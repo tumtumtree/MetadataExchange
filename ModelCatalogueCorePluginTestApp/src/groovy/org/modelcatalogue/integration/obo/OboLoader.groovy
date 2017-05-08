@@ -1,10 +1,8 @@
 package org.modelcatalogue.integration.obo
 
-import groovy.text.SimpleTemplateEngine
-import groovy.text.Template
+
 import groovy.util.logging.Log4j
-import org.modelcatalogue.builder.api.CatalogueBuilder
-import org.modelcatalogue.core.ElementService
+import org.modelcatalogue.core.util.builder.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.obolibrary.oboformat.model.Clause
 import org.obolibrary.oboformat.model.Frame
@@ -14,11 +12,11 @@ import org.obolibrary.oboformat.model.OBODoc
 class OboLoader {
 
 
-    final CatalogueBuilder builder
+    final DefaultCatalogueBuilder builder
 
     static final String ALTERNATIVE_IDS = 'Alternative IDs'
 
-    OboLoader(CatalogueBuilder builder) {
+    OboLoader(DefaultCatalogueBuilder builder) {
         this.builder = builder
     }
 
@@ -194,6 +192,9 @@ class OboLoader {
                         handleSynonym(frame)
                         handleReplacedBy(frame, oboIdsToNames)
                     }
+
+
+
                 }
             }
         }

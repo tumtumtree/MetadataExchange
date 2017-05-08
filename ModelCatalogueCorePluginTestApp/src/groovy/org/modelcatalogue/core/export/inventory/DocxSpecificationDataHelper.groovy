@@ -298,10 +298,10 @@ class DocxSpecificationDataHelper {
                                 row {
                                     cell {
                                         Map<String, Object> attrs = [url: "#${vr.id}", font: [bold: true]]
-                                        link attrs, vr.name
+                                        link attrs, vr?.name
                                     }
                                     cell {
-                                        text vr.description
+                                        text "${vr.description ?: ''}"
                                     }
                                 }
                                 if (!(vr in rules)) rules << vr

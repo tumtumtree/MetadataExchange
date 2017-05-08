@@ -3,10 +3,13 @@ package org.modelcatalogue.core.util.builder
 import com.google.common.collect.Maps
 import com.google.common.collect.Sets
 import grails.compiler.GrailsCompileStatic
+import grails.util.Holders
 import groovy.util.logging.Log4j
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
+import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.util.Legacy
+import org.springframework.context.ApplicationContext
 
 import java.lang.reflect.Modifier
 
@@ -44,6 +47,10 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
     private T resolved
     private String changed
 
+    ApplicationContext context = Holders.getApplicationContext()
+
+
+
     DefaultCatalogueElementProxy(CatalogueElementProxyRepository repository, Class<T> domain, String id, CatalogueElementProxy<DataModel> classification, String name, boolean underControl) {
         if (!(domain in KNOWN_DOMAIN_CLASSES)) {
             throw new IllegalArgumentException("Only domain classes of $KNOWN_DOMAIN_CLASSES are supported as proxies")
@@ -76,40 +83,44 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 
     @Override
     final T resolve() {
-        try {
-            if (replacedBy) {
-                return replacedBy.resolve()
-            }
 
-            if(resolved) {
-                return resolved
-            }
+        AuditService auditService = (AuditService) context.getBean("auditService");
 
-            resolved = fill(findExisting())
-
-            if (resolved) {
-                return resolved
-            }
-
+        auditService.mute {
             try {
-                if (Modifier.isAbstract(domain.modifiers)) {
-                    throw new InstantiationException("$domain is abstract")
+                if (replacedBy) {
+                    return replacedBy.resolve()
                 }
 
-                log.debug "$this not found, creating new one"
+                if (resolved) {
+                    return resolved
+                }
 
-                newlyCreated = true
-                resolved = fill(newDomainInstance())
-            } catch (InstantiationException ignored) {
-                throw new ReferenceNotPresentInTheCatalogueException("Cannot create element from reference $this")
+                resolved = fill(findExisting())
+
+                if (resolved) {
+                    return resolved
+                }
+
+                try {
+                    if (Modifier.isAbstract(domain.modifiers)) {
+                        throw new InstantiationException("$domain is abstract")
+                    }
+
+                    log.debug "$this not found, creating new one"
+
+                    newlyCreated = true
+                    resolved = fill(newDomainInstance())
+                } catch (InstantiationException ignored) {
+                    throw new ReferenceNotPresentInTheCatalogueException("Cannot create element from reference $this")
+                }
+
+
+                return resolved
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to resolve $this:\n\n$e", e)
             }
-
-
-            return resolved
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to resolve $this:\n\n$e", e)
         }
-
     }
 
     private T newDomainInstance() {

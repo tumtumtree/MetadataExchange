@@ -2,8 +2,11 @@ package org.modelcatalogue.core.util.builder
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.DetachedCriteria
+import grails.util.Holders
 import groovy.transform.CompileDynamic
 import groovy.util.logging.Log4j
+import org.hibernate.Session
+import org.hibernate.SessionFactory
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.util.HibernateHelper
 import org.modelcatalogue.core.api.ElementStatus
@@ -11,6 +14,7 @@ import org.modelcatalogue.core.publishing.DraftContext
 import org.modelcatalogue.core.publishing.PublishingContext
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.FriendlyErrors
+import org.springframework.context.ApplicationContext
 import org.springframework.util.StopWatch
 
 @Log4j @GrailsCompileStatic
@@ -42,6 +46,9 @@ class CatalogueElementProxyRepository {
     private final Map<String, Relationship> createdRelationships = [:]
 
     ProgressMonitor monitor = ProgressMonitor.NOOP
+
+    ApplicationContext context = Holders.getApplicationContext()
+
 
 
     CatalogueElementProxyRepository(DataModelService dataModelService, ElementService elementService) {
@@ -99,6 +106,11 @@ class CatalogueElementProxyRepository {
     }
 
     public Set<CatalogueElement> resolveAllProxies(boolean skipDirtyChecking) {
+
+        SessionFactory sessionFactory = (SessionFactory) context.getBean('sessionFactory')
+        Session session = sessionFactory.getCurrentSession()
+
+
         StopWatch watch =  new StopWatch('catalogue proxy repository')
 
         // FIXME: keeping all the created elements eats lot of memory
@@ -155,7 +167,7 @@ class CatalogueElementProxyRepository {
         watch.stop()
 
         if (!skipDirtyChecking) {
-            // Step 1:check something changed this must run before any other resolution happens
+            // Step 2:check something changed this must run before any other resolution happens
             watch.start('dirty checking')
             logInfo "(2/6) dirty checking"
 
@@ -189,7 +201,7 @@ class CatalogueElementProxyRepository {
             }
             watch.stop()
 
-            // Step 2: if something changed, create new versions. if run in one step, it generates false changes
+            // Step 3: if something changed, create new versions. if run in one step, it generates false changes
             watch.start('creating drafts')
             logInfo "(3/6) creating drafts"
 
@@ -206,13 +218,30 @@ class CatalogueElementProxyRepository {
 
         Set<RelationshipProxy> relationshipProxiesToBeResolved = []
 
-        // Step 3: resolve elements (set properties, update metadata)
+        // Step 4: resolve elements (set properties, update metadata)
         watch.start('resolving elements')
         logInfo "(4/6) resolving elements"
         int elNumberOfPositions = Math.floor(Math.log10(elementProxiesToBeResolved.size())).intValue() + 2
+
+        int count = 0
+        int batchSize = 250
+
         elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
-            logDebug "[${(i + 1).toString().padLeft(elNumberOfPositions, '0')}/${elementProxiesToBeResolved.size().toString().padLeft(elNumberOfPositions, '0')}] Resolving $element"
+            logInfo "[${(i + 1).toString().padLeft(elNumberOfPositions, '0')}/${elementProxiesToBeResolved.size().toString().padLeft(elNumberOfPositions, '0')}] Resolving $element"
             try {
+                if ( ++count % batchSize == 0 ) {
+                    //flush a batch of updates and release memory:
+                    try{
+                       session.flush()
+                    }catch(Exception e){
+                        log.error(session)
+                        log.error(" error: " + e.message)
+                        throw e
+                    }
+                   session.clear()
+                }
+
+
                 CatalogueElement resolved = element.resolve() as CatalogueElement
                 created.add(resolved)
                 relationshipProxiesToBeResolved.addAll element.pendingRelationships
@@ -224,7 +253,7 @@ class CatalogueElementProxyRepository {
                     }
                     FriendlyErrors.failFriendlySave(dataModel)
                 }
-                logDebug "${'-' * (elNumberOfPositions * 2 + 3)} Resolved as $resolved"
+                logInfo "${'-' * (elNumberOfPositions * 2 + 3)} Resolved as $resolved"
             } catch (e) {
                 if (anyCause(e, ReferenceNotPresentInTheCatalogueException)) {
                     logWarn "Reference ${element} not present in the catalogue"
@@ -232,7 +261,13 @@ class CatalogueElementProxyRepository {
                     throw e
                 }
             }
+
+
+
         }
+
+
+
         watch.stop()
 
         // Step 5: resolve pending relationships
@@ -240,9 +275,26 @@ class CatalogueElementProxyRepository {
         Set<Long> resolvedRelationships = []
         logInfo "(5/6) resolving relationships"
         int relNumberOfPositions = Math.floor(Math.log10(relationshipProxiesToBeResolved.size())).intValue() + 2
+
+
         relationshipProxiesToBeResolved.eachWithIndex { RelationshipProxy relationshipProxy, i ->
-            logDebug "[${(i + 1).toString().padLeft(relNumberOfPositions, '0')}/${relationshipProxiesToBeResolved.size().toString().padLeft(relNumberOfPositions, '0')}] Resolving $relationshipProxy"
+            logInfo "[${(i + 1).toString().padLeft(relNumberOfPositions, '0')}/${relationshipProxiesToBeResolved.size().toString().padLeft(relNumberOfPositions, '0')}] Resolving $relationshipProxy"
             try {
+
+                if ( ++count % batchSize == 0 ) {
+                    //flush a batch of updates and release memory:
+                    try{
+                        session.flush()
+                    }catch(Exception e){
+                        log.error(session)
+                        log.error(" error: " + e.message)
+                        throw e
+                    }
+                    session.clear()
+                }
+
+
+
                 if (relationshipProxy.source.resolve() == relationshipProxy.destination.resolve()) {
                     logWarn "Ignoring self reference: $relationshipProxy"
                     return
@@ -257,11 +309,26 @@ class CatalogueElementProxyRepository {
             }
         }
 
+
+
        if (!copyRelationships) {
             elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
                 if (!element.underControl) {
                     return
                 }
+
+                if ( ++count % batchSize == 0 ) {
+                    //flush a batch of updates and release memory:
+                    try{
+                        session.flush()
+                    }catch(Exception e){
+                        log.error(session)
+                        log.error(" error: " + e.message)
+                        throw e
+                    }
+                    session.clear()
+                }
+
                 CatalogueElement catalogueElement = element.resolve() as CatalogueElement
                 Set<Long> relations = []
                 relations.addAll catalogueElement.incomingRelationships*.getId()
@@ -275,17 +342,32 @@ class CatalogueElementProxyRepository {
             }
         }
 
+
         watch.stop()
 
         // Step 6: resolve state changes
         watch.start('resolving state changes')
         logInfo "(6/6) resolving state changes"
         elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
-            logDebug "[${(i + 1).toString().padLeft(elNumberOfPositions, '0')}/${elementProxiesToBeResolved.size().toString().padLeft(elNumberOfPositions, '0')}] Resolving status changes for $element"
+            logInfo "[${(i + 1).toString().padLeft(elNumberOfPositions, '0')}/${elementProxiesToBeResolved.size().toString().padLeft(elNumberOfPositions, '0')}] Resolving status changes for $element"
 
             ElementStatus status = element.getParameter('status') as ElementStatus
 
             try {
+
+                if ( ++count % batchSize == 0 ) {
+                    //flush a batch of updates and release memory:
+                    try{
+                        session.flush()
+                    }catch(Exception e){
+                        log.error(session)
+                        log.error(" error: " + e.message)
+                        throw e
+                    }
+                    session.clear()
+                }
+
+
                 CatalogueElement catalogueElement = element.resolve() as CatalogueElement
 
                 if (status && catalogueElement.status != status) {
@@ -565,14 +647,22 @@ class CatalogueElementProxyRepository {
         }
 
         if (!sourceElement.readyForQueries) {
-            throw new IllegalStateException("Source element $sourceElement is not ready to be part of the relationship ${proxy.toString()}")
+            sourceElement = sourceElement.merge()
+            sourceElement.refresh()
+            if (!sourceElement.readyForQueries) {
+                throw new IllegalStateException("Source element $sourceElement is not ready to be part of the relationship ${proxy.toString()}")
+            }
         }
         if (destinationElement.hasErrors()) {
             throw new IllegalStateException(FriendlyErrors.printErrors("Destination element $destinationElement contains errors and is not ready to be part of the relationship ${proxy.toString()}", destinationElement.errors))
         }
 
         if (!destinationElement.readyForQueries) {
-            throw new IllegalStateException("Destination element $destinationElement is not ready to be part of the relationship ${proxy.toString()}")
+            destinationElement = destinationElement.merge()
+            destinationElement.refresh()
+            if (!destinationElement.readyForQueries) {
+                throw new IllegalStateException("Destination element $destinationElement is not ready to be part of the relationship ${proxy.toString()}")
+            }
         }
 
         String hash = PublishingContext.hashForRelationship(sourceElement, destinationElement, type)
@@ -585,7 +675,7 @@ class CatalogueElementProxyRepository {
         }
 
 
-
+        //destination element merged
         Relationship relationship = sourceElement.createLinkTo(destinationElement, type, archived: proxy.archived as Object, resetIndices: true, skipUniqueChecking: (proxy.source.new || proxy.destination.new) as Object, ignoreRules: sourceElement.status == ElementStatus.DEPRECATED)
 
         if(relationship.relationshipType == RelationshipType.supersessionType) {

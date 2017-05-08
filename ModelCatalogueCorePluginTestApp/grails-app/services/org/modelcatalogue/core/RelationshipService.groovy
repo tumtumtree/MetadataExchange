@@ -167,6 +167,8 @@ class RelationshipService {
         relationshipInstance.save(validate: false/* , flush: true*/)
 
         relationshipDefinition.source?.addToOutgoingRelationships(relationshipInstance)?.save(validate: false/*, flush: true*/)
+
+        //fails here because the EXT stuff.
         relationshipDefinition.destination?.addToIncomingRelationships(relationshipInstance)?.save(validate: false/*, flush: true*/)
 
         if (relationshipDefinition.relationshipType == RelationshipType.favouriteType) {
@@ -176,7 +178,7 @@ class RelationshipService {
         CacheService.RELATIONSHIPS_COUNT_CACHE.invalidate(relationshipDefinition.source.getId())
         CacheService.RELATIONSHIPS_COUNT_CACHE.invalidate(relationshipDefinition.destination.getId())
 
-        auditService.logNewRelation(relationshipInstance)
+//        auditService.logNewRelation(relationshipInstance)
 
         if (relationshipDefinition.metadata) {
             relationshipInstance.ext = relationshipDefinition.metadata
