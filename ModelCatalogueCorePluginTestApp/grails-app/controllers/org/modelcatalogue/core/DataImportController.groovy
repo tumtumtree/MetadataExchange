@@ -241,6 +241,21 @@ class DataImportController  {
         if (!dataModel) {
             return updated
         }
+
+        if (!dataModel.readyForQueries) {
+            dataModel.refresh()
+            try {
+                dataModel = dataModel.merge()
+            }
+            catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                dataModel = CatalogueElement.get(dataModel.id)
+            }
+
+            if (!dataModel.readyForQueries) {
+                throw new IllegalStateException("Destination element $dataModel is not ready to be added to asset}")
+            }
+        }
+
         updated.dataModel = dataModel
         updated.status = ElementStatus.FINALIZED
         updated.description = "Your import has finished."

@@ -175,6 +175,10 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
             rel 'involvedness' to element, relConf
         }
 
+        if(!element.classification){
+            println("error")
+        }
+
         element
     }
 

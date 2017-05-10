@@ -328,7 +328,7 @@ class ElementService implements Publisher<CatalogueElement> {
             return draft
         }
         return (DataModel) CatalogueElement.withTransaction { TransactionStatus status ->
-            auditService.logElementFinalized(draft) {
+//            auditService.logElementFinalized(draft) {
                 DataModel finalized = draft.publish(this, monitor) as DataModel
 
                 if (finalized.hasErrors()) {
@@ -340,7 +340,7 @@ class ElementService implements Publisher<CatalogueElement> {
                 finalized.revisionNotes = revisionNotes
 
                 finalized.save(deepValidate: false)
-            }
+//            }
         }
     }
 
@@ -349,13 +349,13 @@ class ElementService implements Publisher<CatalogueElement> {
      */
     public <E extends CatalogueElement> E finalizeElement(E draft, Observer<String> monitor = ProgressMonitor.NOOP) {
         return (E) CatalogueElement.withTransaction { TransactionStatus status ->
-            auditService.logElementFinalized(draft) {
+//            auditService.logElementFinalized(draft) {
                 E finalized = draft.publish(this, monitor) as E
                 if (finalized.hasErrors()) {
                     status.setRollbackOnly()
                 }
                 finalized
-            }
+//            }
         }
     }
 

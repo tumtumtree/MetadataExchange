@@ -84,9 +84,6 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
     @Override
     final T resolve() {
 
-        AuditService auditService = (AuditService) context.getBean("auditService");
-
-        auditService.mute {
             try {
                 if (replacedBy) {
                     return replacedBy.resolve()
@@ -120,7 +117,6 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
             } catch (Exception e) {
                 throw new RuntimeException("Failed to resolve $this:\n\n$e", e)
             }
-        }
     }
 
     private T newDomainInstance() {
@@ -447,6 +443,9 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
         if (modelCatalogueId && !Legacy.fixModelCatalogueId(modelCatalogueId).startsWith(element.getDefaultModelCatalogueId(true))) {
             element.modelCatalogueId = Legacy.fixModelCatalogueId(modelCatalogueId)
         }
+
+        if(classification) element.setProperty('dataModel',classification.resolve())
+
         parameters.each { String key, Object value ->
             if (key == 'status') return
             if (key == CatalogueElementProxyRepository.AUTOMATIC_NAME_FLAG) return

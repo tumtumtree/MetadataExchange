@@ -158,6 +158,7 @@ class CatalogueElementProxyRepository {
                     elementProxiesToBeResolved << proxy
                 } else {
                     // must survive double addition
+                    //TODO: double check if this is working properly - looks like it is creating orphan data models
                     existing.merge(proxy)
                 }
             } else {
@@ -224,7 +225,7 @@ class CatalogueElementProxyRepository {
         int elNumberOfPositions = Math.floor(Math.log10(elementProxiesToBeResolved.size())).intValue() + 2
 
         int count = 0
-        int batchSize = 250
+        int batchSize = 150
 
         elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
             logInfo "[${(i + 1).toString().padLeft(elNumberOfPositions, '0')}/${elementProxiesToBeResolved.size().toString().padLeft(elNumberOfPositions, '0')}] Resolving $element"
@@ -243,6 +244,7 @@ class CatalogueElementProxyRepository {
 
 
                 CatalogueElement resolved = element.resolve() as CatalogueElement
+
                 created.add(resolved)
                 relationshipProxiesToBeResolved.addAll element.pendingRelationships
                 if (element.pendingPolicies) {
@@ -266,7 +268,8 @@ class CatalogueElementProxyRepository {
 
         }
 
-
+        session.flush()
+        session.clear()
 
         watch.stop()
 
@@ -311,36 +314,52 @@ class CatalogueElementProxyRepository {
 
 
 
-       if (!copyRelationships) {
-            elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
-                if (!element.underControl) {
-                    return
-                }
-
-                if ( ++count % batchSize == 0 ) {
-                    //flush a batch of updates and release memory:
-                    try{
-                        session.flush()
-                    }catch(Exception e){
-                        log.error(session)
-                        log.error(" error: " + e.message)
-                        throw e
-                    }
-                    session.clear()
-                }
-
-                CatalogueElement catalogueElement = element.resolve() as CatalogueElement
-                Set<Long> relations = []
-                relations.addAll catalogueElement.incomingRelationships*.getId()
-                relations.addAll catalogueElement.outgoingRelationships*.getId()
-
-                relations.removeAll resolvedRelationships
-
-                relations.collect { Relationship.get(it) } each {
-                    unlink(it)
-                }
-            }
-        }
+//       if (!copyRelationships) {
+//            elementProxiesToBeResolved.eachWithIndex { CatalogueElementProxy element, i ->
+//                if (!element.underControl) {
+//                    return
+//                }
+//
+//                if ( ++count % batchSize == 0 ) {
+//                    //flush a batch of updates and release memory:
+//                    try{
+//                        session.flush()
+//                    }catch(Exception e){
+//                        log.error(session)
+//                        log.error(" error: " + e.message)
+//                        throw e
+//                    }
+//                    session.clear()
+//                }
+//
+//                CatalogueElement catalogueElement = element.resolve() as CatalogueElement
+//
+//
+//                if (!catalogueElement.readyForQueries) {
+//                    catalogueElement.refresh()
+//                    try {
+//                        catalogueElement = catalogueElement.merge()
+//                    }
+//                    catch (org.springframework.dao.OptimisticLockingFailureException e) {
+//                        catalogueElement = CatalogueElement.get(catalogueElement.id)
+//                    }
+//
+//                    if (!catalogueElement.readyForQueries) {
+//                        throw new IllegalStateException("Destination element $catalogueElement is not ready to be part of the relationship ${element.toString()}")
+//                    }
+//                }
+//
+//                Set<Long> relations = []
+//                relations.addAll catalogueElement.incomingRelationships*.getId()
+//                relations.addAll catalogueElement.outgoingRelationships*.getId()
+//
+//                relations.removeAll resolvedRelationships
+//
+//                relations.collect { Relationship.get(it) } each {
+//                    unlink(it)
+//                }
+//            }
+//        }
 
 
         watch.stop()
@@ -369,6 +388,21 @@ class CatalogueElementProxyRepository {
 
 
                 CatalogueElement catalogueElement = element.resolve() as CatalogueElement
+
+                if (!catalogueElement.readyForQueries) {
+                    catalogueElement.refresh()
+                    try {
+                        catalogueElement = catalogueElement.merge()
+                    }
+                    catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                        catalogueElement = CatalogueElement.get(catalogueElement.id)
+                    }
+
+                    if (!catalogueElement.readyForQueries) {
+                        throw new IllegalStateException("Destination element $catalogueElement is not ready to be part of the relationship ${element.toString()}")
+                    }
+                }
+
 
                 if (status && catalogueElement.status != status) {
                     if (status == ElementStatus.FINALIZED) {
@@ -647,8 +681,16 @@ class CatalogueElementProxyRepository {
         }
 
         if (!sourceElement.readyForQueries) {
-            sourceElement = sourceElement.merge()
+            //failing here
             sourceElement.refresh()
+            try {
+                sourceElement = sourceElement.merge()
+            }
+            catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                sourceElement = CatalogueElement.get(sourceElement.id)
+            }
+
+
             if (!sourceElement.readyForQueries) {
                 throw new IllegalStateException("Source element $sourceElement is not ready to be part of the relationship ${proxy.toString()}")
             }
@@ -658,8 +700,14 @@ class CatalogueElementProxyRepository {
         }
 
         if (!destinationElement.readyForQueries) {
-            destinationElement = destinationElement.merge()
             destinationElement.refresh()
+            try {
+                destinationElement = destinationElement.merge()
+            }
+            catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                destinationElement = CatalogueElement.get(destinationElement.id)
+            }
+
             if (!destinationElement.readyForQueries) {
                 throw new IllegalStateException("Destination element $destinationElement is not ready to be part of the relationship ${proxy.toString()}")
             }
@@ -675,7 +723,7 @@ class CatalogueElementProxyRepository {
         }
 
 
-        //destination element merged
+
         Relationship relationship = sourceElement.createLinkTo(destinationElement, type, archived: proxy.archived as Object, resetIndices: true, skipUniqueChecking: (proxy.source.new || proxy.destination.new) as Object, ignoreRules: sourceElement.status == ElementStatus.DEPRECATED)
 
         if(relationship.relationshipType == RelationshipType.supersessionType) {

@@ -70,7 +70,7 @@ class Relationship implements Extendible<RelationshipMetadata>, org.modelcatalog
     }
 
     static mapping = {
-        extensions lazy: false, sort: 'orderIndex', cascade: "all-delete-orphan"
+        extensions lazy: false, sort: 'orderIndex'
     }
 
     String toString() {
