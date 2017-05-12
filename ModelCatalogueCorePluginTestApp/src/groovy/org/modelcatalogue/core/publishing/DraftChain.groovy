@@ -4,11 +4,14 @@ import grails.util.Holders
 import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import org.hibernate.Session
+import org.hibernate.SessionFactory
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.FriendlyErrors
 import org.modelcatalogue.core.util.builder.ProgressMonitor
+import org.springframework.context.ApplicationContext
 import rx.Observer
 
 import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
@@ -17,6 +20,8 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 class DraftChain extends PublishingChain {
 
     private final DraftContext context
+
+    ApplicationContext ctx = Holders.getApplicationContext()
 
     private DraftChain(DataModel published, DraftContext context) {
         super(published)
@@ -32,6 +37,10 @@ class DraftChain extends PublishingChain {
     }
 
     protected CatalogueElement doRun(Publisher<CatalogueElement> publisher, Observer<String> monitor) {
+
+        SessionFactory sessionFactory = (SessionFactory) ctx.getBean('sessionFactory')
+        Session session = sessionFactory.getCurrentSession()
+
         if (!context.forceNew) {
             if (isDraft(published)) {
                 published.clearErrors()
@@ -57,10 +66,29 @@ class DraftChain extends PublishingChain {
         monitor.onNext(" - Created draft [00001/${(total + 1).toString().padLeft(5,'0')}]: $publishedDataModel")
 
 
+        int count = 0
+        int batchSize = 150
+
+
+
         publishedDataModel.declares.eachWithIndex { CatalogueElement element, int index ->
+
+            if ( ++count % batchSize == 0 || count==5) {
+                //flush a batch of updates and release memory:
+                try{
+                    session.flush()
+                }catch(Exception e){
+                    log.error(session)
+                    log.error(" error: " + e.message)
+                    throw e
+                }
+                session.clear()
+            }
+
             monitor.onNext("Creating draft [${(index + 2).toString().padLeft(5,'0')}/${(total + 1).toString().padLeft(5,'0')}]: $element")
             createDraft(element, draftDataModel, publisher, monitor)
             monitor.onNext(" - Created draft [${(index + 2).toString().padLeft(5,'0')}/${(total + 1).toString().padLeft(5,'0')}]: $element")
+            log.info(" - Created draft [${(index + 2).toString().padLeft(5,'0')}/${(total + 1).toString().padLeft(5,'0')}]: $element")
         }
 
 
@@ -78,6 +106,23 @@ class DraftChain extends PublishingChain {
     }
 
     private <T extends CatalogueElement> T createDraft(T element, DataModel draftDataModel, Publisher<CatalogueElement> archiver, Observer<String> monitor) {
+
+
+        if (!element.readyForQueries) {
+            element.refresh()
+            try {
+                element = element.merge()
+            }
+            catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                element = CatalogueElement.get(element.id)
+            }
+
+            if (!element.readyForQueries) {
+                throw new IllegalStateException("Destination element $element is not ready to be part of the relationship ${element.toString()}")
+            }
+        }
+
+
         if (!element.latestVersionId) {
             element.latestVersionId = element.id
             FriendlyErrors.failFriendlySave(element)
@@ -124,7 +169,36 @@ class DraftChain extends PublishingChain {
             throw error
         }
 
+        if (!draft.readyForQueries) {
+            draft.refresh()
+            try {
+                draft = draft.merge()
+            }
+            catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                draft = CatalogueElement.get(draft.id)
+            }
+
+            if (!draft.readyForQueries) {
+                throw new IllegalStateException("Destination element $draft is not ready to be part of the relationship ${draft.toString()}")
+            }
+        }
+
+        if (!element.readyForQueries) {
+            element.refresh()
+            try {
+                element = element.merge()
+            }
+            catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                element = CatalogueElement.get(element.id)
+            }
+
+            if (!element.readyForQueries) {
+                throw new IllegalStateException("Destination element $element is not ready to be part of the relationship ${element.toString()}")
+            }
+        }
+
         draft.addToSupersedes(element, skipUniqueChecking: true)
+
 
         context.delayRelationshipCopying(draft, element)
 

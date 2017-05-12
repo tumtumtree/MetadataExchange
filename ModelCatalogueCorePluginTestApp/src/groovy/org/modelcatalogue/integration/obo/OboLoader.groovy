@@ -190,7 +190,7 @@ class OboLoader {
                         handlePropertyValues(frame)
                         handleIsA(frame, oboIdsToNames)
                         handleSynonym(frame)
-                        handleReplacedBy(frame, oboIdsToNames)
+//                        handleReplacedBy(frame, oboIdsToNames)
                     }
 
 

@@ -178,7 +178,7 @@ class RelationshipService {
         CacheService.RELATIONSHIPS_COUNT_CACHE.invalidate(relationshipDefinition.source.getId())
         CacheService.RELATIONSHIPS_COUNT_CACHE.invalidate(relationshipDefinition.destination.getId())
 
-//        auditService.logNewRelation(relationshipInstance)
+        auditService.logNewRelation(relationshipInstance)
 
         if (relationshipDefinition.metadata) {
             relationshipInstance.ext = relationshipDefinition.metadata

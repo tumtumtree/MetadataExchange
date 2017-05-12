@@ -64,25 +64,25 @@ class ElementService implements Publisher<CatalogueElement> {
 
         context.version(newSemanticVersion)
 
-        Closure<DataModel> code = { TransactionStatus status = null ->
-            return (DataModel) auditService.logNewVersionCreated(dataModel) {
+//        Closure<DataModel> code = { TransactionStatus status = null ->
+//            return (DataModel) auditService.logNewVersionCreated(dataModel) {
                 DataModel draft = PublishingChain.createDraft(dataModel, context.within(dataModel)).run(this, context.monitor) as DataModel
-                if (draft.hasErrors()) {
-                    status?.setRollbackOnly()
-                    return dataModel
-                }
+//                if (draft.hasErrors()) {
+//                    status?.setRollbackOnly()
+//                    return dataModel
+//                }
 
                 // TODO: better target the changes
                 CacheService.VERSION_COUNT_CACHE.invalidateAll()
 
                 return draft
-            }
-        }
-        if (context.importFriendly) {
-            return code()
-        } else {
-            return (DataModel) CatalogueElement.withTransaction(code)
-        }
+//            }
+//        }
+//        if (context.importFriendly) {
+//            return code()
+//        } else {
+//            return (DataModel) CatalogueElement.withTransaction(code)
+//        }
     }
 
     /**
@@ -327,36 +327,38 @@ class ElementService implements Publisher<CatalogueElement> {
             monitor.onNext(FriendlyErrors.printErrors("Element is not valid", draft.errors))
             return draft
         }
-        return (DataModel) CatalogueElement.withTransaction { TransactionStatus status ->
+//        return (DataModel) CatalogueElement.withTransaction { TransactionStatus status ->
 //            auditService.logElementFinalized(draft) {
                 DataModel finalized = draft.publish(this, monitor) as DataModel
 
-                if (finalized.hasErrors()) {
-                    status.setRollbackOnly()
-                    monitor.onNext(FriendlyErrors.printErrors("Element is not valid", finalized.errors))
-                }
+//                if (finalized.hasErrors()) {
+//                    status.setRollbackOnly()
+//                    monitor.onNext(FriendlyErrors.printErrors("Element is not valid", finalized.errors))
+//                }
 
                 finalized.semanticVersion = version
                 finalized.revisionNotes = revisionNotes
 
                 finalized.save(deepValidate: false)
 //            }
-        }
+//        }
+        finalized
     }
 
     /**
      * @deprecated finalization should only happen on the data model level
      */
     public <E extends CatalogueElement> E finalizeElement(E draft, Observer<String> monitor = ProgressMonitor.NOOP) {
-        return (E) CatalogueElement.withTransaction { TransactionStatus status ->
+//        return (E) CatalogueElement.withTransaction { TransactionStatus status ->
 //            auditService.logElementFinalized(draft) {
                 E finalized = draft.publish(this, monitor) as E
-                if (finalized.hasErrors()) {
-                    status.setRollbackOnly()
-                }
+//                if (finalized.hasErrors()) {
+//                    status.setRollbackOnly()
+//                }
+                log.info("finalized - " + finalized)
                 finalized
 //            }
-        }
+//        }
     }
 
     static List<ElementStatus> getStatusFromParams(params, boolean canViewDrafts) {

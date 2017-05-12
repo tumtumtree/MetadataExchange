@@ -48,21 +48,21 @@ class BootStrap {
             null
         }
 
-        if (Environment.current in [Environment.DEVELOPMENT, Environment.TEST] && !System.getenv('MC_BLANK_DEV')) {
-            TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
-                initCatalogueService.initCatalogue(true)
-                initPoliciesAndTags()
-                initSecurity(false)
-                setupStuff()
-            }
-            modelCatalogueSearchService.reindex(true).all { it }.toBlocking().subscribe {
-                System.out.println "Reindexed"
-            }
-        } else {
+//        if (Environment.current in [Environment.DEVELOPMENT, Environment.TEST] && !System.getenv('MC_BLANK_DEV')) {
+//            TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
+//                initCatalogueService.initCatalogue(true)
+//                initPoliciesAndTags()
+//                initSecurity(false)
+//                setupStuff()
+//            }
+//            modelCatalogueSearchService.reindex(true).all { it }.toBlocking().subscribe {
+//                System.out.println "Reindexed"
+//            }
+//        } else {
             initCatalogueService.initDefaultRelationshipTypes()
             initPoliciesAndTags()
             initSecurity(!System.getenv('MC_BLANK_DEV'))
-        }
+//        }
 
         initCatalogueService.setupStoredProcedures()
 

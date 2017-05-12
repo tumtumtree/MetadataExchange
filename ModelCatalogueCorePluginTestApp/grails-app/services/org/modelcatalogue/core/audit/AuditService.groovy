@@ -37,10 +37,14 @@ class AuditService {
 
    @PostConstruct
    void hookSearchService() {
-       auditorFactory =  { return CompoundAuditor.from(new DefaultAuditor(executorService), new EventNotifier(brokerMessagingTemplate, executorService)) }
+       //auditorFactory = {new DefaultAuditor(executorService)}
+
+       auditorFactory =  { return CompoundAuditor.from(new DefaultAuditor(executorService), /*new EventNotifier(brokerMessagingTemplate, executorService)*/) }
+
+       //if indexing manually is true - then you need to manage the search stuff yourself i.e you are using elasticsearch
        if (modelCatalogueSearchService.indexingManually) {
         Callable<Auditor> oldFactory = auditorFactory
-        auditorFactory = { CompoundAuditor.from(oldFactory(), new SearchNotifier(modelCatalogueSearchService), new EventNotifier(brokerMessagingTemplate, executorService))}
+        auditorFactory = { CompoundAuditor.from(oldFactory(), /*new SearchNotifier(modelCatalogueSearchService), new EventNotifier(brokerMessagingTemplate, executorService)*/)}
        }
    }
 

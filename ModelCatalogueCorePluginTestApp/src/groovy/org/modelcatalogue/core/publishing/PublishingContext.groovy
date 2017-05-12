@@ -2,6 +2,7 @@ package org.modelcatalogue.core.publishing
 
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
+import groovy.util.logging.Log4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.RelationshipType
@@ -12,6 +13,7 @@ import rx.Observer
 import java.util.regex.Matcher
 
 @CompileStatic
+@Log4j
 abstract class PublishingContext<C extends PublishingContext> {
 
     protected final Set<CopyAssociationsAndRelationships> pendingRelationshipsTasks = new LinkedHashSet<CopyAssociationsAndRelationships>()
@@ -81,6 +83,7 @@ abstract class PublishingContext<C extends PublishingContext> {
         Integer total = pendingRelationshipsTasks.size()
         pendingRelationshipsTasks.eachWithIndex { CopyAssociationsAndRelationships it, int index ->
             monitor.onNext("Copying relationships [${(index + 1).toString().padLeft(5,'0')}/${total.toString().padLeft(5,'0')}]: $it".toString())
+            log.info("Copying relationships [${(index + 1).toString().padLeft(5,'0')}/${total.toString().padLeft(5,'0')}]: $it".toString())
             it.afterDraftPersisted()
             it.copyRelationships(dataModel, createdRelationshipHashes)
         }

@@ -84,6 +84,13 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
     @Override
     final T resolve() {
 
+//        if(name == "obsolete Abnormal heart morphology" || name == "Abnormal heart morphology"){
+//            if(replacedBy.resolve()) {
+//                println("check")
+//            }
+//
+//        }
+
             try {
                 if (replacedBy) {
                     return replacedBy.resolve()
@@ -402,6 +409,8 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
         }
         throw new IllegalStateException("Missing id, classification and name so there is no way how to find existing element")
     }
+
+
 
     void markAsReferenceNotPresentInTheCatalogue() {
         referenceNotPresentInTheCatalogue = true

@@ -129,6 +129,11 @@ class CatalogueElementProxyRepository {
 
         // FIXME: remove the pending proxy from the map as soon as it's processed
         for (CatalogueElementProxy proxy in pendingProxies) {
+
+//            if(proxy.name == "obsolete Abnormal heart morphology" ){
+//                println("error")
+//            }
+
             if (proxy.modelCatalogueId) {
                 CatalogueElementProxy existing = byID[proxy.modelCatalogueId]
 
@@ -177,6 +182,11 @@ class CatalogueElementProxyRepository {
 
             for (CatalogueElementProxy element in elementProxiesToBeResolved) {
                 try {
+
+//                    if(element.name == "obsolete Abnormal heart morphology" || element.name == "Abnormal heart morphology"){
+//                        println("error")
+//                    }
+
                     String change = element.changed
                     if (change || element.getParameter('status') == ElementStatus.DRAFT) {
                         if (element.domain == DataModel && change != DefaultCatalogueElementProxy.CHANGE_NEW) {
@@ -242,7 +252,9 @@ class CatalogueElementProxyRepository {
                    session.clear()
                 }
 
-
+//                if(element.name == "obsolete Abnormal heart morphology" ){
+//                    println("error")
+//                }
                 CatalogueElement resolved = element.resolve() as CatalogueElement
 
                 created.add(resolved)
@@ -297,8 +309,13 @@ class CatalogueElementProxyRepository {
                 }
 
 
+                    if(relationshipProxy.source.name == "obsolete Abnormal heart morphology" ){
+                        println("err")
+                    }
+
 
                 if (relationshipProxy.source.resolve() == relationshipProxy.destination.resolve()) {
+                    //why is this .revolve returning the same thing when the source and destination are different? TODO: check this
                     logWarn "Ignoring self reference: $relationshipProxy"
                     return
                 }
@@ -478,10 +495,10 @@ class CatalogueElementProxyRepository {
 
     protected static String getFullNameForProxy(CatalogueElementProxy proxy, Class domain) {
 
-        if (proxy.domain == DataModel) {
-            String semanticVersion = proxy.getParameter(SEMANTIC_VERSION)
-            return "${domain.simpleName}:${semanticVersion}:${proxy.name}"
-        }
+//        if (proxy.domain == DataModel) {
+//            String semanticVersion = proxy.getParameter(SEMANTIC_VERSION)
+//            return "${domain.simpleName}:${semanticVersion}:${proxy.name}"
+//        }
 
         return "${domain.simpleName}:${proxy.classification?.name}@${proxy.classification?.getParameter(SEMANTIC_VERSION)}:${proxy.name}"
     }
@@ -570,6 +587,8 @@ class CatalogueElementProxyRepository {
             DataModel result =  DataModel.findByNameAndSemanticVersion(name, semanticVersion)
             if (result) {
                 return result
+            }else{
+                return tryFindUnclassified(DataModel, name, modelCatalogueId)
             }
         }
 

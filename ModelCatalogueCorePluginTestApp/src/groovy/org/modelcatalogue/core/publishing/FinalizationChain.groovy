@@ -42,6 +42,7 @@ class FinalizationChain extends PublishingChain {
         published.save()
 
         for (CatalogueElement element in publishedDataModel.declares) {
+            log.info("checking dependency" + element.name)
             for (CatalogueElement dependency in element.collectExternalDependencies()) {
                 if (dependency && dependency.status != ElementStatus.FINALIZED && dependency.status != ElementStatus.DEPRECATED) {
                     dependency = HibernateHelper.ensureNoProxy(dependency)

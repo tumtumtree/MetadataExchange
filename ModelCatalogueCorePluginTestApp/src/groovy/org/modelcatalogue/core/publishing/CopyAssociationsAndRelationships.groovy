@@ -16,8 +16,8 @@ import org.modelcatalogue.core.RelationshipDefinitionBuilder
 @Log4j
 class CopyAssociationsAndRelationships {
 
-    private final CatalogueElement draft
-    private final CatalogueElement element
+      CatalogueElement draft
+      CatalogueElement element
     private final PublishingContext context
     private final ImmutableList<RelationshipDirection> directions
     private final boolean versionSpecificOnly
@@ -37,6 +37,15 @@ class CopyAssociationsAndRelationships {
 
     void afterDraftPersisted() {
         log.debug("Runnig after draft hooks from '${element}' to '${draft}'...")
+
+        if (!draft.readyForQueries) {
+            draft = CatalogueElement.get(draft.id)
+        }
+
+        if (!element.readyForQueries) {
+            element = CatalogueElement.get(element.id)
+        }
+
         element.afterDraftPersisted(draft, context)
         log.debug("... after draft hooks ran from '${element}' to '${draft}'")
     }
@@ -78,7 +87,7 @@ class CopyAssociationsAndRelationships {
                 return
             }
 
-            if (dataModel && r.relationshipType.versionSpecific && r.source.status != ElementStatus.DRAFT && dataModel != r.source.dataModel) {
+            if (dataModel && r.relationshipType.versionSpecific && r.source.status != ElementStatus.DRAFT && dataModel?.id != r.source.dataModel?.id) {
                 return
             }
 

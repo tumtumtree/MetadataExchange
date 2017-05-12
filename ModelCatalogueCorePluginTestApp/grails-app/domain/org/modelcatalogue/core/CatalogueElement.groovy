@@ -215,7 +215,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
     }
 
     def beforeDelete(){
-//        auditService.logElementDeleted(this)
+        auditService.logElementDeleted(this)
     }
 
     /**
@@ -295,6 +295,19 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
     void beforeDraftPersisted(PublishingContext context) {}
 
     void afterDraftPersisted(CatalogueElement draft, PublishingContext context) {
+
+        if (!draft.readyForQueries) {
+            draft.refresh()
+                    try {
+                        draft = draft.merge()
+                    }
+                    catch (org.springframework.dao.OptimisticLockingFailureException e) {
+                        draft = CatalogueElement.get(draft.id)
+                    }
+
+        }
+
+
         draft.ext.putAll this.ext
         for(Mapping mapping in outgoingMappings) {
             mappingService.map(draft, context.resolve(mapping.destination), mapping.mapping)
@@ -375,7 +388,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
             ExtensionValue newOne = new ExtensionValue(name: name, extensionValue: value, element: this)
             FriendlyErrors.failFriendlySaveWithoutFlush(newOne)
             addToExtensions(newOne).save(validate: false)
-//            auditService.logNewMetadata(newOne)
+            auditService.logNewMetadata(newOne)
             Inheritance.withChildren(this) {
                 if (!it.ext.containsKey(name)) {
                     it.addExtension(name, value)
@@ -395,7 +408,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
                 it.removeExtension(oldExt)
             }
         }
-//        auditService.logMetadataDeleted(extension)
+        auditService.logMetadataDeleted(extension)
         removeFromExtensions(extension).save(validate: false)
         extension.delete(flush: true)
     }
@@ -436,7 +449,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
     void afterMerge(CatalogueElement destination) {}
 
     void afterInsert() {
-//        auditService.logElementCreated(this)
+        auditService.logElementCreated(this)
     }
 
     void beforeInsert() {
@@ -445,7 +458,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
 
     void beforeUpdate() {
         removeModelCatalogueIdIfDefault()
-//        auditService.logElementUpdated(this)
+        auditService.logElementUpdated(this)
 
         CatalogueElement self = this
 
@@ -497,7 +510,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
         }
         old.extensionValue = value
         if (old.validate()) {
-//            auditService.logMetadataUpdated(old)
+            auditService.logMetadataUpdated(old)
         }
         FriendlyErrors.failFriendlySaveWithoutFlush(old)
     }
