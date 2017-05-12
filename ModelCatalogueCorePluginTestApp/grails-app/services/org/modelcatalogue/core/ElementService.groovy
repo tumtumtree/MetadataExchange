@@ -134,13 +134,16 @@ class ElementService implements Publisher<CatalogueElement> {
         }
     }
 
-    CatalogueElement findByModelCatalogueId(Class<? extends CatalogueElement> resource, String theId, Long maxCatalogueElementId = Long.MAX_VALUE) {
+    CatalogueElement findByModelCatalogueId(Class<? extends CatalogueElement> resource, String theId, Long maxCatalogueElementId = Long.MAX_VALUE, List<DataModel> dataModels = []) {
         if (!theId) {
             return null
         }
 
         CatalogueElement byExternalId = getLatestFromCriteria(new DetachedCriteria<CatalogueElement>(resource).build {
             eq 'modelCatalogueId', theId
+            if (dataModels) {
+                inList 'dataModel', dataModels
+            }
         })
 
         if (byExternalId) {

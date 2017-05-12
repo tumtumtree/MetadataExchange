@@ -378,7 +378,7 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 
     T findExisting() {
         if (modelCatalogueId) {
-            T result = repository.findById(domain, modelCatalogueId)
+            T result = repository.findById(domain, modelCatalogueId, Long.MAX_VALUE, classification ? [classification?.findExisting()] : [])
             if (result) {
                 return result
             }

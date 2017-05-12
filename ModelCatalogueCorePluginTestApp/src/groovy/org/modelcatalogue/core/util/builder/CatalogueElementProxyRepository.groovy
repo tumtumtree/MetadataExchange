@@ -608,7 +608,7 @@ class CatalogueElementProxyRepository {
             type = DataType
         }
         if (id) {
-            T result = findById(type, id)
+            T result = findById(type, id, dataModels)
             if (result) {
                 return result
             }
@@ -664,8 +664,8 @@ class CatalogueElementProxyRepository {
         criteria
     }
 
-    protected <T extends CatalogueElement> T findById(Class<T> type, Object id) {
-        elementService.findByModelCatalogueId(type, id?.toString(), maxCatalogueElementIdAtStart)?.asType(type) as T
+    protected <T extends CatalogueElement> T findById(Class<T> type, Object id, List<DataModel> dataModels = []) {
+        elementService.findByModelCatalogueId(type, id?.toString(), maxCatalogueElementIdAtStart, dataModels)?.asType(type) as T
     }
 
     private static <T extends CatalogueElement> T getLatestFromCriteria(DetachedCriteria<T> criteria, boolean unclassifiedOnly = false) {
