@@ -57,7 +57,7 @@ class ReportDescriptor {
      *
      * Use <code>true</code> instead of actual <code>id</code> parameter if <code>id</code> parameter is required.
      *
-     * @see org.codehaus.groovy.grails.web.mapping.LinkGenerator
+     * @see grails.web.mapping.LinkGenerator
      */
     Closure<Map> linkParams = {[:]}
 

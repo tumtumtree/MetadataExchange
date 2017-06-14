@@ -1,9 +1,9 @@
 package org.modelcatalogue.core.ddl
 
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
 import org.hibernate.proxy.HibernateProxyHelper
+import grails.core.GrailsDomainClass
+import grails.core.GrailsDomainClassProperty
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.RelationshipType
 import org.modelcatalogue.core.util.FriendlyErrors

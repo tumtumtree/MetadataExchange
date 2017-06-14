@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.util
 
-import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsHibernateUtil
+import org.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import org.hibernate.SessionFactory
 import org.hibernate.engine.SessionFactoryImplementor
 import org.hibernate.persister.entity.EntityPersister

@@ -2,7 +2,6 @@ package org.modelcatalogue.core.audit
 
 import grails.web.JSONBuilder
 import groovy.json.JsonSlurper
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import groovy.util.logging.Slf4j

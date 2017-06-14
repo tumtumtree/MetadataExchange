@@ -2,7 +2,7 @@ package org.modelcatalogue.core.audit
 
 import grails.converters.JSON
 import grails.util.GrailsNameUtils
-import org.codehaus.groovy.grails.web.converters.exceptions.ConverterException
+import org.grails.web.converters.exceptions.ConverterException
 import org.hibernate.LazyInitializationException
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.cache.CacheService
