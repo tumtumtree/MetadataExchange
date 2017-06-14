@@ -69,6 +69,60 @@ dependencies {
     testCompile "org.grails:grails-datastore-rest-client"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+
+    // RX Java
+    compile "io.reactivex:rxjava:$rxJavaVersion"
+
+    // Elastic Search
+    compile "org.elasticsearch:elasticsearch:$elasticsearchVersion"
+
+    // Model Catalogue
+    compile "org.modelcatalogue:mc-core-api:$mcToolkitVersion"
+    compile "org.modelcatalogue:mc-builder-api:$mcToolkitVersion"
+    compile "org.modelcatalogue:mc-datatype-validation:$mcToolkitVersion"
+
+    compile "org.modelcatalogue:spreadsheet-builder-poi:$mcSpreadSheetBuilderPoiVersion"
+
+    // Security
+    compile "org.grails.plugins:spring-security-core:$springSecurityCoreVersion"
+    compile "org.grails.plugins:spring-security-ui:$springSecurityUiVersion"
+
+    // Spring Messaging
+    compile "org.springframework:spring-messaging:$springMessagingVersion"
+
+    compile "commons-io:commons-io:2.5"
+
+    // OWLAPI
+    compile "net.sourceforge.owlapi:owlapi-oboformat:$owlapiVersion"
+    compile "net.sourceforge.owlapi:owlapi-api:$owlapiVersion"
+    compile "net.sourceforge.owlapi:owlapi-parsers:$owlapiVersion"
+
+    // POI
+    compile "org.apache.poi:poi:$poiVersion"
+    compile "org.apache.poi:poi-ooxml:$poiVersion"
+    compile "org.apache.poi:ooxml-schemas:$poiOoxmlSchemasVersion"
+
+    // Word
+    compile "com.craigburke.document:word:$documentWordVersion"
+
+    // CRF Builder
+    compile "org.modelcatalogue:crf-builder-serializer:$crfBuilderVersion"
+    compile "org.modelcatalogue:crf-builder-builder:$crfBuilderVersion"
+    compile "org.modelcatalogue:crf-builder-preview:$crfBuilderVersion"
+
+    // Karman
+    compile 'com.bertramlabs.plugins:karman-grails:0.12.0'
+
+    // Open CSV
+    compile "net.sf.opencsv:opencsv:$openCsvVersion"
+
+    // Runtime
+    runtime "org.modelcatalogue:spring-security-ajax-aware:0.1.1"
+    runtime 'mysql:mysql-connector-java:5.1.24'
+
+    testCompile "org.modelcatalogue:mc-builder-xml:$mcToolkitVersion"
+    testCompile "xmlunit:xmlunit:$xmlunitVersion"
+
 }
 
 bootRun {

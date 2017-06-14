@@ -62,30 +62,11 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         compile 'com.google.guava:guava:19.0'
-        compile 'io.reactivex:rxjava:1.1.5'
 
         // does not work in tests
         // compile 'io.reactivex:rxgroovy:1.0.3'
 
-
-        String mcToolkitVersion = '2.2.0'
-        compile "org.modelcatalogue:mc-core-api:$mcToolkitVersion"
-        compile "org.modelcatalogue:mc-builder-api:$mcToolkitVersion"
-        compile "org.modelcatalogue:mc-datatype-validation:$mcToolkitVersion"
-
-        compile 'com.craigburke.document:word:0.5.0'
-
         compile 'org.jsoup:jsoup:1.8.3'
-
-        compile 'org.modelcatalogue:spreadsheet-builder-poi:0.3.0-rc4'
-
-        compile 'org.apache.poi:poi:3.13'
-        compile 'org.apache.poi:poi-ooxml:3.13'
-        compile 'org.apache.poi:ooxml-schemas:1.1'
-
-        compile 'net.sourceforge.owlapi:owlapi-oboformat:3.5.1'
-        compile 'net.sourceforge.owlapi:owlapi-api:3.5.1'
-        compile 'net.sourceforge.owlapi:owlapi-parsers:3.5.1'
 
         compile 'org.gperfutils:gprof:0.3.1-groovy-2.4'
 
@@ -110,21 +91,10 @@ grails.project.dependency.resolution = {
                 'tomcat-servlet-api'
         }
 
-        compile 'net.sf.opencsv:opencsv:2.3'
-
-        compile group: 'org.elasticsearch', name: 'elasticsearch', version: '2.3.5'
         compile 'com.vividsolutions:jts:1.13'
 
-        String crfBuilderVersion = '3.2.0-rc6'
-        compile ("org.modelcatalogue:crf-builder-serializer:$crfBuilderVersion")
-        compile ("org.modelcatalogue:crf-builder-builder:$crfBuilderVersion")
-        compile ("org.modelcatalogue:crf-builder-preview:$crfBuilderVersion")
 
-        test 'xmlunit:xmlunit:1.6'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
-        test "org.modelcatalogue:mc-builder-xml:$mcToolkitVersion"
-
-
 
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
@@ -155,7 +125,6 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":console:1.5.6"
-        compile ":spring-security-ui:1.0-RC2"
         compile ":grails-melody:1.59.0"
 
         // plugins needed at runtime but not for compilation
@@ -179,8 +148,6 @@ grails.project.dependency.resolution = {
 
         compile ":executor:0.3"
 
-        compile ":karman-aws:0.8.4"
-
         compile ":spring-websocket:1.3.1"
 
         // codenarc static analysis
@@ -191,7 +158,6 @@ grails.project.dependency.resolution = {
 
         build ':tomcat:8.0.33'
 
-        compile ':spring-security-core:2.0.0'
         compile ":spring-security-oauth:2.1.0-RC4"
         compile ':spring-security-oauth-google:0.1'
         compile ':spring-security-oauth-twitter:0.1'
