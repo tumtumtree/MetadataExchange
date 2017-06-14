@@ -1,4 +1,4 @@
-package metadataexchange
+package org.modelcatalogue.core
 
 class BootStrap {
 

@@ -2,7 +2,7 @@
 grails:
     profile: angularjs
     codegen:
-        defaultPackage: metadataexchange
+        defaultPackage: org.modelcatalogue.core
     spring:
         transactionManagement:
             proxies: false
