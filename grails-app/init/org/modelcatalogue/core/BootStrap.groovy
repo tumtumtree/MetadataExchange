@@ -4,7 +4,6 @@ import grails.core.GrailsApplication
 import grails.core.GrailsDomainClass
 import grails.rest.render.RenderContext
 import grails.util.Environment
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.actions.*
@@ -46,10 +45,7 @@ class BootStrap {
                 CatalogueElementDynamicHelper.addShortcuts(it.clazz)
             }
         }
-        JSONObject.Null.metaClass.getId = {->
-            null
-        }
-
+        
         if (Environment.current in [Environment.DEVELOPMENT, Environment.TEST] && !System.getenv('MC_BLANK_DEV')) {
             TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
                 initCatalogueService.initCatalogue(true)
