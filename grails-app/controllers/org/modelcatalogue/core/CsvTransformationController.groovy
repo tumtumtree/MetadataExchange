@@ -1,6 +1,5 @@
 package org.modelcatalogue.core
 
-import org.codehaus.groovy.grails.web.json.JSONObject
 import org.modelcatalogue.core.dataarchitect.ColumnTransformationDefinition
 import org.modelcatalogue.core.dataarchitect.CsvTransformation
 import org.modelcatalogue.core.util.FriendlyErrors
@@ -60,7 +59,6 @@ class CsvTransformationController extends AbstractRestfulController<CsvTransform
 
     private static DataElement getByIdOrNull(sourceOrDestination) {
         if (!sourceOrDestination) return null
-        if (sourceOrDestination instanceof JSONObject.Null) return null
         DataElement.get(sourceOrDestination.id)
     }
 
