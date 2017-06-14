@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.util.js
 
-import org.codehaus.groovy.grails.commons.GrailsApplication
+import grails.core.GrailsApplication
 import org.springframework.beans.factory.annotation.Autowired
 
 class ApiRootFrontendConfigurationProvider extends  FrontendConfigurationProvider {

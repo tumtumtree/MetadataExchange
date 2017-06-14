@@ -2,8 +2,8 @@ package org.modelcatalogue.core.publishing
 
 import com.google.common.collect.ImmutableList
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import grails.core.GrailsApplication
+import grails.core.GrailsDomainClass
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.FriendlyErrors

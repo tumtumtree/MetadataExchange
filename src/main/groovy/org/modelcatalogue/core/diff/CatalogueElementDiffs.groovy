@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Sets
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
+import grails.core.GrailsApplication
+import grails.core.GrailsDomainClass
+import grails.core.GrailsDomainClassProperty
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.EnumeratedType
 import org.modelcatalogue.core.Relationship

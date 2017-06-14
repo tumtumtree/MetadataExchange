@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap
 import grails.util.GrailsNameUtils
 import grails.web.JSONBuilder
 import groovy.json.JsonSlurper
-import org.codehaus.groovy.grails.web.json.JSONObject
+import org.grails.web.json.JSONObject
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.HibernateHelper

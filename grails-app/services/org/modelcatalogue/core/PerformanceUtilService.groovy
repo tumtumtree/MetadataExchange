@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin
+import org.grails.plugins.domain.DomainClassGrailsPlugin
 import org.hibernate.SessionFactory
 
 class PerformanceUtilService {

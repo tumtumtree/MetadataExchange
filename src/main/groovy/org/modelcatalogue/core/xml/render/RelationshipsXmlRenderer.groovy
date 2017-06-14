@@ -4,7 +4,7 @@ import com.google.common.base.Function
 import com.google.common.collect.Iterables
 import grails.rest.render.AbstractRenderer
 import grails.rest.render.RenderContext
-import org.codehaus.groovy.grails.web.mime.MimeType
+import grails.web.mime.MimeType
 import org.grails.plugins.web.rest.render.ServletRenderContext
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClassService

@@ -1,7 +1,7 @@
 package org.modelcatalogue.core
 
-import org.codehaus.groovy.grails.plugins.testing.GrailsMockMultipartFile
-import org.codehaus.groovy.grails.web.json.JSONElement
+import org.grails.plugins.testing.GrailsMockMultipartFile
+import org.grails.web.json.JSONElement
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
 import spock.lang.Unroll

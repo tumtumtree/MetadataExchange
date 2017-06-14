@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.diff
 
 import com.google.common.collect.Multimap
-import org.codehaus.groovy.grails.commons.GrailsApplication
+import grails.core.GrailsApplication
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataClass

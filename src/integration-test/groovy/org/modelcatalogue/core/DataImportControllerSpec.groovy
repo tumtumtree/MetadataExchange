@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import org.codehaus.groovy.grails.web.json.JSONElement
+import org.grails.web.json.JSONElement
 import org.modelcatalogue.integration.excel.HeadersMap
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder

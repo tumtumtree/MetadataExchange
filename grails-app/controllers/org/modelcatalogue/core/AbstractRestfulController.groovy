@@ -3,7 +3,7 @@ package org.modelcatalogue.core
 import grails.converters.JSON
 import grails.rest.RestfulController
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import grails.core.GrailsDomainClass
 import org.hibernate.StaleStateException
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.policy.VerificationPhase

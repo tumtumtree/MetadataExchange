@@ -1,7 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.util.GrailsNameUtils
-import org.codehaus.groovy.grails.plugins.testing.GrailsMockMultipartFile
+import org.grails.plugins.testing.GrailsMockMultipartFile
 import org.modelcatalogue.core.util.OrderedMap
 import spock.lang.Unroll
 

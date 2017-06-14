@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.util.marshalling
 
 import grails.util.GrailsNameUtils
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
+import grails.util.GrailsClassUtils
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.HibernateHelper

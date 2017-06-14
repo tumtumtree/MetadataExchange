@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.reports
 
-import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 import groovy.util.logging.Slf4j
+import grails.web.mapping.LinkGenerator
 import org.springframework.beans.factory.annotation.Autowired
 
 @Slf4j

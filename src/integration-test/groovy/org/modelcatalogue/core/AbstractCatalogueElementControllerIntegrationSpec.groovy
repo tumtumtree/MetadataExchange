@@ -2,8 +2,8 @@ package org.modelcatalogue.core
 
 import grails.converters.JSON
 import grails.util.GrailsNameUtils
-import org.codehaus.groovy.grails.web.json.JSONElement
-import org.codehaus.groovy.grails.web.json.JSONObject
+import org.grails.web.json.JSONElement
+import org.grails.web.json.JSONObject
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.publishing.DraftContext
 import org.modelcatalogue.core.util.FriendlyErrors

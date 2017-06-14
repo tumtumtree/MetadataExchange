@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.security
 
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsApplication
+import grails.core.GrailsApplication
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.publishing.PublishingContext

@@ -1,10 +1,10 @@
 package org.modelcatalogue.core.elasticsearch
 
 import com.google.common.collect.ImmutableSet
+import grails.core.GrailsClass
 import grails.util.GrailsNameUtils
 import groovy.json.JsonSlurper
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsClass
+import grails.core.GrailsApplication
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder
 import org.elasticsearch.action.bulk.BulkItemResponse
 import org.elasticsearch.action.bulk.BulkRequestBuilder

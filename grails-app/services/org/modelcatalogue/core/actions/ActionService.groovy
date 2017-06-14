@@ -1,8 +1,8 @@
 package org.modelcatalogue.core.actions
 
 import grails.gorm.DetachedCriteria
-import org.codehaus.groovy.grails.exceptions.DefaultStackTraceFilterer
 import groovy.util.logging.Slf4j
+import org.grails.exceptions.reporting.DefaultStackTraceFilterer
 import org.modelcatalogue.core.SecurityService
 import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.util.FriendlyErrors
@@ -71,7 +71,7 @@ class ActionService {
         Closure<ActionResult> job = {
             try {
                 Action a = Action.get(id)
-                
+
                 StringWriter sw = new StringWriter()
                 PrintWriter pw = new PrintWriter(sw)
 

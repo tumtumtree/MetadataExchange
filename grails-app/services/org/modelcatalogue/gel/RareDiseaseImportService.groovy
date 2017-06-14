@@ -3,7 +3,7 @@ package org.modelcatalogue.gel
 import com.google.common.base.Preconditions
 import grails.gorm.DetachedCriteria
 import org.apache.commons.lang.StringUtils
-import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import grails.web.mapping.LinkGenerator
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass

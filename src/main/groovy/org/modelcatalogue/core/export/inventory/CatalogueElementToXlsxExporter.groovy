@@ -6,8 +6,8 @@ import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Iterables
 import com.google.common.collect.Multimap
 import grails.util.GrailsNameUtils
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.web.mime.MimeType
+import grails.web.mime.MimeType
+import grails.core.GrailsApplication
 import org.modelcatalogue.spreadsheet.api.Sheet
 import org.modelcatalogue.spreadsheet.builder.api.CellDefinition
 import org.modelcatalogue.spreadsheet.builder.api.SheetDefinition

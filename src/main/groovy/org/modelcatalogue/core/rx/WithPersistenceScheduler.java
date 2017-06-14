@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.rx;
 
-import org.codehaus.groovy.grails.support.PersistenceContextInterceptor;
+import grails.persistence.support.PersistenceContextInterceptor;
 import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action0;

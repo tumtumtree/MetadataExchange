@@ -1,9 +1,9 @@
 package org.modelcatalogue.core.rx
 
 import grails.gorm.DetachedCriteria
-import org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin
-import org.codehaus.groovy.grails.support.PersistenceContextInterceptor
+import grails.persistence.support.PersistenceContextInterceptor
 import org.codehaus.groovy.runtime.StackTraceUtils
+import org.grails.plugins.domain.DomainClassGrailsPlugin
 import rx.Observable
 import rx.Scheduler
 import rx.functions.Func1

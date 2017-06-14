@@ -1,8 +1,8 @@
 package org.modelcatalogue.core.publishing
 
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import grails.core.GrailsApplication
+import grails.core.GrailsDomainClass
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.api.ElementStatus

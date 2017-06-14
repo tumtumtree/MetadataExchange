@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.util
 
-import org.codehaus.groovy.grails.web.json.JSONElement
+import org.grails.web.json.JSONElement
 
 interface ResultRecorder {
 

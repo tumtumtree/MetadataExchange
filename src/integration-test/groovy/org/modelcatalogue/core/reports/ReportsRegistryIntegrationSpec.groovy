@@ -2,7 +2,7 @@ package org.modelcatalogue.core.reports
 
 import grails.rest.render.RenderContext
 import grails.test.spock.IntegrationSpec
-import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import grails.web.mapping.LinkGenerator
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.Relationship

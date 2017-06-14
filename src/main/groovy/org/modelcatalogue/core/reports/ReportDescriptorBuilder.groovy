@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.reports
 
-import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import grails.web.mapping.LinkGenerator
 import org.modelcatalogue.core.reports.ReportDescriptor.RenderType
 import org.modelcatalogue.core.util.lists.ListWrapper
 

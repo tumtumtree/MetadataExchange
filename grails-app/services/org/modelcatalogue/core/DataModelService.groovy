@@ -2,8 +2,8 @@ package org.modelcatalogue.core
 
 import grails.gorm.DetachedCriteria
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import grails.core.GrailsApplication
+import grails.core.GrailsDomainClass
 import org.modelcatalogue.core.actions.Batch
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.dataarchitect.CsvTransformation

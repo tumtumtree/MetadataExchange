@@ -1,8 +1,7 @@
 package org.modelcatalogue.core.util
 
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsApplication
-
+import grails.core.GrailsApplication
 import javax.servlet.http.HttpServletRequest
 
 class Legacy {

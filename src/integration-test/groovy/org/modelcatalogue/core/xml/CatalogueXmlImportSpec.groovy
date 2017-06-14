@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.xml
 
 import groovy.xml.XmlUtil
-import org.codehaus.groovy.grails.commons.GrailsApplication
+import grails.core.GrailsApplication
 import org.custommonkey.xmlunit.DetailedDiff
 import org.custommonkey.xmlunit.Diff
 import org.custommonkey.xmlunit.XMLUnit

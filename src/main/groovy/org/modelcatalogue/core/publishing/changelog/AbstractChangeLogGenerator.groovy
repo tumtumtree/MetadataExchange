@@ -2,7 +2,7 @@ package org.modelcatalogue.core.publishing.changelog
 
 import grails.util.GrailsNameUtils
 import grails.util.Holders
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import grails.core.GrailsDomainClass
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataClassService

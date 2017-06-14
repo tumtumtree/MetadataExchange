@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.actions
 
+import grails.util.GrailsClassUtils
 import grails.util.GrailsNameUtils
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory
 import org.springframework.context.MessageSource
