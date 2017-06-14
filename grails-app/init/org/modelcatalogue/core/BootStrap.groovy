@@ -1,9 +1,9 @@
 package org.modelcatalogue.core
 
+import grails.core.GrailsApplication
+import grails.core.GrailsDomainClass
 import grails.rest.render.RenderContext
 import grails.util.Environment
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
 import org.modelcatalogue.core.*
