@@ -17,7 +17,7 @@
 
     <title><g:layoutTitle default='User Registration'/></title>
 
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
+    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 
     <s2ui:resources module='register'/>
 
