@@ -1,3 +1,5 @@
+package org.modelcatalogue.core
+
 import grails.plugin.springsecurity.SpringSecurityUtils
 
 class LogoutController {

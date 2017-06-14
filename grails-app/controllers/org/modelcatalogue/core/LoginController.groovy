@@ -1,3 +1,5 @@
+package org.modelcatalogue.core
+
 import grails.converters.JSON
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 
