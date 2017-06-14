@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transaction.Transactional
 import grails.core.GrailsApplication
 import org.codehaus.groovy.runtime.IOGroovyMethods
 import org.hibernate.SessionFactory
@@ -7,6 +8,7 @@ import org.modelcatalogue.core.util.FriendlyErrors
 
 import javax.annotation.PostConstruct
 
+@Transactional
 class ModelCatalogueStorageService implements StorageService {
 
     GrailsApplication grailsApplication

@@ -30,8 +30,6 @@ import javax.validation.Validator
 
 class ModelToFormExporterService {
 
-    static transactional = false
-
     static final String EXT_FORM_NAME = "http://forms.modelcatalogue.org/form#name"
     static final String EXT_FORM_FORM = "http://forms.modelcatalogue.org/form#form"
     static final String EXT_FORM_CUSTOMIZER = "http://forms.modelcatalogue.org/form#customizer"

@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory
 
 class PerformanceUtilService {
 
-    static transactional = false
 
     SessionFactory sessionFactory
     def propertyInstanceMap = DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP

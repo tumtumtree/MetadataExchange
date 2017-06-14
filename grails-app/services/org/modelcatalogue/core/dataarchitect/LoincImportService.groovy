@@ -6,8 +6,6 @@ import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 
 class LoincImportService {
 
-    static transactional = false
-
     CatalogueBuilder catalogueBuilder
 
     Set<CatalogueElement> serviceMethod(InputStream loinc ) {

@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transaction.Transactional
 import com.bertramlabs.plugins.karman.CloudFile
 import com.bertramlabs.plugins.karman.CloudFileACL
 import com.bertramlabs.plugins.karman.StorageProvider
@@ -8,6 +9,7 @@ import grails.core.GrailsApplication
 
 import javax.annotation.PostConstruct
 
+@Transactional
 class AmazonStorageService implements StorageService {
 
     GrailsApplication grailsApplication

@@ -1,11 +1,11 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transaction.Transactional
 
+@Transactional
 class MappingService {
 
     def auditService
-
-    static transactional = true
 
     Mapping map(CatalogueElement source, CatalogueElement destination, String mapping) {
         if (!source || !source.id || !destination || !destination.id || !mapping) return null

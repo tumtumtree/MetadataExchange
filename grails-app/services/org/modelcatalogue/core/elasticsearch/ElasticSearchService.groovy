@@ -47,8 +47,6 @@ import static rx.Observable.just
 
 class ElasticSearchService implements SearchCatalogue {
 
-    static transactional = false
-
 
     private static final int ELEMENTS_PER_BATCH = readFromEnv('MC_ES_ELEMENTS_PER_BATCH', 10)
     private static final int DELAY_AFTER_BATCH = readFromEnv('MC_ES_DELAY_AFTER_BATCH', 25)

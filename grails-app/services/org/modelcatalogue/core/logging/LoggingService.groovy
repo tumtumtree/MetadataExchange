@@ -7,7 +7,9 @@ import java.nio.file.Files
 import java.text.SimpleDateFormat
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import grails.gorm.transaction.Transactional
 
+@Transactional
 class LoggingService {
 
     private final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("ddMMyyyyHHmmss")

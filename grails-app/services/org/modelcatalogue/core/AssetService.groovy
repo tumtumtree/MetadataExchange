@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import com.google.common.collect.ImmutableMap
+import grails.gorm.transaction.Transactional
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.transform.stc.ClosureParams
@@ -20,6 +21,7 @@ import java.security.MessageDigest
 import java.util.concurrent.ExecutorService
 
 @CompileStatic
+@Transactional
 class AssetService {
 
     StorageService modelCatalogueStorageService

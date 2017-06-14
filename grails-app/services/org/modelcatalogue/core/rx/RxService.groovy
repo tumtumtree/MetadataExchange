@@ -10,8 +10,6 @@ import rx.functions.Func1
 
 class RxService {
 
-    static transactional = false
-
 
     PersistenceContextInterceptor persistenceInterceptor
 

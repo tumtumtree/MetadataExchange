@@ -19,8 +19,6 @@ import javax.annotation.PostConstruct
 
 class DataModelService {
 
-    static transactional = false
-
     def modelCatalogueSecurityService
     def grailsApplication
     def sessionFactory

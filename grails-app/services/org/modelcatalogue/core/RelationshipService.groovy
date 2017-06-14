@@ -26,7 +26,6 @@ class RelationshipService {
      * Especially method #getDataModels() can be called in various places where forcing transaction may cause an
      * exception.
      */
-    static transactional = false
 
     def modelCatalogueSecurityService
     def auditService

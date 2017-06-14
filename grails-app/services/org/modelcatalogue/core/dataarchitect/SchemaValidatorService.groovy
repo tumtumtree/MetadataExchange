@@ -11,8 +11,6 @@ import javax.xml.validation.Validator
 
 class SchemaValidatorService {
 
-    static transactional = false
-
     String validateSchema(InputStream schemaStream, InputStream markupFile) {
         try {
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)

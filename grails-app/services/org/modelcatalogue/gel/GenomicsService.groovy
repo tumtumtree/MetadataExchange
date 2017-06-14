@@ -1,7 +1,7 @@
 package org.modelcatalogue.gel
 
 import grails.gsp.PageRenderer
-import grails.transaction.Transactional
+import grails.gorm.transaction.Transactional
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.PerformanceUtilService

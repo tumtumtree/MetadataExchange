@@ -6,8 +6,6 @@ import org.modelcatalogue.core.util.lists.Lists
 
 class DataElementService {
 
-    static transactional = false
-
     def sessionFactory
 
     ListWithTotalAndType<DataElement> findAllDataElementsInModel(Map params, DataModel model){
