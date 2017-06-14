@@ -39,7 +39,7 @@ class AbstractDataModelExporterSpec extends AbstractIntegrationSpec {
 
     // Model Based on Strcture of RD and Cancer Models
     DataModel buildTestModel() {
-        TestDataHelper.initFreshDb(sessionFactory, 'data-model-exporter.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'data-model-exporter.sql') {
             initRelationshipTypes()
             DefaultCatalogueBuilder builder = new DefaultCatalogueBuilder(dataModelService, elementService)
 

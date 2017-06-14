@@ -24,6 +24,8 @@ abstract class AbstractIntegrationSpec extends Specification {
     def cacheService
     def relationshipTypeService
 
+    TestDataHelper testDataHelper
+
     void loadMarshallers() {
         relationshipTypeService.clearCache()
         def springContext = WebApplicationContextUtils.getWebApplicationContext( ServletContextHolder.servletContext )
@@ -33,7 +35,7 @@ abstract class AbstractIntegrationSpec extends Specification {
 
     void initRelationshipTypes(){
         relationshipTypeService.clearCache()
-        TestDataHelper.initFreshDb(sessionFactory, 'reltypes.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'reltypes.sql') {
             initCatalogueService.initDefaultRelationshipTypes()
         }
         cacheService.clearCache()
@@ -41,7 +43,7 @@ abstract class AbstractIntegrationSpec extends Specification {
 
     void initCatalogue(){
         relationshipTypeService.clearCache()
-        TestDataHelper.initFreshDb(sessionFactory, 'initcatalogue.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'initcatalogue.sql') {
             initCatalogueService.initCatalogue(true)
         }
         cacheService.clearCache()
@@ -49,7 +51,7 @@ abstract class AbstractIntegrationSpec extends Specification {
 
     void loadFixtures(){
         relationshipTypeService.clearCache()
-        TestDataHelper.initFreshDb(sessionFactory, 'testdata.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'testdata.sql') {
             initCatalogueService.initDefaultRelationshipTypes()
             TestData.createTestData()
         }
@@ -72,7 +74,7 @@ abstract class AbstractIntegrationSpec extends Specification {
      * @return
      */
     DataModel buildComplexModel(DataModelService dataModelService, ElementService elementService) {
-        TestDataHelper.initFreshDb(sessionFactory, 'complexModel.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'complexModel.sql') {
             initRelationshipTypes()
 
             DefaultCatalogueBuilder builder = new DefaultCatalogueBuilder(dataModelService, elementService)

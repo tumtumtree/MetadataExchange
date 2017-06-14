@@ -36,6 +36,7 @@ class BootStrap {
     def modelCatalogueSearchService
     def userService
     GrailsApplication grailsApplication
+    TestDataHelper testDataHelper
 
     def init = { servletContext ->
         ExtensionModulesLoader.addExtensionModules()
@@ -45,9 +46,9 @@ class BootStrap {
                 CatalogueElementDynamicHelper.addShortcuts(it.clazz)
             }
         }
-        
+
         if (Environment.current in [Environment.DEVELOPMENT, Environment.TEST] && !System.getenv('MC_BLANK_DEV')) {
-            TestDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
+            testDataHelper.initFreshDb(sessionFactory, 'initTestDatabase.sql') {
                 initCatalogueService.initCatalogue(true)
                 initPoliciesAndTags()
                 initSecurity(false)

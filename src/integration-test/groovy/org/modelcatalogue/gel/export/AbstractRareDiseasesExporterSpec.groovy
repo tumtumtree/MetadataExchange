@@ -54,7 +54,7 @@ class AbstractRareDiseasesExporterSpec extends AbstractIntegrationSpec {
     // this model reflects the data mix of eligibility criteria, phenotypes & clinical tests that need to be extracted
     // by the two report generation methods it's a bit nasty looking but creates a fairly realistic model
     DataModel buildTestModel(boolean createPhenotypes) {
-        TestDataHelper.initFreshDb(sessionFactory, 'rare-diseases.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'rare-diseases.sql') {
             initRelationshipTypes()
             DefaultCatalogueBuilder builder = new DefaultCatalogueBuilder(dataModelService, elementService)
 

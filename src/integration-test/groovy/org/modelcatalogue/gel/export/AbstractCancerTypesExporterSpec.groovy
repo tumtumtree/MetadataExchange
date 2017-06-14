@@ -48,7 +48,7 @@ class AbstractCancerTypesExporterSpec extends AbstractIntegrationSpec {
     DataModelService dataModelService
 
     def setup() {
-        TestDataHelper.initFreshDb(sessionFactory, 'cancer-types.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'cancer-types.sql') {
             initRelationshipTypes()
 
             DefaultCatalogueBuilder catalogueBuilder = new DefaultCatalogueBuilder(dataModelService, elementService)

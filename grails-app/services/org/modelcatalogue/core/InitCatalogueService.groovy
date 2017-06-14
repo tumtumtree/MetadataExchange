@@ -21,6 +21,7 @@ class InitCatalogueService {
     def elementService
     def sessionFactory
     def cacheService
+    TestDataHelper testDataHelper
 
     def initCatalogue(boolean test = false){
         Closure init = {
@@ -28,7 +29,7 @@ class InitCatalogueService {
             initDefaultDataTypes(test)
         }
         if (test) {
-            TestDataHelper.initFreshDb(sessionFactory, 'initCatalogue.sql', init)
+            testDataHelper.initFreshDb(sessionFactory, 'initCatalogue.sql', init)
         } else {
             init()
         }

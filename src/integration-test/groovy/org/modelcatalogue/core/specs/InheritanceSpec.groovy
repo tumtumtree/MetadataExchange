@@ -68,9 +68,10 @@ class InheritanceSpec extends AbstractIntegrationSpec  {
     DataModel dataModel2
     Relationship baseClass
     Relationship baseElement
+    TestDataHelper testDataHelper
 
     def setup() {
-        TestDataHelper.initFreshDb(sessionFactory, 'inheritanceSpec.sql') {
+        testDataHelper.initFreshDb(sessionFactory, 'inheritanceSpec.sql') {
             initRelationshipTypes()
             catalogueBuilder.build {
                 skip draft

@@ -1,10 +1,16 @@
 package org.modelcatalogue.core.util.test
 
-import grails.util.Metadata
 import groovy.sql.Sql
 import org.hibernate.SessionFactory
+import org.springframework.beans.factory.annotation.Value
 
 class TestDataHelper {
+
+    @Value('${info.app.name}')
+    String appName
+
+    @Value('${info.app.version}')
+    String appVersion
 
     /**
      * Runs the closure once and than caches the current state of the database in the temp folder so the database
@@ -15,20 +21,20 @@ class TestDataHelper {
      * @param tempSqlFileName
      * @param initCode
      */
-    static runOnceAndPreserve(SessionFactory sessionFactory, String tempSqlFileName, Closure initCode) {
+    void runOnceAndPreserve(SessionFactory sessionFactory, String tempSqlFileName, Closure initCode) {
         initDb(sessionFactory, false, tempSqlFileName, initCode)
     }
 
-    static initFreshDb(SessionFactory sessionFactory, String tempSqlFileName, Closure initCode) {
+    void initFreshDb(SessionFactory sessionFactory, String tempSqlFileName, Closure initCode) {
         initDb(sessionFactory, true, tempSqlFileName, initCode)
     }
 
-    private static initDb(SessionFactory sessionFactory, boolean drop, String tempSqlFileName, Closure initCode) {
+    private void initDb(SessionFactory sessionFactory, boolean drop, String tempSqlFileName, Closure initCode) {
         if (isH2(sessionFactory)) {
             return initCode()
         }
 
-        String scriptLocation = "${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/${tempSqlFileName}"
+        String scriptLocation = "${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/${tempSqlFileName}"
 
         if (new File(scriptLocation).exists()) {
             long start = System.currentTimeMillis()
@@ -41,7 +47,7 @@ class TestDataHelper {
         long start = System.currentTimeMillis()
 
         if (drop) {
-            String clearScriptLocation = "${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/dropfiles/$tempSqlFileName"
+            String clearScriptLocation = "${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}}/dropfiles/$tempSqlFileName"
             new Sql(sessionFactory.currentSession.connection()).execute("SCRIPT NODATA DROP TO ${clearScriptLocation}")
             println "Clear script created in $clearScriptLocation"
             new Sql(sessionFactory.currentSession.connection()).execute("RUNSCRIPT FROM ${clearScriptLocation}")

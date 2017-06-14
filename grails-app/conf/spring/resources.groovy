@@ -44,6 +44,7 @@ import org.modelcatalogue.core.util.marshalling.RelationshipsMarshaller
 import org.modelcatalogue.core.util.marshalling.TagMarshaller
 import org.modelcatalogue.core.util.marshalling.UserMarshaller
 import org.modelcatalogue.core.util.marshalling.ValidationRuleMarshaller
+import org.modelcatalogue.core.util.test.TestDataHelper
 import org.modelcatalogue.core.xml.render.RelationshipsXmlRenderer
 
 import java.util.concurrent.Executors
@@ -148,4 +149,6 @@ beans = {
     ) {
         springConfig.addAlias('modelCatalogueSearchService','elasticSearchService')
     }
+
+    testDataHelper(TestDataHelper)
 }
