@@ -1,11 +1,13 @@
 package org.modelcatalogue.core.dataarchitect
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import org.modelcatalogue.core.DataClass
 import org.springframework.transaction.TransactionStatus
 import spock.lang.Ignore
+import spock.lang.Specification
 
-class OBOServiceISpec extends IntegrationSpec {
+@Integration
+class OBOServiceISpec extends Specification {
 
     def OBOService
 

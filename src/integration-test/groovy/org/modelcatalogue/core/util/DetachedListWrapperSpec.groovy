@@ -1,12 +1,14 @@
 package org.modelcatalogue.core.util
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Lists
+import spock.lang.Specification
 import spock.lang.Unroll
 
-class DetachedListWrapperSpec extends IntegrationSpec {
+@Integration
+class DetachedListWrapperSpec extends Specification {
 
     @Unroll
     def "list wrapper backed by detached criteria, size is #size for max #max"() {

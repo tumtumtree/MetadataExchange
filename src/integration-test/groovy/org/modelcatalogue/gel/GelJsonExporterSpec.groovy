@@ -1,15 +1,16 @@
 package org.modelcatalogue.gel
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import groovy.json.JsonOutput
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModelService
 import org.modelcatalogue.core.ElementService
 import org.modelcatalogue.core.InitCatalogueService
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
+import spock.lang.Specification
 
-
-class GelJsonExporterSpec extends IntegrationSpec {
+@Integration
+class GelJsonExporterSpec extends Specification {
 
     public static final String DATA_MODEL_NAME = 'testDataModel1'
     public static final String ROOT_DATA_CLASS_NAME = 'rare disease group 1'

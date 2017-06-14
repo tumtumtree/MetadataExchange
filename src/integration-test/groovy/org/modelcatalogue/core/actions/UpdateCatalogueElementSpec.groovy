@@ -1,10 +1,12 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.RelationshipType
+import spock.lang.Specification
 
-class UpdateCatalogueElementSpec extends IntegrationSpec {
+@Integration
+class UpdateCatalogueElementSpec extends Specification {
 
     UpdateCatalogueElement updateAction = new UpdateCatalogueElement()
     DataClass model

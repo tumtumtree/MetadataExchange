@@ -1,13 +1,14 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import grails.util.Holders
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
-
+import spock.lang.Specification
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.FutureTask
 
-class ActionServiceSpec extends IntegrationSpec {
+@Integration
+class ActionServiceSpec extends Specification {
 
     ActionService service
     Batch batch

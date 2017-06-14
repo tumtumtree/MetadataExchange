@@ -1,11 +1,13 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
+import spock.lang.Specification
 import spock.lang.Unroll
 /**
  * Created by adammilward on 03/02/2014.
  */
-class DataTypeSpec extends IntegrationSpec {
+@Integration
+class DataTypeSpec extends Specification {
 
 
     @Unroll

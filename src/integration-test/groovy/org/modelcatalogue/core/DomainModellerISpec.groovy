@@ -1,13 +1,14 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import spock.lang.Shared
+import spock.lang.Specification
 
 /**
 * Created by adammilward on 05/02/2014.
 */
-
-class DomainModellerISpec extends IntegrationSpec{
+@Integration
+class DomainModellerISpec extends Specification {
     @Shared
     def domainModellerService
 

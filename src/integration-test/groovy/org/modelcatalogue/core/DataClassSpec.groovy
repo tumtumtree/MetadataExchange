@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
+import spock.lang.Specification
 import spock.lang.Unroll
 /**
  * Created by adammilward on 05/02/2014.
@@ -9,7 +10,8 @@ import spock.lang.Unroll
  * They contains data elements
  */
 
-class DataClassSpec extends IntegrationSpec {
+@Integration
+class DataClassSpec extends Specification {
 
     @Unroll
     def "Model creation for #args results in #validates"() {

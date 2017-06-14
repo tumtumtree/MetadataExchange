@@ -1,8 +1,10 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
+import spock.lang.Specification
 
-class ActionServiceISpec extends IntegrationSpec {
+@Integration
+class ActionServiceISpec extends Specification {
 
     ActionService actionService
 

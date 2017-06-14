@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.reports
 
 import grails.rest.render.RenderContext
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import grails.web.mapping.LinkGenerator
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass
@@ -10,10 +10,12 @@ import org.modelcatalogue.core.util.lists.Elements
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Relationships
 import org.modelcatalogue.core.util.lists.SimpleListWrapper
+import spock.lang.Specification
 import spock.lang.Stepwise
 
+@Integration
 @Stepwise
-class ReportsRegistryIntegrationSpec extends IntegrationSpec {
+class ReportsRegistryIntegrationSpec extends Specification {
 
     def "returns reports for the given element"() {
         DataClass model                 = new DataClass(name: "Test")

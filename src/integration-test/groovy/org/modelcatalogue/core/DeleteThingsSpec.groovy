@@ -1,16 +1,17 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import groovy.util.slurpersupport.GPathResult
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
 import spock.lang.Shared
+import spock.lang.Specification
 import spock.lang.Unroll
-
 import javax.servlet.http.HttpServletResponse
 
-class DeleteThingsSpec extends IntegrationSpec{
+@Integration
+class DeleteThingsSpec extends Specification {
 
  //runs ok in integration test (test-app :integration), fails as part of test-app (Grails Bug) - uncomment to run
 //RE: http://jira.grails.org/browse/GRAILS-11047?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel

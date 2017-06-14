@@ -1,10 +1,12 @@
 package org.modelcatalogue.core.util
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import grails.util.Holders
+import spock.lang.Specification
 import spock.lang.Unroll
 
-class LegacySpec extends IntegrationSpec {
+@Integration
+class LegacySpec extends Specification {
 
     @Unroll
     def "fixes model catalogue id #original to #fixed"() {

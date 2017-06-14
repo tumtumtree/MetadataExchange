@@ -1,6 +1,5 @@
 package org.modelcatalogue.gel.export
 
-import grails.test.spock.IntegrationSpec
 import org.hibernate.SessionFactory
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataClass

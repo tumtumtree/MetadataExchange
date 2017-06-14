@@ -2,10 +2,10 @@ package org.modelcatalogue.core.actions
 
 import grails.util.GrailsClassUtils
 import grails.util.GrailsNameUtils
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory
 import org.springframework.context.MessageSource
 import org.springframework.validation.ObjectError
+import org.springframework.beans.factory.annotation.Autowired
 
 /**
  * Base class for ActionRunner interface.

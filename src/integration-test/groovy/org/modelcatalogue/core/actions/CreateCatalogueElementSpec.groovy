@@ -1,11 +1,13 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.RelationshipType
+import spock.lang.Specification
 
-class CreateCatalogueElementSpec extends IntegrationSpec {
+@Integration
+class CreateCatalogueElementSpec extends Specification {
 
     CreateCatalogueElement createAction = new CreateCatalogueElement()
 

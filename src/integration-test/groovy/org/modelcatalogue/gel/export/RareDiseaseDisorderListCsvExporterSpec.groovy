@@ -1,17 +1,16 @@
 package org.modelcatalogue.gel.export
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import groovy.transform.TypeChecked
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModelService
 import org.modelcatalogue.core.ElementService
 import org.modelcatalogue.core.InitCatalogueService
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
+import spock.lang.Specification
 
-/**
- * Created by rickrees on 24/03/2016.
- */
-class RareDiseaseDisorderListCsvExporterSpec extends IntegrationSpec {
+@Integration
+class RareDiseaseDisorderListCsvExporterSpec extends Specification {
 
     public static final String LEVEL2_GROUP1 = 'disease group 1,with comma'
     public static final String LEVEL3_1_GROUP1 = 'disease subgroup 1.1'

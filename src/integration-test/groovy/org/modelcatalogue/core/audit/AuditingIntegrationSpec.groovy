@@ -1,14 +1,15 @@
 package org.modelcatalogue.core.audit
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.publishing.DraftContext
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.builder.ProgressMonitor
+import spock.lang.Specification
 
-
-class AuditingIntegrationSpec extends IntegrationSpec {
+@Integration
+class AuditingIntegrationSpec extends Specification {
 
     def elementService
     def initCatalogueService

@@ -1,11 +1,13 @@
 package org.modelcatalogue.core.util
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
+import spock.lang.Specification
 import spock.lang.Unroll
 
-class CatalogueElementDynamicHelperSpec extends IntegrationSpec {
+@Integration
+class CatalogueElementDynamicHelperSpec extends Specification {
 
     def initCatalogueService
 

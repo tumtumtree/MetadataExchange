@@ -1,12 +1,14 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import grails.test.mixin.integration.Integration
+import spock.lang.Specification
 import spock.lang.Unroll
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  * a measurement unit can be
  */
-class MeasurementUnitSpec extends IntegrationSpec {
+@Integration
+class MeasurementUnitSpec extends Specification {
 
     @Unroll
     def "create a new measurement from #args validates to #validates"() {

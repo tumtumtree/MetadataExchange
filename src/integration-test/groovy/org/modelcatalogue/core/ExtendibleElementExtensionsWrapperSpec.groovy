@@ -1,9 +1,11 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import spock.lang.Specification
 import spock.lang.Unroll
+import grails.test.mixin.integration.Integration
 
-class ExtendibleElementExtensionsWrapperSpec extends IntegrationSpec {
+@Integration
+class ExtendibleElementExtensionsWrapperSpec extends Specification {
 
     def relationshipService
 

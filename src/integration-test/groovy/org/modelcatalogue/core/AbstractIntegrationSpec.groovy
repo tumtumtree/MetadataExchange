@@ -1,7 +1,6 @@
 package org.modelcatalogue.core
 
 import grails.plugin.springsecurity.SpringSecurityUtils
-import grails.test.spock.IntegrationSpec
 import grails.web.context.ServletContextHolder
 import org.modelcatalogue.core.security.Role
 import org.modelcatalogue.core.security.User
@@ -11,8 +10,11 @@ import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import org.modelcatalogue.core.util.test.TestData
 import org.modelcatalogue.core.util.test.TestDataHelper
 import org.springframework.web.context.support.WebApplicationContextUtils
+import spock.lang.Specification
+import grails.test.mixin.integration.Integration
 
-abstract class AbstractIntegrationSpec extends IntegrationSpec {
+@Integration
+abstract class AbstractIntegrationSpec extends Specification {
 
     protected static final String COMPLEX_MODEL_ROOT_DATA_CLASS_NAME = 'C4CTDE Root'
     protected static final String COMPLEX_MODEL_NAME = 'C4CTDE'

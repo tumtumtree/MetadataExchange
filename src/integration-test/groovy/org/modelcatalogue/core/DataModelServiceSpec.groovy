@@ -1,7 +1,6 @@
 package org.modelcatalogue.core
 
 import grails.gorm.DetachedCriteria
-import grails.test.spock.IntegrationSpec
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.DataModelFilter

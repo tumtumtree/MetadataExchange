@@ -1,10 +1,12 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
 import grails.transaction.Rollback
+import grails.test.mixin.integration.Integration
+import spock.lang.Specification
 
+@Integration
 @Rollback
-class CatalogueElementServiceIntegrationSpec extends IntegrationSpec {
+class CatalogueElementServiceIntegrationSpec extends Specification {
 
     def sessionFactory
     def catalogueElementService

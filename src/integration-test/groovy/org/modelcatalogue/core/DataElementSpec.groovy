@@ -1,7 +1,8 @@
 package org.modelcatalogue.core
 
-import grails.test.spock.IntegrationSpec
+import spock.lang.Specification
 import spock.lang.Unroll
+import grails.test.mixin.integration.Integration
 
 /**
  * Created by adammilward on 05/02/2014.
@@ -26,7 +27,8 @@ import spock.lang.Unroll
  *
  *
  */
-class DataElementSpec extends IntegrationSpec {
+@Integration
+class DataElementSpec extends Specification {
 
     @Unroll
     def "#no create a new data element from #args validates to #validates"() {
