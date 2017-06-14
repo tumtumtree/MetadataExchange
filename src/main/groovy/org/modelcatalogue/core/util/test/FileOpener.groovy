@@ -1,11 +1,10 @@
 package org.modelcatalogue.core.util.test
 
-import groovy.util.logging.Commons
+import groovy.util.logging.Slf4j
 import org.codehaus.groovy.runtime.StackTraceUtils
-
 import java.awt.Desktop
 
-@Commons
+@Slf4j
 class FileOpener {
 
 
