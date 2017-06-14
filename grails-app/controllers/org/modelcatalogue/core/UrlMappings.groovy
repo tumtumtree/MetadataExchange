@@ -1,3 +1,5 @@
+package org.modelcatalogue.core
+
 class UrlMappings {
 
 	static mappings = {
