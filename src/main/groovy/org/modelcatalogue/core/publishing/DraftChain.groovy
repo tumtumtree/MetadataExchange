@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.publishing
 
+import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 import grails.util.Holders
 import grails.core.GrailsApplication
 import grails.core.GrailsDomainClass
@@ -10,8 +11,6 @@ import org.modelcatalogue.core.util.FriendlyErrors
 import org.modelcatalogue.core.util.builder.ProgressMonitor
 import rx.Observer
 import groovy.util.logging.Slf4j
-
-import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 
 @Slf4j
 class DraftChain extends PublishingChain {

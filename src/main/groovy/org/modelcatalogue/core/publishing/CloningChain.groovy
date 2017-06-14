@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.publishing
 
+import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 import grails.util.Holders
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
@@ -12,8 +13,6 @@ import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.FriendlyErrors
 import rx.Observer
 import groovy.util.logging.Slf4j
-
-import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 
 @CompileStatic
 @Slf4j

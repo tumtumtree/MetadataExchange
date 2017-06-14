@@ -1,5 +1,7 @@
 package org.modelcatalogue.core.util.builder
 
+import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
+
 import com.google.common.collect.Maps
 import com.google.common.collect.Sets
 import grails.compiler.GrailsCompileStatic
@@ -8,8 +10,6 @@ import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.Legacy
 
 import java.lang.reflect.Modifier
-
-import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 import groovy.util.logging.Slf4j
 
 @GrailsCompileStatic
