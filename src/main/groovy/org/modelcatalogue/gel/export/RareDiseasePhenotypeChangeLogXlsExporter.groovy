@@ -1,6 +1,6 @@
 package org.modelcatalogue.gel.export
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.spreadsheet.builder.api.SheetDefinition
@@ -9,7 +9,7 @@ import org.modelcatalogue.spreadsheet.builder.api.SheetDefinition
  * Created by rickrees on 18/04/2016.
  * HPO and Clinical Tests spreadsheet implementation of RD Change Log Excel Exporter
  */
-@Log4j
+@Slf4j
 class RareDiseasePhenotypeChangeLogXlsExporter extends RareDiseaseChangeLogXlsExporter {
 
     private static final String PHENOTYPES_SHEET = 'HPO & Clinical tests change log'

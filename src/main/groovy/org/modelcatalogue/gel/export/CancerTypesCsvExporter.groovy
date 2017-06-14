@@ -1,6 +1,6 @@
 package org.modelcatalogue.gel.export
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.EnumeratedType
@@ -12,7 +12,7 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
  * Created by rickrees on 31/03/2016.
  *
  */
-@Log4j
+@Slf4j
 class CancerTypesCsvExporter {
 
     static final String CANCER_TYPES_HEADER = "Id,Cancer Types,Presentations,Id SubTypes,Cancer SubTypes,Id Enum,Enum SubType"

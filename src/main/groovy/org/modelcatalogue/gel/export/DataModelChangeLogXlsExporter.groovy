@@ -2,7 +2,7 @@ package org.modelcatalogue.gel.export
 
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.spreadsheet.builder.api.SheetDefinition
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.audit.AuditService
@@ -12,7 +12,7 @@ import org.modelcatalogue.core.util.DataModelFilter
  * General purpose Change Log Excel Exporter
  * Runs from the DataModel level and traverses the DataClasses
  */
-@Log4j
+@Slf4j
 class DataModelChangeLogXlsExporter extends RareDiseaseChangeLogXlsExporter {
 
     private static final String DATA_SPEC_SHEET = 'Data Specification Change Log'

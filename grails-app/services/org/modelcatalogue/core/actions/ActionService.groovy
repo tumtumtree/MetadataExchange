@@ -1,8 +1,8 @@
 package org.modelcatalogue.core.actions
 
 import grails.gorm.DetachedCriteria
-import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.exceptions.DefaultStackTraceFilterer
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.SecurityService
 import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.util.FriendlyErrors
@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 import java.util.concurrent.FutureTask
 
-@Log4j
+@Slf4j
 class ActionService {
 
     ExecutorService executorService

@@ -1,7 +1,7 @@
 package org.modelcatalogue.gel.export
 
 import com.craigburke.document.core.builder.DocumentBuilder
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.util.Metadata
@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
  * This class generates either the Eligibility Criteria OR the Phenotypes & Clinical Tests report for Rare Diseases
  * according to the selected mode
  */
-@Log4j
+@Slf4j
 class RareDiseasesDocExporter {
 
     private static final Map<String, Object> CELL_TEXT_FIRST = [font: [size: 11, family: 'Calibri', bold: true]]

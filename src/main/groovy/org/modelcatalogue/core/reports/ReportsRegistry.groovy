@@ -1,10 +1,10 @@
 package org.modelcatalogue.core.reports
 
-import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 
-@Log4j
+@Slf4j
 class ReportsRegistry {
 
     @Autowired LinkGenerator linkGenerator

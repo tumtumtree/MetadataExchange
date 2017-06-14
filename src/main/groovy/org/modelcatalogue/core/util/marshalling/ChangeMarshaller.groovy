@@ -2,7 +2,7 @@ package org.modelcatalogue.core.util.marshalling
 
 import grails.converters.JSON
 import grails.util.GrailsNameUtils
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.codehaus.groovy.runtime.InvokerInvocationException
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.audit.AuditService
@@ -10,7 +10,7 @@ import org.modelcatalogue.core.audit.Change
 import org.modelcatalogue.core.audit.ChangeType
 import org.springframework.beans.factory.annotation.Autowired
 
-@Log4j
+@Slf4j
 class ChangeMarshaller extends AbstractMarshaller {
 
     @Autowired AuditService auditService

@@ -1,7 +1,7 @@
 package org.modelcatalogue.gel.export
 
 import groovy.json.JsonBuilder
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataElement
@@ -10,7 +10,7 @@ import org.modelcatalogue.core.DataElement
  * Created by rickrees on 31/03/2016.
  *
  */
-@Log4j
+@Slf4j
 class RareDiseasesJsonExporter {
 
     public static final int LEVEL1 = 1

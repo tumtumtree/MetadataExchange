@@ -4,7 +4,6 @@ import com.craigburke.document.core.builder.DocumentBuilder
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
 import grails.util.GrailsNameUtils
-import groovy.util.logging.Log4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataClassService
@@ -18,10 +17,10 @@ import org.modelcatalogue.core.export.inventory.DocxSpecificationDataHelper
 import org.modelcatalogue.core.util.Metadata
 import org.modelcatalogue.core.util.delayable.Delayable
 import org.modelcatalogue.core.util.docx.ModelCatalogueWordDocumentBuilder
-
 import java.text.SimpleDateFormat
+import groovy.util.logging.Slf4j
 
-@Log4j
+@Slf4j
 class ChangeLogDocxGenerator extends AbstractChangeLogGenerator{
 
     def customTemplate

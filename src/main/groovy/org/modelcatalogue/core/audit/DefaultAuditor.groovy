@@ -2,10 +2,10 @@ package org.modelcatalogue.core.audit
 
 import grails.web.JSONBuilder
 import groovy.json.JsonSlurper
-import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.util.FriendlyErrors
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 import org.modelcatalogue.core.util.marshalling.RelationshipMarshallers
@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService
 /**
  * Default auditor auditing the changes using the change table/entity.
  */
-@Log4j
+@Slf4j
 class DefaultAuditor extends LoggingAuditor {
 
     private final ExecutorService executorService

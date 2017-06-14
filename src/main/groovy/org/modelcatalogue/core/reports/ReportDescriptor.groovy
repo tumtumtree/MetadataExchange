@@ -1,13 +1,13 @@
 package org.modelcatalogue.core.reports
 
-import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import groovy.util.logging.Slf4j
 import org.springframework.util.SerializationUtils
 
 /**
  * Created by ladin on 09.06.14.
  */
-@Log4j
+@Slf4j
 class ReportDescriptor {
 
     static enum RenderType {

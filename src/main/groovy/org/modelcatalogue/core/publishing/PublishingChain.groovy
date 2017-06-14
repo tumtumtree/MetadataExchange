@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.publishing
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.hibernate.proxy.HibernateProxyHelper
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
@@ -9,7 +9,7 @@ import org.modelcatalogue.core.util.FriendlyErrors
 import org.modelcatalogue.core.util.builder.ProgressMonitor
 import rx.Observer
 
-@Log4j
+@Slf4j
 abstract class PublishingChain {
 
     protected final CatalogueElement published

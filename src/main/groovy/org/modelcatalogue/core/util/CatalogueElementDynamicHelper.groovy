@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.util
 
-import groovy.util.logging.Log
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.Relationship
 import org.modelcatalogue.core.RelationshipType
@@ -9,7 +9,7 @@ import org.modelcatalogue.core.RelationshipType
 /**
  * Created by ladin on 24.03.14.
  */
-@Log
+@Slf4j
 class CatalogueElementDynamicHelper {
 
     static void addShortcuts(Class<? extends CatalogueElement>... types) {

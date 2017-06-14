@@ -2,7 +2,6 @@ package org.modelcatalogue.core.publishing
 
 import com.google.common.collect.ImmutableList
 import grails.util.Holders
-import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
 import org.modelcatalogue.core.*
@@ -12,8 +11,9 @@ import org.modelcatalogue.core.util.HibernateHelper
 import org.modelcatalogue.core.util.RelationshipDirection
 import org.modelcatalogue.core.RelationshipDefinition
 import org.modelcatalogue.core.RelationshipDefinitionBuilder
+import groovy.util.logging.Slf4j
 
-@Log4j
+@Slf4j
 class CopyAssociationsAndRelationships {
 
     private final CatalogueElement draft

@@ -6,7 +6,6 @@ import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Iterables
 import com.google.common.collect.Multimap
 import grails.util.GrailsNameUtils
-import groovy.util.logging.Log4j
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.web.mime.MimeType
 import org.modelcatalogue.spreadsheet.api.Sheet
@@ -45,13 +44,14 @@ import static org.modelcatalogue.core.export.inventory.ModelCatalogueStyles.CHAN
 import static org.modelcatalogue.core.export.inventory.ModelCatalogueStyles.H1
 import static org.modelcatalogue.core.export.inventory.ModelCatalogueStyles.H2
 
+import groovy.util.logging.Slf4j
 /**
  * For the Inventory Report.
  * Compares a Data Model or a Data Class with its previous version and produces an Excel spreadsheet detailing
  * the differences.
  * Uses CatalogueElementDiffs in the base case to compare two elements.
  */
-@Log4j
+@Slf4j
 class CatalogueElementToXlsxExporter {
 
     static final String CONTENT = 'Content'

@@ -2,7 +2,7 @@ package org.modelcatalogue.core.util.delayable
 
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.FromString
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 
 /**
  * Object wrapper with ability to delay and rollback method calls.
@@ -11,7 +11,7 @@ import groovy.util.logging.Log4j
  *
  * @param < T > the type of the delegate
  */
-@Log4j
+@Slf4j
 class Delayable<T>  {
 
     private final T delegate

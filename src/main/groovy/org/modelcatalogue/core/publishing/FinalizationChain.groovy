@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.publishing
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.api.ElementStatus
@@ -8,7 +8,7 @@ import org.modelcatalogue.core.util.FriendlyErrors
 import org.modelcatalogue.core.util.HibernateHelper
 import rx.Observer
 
-@Log4j
+@Slf4j
 class FinalizationChain extends PublishingChain {
 
 

@@ -3,7 +3,7 @@ package org.modelcatalogue.core.export.inventory
 import com.craigburke.document.core.builder.DocumentBuilder
 import com.google.common.collect.SetMultimap
 import com.google.common.collect.TreeMultimap
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataElement
@@ -17,7 +17,7 @@ import org.modelcatalogue.core.enumeration.Enumerations
 /**
  * Prints data specification using the DocumentBuilder library
  */
-@Log4j
+@Slf4j
 class DocxSpecificationDataHelper {
 
     final Set<ValidationRule> rules = new HashSet<>()

@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.export.inventory
 
 import com.craigburke.document.core.builder.DocumentBuilder
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataClassService
@@ -19,7 +19,7 @@ import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 
 import java.text.SimpleDateFormat
 
-@Log4j
+@Slf4j
 class DataClassToDocxExporter {
 
     private static final Map<String, Object> HEADER_CELL =  [background: '#F2F2F2']

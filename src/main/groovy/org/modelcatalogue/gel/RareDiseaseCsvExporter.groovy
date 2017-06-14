@@ -1,6 +1,6 @@
 package org.modelcatalogue.gel
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.util.Metadata
@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets
  * The business requirement for these csv files is to be human readable (for human consumption), so they are probably looking at the generated
  * report in Excel. Currently, the file is UTF-8 encoded and may require treatment in Excel after being imported.
  */
-@Log4j
+@Slf4j
 class RareDiseaseCsvExporter {
 
     private def docType

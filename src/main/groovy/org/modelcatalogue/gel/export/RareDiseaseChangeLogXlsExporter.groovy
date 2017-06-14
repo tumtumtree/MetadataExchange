@@ -5,7 +5,7 @@ import com.google.common.collect.ListMultimap
 import groovy.json.JsonSlurper
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.apache.commons.lang.exception.ExceptionUtils
 import org.modelcatalogue.spreadsheet.builder.api.SheetDefinition
 import org.modelcatalogue.spreadsheet.builder.api.SpreadsheetBuilder
@@ -29,7 +29,7 @@ import static RareDiseaseChangeLogXlsExporter.RareDiseaseChangeType.*
  * Created by rickrees on 18/04/2016.
  *
  */
-@Log4j
+@Slf4j
 abstract class RareDiseaseChangeLogXlsExporter extends AbstractChangeLogGenerator implements XlsExporter {
 
     public static final String EMPTY = ''

@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.elasticsearch
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.elasticsearch.action.search.SearchRequestBuilder
 import org.elasticsearch.action.search.SearchResponse
 import org.elasticsearch.index.IndexNotFoundException
@@ -18,7 +18,7 @@ import org.modelcatalogue.core.util.OrderedMap
 import org.modelcatalogue.core.util.lists.JsonAwareListWithTotalAndType
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 
-@Log4j
+@Slf4j
 class ElasticSearchQueryList<T> implements JsonAwareListWithTotalAndType<T> {
 
     final Map<String, Object> params

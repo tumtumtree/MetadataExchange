@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.export.inventory
 
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataClassService
 import org.modelcatalogue.core.DataModel
@@ -19,7 +19,7 @@ import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 
 import java.text.SimpleDateFormat
 
-@Log4j
+@Slf4j
 class DataModelToDocxExporter {
 
     DataClassService dataClassService

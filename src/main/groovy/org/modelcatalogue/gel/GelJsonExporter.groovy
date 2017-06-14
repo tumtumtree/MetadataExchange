@@ -1,11 +1,11 @@
 package org.modelcatalogue.gel
 
 import groovy.json.JsonBuilder
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 
-@Log4j
+@Slf4j
 class GelJsonExporter {
 
     public static final int LEVEL1 = 1

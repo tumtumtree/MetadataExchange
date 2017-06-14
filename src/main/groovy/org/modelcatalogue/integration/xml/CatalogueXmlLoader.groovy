@@ -1,6 +1,6 @@
 package org.modelcatalogue.integration.xml
 
-import groovy.util.logging.Log
+import groovy.util.logging.Slf4j
 import groovy.util.slurpersupport.GPathResult
 import groovy.util.slurpersupport.NodeChild
 import org.modelcatalogue.builder.api.CatalogueBuilder
@@ -8,7 +8,7 @@ import org.modelcatalogue.builder.api.ConventionBuilder
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
 import org.modelcatalogue.core.enumeration.Enumerations
 
-@Log
+@Slf4j
 class CatalogueXmlLoader {
 
     private static final List<String> SUPPORTED_NAMESPACE_URLS = [

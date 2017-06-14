@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.diff
 
 import grails.util.GrailsNameUtils
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.Relationship
 import org.modelcatalogue.core.enumeration.Enumeration
@@ -9,7 +9,7 @@ import org.modelcatalogue.core.enumeration.Enumeration
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-@Log4j
+@Slf4j
 class Diff {
 
     private final Pattern REL_EXT_PATTERN = Pattern.compile(/rex:(\d+)=\[(.+?)\/(.+)]=>(\d+)/)

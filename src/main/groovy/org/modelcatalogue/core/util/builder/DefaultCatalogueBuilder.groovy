@@ -4,7 +4,6 @@ import grails.transaction.Transactional
 import grails.util.GrailsNameUtils
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
-import groovy.util.logging.Log4j
 import org.modelcatalogue.builder.api.BuilderKeyword
 import org.modelcatalogue.builder.api.DataModelPolicyBuilder
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
@@ -23,6 +22,7 @@ import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
 
 
+import groovy.util.logging.Slf4j
 
 /**
  * CatalogueBuilder class allows to design the catalogue elements relationship in a tree-like structure simply without
@@ -32,7 +32,8 @@ import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
  *
  */
 @CompileStatic
-@Log4j class DefaultCatalogueBuilder extends AbstractCatalogueBuilder {
+@Slf4j
+class DefaultCatalogueBuilder extends AbstractCatalogueBuilder {
 
     /**
      * These classes can be created automatically setting e.g. <code>automatic dataType</code> flag on.

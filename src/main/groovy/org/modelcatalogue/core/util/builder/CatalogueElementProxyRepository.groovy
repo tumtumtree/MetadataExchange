@@ -3,7 +3,7 @@ package org.modelcatalogue.core.util.builder
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.DetachedCriteria
 import groovy.transform.CompileDynamic
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.util.HibernateHelper
 import org.modelcatalogue.core.api.ElementStatus
@@ -13,7 +13,8 @@ import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.FriendlyErrors
 import org.springframework.util.StopWatch
 
-@Log4j @GrailsCompileStatic
+@GrailsCompileStatic
+@Slf4j
 class CatalogueElementProxyRepository {
 
 
