@@ -1,8 +1,10 @@
 package org.modelcatalogue.core.security
 
+import grails.gorm.transaction.Transactional
 import com.google.common.io.BaseEncoding
 import org.modelcatalogue.core.util.FriendlyErrors
 
+@Transactional
 class UserService {
 
     public static final String ACCESS_LEVEL_SUPERVISOR = 'supervisor'

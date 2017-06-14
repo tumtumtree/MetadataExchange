@@ -1,6 +1,7 @@
 package org.modelcatalogue.gel
 
 import com.google.common.base.Preconditions
+import grails.gorm.transaction.Transactional
 import grails.gorm.DetachedCriteria
 import org.apache.commons.lang.StringUtils
 import grails.web.mapping.LinkGenerator
@@ -13,6 +14,7 @@ import org.modelcatalogue.core.util.builder.CatalogueElementProxyRepository
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import org.modelcatalogue.integration.obo.OboLoader
 
+@Transactional
 class RareDiseaseImportService {
 
     LinkGenerator grailsLinkGenerator

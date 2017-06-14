@@ -2,7 +2,9 @@ package org.modelcatalogue.core
 
 import grails.core.GrailsApplication
 import javax.annotation.PostConstruct
+import grails.gorm.transaction.Transactional
 
+@Transactional
 class LocalFilesStorageService implements StorageService {
 
     GrailsApplication grailsApplication

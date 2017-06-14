@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.actions
 
+import grails.gorm.transaction.Transactional
 import grails.gorm.DetachedCriteria
 import groovy.util.logging.Slf4j
 import org.grails.exceptions.reporting.DefaultStackTraceFilterer
@@ -16,7 +17,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 import java.util.concurrent.FutureTask
 
-@Slf4j
+@Slf4j @Transactional
 class ActionService {
 
     ExecutorService executorService

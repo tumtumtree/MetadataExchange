@@ -12,8 +12,6 @@ import org.modelcatalogue.core.util.SecuredRuleExecutor
 
 class DataArchitectService {
 
-    static transactional = false
-
     def modelCatalogueSecurityService
     def modelCatalogueSearchService
     def relationshipService

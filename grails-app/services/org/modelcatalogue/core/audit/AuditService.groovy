@@ -23,8 +23,6 @@ import java.util.concurrent.Callable
  */
 class AuditService {
 
-    static transactional = false
-
     SearchCatalogue modelCatalogueSearchService
     def modelCatalogueSecurityService
     def dataModelService

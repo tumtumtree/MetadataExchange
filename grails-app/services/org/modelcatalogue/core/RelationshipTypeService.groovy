@@ -3,8 +3,6 @@ package org.modelcatalogue.core
 
 class RelationshipTypeService {
 
-    static transactional = false
-
     private  Map<Class, Map<String, RelationshipType>> typesForDomainClassCache = [:]
     private Map<String, RelationshipType> relationshipTypesCache = [:]
 

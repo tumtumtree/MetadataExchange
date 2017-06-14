@@ -16,8 +16,6 @@ import org.springframework.jdbc.datasource.init.ScriptUtils
 
 class InitCatalogueService {
 
-    static transactional = false
-
     def grailsApplication
     def dataModelService
     def elementService

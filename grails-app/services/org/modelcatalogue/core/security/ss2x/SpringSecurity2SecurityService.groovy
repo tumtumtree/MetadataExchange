@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit
 
 class SpringSecurity2SecurityService implements SecurityService, LogoutListeners, LogoutHandler {
 
-    static transactional = false
 
     SpringSecurityService springSecurityService
 

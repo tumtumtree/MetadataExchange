@@ -7,8 +7,6 @@ import org.modelcatalogue.core.security.User
  */
 class ModelCatalogueSecurityService implements SecurityService, LogoutListeners {
 
-    static transactional = false
-
     @Override
     boolean isUserLoggedIn() {
         return true

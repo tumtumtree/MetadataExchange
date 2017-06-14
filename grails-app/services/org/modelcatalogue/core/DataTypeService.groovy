@@ -1,14 +1,13 @@
 package org.modelcatalogue.core
 
-import grails.transaction.Transactional
+import grails.gorm.transaction.Transactional
 import org.modelcatalogue.core.util.HibernateHelper
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import org.modelcatalogue.core.util.lists.Lists
 
+// This had Transactional annotation AND static transactional=false... weird.
 @Transactional
 class DataTypeService {
-
-    static transactional = false
 
     def sessionFactory
 
