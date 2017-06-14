@@ -1,5 +1,7 @@
 package org.modelcatalogue.core.genomics
 
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import org.modelcatalogue.core.Asset
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.RelationshipType
@@ -11,9 +13,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 
-class RareDiseaseImportController {
+class RareDiseaseImportController implements GrailsConfigurationAware {
 
-    def grailsApplication
+    String serverUrl
     def assetService
     def auditService
     def elementService
@@ -25,6 +27,11 @@ class RareDiseaseImportController {
     private static final CONTENT_TYPES = ['text/csv']
     static responseFormats = ['json']
     static allowedMethods = [upload: "POST"]
+
+    @Override
+    void setConfiguration(Config co) {
+        serverUrl = co.getProperty('grails.serverURL', String)
+    }
 
     def upload() {
         if (!modelCatalogueSecurityService.hasRole('CURATOR')) {
@@ -68,7 +75,7 @@ class RareDiseaseImportController {
 
             // redirect to asset
             response.setHeader("X-Asset-ID", asset.id.toString())
-            redirect url: grailsApplication.config.grails.serverURL + "/api/modelCatalogue/core/asset/" + asset.id
+            redirect url: "${serverUrl}/api/modelCatalogue/core/asset/${asset.id}".toString()
         }
 
         respond("errors": ["usupported content type ${file.contentType}, use some of ${CONTENT_TYPES}"])
