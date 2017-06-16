@@ -1,0 +1,13 @@
+= Ref - Angular Services
+:toc: left
+
+include::enhance.adoc[leveloffset=+1]
+include::actions.adoc[leveloffset=+1]
+include::catalogueElementProperties.adoc[leveloffset=+1]
+include::columns.adoc[leveloffset=+1]
+include::modelCatalogueSearch.adoc[leveloffset=+1]
+include::security.adoc[leveloffset=+1]
+include::catalogueElementResource.adoc[leveloffset=+1]
+include::names.adoc[leveloffset=+1]
+include::rest.adoc[leveloffset=+1]
+include::messages.adoc[leveloffset=+1]

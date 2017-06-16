@@ -1,0 +1,17 @@
+= catalogueElementDeleted
+
+Event broadcast on the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope] when
+ [catalogueElement|Angular Enhancers] is deleted.
+
+WARNING: This event is currently implemented only for removing items from the lists (such as relationships).
+
+== Usage
+Register the handler on the current scope or the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope]
+to listen to delete request.
+
+[source,javascript]
+----
+$scope.$on('catalogueElementDeleted', function(event, element) {
+    // hide the element
+})
+----

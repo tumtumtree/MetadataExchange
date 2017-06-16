@@ -1,0 +1,25 @@
+= Model Catalogue Core - Development
+:toc: left
+
+== Frameworks
+
+include::frameworks/technology_stack.adoc[leveloffset=+2]
+include::frameworks/geb.adoc[leveloffset=+2]
+include::frameworks/grails_console.adoc[leveloffset=+2]
+include::frameworks/rxjava.adoc[leveloffset=+2]
+
+
+== Recipes
+include::recipes/exports.adoc[leveloffset=+2]
+include::recipes/policies.adoc[leveloffset=+2]
+
+== Integration
+include::integration/xml.adoc[leveloffset=+2]
+
+include::bugs.adoc[leveloffset=+1]
+include::migration.adoc[leveloffset=+1]
+include::executor_service.adoc[leveloffset=+1]
+
+
+
+

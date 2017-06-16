@@ -1,0 +1,56 @@
+= Data Element
+
+Extends [extendibleElement|Domain Classes]
+Extends [publishedElement|Domain Classes]
+
+Uses the static map `relationships` to create the following shortcuts:
+
+[source,groovy]
+----
+    static relationships = [
+            incoming: [containment: 'containedIn'],
+            outgoing: [instantiation: 'instantiatedBy']
+    ]
+----
+
+== Usage
+
+`.addToContainedIn`
+[source,groovy]
+----
+DataElement subject = new DataElement(name:"subject", description: "subject for the book", code: "SUB001")
+Model book = Model.findByName("book")
+author.addToContainedIn(book)
+----
+
+`.addToInstantiatedBy`
+[source,groovy]
+----
+EnumeratedType schoolSubjects = EnumeratedType.findByName("schoolSubjects")
+DataType subjects = new DataType(name: "school subjects", dataType: v)
+author.addToInstantiatedBy(subjects)
+----
+
+`.containedIn`
+[source,groovy]
+----
+author.containedIn == book
+----
+
+`.instantiatedBy`
+[source,groovy]
+----
+author.instantiatedBy == subjects
+----
+
+`.removeFromContainedIn`
+[source,groovy]
+----
+author.removeFromContainedIn(book)
+----
+
+`.removeFromInstantiatedBy`
+[source,groovy]
+----
+ author.removeFromInstantiatedBy(subjects)
+----

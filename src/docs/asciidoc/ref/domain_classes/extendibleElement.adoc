@@ -1,0 +1,84 @@
+= Extendible Element
+
+Abstract Class extended to allow addition of metadata in the form of an a key-value pair (see [extensionValue|Domain Classes]).
+This can be achieved using the `.ext` notation.
+
+Extended by [model|Domain Classes] and [dataElement|Domain Classes].
+
+== Usage
+
+You can add key value extensions using the following notation:
+
+`.ext.*`
+[source,groovy]
+----
+element.ext.collectionQuality = "high"
+----
+
+
+`.ext.put(key, value) `
+[source,groovy]
+----
+element.ext.put('collectionQuality', "low")
+----
+
+
+`.ext.putAll(key:value, key:value, *)`
+[source,groovy]
+----
+element.ext.putAll(collectionQuality: "medium", source: "systemA")
+----
+
+You can remove the metadata using the following notation:
+
+`.ext.remove(key)`
+[source,groovy]
+----
+element.ext.remove("collectionQuality")
+----
+
+`.ext.clear`
+[source,groovy]
+----
+element.ext.clear()
+----
+
+
+You can use the following methods to access the metadata:
+
+
+`.ext.get(key)`
+[source,groovy]
+----
+assert element.ext.get("collectionQuality") == 'medium'
+----
+
+`.ext.ext.containsKey(key)`
+[source,groovy]
+----
+assert element.ext.containsKey('collectionQuality')
+----
+
+`.ext.containsValue(value)`
+[source,groovy]
+----
+assert element.ext.containsValue('medium')
+----
+
+`.ext.keySet()`
+[source,groovy]
+----
+assert element.ext.keySet() == ['collectionQuality'] as Set
+----
+
+`.ext.values()`
+[source,groovy]
+----
+assert element.ext.values()?.contains('medium')
+----
+
+`.ext.entrySet()`
+[source,groovy]
+----
+assert element.ext.entrySet() == [collectionQuality: 'medium'].entrySet()
+----

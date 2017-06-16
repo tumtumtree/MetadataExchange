@@ -1,0 +1,29 @@
+= catalogueElement
+
+`catalogueElement` enhancer wraps the catalogue elements usually returned by the backend as JSON and adds
+following methods `delete`, `update`, `validate`, `refresh`, `show`. First three can be considered shortcuts
+to the methods of the same name in [catalogueElementResource|Angular Services].
+The `refresh` method returns promise to latest version of current element fetched again from the backend.
+The `show` method
+changes ui router state to `mc.resource.show` with the correct `resource` and `id` parameter.
+
+== Condition
+
+This enhancer is used if the object has own properties of name `elementType` and `link`.
+
+== Usage
+
+You usually get objects enhanced by this enhancer when accessing resource using [catalogueElementResource|Angular Services]
+or [modelCatalogueSearch|Angular Services].
+
+[source, javascript]
+----
+angular
+.module('foo', ['mc.core.catalogueElementResource', 'mc.core.catalogueElementEnhancer'])
+.factory('bar', function(catalogueElementResource) {
+    var dataTypes = catalogueElementResource('dataType')
+    dataTypes.get(1).then(function(type){
+        type.show(); // triggers the showCatalogueElement event
+    });
+});
+----

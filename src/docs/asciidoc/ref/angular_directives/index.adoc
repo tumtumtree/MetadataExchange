@@ -1,0 +1,18 @@
+= Ref - Angular Directives
+:toc: left
+
+include::simple-object-editor.adoc[leveloffset=+1]
+include::show-if-logged-in.adoc[leveloffset=+1]
+include::show-for-role.adoc[leveloffset=+1]
+include::properties-pane.adoc[leveloffset=+1]
+include::messages-panel.adoc[leveloffset=+1]
+include::hide-if-logged-in.adoc[leveloffset=+1]
+include::hide-for-role.adoc[leveloffset=+1]
+include::decorated-list.adoc[leveloffset=+1]
+include::contextual-actions.adoc[leveloffset=+1]
+include::columns-configuration.adoc[leveloffset=+1]
+include::catalogue-element-view.adoc[leveloffset=+1]
+include::catalogue-element-treeview.adoc[leveloffset=+1]
+include::catalogue-element-picker.adoc[leveloffset=+1]
+include::action-button-single.adoc[leveloffset=+1]
+include::action-button-dropdown.adoc[leveloffset=+1]

@@ -1,0 +1,48 @@
+= Concepts
+
+== Model
+
+A Model contains DataElements.
+
+A model within the context of a ConceptualDomain can instantiate the containing data elements with the appropriate value domains
+i.e. the rules and constraints that are applicable in the given context.
+
+Models are hierarchical element and can be parents of or children of other models.
+
+Models are Published Elements i.e. once a model is finalized it cannot be changed instead a new version
+will be created that supersedes the original.
+
+Models are Extensible Elements which allows the user add additional metadata to the element.
+
+i.e.
+- a model for a book:
+- contains the data elements author and isbn.
+
+[source, xml]
+----
+<xs:complexType name="Book">
+ <xs:element name="author" type="xs:string"/>
+ <xs:element name="isbn" type="xs:string"/>
+ <xs:complexType name="Chapter">
+  <xs:element name="content" type="xs:string"/>
+ </xs:complexType>
+</xs:complexType>
+----
+
+please see Domain Classes for more details
+
+== Data element
+
+A DataElement is an atomic unit used to describe another piece data.
+
+It can be instantiated by a value domain when it is contained in a Model within the context of a ConceptualDomain
+
+Data Elements are Published Elements.
+
+i.e. once a data element is finalized it cannot be further changed, instead a new version will be created that
+supersedes the original.*
+
+Data Elements are also Extensible Elements which allows the user add additional metadata to the element.
+
+
+

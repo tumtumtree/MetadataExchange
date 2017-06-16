@@ -1,0 +1,57 @@
+= Catalogue Element
+
+Abstract Class extended to allow creation of [relationship|Domain Classes]s between elements of this type.
+Relationships can be created and removed using the [relationshipService|Services].
+Shortcuts methods for catalogue element relationships can be configured using the [relationships|Domain Classes] declaration.
+
+Extended By: [dataElement|Domain Classes], [model|Domain Classes]
+
+== Usage
+
+`.getIncomingRelations()`
+[source,groovy]
+----
+RelationshipType synonymity = RelationshipType.findByName("synonymity")
+DataElement speed = DataElement.findByName("speed")
+DataElement groundSpeed = DataElement.findByName("ground speed")
+
+groundSpeed.getIncomingRelations().contains(speed)
+
+----
+
+`.getOutgoingRelations()`
+[source,groovy]
+----
+    speed.getOutgoingRelations().contains(groundSpeed)
+----
+
+`.getIncomingRelationsByType()`
+[source,groovy]
+----
+    groundSpeed.getIncomingRelationsByType(relationshipType).contains(speed)
+----
+
+`.getOutgoingRelationsByType()`
+[source,groovy]
+----
+    speed.getOutgoingRelationsByType(relationshipType).contains(groundSpeed)
+----
+`.getRelationsByType()`
+[source,groovy]
+----
+    speed.getRelationsByType(relationshipType).contains(groundSpeed)
+----
+
+`.countIncomingRelationsByType()`
+[source,groovy]
+----
+    groundSpeed.countIncomingRelationsByType(relationshipType) == 1
+----
+
+`.countOutgoingRelationsByType()`
+[source,groovy]
+----
+    speed.countOutgoingRelationsByType(relationshipType) == 1
+----
+
+

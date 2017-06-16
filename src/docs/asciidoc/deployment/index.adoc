@@ -1,0 +1,9 @@
+= Model Catalogue Core - Deployment
+:toc: left
+
+include::aws.adoc[leveloffset=+1]
+include::docker_releases.adoc[leveloffset=+1]
+include::elasticsearch.adoc[leveloffset=+1]
+include::environment.adoc[leveloffset=+1]
+include::production.adoc[leveloffset=+1]
+include::show-logs.adoc[leveloffset=+1]

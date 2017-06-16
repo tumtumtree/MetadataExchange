@@ -1,0 +1,24 @@
+= catalogue-element-view
+
+Element directive for selecting catalogue element single catalogue. It used as attribute which can have no value
+(in that case [modelCatalogueSearch|Angular Services] is used) or resource URL name as `dataType@
+(in that case [catalogueElementResource|Angular Services] search method for given resource is used).
+[Angular Bootstrap UI typeahead|http://angular-ui.github.io/bootstrap/#/typeahead] widget is used for a picker.
+
+== Usage
+
+Considering you have following code in you controller:
+
+[source, javascript]
+----
+$scope.element = null
+----
+
+And following HTML snippet in your page:
+[source, html]
+ <input type="text" ng-model="element" catalogue-element-picker="dataType>
+----
+
+When you type a search word into the input box, you get the suggestions. When the suggestion is picked
+the element` property in the scope is set to picked element.
+

@@ -1,0 +1,8 @@
+= Ref - Angular Events
+:toc: left
+
+include::userLoggedOut.adoc[leveloffset=+1]
+include::treeviewElementSelected.adoc[leveloffset=+1]
+include::userLoggedIn.adoc[leveloffset=+1]
+include::catalogueElementDeleted.adoc[leveloffset=+1]
+include::catalogueElementCreated.adoc[leveloffset=+1]

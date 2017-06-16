@@ -1,0 +1,6 @@
+= Model Catalogue Core - Documentation
+
+- link:guide/index.html[Guide]
+- link:development/index.html[Development]
+- link:deployment/index.html[Deployment]
+- link:ref/index.html[Reference]

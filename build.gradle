@@ -11,8 +11,11 @@ buildscript {
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
         classpath "org.grails.plugins:views-gradle:1.1.6"
+        classpath "org.asciidoctor:asciidoctor-gradle-plugin:$asciidoctorGradlePluginVersion"
     }
 }
+
+apply plugin: 'org.asciidoctor.convert'
 
 version "0.1"
 group "metadataexchange"
@@ -169,8 +172,17 @@ karma {
 }
 
 
-
 assets {
     minifyJs = true
     minifyCss = true
+}
+
+task docs {
+    dependsOn asciidoctor
+    //dependsOn groovydoc
+    group 'documentation'
+    description 'Generates Asciidoc documentation and API documentation for Groovy Source'
+    doLast {
+        logger.quiet('Docs generated at build/asciidoc/html5/index.html')
+    }
 }

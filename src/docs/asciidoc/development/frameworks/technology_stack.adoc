@@ -1,0 +1,82 @@
+= Technology Stack
+The following listing can help you find the documentation for the tools, frameworks and libraries in use.
+
+== Dependencies
+The following dependecies are managed automatically if using https://github.com/MetadataRegistry/registry/[Model Catalogue with Docker] (except Discourse)
+* http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[Java 8]
+* https://tomcat.apache.org/download-80.cgi[Tomcat 8.x]
+* https://www.mysql.com/[MySQL 5.6+]
+* https://www.elastic.co/products/elasticsearch[ElasticSearch 2.0+] ([additional notes](../../deployment/elasticsearch.md))
+* https://www.discourse.org/[Discourse] (optional for comments)
+
+James: Vlad has implemented Docker so that we can run the catalogue in containers. The continuous integration setup makes a docker image out of our catalogue. However we (David and I) are not sure about Docker because it is still an experimental/immature technology. It sometimes does strange things on Windows. The containers are opaque to inspection.
+
+== Frontend
+
+Description of frontend structure by James:
+
+Most of the front end is written in AngularJS. The thing is, Grails and Angular are both MVC frameworks in their own right, with their own dependency injection systems. So combining them is a bit of a nightmare. We use the Grails plugin, "Angular Asset Pipeline Plugin", its author Craig Burke describes an aspect of their combination: "By default the Asset Pipeline plugin will minify all the Javascript files in your project. This breaks the dependency injection used by AngularJS (which relies on specific parameter names)."
+
+The javascripts are contained in grails-app/assets/javascripts. There are two folders in javascripts, templates and modelcatalogue. templates of course holds most of the templates, which are managed by the Angular Template Asset Pipeline Plugin. Each template must have a corresponding angular module. These are declared in modelcatalogue. Within templates we might have a file such as mc/core/forms/ui/infiniteTable.tpl.html; which when loaded into the Angular template cache would be referred to as mc/core/forms/ui/infiniteTable.html
+
+All the templates in mc are required by mc/index, which in turn is required by modelcatalogue/modelcatalogue, which defines a javascript variable, also called modelcatalogue, which is attached to the window. modelcatalogue/modelcatalogue is called by the Grails index view, at grails-app/views/index.gsp. All of its modules are used for the metadataCurator Angular module, which is registered to the main body of the index page. It appears to me that most of the app is in effect a "single-page app", although I am not sure of the details of how Grails controllers invoke this view.
+
+=== Tools
+* https://nodejs.org/en/[NodeJS] ecosystem (tested with version 0.10.x)
+* https://www.npmjs.com/[NPM] for managing tools dependencies
+* http://bower.io/[Bower] for managing frontend dependencies
+* http://karma-runner.github.io/[Karma Test Runner] for running JavaScript tests
+
+See [package.json](../../../ModelCatalogueCorePlugin/package.json) for information on versions
+
+=== Languages
+Apart from standard HTML + CSS + JS stack we use following languages in the frontend:
+* http://coffeescript.org/[CoffeeScript] as alternative to JavaScript
+* http://lesscss.org/[LESS] as alternative to CSS
+
+=== Polyfills
+Polyfills grants access to features which might not be available in older browser
+* ES5 and ES6 features covered by via https://github.com/zloirock/core-js[core-js]
+* https://developer.mozilla.org/en-US/docs/Web/API/Blob[Blob] via https://github.com/eligrey/Blob.js/[Blob.js]
+* https://dev.w3.org/2009/dap/file-system/file-writer.html[Window.saveAs] via https://github.com/eligrey/FileSaver.js[FileSaver.js]
+
+=== Frameworks and Libraries
+* http://getbootstrap.com/[Bootstrap] as the base CSS framework
+* http://fontawesome.io/[FontAwesome] for application icons
+* https://angularjs.org/[AngularJS] as the base JavaScript framework
+* https://jquery.com/[jQuery] is not used directly but as an base of other framework
+* https://jqueryui.com/[jQuery UI] for dragging and resizable support
+* http://angular-ui.github.io/bootstrap/versioned-docs/0.13.4/[Angular UI Bootstrap] as a bridge between AngularJS and Bootstrap
+* http://angular-ui.github.io/ui-router/site/#/api/ui.router[Angular UI Router] for URL routing the application
+* https://github.com/danialfarid/ng-file-upload[NG File Upload]() for uploading assets
+* http://chieffancypants.github.io/angular-loading-bar/[Angular Loading Bar] for showing the network progress
+* https://github.com/witoldsz/angular-http-auth[Angular Auth Interceptor] for seamless authentication
+* https://github.com/alferov/angular-file-saver[Angular File Saver] for storing content to the client
+* https://github.com/Reactive-Extensions/RxJS[RxJS] (http://reactivex.io/[ReactiveX]) for event handling (waiting for wider adoption through codebase)
+* https://github.com/Reactive-Extensions/rx.angular.js/[Rx Angular] as a bridge between AngularJS and RxJS
+* http://jmesnil.net/stomp-websocket/doc/[STOMP] over http://sockjs.org[SockJS] for server push notification
+* http://www.saxonica.com/ce/index.xml[SaxonCE] for client side XSLT 2.0 transformations
+* http://www.eslinstructor.net/vkbeautify/[vkBeautify]for formatiing generated XML on client side
+
+See [bower.json](../../../ModelCatalogueCorePlugin/bower.json) for information on versions
+
+== Backend
+
+=== Frameworks and Libraries
+* http://grails.github.io/grails-doc/2.5.x/[Grails 2.5.x] ecosystem
+* https://grails.org/plugin/asset-pipeline[Grails Asset Pipeline] for handling the frontend resources
+* https://grails.org/plugin/spring-security-core[Grails Spring Security Core 2.0] for securing the application
+* https://grails.org/plugin/spring-security-ui[Grails Spring Security Core UI] for managing the application users
+* https://grails.org/plugin/database-migration[Grails Database Migration] (wrapper around http://www.liquibase.org/[Liquibase]) for database migrations
+* https://grails.org/plugin/executor[Grails Executor] for executing asynchronous code (link:executor_service.html[additional notes])
+* https://github.com/google/guava[Guava] for in memory caching and immutable collections
+* https://github.com/ReactiveX/RxJava[RxJava] (http://reactivex.io/[ReactiveX]) for easier event/stream based programming (waiting for wider adoption through codebase, currently used mostly with search indexing) ([additional notes](rxjava.md))
+* https://github.com/craigburke/document-builder[Document Builder] for MS Word exports
+* http://metadataregistry.github.io/spreadsheet-builder/[Spreadsheet Builder] for MS Excel exports
+* https://github.com/MetadataRegistry/crf-builder[OpenClinica Case Report Form Builder] for OpenClinica forms export
+* https://github.com/owlcs/owlapi/[Owlapi] for parsing OBO files
+* https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/index.html[ElasticSearch Java API] for indexing and searching catalogue
+* https://spockframework.github.io/spock/docs/1.0/[Spock] for general unit testing
+* http://www.gebish.org/[Geb] for browser based testing ([additional notes](geb.md))
+
+See particular `grails-app/config/BuildConfig.groovy` files in Grails plugins folders for information on versions

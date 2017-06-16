@@ -1,0 +1,12 @@
+= Migrating from Version 1 to Version 2
+
+.Renamed Entities
+|===
+|Version 1         | Version 2
+|Classification
+|DataModel
+|Model
+|DataClass
+|ValueDomain
+|no longer present (use DataType instead)
+|===

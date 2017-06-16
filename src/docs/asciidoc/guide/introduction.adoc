@@ -1,0 +1,9 @@
+= Introduction
+
+This plugin implements a metadata registry based on http://metadata-standards.org/11179[ISO11179].
+This plugin is a component in an enterprise toolkit that can be used with a variety of persistent storage mechanisms and
+user interfaces to ensure data conformity to data standards.
+
+
+
+
