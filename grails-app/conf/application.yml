@@ -124,3 +124,28 @@ grails:
             requestMap:
                 className: org.modelcatalogue.core.testapp.Requestmap
             securityConfigType: Requestmap
+            useBasicAuth: true
+            basic:
+                realmName: 'Model Catalogue'
+            filterChain:
+                chainMap:
+                    -
+                        pattern: /catalogue/upload
+                        filters: 'JOINED_FILTERS,-exceptionTranslationFilter'
+                    -
+                        pattern: /catalogue/*/*/export
+                        filters: 'JOINED_FILTERS,-exceptionTranslationFilter'
+                    -
+                        pattern: /user/current
+                        filters: 'JOINED_FILTERS,-exceptionTranslationFilter'
+                    -
+                        pattern: '/api/modelCatalogue/core/feedback/**'
+                        filters: 'JOINED_FILTERS,-exceptionTranslationFilter'
+                    -
+                        pattern: '/**'
+                        filters: 'JOINED_FILTERS,-basicAuthenticationFilter,-basicExceptionTranslationFilter'
+            logout:
+                handlerNames:
+                    - rememberMeServices
+                    - securityContextLogoutHandler
+                    - modelCatalogueSecurityService # both spring security services implements it

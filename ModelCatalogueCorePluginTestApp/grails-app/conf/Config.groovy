@@ -326,20 +326,7 @@ grails.assets.plugin.famfamfam.excludes = ['**/*.*']
 grails.assets.babel.enabled = true
 grails.assets.less.compiler = 'less4j'
 
-grails.plugin.springsecurity.useBasicAuth = true
-grails.plugin.springsecurity.basic.realmName = "Model Catalogue"
-grails.plugin.springsecurity.filterChain.chainMap = [
-        '/catalogue/upload':                    'JOINED_FILTERS,-exceptionTranslationFilter',
-        '/catalogue/*/*/export':                'JOINED_FILTERS,-exceptionTranslationFilter',
-        '/user/current':                        'JOINED_FILTERS,-exceptionTranslationFilter',
-        '/api/modelCatalogue/core/feedback/**': 'JOINED_FILTERS,-exceptionTranslationFilter',
-        '/**':                                  'JOINED_FILTERS,-basicAuthenticationFilter,-basicExceptionTranslationFilter'
-]
-grails.plugin.springsecurity.logout.handlerNames = [
-        'rememberMeServices',
-        'securityContextLogoutHandler',
-        'modelCatalogueSecurityService' // both spring security services implements it
-]
+
 
 // Added by the Spring Security OAuth plugin:
 grails.plugin.springsecurity.oauth.domainClass = 'org.modelcatalogue.core.security.OAuthID'
