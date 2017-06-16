@@ -31,7 +31,8 @@ class TestDataHelper {
 
     private void initDb(SessionFactory sessionFactory, boolean drop, String tempSqlFileName, Closure initCode) {
         if (isH2(sessionFactory)) {
-            return initCode()
+            initCode()
+            return
         }
 
         String scriptLocation = "${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/${tempSqlFileName}"
