@@ -119,7 +119,8 @@ grails:
             userLookup:
                 userDomainClassName: org.modelcatalogue.core.security.User
                 authorityJoinClassName: org.modelcatalogue.core.security.UserRole
-            authority.className: org.modelcatalogue.core.security.Role
+            authority:
+                className: org.modelcatalogue.core.security.Role
             requestMap:
                 className: org.modelcatalogue.core.testapp.Requestmap
             securityConfigType: Requestmap
