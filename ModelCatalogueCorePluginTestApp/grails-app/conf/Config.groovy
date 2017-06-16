@@ -272,13 +272,6 @@ log4j.main = {
 }
 grails.views.gsp.encoding = "UTF-8"
 
-// Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.modelcatalogue.core.security.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.modelcatalogue.core.security.UserRole'
-grails.plugin.springsecurity.authority.className = 'org.modelcatalogue.core.security.Role'
-grails.plugin.springsecurity.requestMap.className = 'org.modelcatalogue.core.testapp.Requestmap'
-grails.plugin.springsecurity.securityConfigType = 'Requestmap'
-
 // this doesn't work properly, only reliable way is to his in setup-frontend.sh script
 def assetExcludes = [
         "bootstrap/**/*.*",

@@ -112,3 +112,14 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+---
+grails:
+    plugin:
+        springsecurity:
+            userLookup:
+                userDomainClassName: org.modelcatalogue.core.security.User
+                authorityJoinClassName: org.modelcatalogue.core.security.UserRole
+            authority.className: org.modelcatalogue.core.security.Role
+            requestMap:
+                className: org.modelcatalogue.core.testapp.Requestmap
+            securityConfigType: Requestmap
