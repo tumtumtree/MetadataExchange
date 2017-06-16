@@ -1,8 +1,8 @@
 package org.modelcatalogue.gel
 
 import com.google.common.base.Preconditions
-import grails.gorm.transaction.Transactional
 import grails.gorm.DetachedCriteria
+import grails.gorm.transactions.Transactional
 import org.apache.commons.lang.StringUtils
 import grails.web.mapping.LinkGenerator
 import org.modelcatalogue.builder.api.CatalogueBuilder

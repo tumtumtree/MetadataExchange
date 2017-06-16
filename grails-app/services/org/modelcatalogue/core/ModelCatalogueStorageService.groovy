@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import grails.gorm.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import grails.core.GrailsApplication
 import org.codehaus.groovy.runtime.IOGroovyMethods
 import org.hibernate.SessionFactory

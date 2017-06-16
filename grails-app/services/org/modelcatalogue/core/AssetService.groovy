@@ -1,7 +1,7 @@
 package org.modelcatalogue.core
 
 import com.google.common.collect.ImmutableMap
-import grails.gorm.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.transform.stc.ClosureParams

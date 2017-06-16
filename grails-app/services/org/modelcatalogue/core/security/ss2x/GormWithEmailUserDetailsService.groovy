@@ -1,10 +1,10 @@
 package org.modelcatalogue.core.security.ss2x
 
+import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.userdetails.GormUserDetailsService
 import grails.plugin.springsecurity.userdetails.GrailsUser
 import grails.plugin.springsecurity.userdetails.NoStackUsernameNotFoundException
-import grails.gorm.transaction.Transactional
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException

@@ -1,7 +1,7 @@
 package org.modelcatalogue.core
 
 import com.google.common.collect.ImmutableMap
-import grails.gorm.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.rx.ErrorSubscriber
 import org.modelcatalogue.core.util.HibernateHelper

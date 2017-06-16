@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.actions
 
-import grails.gorm.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import grails.gorm.DetachedCriteria
 import groovy.util.logging.Slf4j
 import org.grails.exceptions.reporting.DefaultStackTraceFilterer

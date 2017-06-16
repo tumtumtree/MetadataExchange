@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.security
 
-import grails.gorm.transaction.Transactional
 import com.google.common.io.BaseEncoding
+import grails.gorm.transactions.Transactional
 import org.modelcatalogue.core.util.FriendlyErrors
 
 @Transactional

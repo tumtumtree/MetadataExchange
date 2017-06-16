@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import grails.gorm.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import com.bertramlabs.plugins.karman.CloudFile
 import com.bertramlabs.plugins.karman.CloudFileACL
 import com.bertramlabs.plugins.karman.StorageProvider

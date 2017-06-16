@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import grails.gorm.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import org.modelcatalogue.core.util.HibernateHelper
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import org.modelcatalogue.core.util.lists.Lists
