@@ -124,56 +124,6 @@ environments {
     }
 }
 
-// log4j configuration
-log4j.main = {
-    info 'grails.app.services.org.modelcatalogue'
-    info 'grails.app.controllers.org.modelcatalogue'
-
-    info 'org.modelcatalogue.core.dataarchitect.xsd.XSDImporter'
-
-    // detailed feedback is now visible using the ProgressMonitor API
-    info 'org.modelcatalogue.core.util.builder'
-    info 'org.modelcatalogue.core.util.HibernateHelper' // for some reason the logging from builder is redirected here
-
-    info 'org.modelcatalogue.core.publishing'
-    info 'org.modelcatalogue.core.util.test'
-    info 'org.modelcatalogue.core.gel'
-    info 'org.modelcatalogue.core.export'
-    info 'org.modelcatalogue.core.elasticsearch'
-    info 'org.modelcatalogue.discourse'
-
-    info 'grails.app.services.org.grails.plugins.console'
-    info 'grails.app.services.org.modelcatalogue.core.elasticsearch'
-    info 'org.grails.plugins.console'
-
-    info 'org.modelcatalogue.core.rx.BatchOperator'
-    info 'org.modelcatalogue.core.rx.DetachedCriteriaOnSubscribe'
-
-//    debug 'org.codehaus.groovy.grails.web.mapping'
-//    debug 'org.springframework.security'
-//    debug 'org.grails.plugins.elasticsearch'
-
-//    if (Environment.current == Environment.DEVELOPMENT || Environment.current == Environment.CUSTOM) {
-//        trace 'org.hibernate.type'
-//        trace 'org.hibernate.stat'
-//        debug 'org.hibernate.SQL'
-//    }
-
-    info 'org.modelcatalogue'
-    info 'grails.app.domain.org.modelcatalogue'
-
-    error 'org.codehaus.groovy.grails.web.servlet',           // controllers
-            'org.codehaus.groovy.grails.web.pages',          // GSP
-            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-            'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-            'org.codehaus.groovy.grails.commons',            // core / classloading
-            'org.codehaus.groovy.grails.plugins',            // plugins
-            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-            'org.springframework',
-            'org.hibernate',
-            'net.sf.ehcache.hibernate'
-}
 grails.views.gsp.encoding = "UTF-8"
 
 grails.assets.plugin.famfamfam.excludes = ['**/*.*']
