@@ -28,9 +28,6 @@ grails.project.fork = [
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
-
-    final String gebVersion = '0.13.1'
-
     // inherit Grails' default dependencies
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
@@ -117,7 +114,6 @@ grails.project.dependency.resolution = {
         // plugins needed at runtime but not for compilation
         runtime ":jquery:1.11.1"
 
-        test ":geb:$gebVersion"
         test ':build-test-data:2.1.2'
         test ':fixtures:1.3'
         
