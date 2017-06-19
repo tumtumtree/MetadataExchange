@@ -130,6 +130,9 @@ dependencies {
     // Database Migration
     compile "org.grails.plugins:database-migration:$databaseMigrationVersion"
     compile "org.liquibase:liquibase-core:$liquibaseCoreVersion"
+
+    // External Configuration
+    compile "org.grails.plugins:external-config:$externalConfigVersion"
 }
 
 sourceSets {

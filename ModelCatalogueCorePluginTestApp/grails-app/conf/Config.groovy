@@ -192,25 +192,6 @@ environments {
                 mangleOptions: [mangle: false, toplevel: false, defines: null, except: null, no_functions:false],
                 genOptions: [indent_start:0, indent_level:4, quote_keys: false, space_colon: false, beautify: false, ascii_only: false, inline_script:false]
         ]
-
-
-        if (System.properties["mc.config.location"]) {
-            // for running
-            // grails prod run-war -Dmc.config.location=my-conf.groovy
-            grails.config.locations = ["file:" + System.properties["mc.config.location"]]
-        } else {
-            grails.config.locations = [ "classpath:mc-config.properties",
-                                        "classpath:mc-config.groovy",
-                                        "file:${userHome}/.grails/mc-config.properties",
-                                        "file:${userHome}/.grails/mc-config.groovy"]
-        }
-        if (System.properties['catalina.base']) {
-            def tomcatConfDir = new File("${System.properties['catalina.base']}/conf")
-            if (tomcatConfDir.isDirectory()) {
-                grails.config.locations = ["file:${tomcatConfDir.canonicalPath}/mc-config.groovy"]
-            }
-        }
-
     }
 }
 
