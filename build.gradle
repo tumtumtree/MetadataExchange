@@ -19,7 +19,7 @@ buildscript {
 apply plugin: 'org.asciidoctor.convert'
 
 version "0.1"
-group "metadataexchange"
+group "org.modelcatalogue"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
