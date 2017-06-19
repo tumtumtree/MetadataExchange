@@ -31,7 +31,7 @@ The function declared as `generator` property usually generates another actions 
 `action.createActionsFrom(watchExpression, callback)`  the `callback` will be run every time the `watchExpression` changes
 and of course in the initial call as well. The expected return value is array of actions to be added based on current context.
 
-Declared in `mc.util.ui.actions` module inside [mc.util.ui|Angular Packages] package.
+Declared in `mc.util.ui.actions` module inside <_mc_util_ui, "mc.util.ui" Angular Package>>.
 
 == Usage
 

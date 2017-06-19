@@ -1,4 +1,4 @@
-= RelationshipType
+= Relationship Type
 
 the model catalogue core plugin includes the following relationship types as a default:
 
@@ -21,7 +21,7 @@ the model catalogue core plugin includes the following relationship types as a d
 |"supercededBy"
 |===
 
-These relationship types can be used to create [relationship|DomainClasses]s between [catalogueElement|DomainClasses]s
+These relationship types can be used to create <<_relationships, "Relationships">> between <<_catalogue_element, "Catalogue Elements">>
 
 WARNINIG: containment, context, hierarchy, inclusion, instantiation and supersession relationship types should not be removed from the registry
 

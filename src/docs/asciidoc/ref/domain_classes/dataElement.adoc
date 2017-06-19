@@ -1,7 +1,7 @@
 = Data Element
 
-Extends [extendibleElement|Domain Classes]
-Extends [publishedElement|Domain Classes]
+Extends <<_extendible_element, "Extendible Element" Domain Class>>
+Extends <<_published_element, "Published Element" Domain Class>>
 
 Uses the static map `relationships` to create the following shortcuts:
 

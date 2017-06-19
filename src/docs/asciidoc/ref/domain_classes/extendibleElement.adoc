@@ -1,9 +1,9 @@
 = Extendible Element
 
-Abstract Class extended to allow addition of metadata in the form of an a key-value pair (see [extensionValue|Domain Classes]).
+Abstract Class extended to allow addition of metadata in the form of an a key-value pair (see <<_extension_value, "Extension Value" Domain Class>>).
 This can be achieved using the `.ext` notation.
 
-Extended by [model|Domain Classes] and [dataElement|Domain Classes].
+Extended by <<_model, "Model" Domain Class>> and <<_data_element, "Data Element" Domain Class>>.
 
 == Usage
 

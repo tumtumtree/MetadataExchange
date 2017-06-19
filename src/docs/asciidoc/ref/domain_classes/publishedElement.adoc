@@ -1,7 +1,7 @@
 = Published Element
 
-Extends [catalogueElement|Domain Classes]
-Extended by [extendibleElement|Domain Classes]
+Extends <<_catalogue_element, "Catalogue Element" Domain Class>>
+Extended by <<_extendible_element, "Extendible Element" Domain Class>>
 
 Abstract class extended to add publishable behaviour.
 * to be completed in future release

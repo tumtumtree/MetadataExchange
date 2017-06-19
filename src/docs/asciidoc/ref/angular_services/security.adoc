@@ -2,8 +2,8 @@
 
 Security service for retrieving currently signed-in user and determining her current roles. Also provides
 @login@ and @logout@ functionality.
-See [securityProvider|Angular Providers] how to configure the security mechanism.
-Declared in @mc.core.security@ module inside [mc.util|Angular Packages] package.
+See <<_securityprovider, "Security Provider" Angular Provider>> on how to configure the security mechanism.
+Declared in @mc.core.security@ module inside <<_mc_util, "mc.util" Angular Package>>.
 
 
 == Usage

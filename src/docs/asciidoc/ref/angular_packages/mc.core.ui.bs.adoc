@@ -1,6 +1,6 @@
 = mc.core.ui.bs
 
-BootStrap UI Core package provides default templates for directive and services in [mc.core.ui|Angular Packages]
+BootStrap UI Core package provides default templates for directive and services in <<_mc_core_ui, "mc.core.ui" Angular Package>>
 communication. If you want to use default templates and settings you will probably want to include this
 package as dependency for you JavaScript code.
 

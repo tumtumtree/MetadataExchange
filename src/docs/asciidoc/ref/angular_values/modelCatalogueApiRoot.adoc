@@ -1,7 +1,7 @@
 = modelCatalogueApiRoot
 
 Sets and retrieves the current root of model catalogue api. Declared in `mc.core.modelCatalogueApiRoot` module
-inside [mc.core|Angular Packages] package.
+inside <<_mc_core, "mc.core" Angular Package>>.
 
 == Usage
 

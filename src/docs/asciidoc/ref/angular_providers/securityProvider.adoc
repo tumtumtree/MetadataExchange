@@ -6,4 +6,4 @@ or `springSecurity()` methods. You can also provide your own factory for <<_secu
 
 == Usage
 
-Follow the security section in [Intro|guide:5 AngularJS Support] how to setup the security completely.
+Follow the security section in AngularJS Support in Guides to see how to setup the security completely.

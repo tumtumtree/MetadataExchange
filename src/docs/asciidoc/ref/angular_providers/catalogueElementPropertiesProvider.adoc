@@ -1,6 +1,6 @@
 = catalogueElementsPropertiesProvider
 
-Configures the [catalogueElementProperties|Angular Services] service.
+Configures the <<_catalogueelementproperties, "Catalogue Element Properties" Angular Service>>.
 You can register new properties configuration in generic way using `configureProperty` method which accepts
 the fully qualified name of the property (one composed from element type and the name of the property joined using
 dot '.' e.g. `org.modelcatalogue.core.DataElement.attachments`) or just plain property name e.g. `attachments` and
@@ -10,7 +10,7 @@ In case of duplicates the ones added later win. The values for the properties sp
 are merged with the ones without the qualifier so you can configure properties in all classes and then add special
 handling for particular element types.
 
-Declared in `mc.core.ui.catalogueElementsPropertiesProvider` module inside [mc.core.ui|Angular Packages] package.
+Declared in `mc.core.ui.catalogueElementsPropertiesProvider` module inside <<_mc_core_ui, "mc.core.ui" Angular Package>>.
 
 == Usage
 
