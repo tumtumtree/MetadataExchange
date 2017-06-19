@@ -1,13 +1,15 @@
+package org.modelcatalogue.core
+
+import grails.core.GrailsControllerClass
+import grails.web.mapping.UrlMappingsHolder
+import junit.framework.AssertionFailedError
+import org.grails.core.artefact.ControllerArtefactHandler
+import org.modelcatalogue.core.actions.BatchController
+import spock.lang.Specification
+import spock.lang.Ignore
+import spock.lang.Unroll
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
-import junit.framework.AssertionFailedError
-import org.codehaus.groovy.grails.commons.GrailsControllerClass
-import org.codehaus.groovy.grails.web.mapping.UrlMappingsHolder
-import org.modelcatalogue.core.*
-import org.modelcatalogue.core.actions.BatchController
-import spock.lang.Ignore
-import spock.lang.Specification
-import spock.lang.Unroll
 
 @TestFor(ModelCatalogueCorePluginUrlMappings)
 @Mock([
@@ -181,7 +183,7 @@ class ModelCatalogueCorePluginUrlMappingsSpec extends Specification {
     }
 
     private GrailsControllerClass getControllerClass(controller) {
-        return grailsApplication.getArtefactByLogicalPropertyName(org.codehaus.groovy.grails.commons.ControllerArtefactHandler.TYPE, controller)
+        return grailsApplication.getArtefactByLogicalPropertyName(ControllerArtefactHandler.TYPE, controller)
     }
 
 
