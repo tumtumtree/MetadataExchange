@@ -4,6 +4,7 @@ import geb.Browser
 import geb.navigator.Navigator
 import geb.spock.GebReportingSpec
 import geb.waiting.WaitTimeoutException
+import grails.test.mixin.integration.Integration
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.StaleElementReferenceException
@@ -15,6 +16,7 @@ import org.openqa.selenium.Keys
 
 import static org.modelcatalogue.core.geb.Common.*
 
+@Integration
 abstract class AbstractModelCatalogueGebSpec extends GebReportingSpec {
 
     // keep the passwords simply stupid, they are only for dev/test or very first setup
