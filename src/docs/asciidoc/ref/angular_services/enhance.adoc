@@ -9,7 +9,7 @@ Declared in `mc.core.enhance` module inside [mc.core|Angular Packages] package.
 == Usage
 
 Call given function with the object you want to enhance as the parameter. Following example showing
-how [listReference|Angular Enhancers] works. It turns object with expected properties into function
+how <<_listreference, "List Reference" Angular Enhancer>> works. It turns object with expected properties into function
 returning the promise for the list response. If object to be enhanced is promise, the result of the promise
 is enhanced instead of the promise object.
 

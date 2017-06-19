@@ -1,4 +1,4 @@
-= enhance
+= actions
 
 Service to obtain all actions applicable for the current scope. Use `getActions($scope)` method
 to get the list of actions for the current scope sorted by their position parameter.

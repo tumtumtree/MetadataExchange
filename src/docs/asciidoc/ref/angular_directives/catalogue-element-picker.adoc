@@ -1,9 +1,9 @@
-= catalogue-element-view
+= catalogue-element-picker
 
 Element directive for selecting catalogue element single catalogue. It used as attribute which can have no value
-(in that case [modelCatalogueSearch|Angular Services] is used) or resource URL name as `dataType@
-(in that case [catalogueElementResource|Angular Services] search method for given resource is used).
-[Angular Bootstrap UI typeahead|http://angular-ui.github.io/bootstrap/#/typeahead] widget is used for a picker.
+(in which case the <<_modelcataloguesearch, "Model Catalogue Search" Angular Service>> is used) or resource URL name as `dataType@
+(in which case the <<_catalogueelementresource, "Catalogue Element Resource" Angular Service>> search method for given resource is used).
+The http://angular-ui.github.io/bootstrap/#/typeahead[Angular Bootstrap UI typeahead] widget is used for a picker.
 
 == Usage
 

@@ -10,23 +10,23 @@ This package groups following modules for easier use:
 |===
 |Name                                    | Description
 |mc.core.ui.bs.catalogueElementView
-|provides default template for [catalogue-element-view|Angular Directives] directive
+|provides default template for <<_catalogue_element_view, "Catalogue Element View" Angular Directive>>
 |mc.core.ui.bs.catalogueElementTreeView
-|provides default template for [catalogue-element-treeview|Angular Directives] directive
+|provides default template for <<_catalogue_element_treeview, "Catalogue Element Treeview" Angular Directive>>
 |mc.core.ui.bs.columns
-|configures [columns|Angular Services] for known catalogue elements
+|configures <<_columns, "Columns" Angular Service>> for known catalogue elements
 |mc.core.ui.bs.columnsConfiguration
-|provides default template for [columns-configuration|Angular Directives] directive
+|provides default template for <<_columns_configuration, "Columns Configuration" Angular Directive>>
 |mc.core.ui.bs.decoratedListTable
-|provides default template for [decorated-list|Angular Directives] directive
+|provides default template for <<_decorated_list, "Decorated List" Angular Directive>>
 |mc.core.ui.bs.messagesPanel
-|provides default template for [messages-panel|Angular Directives] directive
+|provides default template for <<_messages_panel, "Messages Panel" Angular Directive>>
 |c.core.ui.bs.modalConfirm
-|provides modal confirm dialog for [messagesProvider|Angular Providers] provider
+|provides modal confirm dialog for <<_messagesprovider, "Messages Provider" Angular Provider>>
 |mc.core.ui.bs.modalPrompt
-|provides modal prompt dialog for [messagesProvider|Angular Providers] provider
+|provides modal prompt dialog for <<_messagesprovider, "Messages Provider" Angular Provider>>
 |mc.core.ui.bs.propertiesPane
-|provides default template for [properties-pane|Angular Directives] directive showing properties in table
+|provides default template for <<_properties_pane, "Properties Pane" Angular Directive>> showing properties in table
 |===
 
 == Include

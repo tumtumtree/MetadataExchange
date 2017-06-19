@@ -1,7 +1,7 @@
 = treeviewElementSelected
 
 Event broadcast on the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope] when an item is selected in
- [catalogue-element-treeview|Angular Directives]. It passes the element
+ <<_catalogue_element_treeview, "Catalogue Element Treeview" Angular Directive>>. It passes the element
  to show as the second argument to handler function and optionally the id of the treeview as the third argument.
  You can broadcast the event on yourself with element you want to select in the tree view.
 

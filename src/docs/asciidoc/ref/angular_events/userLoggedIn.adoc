@@ -1,7 +1,7 @@
 = userLoggedIn
 
 Event broadcast on the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope] when
- user logs in using [security|Angular Services]. The newly logged in user is passed as the event's argument.
+ user logs in using <<_security, "Security" Angular Service>>. The newly logged in user is passed as the event's argument.
 
 == Usage
 Register the handler on the current scope or the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope]

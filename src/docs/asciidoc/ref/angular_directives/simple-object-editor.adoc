@@ -3,7 +3,7 @@
 Generic element directive for editing simple properties of the JavaScript Object. Default template defined in
 module `mc.core.ui.bs.simpleObjectEditor` renders the properties in the table with text inputs.
 You only need to supply one attribute `object` which is the root object which the properties are going to be edited.
-You can also define hints in string array `hints` attribute. One row with hint as key will be genereated
+You can also define hints in string array `hints` attribute. One row with hint as key will be generated
 for each hint missing in the object. All the values in the object are plain strings.
 
 To http://docs.angularjs.org/api/ng/type/$rootScope.Scope[$watch] for changes don't forget

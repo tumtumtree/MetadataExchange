@@ -1,4 +1,4 @@
 = action-button-single
 
-Helper directive for rendering action as a single button to be used by [contextual-actions|Angular Directives] directive.
-Not designed by used separately.
+Helper directive for rendering action as a single button to be used by the <<_contextual_actions, "Contextual Actions" Angular Directive>>.
+Not designed to be used separately.

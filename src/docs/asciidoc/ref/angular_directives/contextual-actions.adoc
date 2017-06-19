@@ -30,7 +30,7 @@ omit the scope argument, you will get all actions applicable for the current sco
 == Customization
 You can override the `modelcatalogue/util/ui/contextualActions.html` template to plug your own either using
 `text/ng-template` script definition, creating the template on the appropriate location in your server
-or using the [$templateCache|http://docs.angularjs.org/api/ng/service/$templateCache]. The content of root element is
-replaced by the group inner elements - [action-button-single|Angular Directives] or [action-button-dropdown|Angular Directives]
+or using the http://docs.angularjs.org/api/ng/service/$templateCache[$templateCache]. The content of root element is
+replaced by the group inner elements - the <<_action_button_single, "Action Button Single" Angular Directive>> or <<_action_button_dropdown, "Action Button Dropdown" Angular Directive>>
 depending on whether the action has or hasn't any children.
 

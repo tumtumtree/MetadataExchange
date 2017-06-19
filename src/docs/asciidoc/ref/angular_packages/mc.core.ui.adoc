@@ -8,23 +8,23 @@ This package groups following modules for easier use:
 |===
 |Name                                        | Description
 |mc.core.ui.catalogueElementPicker
-|provides [catalogue-element-picker|Angular Directives] directive for selecting catalogue elements
+|provides <<_catalogue_element_picker, "Catalogue Element Picker" Angular Directive>> for selecting catalogue elements
 |mc.core.ui.catalogueElementTreeview
-|provides [catalogue-element-treeview|Angular Directives] directive for displaying catalogue elements in tree structure
+|provides <<_catalogue_element_treeview, "Catalogue Element Treeview" Angular Directive>> for displaying catalogue elements in tree structure
 |mc.core.ui.catalogueElementTreeviewItem
-|provides @catalogue-element-treeview-item@ directive which is internally used by [catalogue-element-treeview|Angular Directives]
+|provides @catalogue-element-treeview-item@ directive which is internally used by <<_catalogue_element_treeview, "Catalogue Element Treeview" Angular Directive>>
 |mc.core.ui.catalogueElementView
-|provides [catalogue-element-view|Angular Directives] directive for displaying catalogue elements
+|provides <<_catalogue_element_view, "Catalogue Element View" Angular Directive>> for displaying catalogue elements
 |mc.core.ui.columns
-|provides [columns|Angular Services] service to define default columns to display when catalogue element is rendered
+|provides <<_columns, "Columns" Angular Service>> to define default columns to display when catalogue element is rendered
 |mc.core.ui.columnsConfiguration
-|provides [columns-configuration|Angular Directives] directive for configuring @decorated-list@ columns
+|provides <<_columns_configuration, "Columns Configuration" Angular Directive>> for configuring @decorated-list@ columns
 |mc.core.ui.decoratedList
-|provides [decorated-list|Angular Directives] directive for rendering enhanced list data structures
+|provides <<_decorated_list, "Decorated List" Angular Directive>> for rendering enhanced list data structures
 |mc.core.ui.messagesPanel
-|provides [messages-panel|Angular Directives] directive for rendering information messages
+|provides <<_messages_panel, "Messages Panel" Angular Directive>> for rendering information messages
 |mc.core.ui.propertiesPane
-|provides [properties-pane|Angular Directives] directive to displaying JavaScript object properties
+|provides <<_properties_pane, "Properties Pane" Angular Directive>> to displaying JavaScript object properties
 |===
 
 == Include

@@ -6,13 +6,13 @@ attributes `item` which is the root object from which the properties will be eva
 objects defining the properties. Each item in properties array must have `label` and `value` definition.
 `label` is just plain string shown as the label for the property. `value` is either a function which gets
 the item as single parameter and returns the desired value or an expression which will be evaluated using
-AngularJS [$eval|http://docs.angularjs.org/api/ng/type/$rootScope.Scope] function with the
+AngularJS http://docs.angularjs.org/api/ng/type/$rootScope.Scope[$eval] function with the
 root object supplied as `locals` parameter. If the result of the
 value evaluation is object instead of string, its property `name` is displayed in the row if present. If
 the object has also `show()` method it will be displayed as a link calling the that `show()` method on click.
 
 == Usage
-Considering you have following code in you controller:
+Considering you have following code in your controller:
 
 [source,javascript]
 ----

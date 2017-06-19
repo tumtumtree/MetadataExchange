@@ -2,7 +2,7 @@
 
 Element directive for showing catalogue element and its list references in the form of tree.
 It accepts a catalogue element as `element` attribute and the descend path in `descend` attribute. The descend path
-is array with the names of [listReference|Angular Enhancers] references in the catalogue element and its children or
+is array with the names of <<_listreference, "List Reference" Angular Enhancer>> references in the catalogue element and its children or
 a string which is applied recursively as long as there are any children of given name. The
 first item is the name of reference in the element passed into the directive, the second one if passed in will be applied
 to root element's children and third one for their children and so on. By default the height of the widget is
@@ -10,7 +10,7 @@ constrained to 400 pixels
 
 == Usage
 
-Considering you have following code in you controller with injected [catalogueElementResource|Angular Services] service:
+Considering you have following code in you controller with injected <<_catalogueelementresource, "Catalogue Element Resource" Angular Service>>:
 
 [source, javascript]
 ----

@@ -1,6 +1,6 @@
 = actionsProvider
 
-Defines actions for the [actions|Angular Services] service. You can register new actions using `registerAction(id, factory)`
+Defines actions for the <<_actions, "Actions" Angular Service>>. You can register new actions using `registerAction(id, factory)`
 and `registerChildAction(parentId, id, factory)`. The factory is http://docs.angularjs.org/api/auto/service/$injector[injectable]
 function which returns object with properties defined bellow or falsy value if the action defined by the factory is not
 applicable in current context (usually a scope).
@@ -22,7 +22,7 @@ applicable in current context (usually a scope).
 |label
 |The description of the action to be displayed in the button or link
 |position
-|The position of the action, actions returned from [actions|Angular Services] `getActions()` are sorted ascendant by this number
+|The position of the action, actions returned from <<_actions, "Actions" Angular Service>> `getActions()` are sorted ascendant by this number
 |type
 |The type of the action such as success or danger, for default implementation adds class `btn-<type>` to the action button
 |===
@@ -36,7 +36,7 @@ Declared in `mc.util.ui.actions` module inside [mc.util.ui|Angular Packages] pac
 == Usage
 
 Register new action using the `registerAction(id, factory)` method. After the registration the action
-will be returned from [actions|Angular Services] service `getAction(scope)` method if applicable.
+will be returned from <<_actions, "Actions" Angular Service>> `getAction(scope)` method if applicable.
 
 [source,javascript]
 ----

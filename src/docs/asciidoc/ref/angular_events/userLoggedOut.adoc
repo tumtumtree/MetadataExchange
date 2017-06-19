@@ -1,7 +1,7 @@
 = userLoggedOut
 
 Event broadcast on the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope] when
- user logs out using [security|Angular Services]. The previously logged in user is passed as the event's argument.
+ user logs out using <<_security, "Security" Angular Service>>. The previously logged in user is passed as the event's argument.
 
 == Usage
 Register the handler on the current scope or the http://docs.angularjs.org/api/ng/service/$rootScope[$rootScope]

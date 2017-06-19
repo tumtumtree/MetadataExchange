@@ -8,21 +8,21 @@ This package groups following modules for easier use:
 |===
 |Name                            | Description
 |mc.util.ui.actions
-|provides [actions|Angular Services] service for obtaining the UI actions related to current context
+|provides <<_actions, "Actions" Angular Service>> for obtaining the UI actions related to current context
 |mc.util.ui.actionButtonSingle
-|provides [action-button-single|Angular Directives] directive for rendering actions as button
+|provides <<_action_button_single, "Action Button Single" Angular Directive>> directive for rendering actions as button
 |mc.util.ui.actionButtonDropdown
-|provides [action-button-dropdown|Angular Directives] directive for rendering action as dropdown
+|provides <<_action_button_dropdown, "Action Button Dropdown" Angular Directive>> for rendering action as dropdown
 |mc.util.ui.contextualActions
-|provides [contextual-actions|Angular Directives] directive for rendering contextual actions
+|provides <<_contextual_action, "Contextual Action" Angular Directive>> for rendering contextual actions
 |mc.util.ui.hideForRole
-|provides [hide-for-role|Angular Directives] directive for hiding elements for users not in particular role
+|provides <<_hide_for_role, "Hide For Role" Angular Directive>> for hiding elements for users not in particular role
 |mc.util.ui.hideIfLoggedIn
-|provides [hide-if-logged-in|Angular Directives] directive for hiding elements when the user is logged in
+|provides <<_hide_if_logged_in, "Hide If Logged In" Angular Directive>> for hiding elements when the user is logged in
 |mc.util.ui.showForRole
-|provides [show-for-role|Angular Directives] directive for showing elements for users in particular role
+|provides <<_show_for_role, "Show For Role" Angular Directive>> for showing elements for users in particular role
 |mc.util.ui.showIfLoggedIn
-|provides [hide-if-logged-in|Angular Directives] directive for showing elements when the user is logged in
+|provides <<_hide_if_logged_in, "Hide If Logged In" Angular Directive>> for showing elements when the user is logged in
 |===
 
 == Include

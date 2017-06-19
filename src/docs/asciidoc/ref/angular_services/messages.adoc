@@ -8,7 +8,7 @@ promise which is resolved if user confirms the dialog and rejected otherwise. Ba
 `prompt` method also accepts question title and body and returns promise which is resolved to the string supplied by
 the user or rejected if the user cancels the prompt. The `prompt` method also accepts the third argument which is `type`
 of the prompt which is ignored by default implementations but you own supply your own prompt function which will
-take advantage of it. See [messagesProvider|Angular Providers] how to configure the `prompt` and `confirm` functions.
+take advantage of it. See <<_messagesprovider, "Messages Provider" Angular Provider>> how to configure the `prompt` and `confirm` functions.
 Declared in `mc.core.messages` module inside [mc.util|Angular Packages] package.
 
 == Usage
