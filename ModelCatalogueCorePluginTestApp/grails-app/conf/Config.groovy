@@ -58,7 +58,6 @@ grails.hibernate.cache.queries = false
 
 environments {
     development {
-        grails.serverURL = "http://localhost:${System.getProperty('server.port') ?: 8080}"
 //        discourse {
 //            url = "http://192.168.1.123/"
 //            api {
@@ -91,9 +90,6 @@ environments {
         mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
         grails.mail.disabled=true
     }
-    local {
-        grails.serverURL =  "http://localhost:${System.getProperty('server.port') ?: 8080}"
-    }
     test {
         oauth {
             providers {
@@ -111,7 +107,6 @@ environments {
         }
 
         grails.plugin.console.enabled = true
-        grails.serverURL =  "http://localhost:${System.getProperty('server.port') ?: 8080}"
         if (System.getenv('DOCKERIZED_TESTS') && System.properties["grails.test.phase"] == 'functional') {
             mc.search.elasticsearch.host="localhost"
             mc.search.elasticsearch.port=49300
