@@ -168,3 +168,25 @@ environments:
     production:
         javamelody:
             disabled: false
+---
+environments:
+    development:
+        mc:
+            allow:
+                signup: true
+            preload:
+                -
+                    name: 'Java Basic Types'
+                    url: https://s3-eu-west-1.amazonaws.com/datamodels.metadata.org.uk/Java.mc.xml
+    test:
+        mc:
+            allow:
+                signup: true
+    production:
+        # you can overrides in your mc-config.groovy
+        mc:
+            sync:
+                relationshipTypes: true
+            storage: # configure the default storage
+               directory: /tmp/mc/storage
+               maxSize: 52428800 # 50 * 1024 * 1024

@@ -203,3 +203,15 @@ if (System.properties['catalina.base']) {
         grails.config.locations = ["file:${tomcatConfDir.canonicalPath}/mc-config.groovy"]
     }
 }
+
+environments {
+    development {
+        mc.css.custom = """
+          /* green for dev mode to show it's safe to do any changes */
+          .navbar-default {
+            background-color: #c8e1c0;
+            border-color: #bee2b2;
+          }
+        """
+    }
+}

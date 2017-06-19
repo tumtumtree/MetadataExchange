@@ -107,20 +107,9 @@ environments {
                 }
             }
         }
-        mc.allow.signup = true
 
         grails.plugin.console.enabled = true
         mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
-        mc.css.custom = """
-          /* green for dev mode to show it's safe to do any changes */
-          .navbar-default {
-            background-color: #c8e1c0;
-            border-color: #bee2b2;
-          }
-        """
-        mc.preload = [
-                [name: "Java Basic Types", url: "https://s3-eu-west-1.amazonaws.com/datamodels.metadata.org.uk/Java.mc.xml"]
-        ]
         grails.mail.disabled=true
     }
     local {
@@ -142,7 +131,6 @@ environments {
                 }
             }
         }
-        mc.allow.signup = true
 
         grails.plugin.console.enabled = true
         grails.serverURL =  "http://localhost:${System.getProperty('server.port') ?: 8080}"
@@ -167,14 +155,6 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-
-        // ---
-        // you can overrides in your mc-config.groovy
-        mc.sync.relationshipTypes=true
-        // configure the default storage
-        mc.storage.directory = "/tmp/mc/storage"
-        mc.storage.maxSize = 50 * 1024 * 1024
-        // ---
     }
 }
 
