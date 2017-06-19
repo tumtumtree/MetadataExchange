@@ -264,8 +264,6 @@ grails.plugin.springsecurity.ajaxCheckClosure = { request ->
 
 grails.plugin.springsecurity.ui.register.defaultRoleNames = [] // no roles
 
-grails.databinding.dateFormats = ['MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:sss'Z'"]
-
 
 grails.doc.images = new File("src/docs/images")
 grails.doc.title = 'Model Catalogue Core Plugin' // The title of the documentation
