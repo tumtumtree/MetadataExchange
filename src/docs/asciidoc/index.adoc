@@ -1,4 +1,6 @@
 = Model Catalogue Core - Documentation
+Adam Milward; Vladimír Oraný; David Milward
+:docinfo1:
 
 - link:guide/index.html[Guide]
 - link:development/index.html[Development]
