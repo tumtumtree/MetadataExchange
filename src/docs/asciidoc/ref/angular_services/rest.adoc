@@ -3,7 +3,7 @@
 Opaque facade to AngularJS http://docs.angularjs.org/api/ng/service/$http[$http] service.
 The only difference in usage is that it resolves to data or status
 if no error occurs and on the other hand it rejects if data object has errors property.
-Declared in `mc.util.rest` module inside [mc.util|Angular Packages] package.
+Declared in `mc.util.rest` module inside <<_mc_util, "mc.util" Angular Package>>.
 
 == Usage
 

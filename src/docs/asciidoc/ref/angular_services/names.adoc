@@ -1,7 +1,7 @@
 = names
 
 Object containing utility functions for name related string conversions.
-Declared in `mc.util.names` module inside [mc.util|Angular Packages] package.
+Declared in `mc.util.names` module inside <<_mc_util, "mc.util" Angular Package>>.
 
 == Usage
 

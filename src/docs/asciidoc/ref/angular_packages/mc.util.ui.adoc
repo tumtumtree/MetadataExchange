@@ -1,6 +1,6 @@
 = mc.util.ui
 
-Util UI package provides directives to simplify usage of services and providers declared in [mc.util|Angular Packages].
+Util UI package provides directives to simplify usage of services and providers declared in <<_mc_util, "mc.util" Angular Package>>.
 
 == Modules
 This package groups following modules for easier use:

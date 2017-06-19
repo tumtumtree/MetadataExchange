@@ -1,6 +1,5 @@
 = Model
 
-Extends [extendibleElement|Domain Classes]
-
+Extends <<_extendible_element, "Extendible Element" Domain Class>>
 
 

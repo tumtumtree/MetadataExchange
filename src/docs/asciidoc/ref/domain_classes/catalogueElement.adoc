@@ -1,10 +1,10 @@
 = Catalogue Element
 
-Abstract Class extended to allow creation of [relationship|Domain Classes]s between elements of this type.
-Relationships can be created and removed using the [relationshipService|Services].
-Shortcuts methods for catalogue element relationships can be configured using the [relationships|Domain Classes] declaration.
+Abstract Class extended to allow creation of <<_relationship, "Relationship" Domain Classes>> between elements of this type.
+Relationships can be created and removed using the <<_relationship_service, "Relationship" Services>>.
+Shortcuts methods for catalogue element relationships can be configured using the <<_relationship, "Relationship" Domain Classes>> declaration.
 
-Extended By: [dataElement|Domain Classes], [model|Domain Classes]
+Extended By: <<_data_element, "Data Element" Domain Class>>, <<_model, "Model" Domain Class>>
 
 == Usage
 

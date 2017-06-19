@@ -1,7 +1,7 @@
 = catalogueElementResource
 
 Function which creates an interface to communicate with the model catalogue REST API resource such as `dataType`.
-Declared in `mc.core.catalogueElementResource` module inside [mc.core|Angular Packages] package.
+Declared in `mc.core.catalogueElementResource` module inside <<_mc_core, "mc.core" Angular Package>>.
 
 == Usage
 
@@ -52,5 +52,5 @@ The returned object has following methods:
 |returns search result of given term, optionally paginated by given params (max and offset are accepted)
 |===
 
-NOTE: All methods return promises to result which are resolved or rejected (in case of error, e.g. validation errors or resource not found errors) depending on the response from the backend server. The result object and arrays are enhanced by all present enhancers registered in [enhanceProvider|Angular Providers]
+NOTE: All methods return promises to result which are resolved or rejected (in case of error, e.g. validation errors or resource not found errors) depending on the response from the backend server. The result object and arrays are enhanced by all present enhancers registered in <<_enhanceprovider, "Enhance Provider" Angular Provider>>
 

@@ -1,7 +1,7 @@
 = modelCatalogueSearch
 
 Function which searches through every catalogue element type.
-Declared in `mc.core.modelCatalogueSearch` module inside [mc.core|Angular Packages] package.
+Declared in `mc.core.modelCatalogueSearch` module inside <<_mc_core, "mc.core" Angular Package>>.
 
 == Usage
 

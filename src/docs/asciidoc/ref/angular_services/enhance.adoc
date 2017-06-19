@@ -3,8 +3,8 @@
 Function which enhances given object with additional functionality if particular conditions are met. Function
 might or might not return different object than the one supplied. You should always re-assign the value with
 the returned object. Objects and arrays are deep enhanced breadth-first.
-See [enhanceProvider|Angular Providers] how to configure the enhancement mechanism.
-Declared in `mc.core.enhance` module inside [mc.core|Angular Packages] package.
+See <<_enhanceprovider, "Enhance Provider" Angular Provider>> how to configure the enhancement mechanism.
+Declared in `mc.core.enhance` module inside <<_mc_core, "mc.core" Angular Package>>.
 
 == Usage
 

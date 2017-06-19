@@ -1,6 +1,6 @@
-= relationship service
+= Relationship Service
 
-You can specify relationships, by [relationshipType|DomainClasses] between catalogue elements using the relationship service link and unlink methods.
+You can specify relationships, by <<_relationship_type, "Relationship Type" Domain Classes>> between catalogue elements using the relationship service link and unlink methods.
 
 Usage:
 

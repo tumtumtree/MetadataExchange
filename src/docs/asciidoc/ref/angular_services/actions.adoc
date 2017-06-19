@@ -2,9 +2,9 @@
 
 Service to obtain all actions applicable for the current scope. Use `getActions($scope)` method
 to get the list of actions for the current scope sorted by their position parameter.
-See [actionsProvider|Angular Providers] how to configure the actions.
+See <<_actionsprovider, "Actions Provider" Angular Provider>> how to configure the actions.
 
-Declared in `mc.core.ui.actions` module inside [mc.core.ui|Angular Packages] package.
+Declared in `mc.core.ui.actions` module inside <<_mc_core_ui, "mc.core.ui" Angular Package>>.
 
 == Usage
 
@@ -20,5 +20,5 @@ angular
 });
 ----
 
-See [actionsProvider|Angular Providers] for the list of action's properties. To perform the action, call its `run()`
+See <<_actionsprovider, "Actions Provider" Angular Provider>> for the list of action's properties. To perform the action, call its `run()`
 method without any parameters.
