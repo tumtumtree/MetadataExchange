@@ -199,3 +199,10 @@ environments:
             storage: # configure the default storage
                directory: /tmp/mc/storage
                maxSize: 52428800 # 50 * 1024 * 1024
+---
+grails:
+    plugin:
+        springsecurity:
+            ui:
+                register:
+                   defaultRoleNames: [] # no roles

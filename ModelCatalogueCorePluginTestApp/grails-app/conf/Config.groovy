@@ -208,7 +208,3 @@ if (!mc.allow.signup) {
 grails.plugin.springsecurity.ajaxCheckClosure = { request ->
     request.getHeader('accept')?.startsWith('application/json')
 }
-
-
-
-grails.plugin.springsecurity.ui.register.defaultRoleNames = [] // no roles
