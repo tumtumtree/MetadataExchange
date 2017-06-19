@@ -178,12 +178,6 @@ environments {
     }
 }
 
-hibernate {
-    format_sql = true
-    use_sql_comments = true
-    generate_statistics = true
-}
-
 // log4j configuration
 log4j.main = {
     info 'grails.app.services.org.modelcatalogue'

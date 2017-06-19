@@ -7,7 +7,7 @@ grails:
         transactionManagement:
             proxies: false
     gorm:
-        # Whether to autowire entities. 
+        # Whether to autowire entities.
         # Disabled by default for performance reasons.
         autowire: true
         reactor:
@@ -46,20 +46,20 @@ grails:
         types:
             json:
               - application/json
-              - text/json   
+              - text/json
             hal:
               - application/hal+json
-              - application/hal+xml  
+              - application/hal+xml
             xml:
               - text/xml
-              - application/xml                                 
+              - application/xml
             atom: application/atom+xml
             css: text/css
             csv: text/csv
             js: text/javascript
             rss: application/rss+xml
             text: text/plain
-            all: '*/*'            
+            all: '*/*'
     urlmapping:
         cache:
             maxsize: 1000
@@ -75,6 +75,9 @@ grails:
 
 ---
 hibernate:
+    format_sql: true
+    use_sql_comments: true
+    generate_statistics: true
     cache:
         queries: false
         use_second_level_cache: false
