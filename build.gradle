@@ -32,8 +32,11 @@ apply plugin:"asset-pipeline"
 apply plugin:"org.grails.plugins.views-json"
 
 repositories {
+    jcenter()
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url 'http://dl.bintray.com/metadata/model-catalogue' }
+    maven { url 'http://dl.bintray.com/musketyr/document-builder' }
 }
 
 ext {
