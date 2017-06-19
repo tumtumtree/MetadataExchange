@@ -1,3 +1,5 @@
+package org.modelcatalogue.core
+
 import org.springframework.http.HttpMethod
 
 class ModelCatalogueFormsUrlMappings {
