@@ -7,8 +7,6 @@ import grails.util.Metadata
 // will be overriden by specific configuration but needs to exist at least as empty map
 oauth.providers = [:]
 
-grails.app.context = '/'
-
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.documentCache.maxsize = 1000
 
