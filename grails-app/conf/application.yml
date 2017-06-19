@@ -149,3 +149,14 @@ grails:
                     - rememberMeServices
                     - securityContextLogoutHandler
                     - modelCatalogueSecurityService # both spring security services implements it
+---
+javamelody:
+    # filter out numbers from URI
+    http-transform-pattern: \d+
+    displayed-counters: 'http,sql,error,log,spring,jsp'
+    url-exclude-pattern: '/assets/.*|.*/download.*|.*/gereportDoc.*|.*/changelogDoc.*'
+    disabled: true
+environments:
+    production:
+        javamelody:
+            disabled: false

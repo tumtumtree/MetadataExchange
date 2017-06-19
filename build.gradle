@@ -140,6 +140,9 @@ dependencies {
 
     // External Configuration
     compile "org.grails.plugins:external-config:$externalConfigVersion"
+
+    // JavaMelody monitoring plugin for Grails 3
+    compile "org.grails.plugins:grails-melody-plugin:$grailsMelodyVersion"
 }
 
 sourceSets {
