@@ -2,8 +2,10 @@
  This is the Geb configuration file.
  See: http://www.gebish.org/manual/current/configuration.html
  */
-
-
+import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import org.openqa.selenium.phantomjs.PhantomJSDriver
 import io.github.bonigarcia.wdm.ChromeDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
@@ -11,17 +13,13 @@ import org.openqa.selenium.chrome.ChromeOptions
 ChromeOptions options = new ChromeOptions()
 options.addArguments("test-type")
 options.addArguments("--disable-extensions")
-
-reportsDir = new File("target/geb-reports")
-reportOnTestFailureOnly = false
-baseUrl = 'http://localhost:8080/'
-//baseUrl = 'https://gel-mc-test.metadata.org.uk/'
-
 ChromeDriverManager.getInstance().setup()
 
-driver = {
-    new ChromeDriver(options)
-}
+
+reportsDir = new File("build//geb-reports")
+reportOnTestFailureOnly = false
+//baseUrl = 'http://localhost:8080/'
+//baseUrl = 'https://gel-mc-test.metadata.org.uk/'
 
 waiting {
     timeout = 15
@@ -29,3 +27,23 @@ waiting {
 }
 
 atCheckWaiting = true
+
+environments {
+
+    htmlUnit {
+        driver = { new HtmlUnitDriver() }
+    }
+
+    chrome {
+        driver = { new ChromeDriver(options) }
+    }
+
+    firefox {
+        driver = { new FirefoxDriver() }
+    }
+
+    phantomJs {
+        driver = { new PhantomJSDriver() }
+    }
+}
+

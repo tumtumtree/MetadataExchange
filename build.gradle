@@ -36,6 +36,10 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
 }
 
+ext {
+    webDriverVersion = System.getenv('WEB_DRIVER_VERSION') ?: '2.53.1'
+}
+
 dependencies {
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:$assetPipelineVersion"
     assets "com.bertramlabs.plugins:less-asset-pipeline:$assetPipelineVersion"
@@ -77,9 +81,15 @@ dependencies {
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
+    testRuntime "net.sourceforge.htmlunit:htmlunit:$htmlunitVersion"
+    testRuntime "org.seleniumhq.selenium:selenium-support:$webDriverVersion"
+    testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:$htmlunitdriverVersion"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$webDriverVersion"
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$webDriverVersion"
+    testCompile "com.codeborne:phantomjsdriver:$phantomjsdriverVersion"
+    testCompile "io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion"
+
     testCompile "org.grails:grails-datastore-rest-client"
-    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-    testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     // RX Java
     compile "io.reactivex:rxjava:$rxJavaVersion"
