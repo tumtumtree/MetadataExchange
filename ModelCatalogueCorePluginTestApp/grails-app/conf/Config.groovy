@@ -9,24 +9,6 @@ oauth.providers = [:]
 
 grails.app.context = '/'
 
-grails.mime.types = [ // the first one is the default format
-                      atom         : 'application/atom+xml',
-                      css          : 'text/css',
-                      csv          : 'text/csv',
-                      form         : 'application/x-www-form-urlencoded',
-                      html         : ['text/html', 'application/xhtml+xml'],
-                      js           : 'text/javascript',
-                      json         : ['application/json', 'text/json'],
-                      multipartForm: 'multipart/form-data',
-                      rss          : 'application/rss+xml',
-                      text         : 'text/plain',
-                      xsl          : 'text/xsl',
-                      hal          : ['application/hal+json', 'application/hal+xml'],
-//                      xml          : ['text/xml', 'application/xml'],
-                      xlsx         : ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
-                      all          : '*/*', // 'all' maps to '*' or the first available format in withFormat
-]
-
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.documentCache.maxsize = 1000
 

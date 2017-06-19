@@ -50,15 +50,24 @@ grails:
             hal:
               - application/hal+json
               - application/hal+xml
-            xml:
-              - text/xml
-              - application/xml
+#            xml:
+#              - text/xml
+#              - application/xml
             atom: application/atom+xml
             css: text/css
             csv: text/csv
             js: text/javascript
             rss: application/rss+xml
             text: text/plain
+            form: application/x-www-form-urlencoded
+            html:
+                - text/html
+                - application/xhtml+xml
+            multipartForm: multipart/form-data
+            xsl: text/xsl
+            xlsx:
+                - application/vnd.ms-excel
+                - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
             all: '*/*'
     urlmapping:
         cache:
