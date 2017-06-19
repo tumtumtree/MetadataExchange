@@ -135,9 +135,6 @@ environments {
         grails.serverURL =  "http://localhost:${System.getProperty('server.port') ?: 8080}"
     }
     test {
-        // uncomment for debugging failing functional tests on Travis CI
-        grails.assets.bundle=false
-        grails.assets.minifyJs = false
         oauth {
             providers {
                 google {
@@ -181,17 +178,10 @@ environments {
         // ---
         // you can overrides in your mc-config.groovy
         mc.sync.relationshipTypes=true
-        grails.assets.minifyJs = true
         // configure the default storage
         mc.storage.directory = "/tmp/mc/storage"
         mc.storage.maxSize = 50 * 1024 * 1024
         // ---
-
-        grails.assets.minifyOptions = [
-                strictSemicolons: false,
-                mangleOptions: [mangle: false, toplevel: false, defines: null, except: null, no_functions:false],
-                genOptions: [indent_start:0, indent_level:4, quote_keys: false, space_colon: false, beautify: false, ascii_only: false, inline_script:false]
-        ]
     }
 }
 
@@ -253,55 +243,6 @@ log4j.main = {
 }
 grails.views.gsp.encoding = "UTF-8"
 
-// this doesn't work properly, only reliable way is to his in setup-frontend.sh script
-def assetExcludes = [
-        "bootstrap/**/*.*",
-        "jquery-ui/**/*.*",
-        "font-awesome/**/*.*",
-        "core.js/**/*.*",
-        "jquery/**/*.*",
-        "angular/**/*.*",
-        "ace-builds/**/*.*",
-        "rxjs/**/*.*",
-        "angular-animate/**/*.*",
-        "angular-rx/**/*.*",
-        "angular-bootstrap/**/*.*",
-        "angular-cookies/**/*.*",
-        "angular-i18n/**/*.*",
-        "angular-i18n/*.js",
-        "angular-mocks/**/*.*",
-        "angular-sanitize/**/*.*",
-        "jasmine/**/*.*",
-        "libs/**/*.*",
-        "**/*/GruntFile",
-        "**/*/GruntFile.js",
-        "**/*/gulpfile.babel.js",
-        "**/*/karma.conf.js",
-        "**/*/Gruntfile",
-        "**/*/Gruntfile.coffee",
-        "**/*/LICENSE",
-        "**/*/COPYING",
-        "**/*/README",
-        "**/*/*.md",
-        "**/*/*.json",
-        "**/src/*.*",
-        "**/test/*.*",
-        "**/cpp/*.*",
-        "**/csharp/*.*",
-        "**/dart/*.*",
-        "**/demos/*.*",
-        "**/java/*.*",
-        "**/lua/*.*",
-        "**/maven/*.*",
-        "**/objectivec/*.*",
-        "**/python2/*.*",
-        "**/python3/*.*",
-]
-
-
-
-grails.assets.excludes = assetExcludes
-
 grails.assets.plugin.famfamfam.excludes = ['**/*.*']
 
 grails.assets.babel.enabled = true
@@ -335,7 +276,3 @@ grails.doc.authors = 'Adam Milward, Vladimír Oraný, David Milward'// The autho
 grails.doc.license = 'MIT'// The license of the software
 grails.doc.copyright = ''// The copyright message to display
 grails.doc.footer = ''// The footer to use
-
-
-grails.assets.minifyJs = false
-
