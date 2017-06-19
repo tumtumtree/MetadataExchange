@@ -38,6 +38,7 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
 //// Setting log levels for various loggers:
 
 // Don't know if all of these names are correct for Grails 3?
+// note these configs came from Config.groovy and ModelCatalogueConfig.groovy (referred to as MCConfig) in version 2.
 
 /// grails-app loggers:
 logger('grails.app.services.org.modelcatalogue', INFO) // set log level to INFO to all Services in package org.modelcatalogue
@@ -46,7 +47,9 @@ logger('grails.app.domain.org.modelcatalogue', INFO)
 logger('grails.app.services.org.grails.plugins.console', INFO)
 logger('grails.app.services.org.modelcatalogue.core.elasticsearch', INFO)
 logger('org.grails.plugins.console', INFO)
-
+logger('grails.app.services.org.modelcatalogue.core.ElementService', DEBUG)
+logger('grails.app.services.org.modelcatalogue.core.dataarchitect.OBOService', DEBUG)
+logger('grails.app.services.org.modelcatalogue.core.InitCatalogueService', DEBUG)
 
 
 //    logger('org.codehaus.groovy.grails.web.mapping', DEBUG)
@@ -79,13 +82,14 @@ logger('net.sf.ehcache.hibernate', ERROR)
 
 /// groovy source loggers:
 logger('org.modelcatalogue', INFO)
-logger('org.modelcatalogue.core.dataarchitect.xsd.XSDImporter', INFO)
+logger('org.modelcatalogue.core.dataarchitect.xsd.XSDImporter', DEBUG) // from MCConfig. Was INFO in Config
+
 
 // detailed feedback is now visible using the ProgressMonitor API
-logger('org.modelcatalogue.core.util.builder', INFO)
+logger('org.modelcatalogue.core.util.builder', DEBUG) // from MCConfig. Was INFO in Config
 logger('org.modelcatalogue.core.util.HibernateHelper', INFO) // for some reason the logging from builder is redirected here, INFO)
 
-logger('org.modelcatalogue.core.publishing', INFO)
+
 logger('org.modelcatalogue.core.util.test', INFO)
 logger('org.modelcatalogue.core.gel', INFO)
 logger('org.modelcatalogue.core.export', INFO)
@@ -93,5 +97,7 @@ logger('org.modelcatalogue.core.elasticsearch', INFO)
 logger('org.modelcatalogue.discourse', INFO)
 logger('org.modelcatalogue.core.rx.BatchOperator', INFO)
 logger('org.modelcatalogue.core.rx.DetachedCriteriaOnSubscribe', INFO)
+logger('org.modelcatalogue.core.xml', WARN)
+logger('org.modelcatalogue.core.publishing', DEBUG) // from MCConfig. Was INFO in Config
 
 root(ERROR, ['STDOUT'])
