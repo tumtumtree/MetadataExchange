@@ -12,6 +12,7 @@ buildscript {
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
         classpath "org.grails.plugins:views-gradle:1.1.6"
         classpath "org.asciidoctor:asciidoctor-gradle-plugin:$asciidoctorGradlePluginVersion"
+        classpath "org.grails.plugins:database-migration:$databaseMigrationVersion"
     }
 }
 
@@ -126,6 +127,17 @@ dependencies {
     testCompile "org.modelcatalogue:mc-builder-xml:$mcToolkitVersion"
     testCompile "xmlunit:xmlunit:$xmlunitVersion"
 
+    // Database Migration
+    compile "org.grails.plugins:database-migration:$databaseMigrationVersion"
+    compile "org.liquibase:liquibase-core:$liquibaseCoreVersion"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'grails-app/migrations'
+        }
+    }
 }
 
 bootRun {

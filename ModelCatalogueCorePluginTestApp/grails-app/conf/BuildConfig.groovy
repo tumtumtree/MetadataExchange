@@ -128,7 +128,6 @@ grails.project.dependency.resolution = {
         compile ":grails-melody:1.59.0"
 
         // plugins needed at runtime but not for compilation
-        runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
         test ":geb:$gebVersion"
