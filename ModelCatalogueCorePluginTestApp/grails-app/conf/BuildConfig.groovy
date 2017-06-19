@@ -53,7 +53,6 @@ grails.project.dependency.resolution = {
 
         compile ":executor:0.3"
 
-        compile ":console:1.5.6"
         compile ":spring-websocket:1.3.1"
 
         // codenarc static analysis

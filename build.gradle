@@ -79,10 +79,8 @@ dependencies {
     runtime "com.h2database:h2"
     runtime "org.apache.tomcat:tomcat-jdbc"
 
-
-
-
     testCompile "org.grails:grails-plugin-testing"
+
     testCompile "org.grails.plugins:geb"
     testRuntime "net.sourceforge.htmlunit:htmlunit:$htmlunitVersion"
     testRuntime "org.seleniumhq.selenium:selenium-support:$webDriverVersion"
@@ -156,6 +154,9 @@ dependencies {
 
     // JavaMelody monitoring plugin for Grails 3
     compile "org.grails.plugins:grails-melody-plugin:$grailsMelodyVersion"
+
+    // Grails Console Plugin
+    runtime "org.grails.plugins:grails-console:$grailsConsoleVersion"
 }
 
 sourceSets {

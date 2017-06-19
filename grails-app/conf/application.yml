@@ -223,3 +223,20 @@ environments:
             logging:
                 jul:
                     usebridge: false
+--- # Grails Console
+environments:
+    development:
+        grails:
+            plugin:
+                console:
+                    enabled: true
+    test:
+        grails:
+            plugin:
+                console:
+                    enabled: true
+    production:
+        grails:
+            plugin:
+                console:
+                    enabled: false
