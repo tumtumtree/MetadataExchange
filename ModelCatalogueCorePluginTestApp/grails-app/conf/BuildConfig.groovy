@@ -51,8 +51,6 @@ grails.project.dependency.resolution = {
 
         compile "org.grails.plugins:babel-asset-pipeline:1.4.5"
 
-        compile ":executor:0.3"
-
         compile ":spring-websocket:1.3.1"
 
         // codenarc static analysis

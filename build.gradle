@@ -157,6 +157,8 @@ dependencies {
 
     // Grails Console Plugin
     runtime "org.grails.plugins:grails-console:$grailsConsoleVersion"
+
+    compile 'org.grails.plugins:grails-executor:0.4'
 }
 
 sourceSets {
