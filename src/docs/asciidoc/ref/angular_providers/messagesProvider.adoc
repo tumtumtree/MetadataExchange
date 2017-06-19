@@ -1,6 +1,6 @@
 = messagesProvider
 
-Provider for [messages|Angular Services] service. Allows to configure the `confirm` and `prompt` method
+Provider for <<_messages, "messages" Angular Service>>. Allows to configure the `confirm` and `prompt` method
 using `setConfirmFactory` and `setPromptFactory` methods.
 Declared in `mc.util.messages` module inside [mc.util|Angular Packages] package.
 

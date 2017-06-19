@@ -9,8 +9,8 @@ This enhancer is used if the object has own property of name `removeLink`.
 
 == Usage
 
-You usually get objects enhanced by this enhancer when accessing resource using [catalogueElementResource|Angular Services]
-or [modelCatalogueSearch|Angular Services].
+You usually get objects enhanced by this enhancer when accessing resource using <<_catalogueelementresource, "Catalogue Element Resource" Angular Service>>
+or <<_modelcataloguesearch, "Model Catalogue Search" Angular Service>>.
 
 [source,javascript]
 ----

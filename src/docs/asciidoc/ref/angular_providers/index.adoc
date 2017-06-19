@@ -1,9 +1,9 @@
 = Ref - Angular Providers
 :toc: left
 
-include:columnsProvider.adoc[leveloffset=+1]
-include:catalogueElementPropertiesProvider.adoc[leveloffset=+1]
-include:enhanceProvider.adoc[leveloffset=+1]
-include:securityProvider.adoc[leveloffset=+1]
-include:actionsProvider.adoc[leveloffset=+1]
-include:messagesProvider.adoc[leveloffset=+1]
+include::columnsProvider.adoc[leveloffset=+1]
+include::catalogueElementPropertiesProvider.adoc[leveloffset=+1]
+include::enhanceProvider.adoc[leveloffset=+1]
+include::securityProvider.adoc[leveloffset=+1]
+include::actionsProvider.adoc[leveloffset=+1]
+include::messagesProvider.adoc[leveloffset=+1]

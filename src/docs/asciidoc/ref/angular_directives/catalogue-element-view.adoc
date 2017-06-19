@@ -2,12 +2,12 @@
 
 Element directive for showing single catalogue element item. Default template defined in
 `mc.core.ui.bs.catalogueElementView` is showing the name and the description on the top of the panel, all simple properties in single Properties tab, plain JavaScript objects
-in separate tabs using [properties-pane|Angular Directives] directive and all [listReference|Angular Enhancers] properties in separate tabs using [decorated-list|Angular Directives] directive.
+in separate tabs using the <<_properties_pane, "Properties Pane" Angular Directive>> and all <<_listreference, "List Reference" Angular Enhancer>> properties in separate tabs using the <<_decorated_list, "Decorated List" Angular Directive>>.
 It accepts only one attribute `element` which is the element to show.
 
 == Usage
 
-Considering you have following code in you controller with injected [catalogueElementResource|Angular Services] service:
+Considering you have following code in your controller with injected <<_catalogueelementresource, "Catalogue Element Resource" Angular Service>>:
 
 [source, javascript]
 ----
@@ -29,7 +29,7 @@ Than you get the value domain rendered as described above.
 == Customization
 You can override the `modelcatalogue/core/ui/catalogueElementView.html` template to plug your own either using
 `text/ng-template` script definition, creating the template on the appropriate location in your server
-or using the [$templateCache|http://docs.angularjs.org/api/ng/service/$templateCache].
+or using the http://docs.angularjs.org/api/ng/service/$templateCache[$templateCache].
 
 Following variables and methods are added by the directive controller):
 

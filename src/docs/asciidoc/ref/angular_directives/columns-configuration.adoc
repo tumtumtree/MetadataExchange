@@ -1,6 +1,6 @@
 = columns-configuration
 
-Element directive for rendering configuring columns for [decorated-list|Angular Directives] directive. Default template defined in
+Element directive for rendering configuring columns for the <<_decorated_list, "Decorated List" Angular Directive>>. Default template defined in
 module `mc.core.ui.bs.columnsConfiguration` provides configuration widget in table layout.
 
 == Usage
@@ -18,7 +18,7 @@ table using the `columns-configuration` directive.
 == Customization
 You can override the `modelcatalogue/core/ui/columnsConfiguration.html` template to plug your own either using
 `text/ng-template` script definition, creating the template on the appropriate location in your server
-or using the [$templateCache|http://docs.angularjs.org/api/ng/service/$templateCache].
+or using the http://docs.angularjs.org/api/ng/service/$templateCache[$templateCache].
 
 Following variables and methods are added by the directive controller:
 

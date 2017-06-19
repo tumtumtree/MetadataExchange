@@ -1,6 +1,6 @@
 = decorated-list
 
-Generic element directive for showing items enhanced by [list|Angular Enhancers] enhancer. Default template defined in
+Generic element directive for showing items enhanced by the <<_list, "List" Angular Enhancer>>. Default template defined in
 `mc.core.ui.bs.decoratedListTable` is showing each item of the list as table row with pagination at the bottom of the table.
 The directive accepts following two-ways bound attributes `list`, `columns`, `selection` and `actions`.
 Only the `list` attribute is mandatory and represents the list structure which should match the expected input.
@@ -27,7 +27,7 @@ loading of the resource twice.
 
 `columns` defines which columns should be present in the table in an array of following structures:
 
-NOTE: Instead of managing the columns definition in your business code, you should use [columns|Angular Services] service to manage columns definition in one place.
+NOTE: Instead of managing the columns definition in your business code, you should use <<_columns, "Columns" Angular Service>> to manage columns definition in one place.
 
 
 |===
@@ -64,8 +64,8 @@ value is populated with the items from the checked rows.
 
 == Usage
 
-Considering you have following code in you controller with injected [catalogueElementResource|Angular Services],
-[columns|Angular Services] and [enhance|Angular Services] services:
+Suppose you have following code in you controller with injected <<_catalogueelementresource, "Catalogue Element Resource" Angular Service>>,
+<<_columns, "Columns" Angular Service>> and <<_enhance, "Enhance" Angular Service>>:
 
 [source, javascript]
 ----
@@ -90,7 +90,7 @@ Than you get first ten value domain objects rendered in the table with paginatio
 == Customization
 You can override the `modelcatalogue/core/ui/decoratedList.html` template to plug your own either using
 `text/ng-template` script definition, creating the template on the appropriate location in your server
-or using the [$templateCache|http://docs.angularjs.org/api/ng/service/$templateCache].
+or using the http://docs.angularjs.org/api/ng/service/$templateCache[$templateCache].
 
 Following variables and methods are added by the directive controller (besides `list`, `columns` and `selection`):
 

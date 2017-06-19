@@ -1,6 +1,6 @@
 = columnsProvider
 
-Configures the [columns|Angular Services] service. You can register new columns definition using `registerColumns(type, columns)`
+Configures the <<_columns, "Columns" Angular Service>>. You can register new columns definition using `registerColumns(type, columns)`
 method or set the default columns using `setDefaultColumns(columns)` method.
 Declared in `mc.core.ui.columns` module inside [mc.core.ui|Angular Packages] package.
 

@@ -9,19 +9,19 @@ This package groups following modules for easier use:
 |===
 |Name                             | Description
 |mc.core.catalogueElementEnhancer
-|enables [catalogueElement|Angular Enhancers] enhancer
+|enables <<_catalogueelement, "Catalogue Element" Angular Enhancer>>
 |mc.core.catalogueElementResource
-|provides [catalogueElementResource|Angular Services] service
+|provides <<_catalogueelementresource, "Catalogue Element Resource" Angular Service>>
 |mc.core.listEnhancer
-|enables [list|Angular Enhancers] enhancer
+|enables <<_list, "List" Angular Enhancer>>
 |mc.core.listReferenceEnhancer
-|enables [listReference|Angular Enhancers] enhancer
+|enables <<_listreference, "List Reference" Angular Enhancer>>
 |mc.core.modelCatalogueApiRoot
-|declares [modelCatalogueApiRoot|Angular Values] value
+|declares [_modelcatalogueapiroot, "Model Catalogue API Root" Angular Value>>
 |mc.core.modelCatalogueSearch
-|provides [modelCatalogueSearch|Angular Services] service
+|provides <<_modelcataloguesearch, "Model Catalogue Search" Angular Service>>
 |mc.core.removableItemEnhancer
-|enables [removableItem|Angular Enhancers] enhancer
+|enables <<_removableitem, "Removable Item" Angular Enhancer>>
 |===
 
 == Include
