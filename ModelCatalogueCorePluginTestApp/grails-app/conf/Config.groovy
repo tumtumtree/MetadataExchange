@@ -58,7 +58,6 @@ grails.hibernate.cache.queries = false
 
 environments {
     development {
-        grails.logging.jul.usebridge = true
         grails.serverURL = "http://localhost:${System.getProperty('server.port') ?: 8080}"
 //        discourse {
 //            url = "http://192.168.1.123/"
@@ -93,7 +92,6 @@ environments {
         grails.mail.disabled=true
     }
     local {
-        grails.logging.jul.usebridge = true
         grails.serverURL =  "http://localhost:${System.getProperty('server.port') ?: 8080}"
     }
     test {
@@ -132,9 +130,6 @@ environments {
             mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
             grails.mail.disabled=true
         }
-    }
-    production {
-        grails.logging.jul.usebridge = false
     }
 }
 
