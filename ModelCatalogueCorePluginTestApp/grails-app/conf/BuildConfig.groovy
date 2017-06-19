@@ -113,7 +113,6 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":console:1.5.6"
-        compile ":grails-melody:1.59.0"
 
         // plugins needed at runtime but not for compilation
         runtime ":jquery:1.11.1"
