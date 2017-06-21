@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.interceptors
 
-import org.codehaus.groovy.grails.commons.GrailsClass
+import grails.core.GrailsClass
 import org.modelcatalogue.core.AbstractRestfulController
 import groovy.transform.CompileStatic
 
