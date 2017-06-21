@@ -174,7 +174,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 
     protected String generateLink(String action, linkParams) {
         createLink(base: grailsApplication.config.grails.serverURL,
-                   controller: 'register', action: action,
-                   params: linkParams)
+            controller: 'register', action: action,
+            params: linkParams)
     }
 }
