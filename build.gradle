@@ -37,6 +37,7 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
     maven { url 'http://dl.bintray.com/metadata/model-catalogue' }
     maven { url 'http://dl.bintray.com/musketyr/document-builder' }
+    maven { url "https://oss.jfrog.org/repo/" }
 }
 
 ext {
