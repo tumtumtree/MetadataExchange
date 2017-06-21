@@ -1,15 +1,15 @@
 package org.modelcatalogue.core
 
-import grails.core.GrailsControllerClass
-import grails.web.mapping.UrlMappingsHolder
-import junit.framework.AssertionFailedError
-import org.grails.core.artefact.ControllerArtefactHandler
-import org.modelcatalogue.core.actions.BatchController
-import spock.lang.Specification
-import spock.lang.Ignore
-import spock.lang.Unroll
-import grails.test.mixin.Mock
-import grails.test.mixin.TestFor
+import GrailsControllerClass
+import UrlMappingsHolder
+import AssertionFailedError
+import ControllerArtefactHandler
+import BatchController
+import Specification
+import Ignore
+import Unroll
+import Mock
+import TestFor
 
 @TestFor(ModelCatalogueCorePluginUrlMappings)
 @Mock([
