@@ -14,7 +14,8 @@ class ModelCatalogueIDInterceptor {
     }
     boolean before() {
         if (!request.getHeader('Accept')?.contains('json')) {
-            CatalogueElement element = CatalogueElement.get(params.id)
+            Serializable id = params.id as Serializable
+            CatalogueElement element = CatalogueElement.get(id)
 
             if (!element) {
                 render status: HttpStatus.NOT_FOUND
