@@ -246,8 +246,7 @@ beans:
         order: 50
     apiExpiresInterceptor:
         order: 60
-    apiLegacyInterceptor:
+    modelCatalogueIDInterceptor:
         order: 70
     springOAuthAjaxFixInterceptor:
         order: 80
-
