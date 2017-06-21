@@ -9,7 +9,7 @@ import groovy.transform.CompileStatic
  */
 @CompileStatic
 class ApiLegacyInterceptor {
-    int order = 99 // should be less than ApiExpiresInterceptor's order.
+
     ApiLegacyInterceptor() {
         match(controller: '*', action: '*')
     }

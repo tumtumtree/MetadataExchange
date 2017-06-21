@@ -10,7 +10,6 @@ import groovy.transform.CompileStatic
  */
 @CompileStatic
 class ApiExpiresInterceptor {
-    int order = 100
     ApiExpiresInterceptor() {
         match(controller: '*', action: '*')
     }

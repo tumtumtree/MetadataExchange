@@ -240,3 +240,14 @@ environments:
             plugin:
                 console:
                     enabled: false
+---
+beans:
+    apiLegacyInterceptor:
+        order: 50
+    apiExpiresInterceptor:
+        order: 60
+    apiLegacyInterceptor:
+        order: 70
+    springOAuthAjaxFixInterceptor:
+        order: 80
+
