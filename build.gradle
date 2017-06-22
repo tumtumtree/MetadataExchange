@@ -38,6 +38,7 @@ repositories {
     maven { url 'http://dl.bintray.com/metadata/model-catalogue' }
     maven { url 'http://dl.bintray.com/musketyr/document-builder' }
     maven { url "https://oss.jfrog.org/repo/" }
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
 
 ext {
