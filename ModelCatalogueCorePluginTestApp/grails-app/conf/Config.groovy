@@ -10,9 +10,6 @@ oauth.providers = [:]
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.documentCache.maxsize = 1000
 
-// Legacy setting for codec used to encode data with ${}
-grails.views.default.codec = "html"
-
 // GSP settings
 grails {
     views {
