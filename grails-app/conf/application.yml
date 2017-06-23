@@ -88,6 +88,10 @@ grails:
                 - password1
                 - password2
                 - client_secret
+    views:
+        gsp:
+            codecs:
+                scriptlet: html #escapes output from scriptlets in GSPs
 
 ---
 hibernate:
