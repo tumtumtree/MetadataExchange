@@ -1,56 +1,4 @@
-plugins {
-    id "com.moowork.node" version "1.1.1"
-}
 
-node {
-    // Version of node to use.
-    version = '5.12.0'
-
-    // Version of npm to use.
-    npmVersion = '3.8.6'
-
-    download = true
-}
-
-
-task npmCacheConfig(type: NpmTask, dependsOn: nodeSetup) {
-    description = "Configure the NPM cache"
-    def npmCacheDir = "${gradle.getGradleUserHomeDir()}/caches/npm"
-    outputs.files file(npmCacheDir)
-    args = [ 'config', 'set', 'cache', npmCacheDir ]
-}
-
-task npmPackages(type: NpmTask, dependsOn: npmCacheConfig) {
-    description = "Install Node.js packages"
-    args = [ 'install' ]
-    // inputs.files file('package.json')
-    outputs.files file('node_modules')
-}
-
-task bowerInstall(type: NodeTask) {
-    description = "Resolves Bower dependencies"
-    script = file('node_modules/bower/bin/bower')
-    args = ["--config.storage.cache=${gradle.getGradleUserHomeDir()}/caches/bower/cache",
-            "--config.storage.packages=${gradle.getGradleUserHomeDir()}/caches/bower/packages",
-            "--config.storage.registry=${gradle.getGradleUserHomeDir()}/caches/bower/registry",
-            'install']
-    // inputs.files file('bower.json')
-    outputs.files file('grails-app/assets/bower_components')
-    dependsOn npmPackages
-}
-
-task cleanUpBowerDependencies(type: Delete) {
-    delete 'grails-app/assets/bower_components/ace-builds/demo'
-    delete 'grails-app/assets/bower_components/ace-builds/src'
-    delete 'grails-app/assets/bower_components/ace-builds/src-min'
-    delete 'grails-app/assets/bower_components/ace-builds/src-noconflict'
-    delete 'grails-app/assets/bower_components/ace-builds/textarea'
-    delete 'grails-app/assets/bower_components/angular-file-saver/gulpfile.babel.js'
-    delete 'grails-app/assets/bower_components/angular-file-saver/src'
-    delete 'grails-app/assets/bower_components/angular-file-saver/docs'
-    delete 'grails-app/assets/bower_components/sly-repeat/scripts'
-    delete 'grails-app/assets/bower_components/sly-repeat/src'
-}
 
 task cleanIdeaFiles(type: Delete) {
     delete '**/.idea'
@@ -202,16 +150,7 @@ task runGrailsTests(type: Exec, dependsOn: [bowerInstall, startContainers, initT
     outputs.files file('target/test-reports/')
 }
 
-task runKarmaTests(type: NodeTask) {
-    description = "Runs Karma tests"
-    script = file('node_modules/karma/bin/karma')
-    args = [ 'start', '--single-run', '--browsers', 'Firefox']
-    inputs.files file('karma.conf.json')
-    inputs.files files('test/js')
-    inputs.files files('grails-app/assets')
-    outputs.files file('target/test-reports-js')
-    dependsOn([bowerInstall, runGrailsTests])
-}
+
 
 task collectTestReports(type: Copy) {
     description = "Collects reports from Grails tests"
@@ -229,7 +168,6 @@ task stop(type: Exec) {
     commandLine grailsw, 'stop-app','--non-interactive', '--stacktrace'
 }
 
-bowerInstall.finalizedBy cleanUpBowerDependencies
 stop.finalizedBy stopContainers
 
 

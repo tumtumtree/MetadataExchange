@@ -13,11 +13,11 @@ module.exports = function(config) {
 
         coverageReporter: {
             type: 'lcovonly',
-            dir: 'target/test-reports-js/coverage/'
+            dir: 'build/test-reports-js/coverage/'
         },
 
         junitReporter: {
-            outputDir: 'target/test-reports-js',
+            outputDir: 'build/test-reports-js',
             suite: 'unit'
         },
 
@@ -46,8 +46,8 @@ module.exports = function(config) {
             'web-app/js/libs/google-diff-match-patch/javascript/diff_match_patch.js',
 
             // Tests Helpers
-            'test/js/**/*.fixture.js',
-            'test/js/**/*.fixture.coffee',
+            'src/test/javascripts/*.fixture.js',
+            'src/test/javascripts/*.fixture.coffee',
 
             // App under test
             'grails-app/assets/javascripts/modelcatalogue/modelcatalogue.coffee',
@@ -60,9 +60,9 @@ module.exports = function(config) {
             'grails-app/assets/bower_components/angular-mocks/angular-mocks.js',
 
             // Tests
-            'test/js/**/*.!(fixture.)es6',
-            'test/js/**/*.!(fixture.)js',
-            'test/js/**/*.!(fixture.)coffee'
+            'src/test/javascripts/**/*.!(fixture.)es6',
+            'src/test/javascripts/**/*.!(fixture.)js',
+            'src/test/javascripts/**/*.!(fixture.)coffee'
         ],
         exclude: [
         ],
