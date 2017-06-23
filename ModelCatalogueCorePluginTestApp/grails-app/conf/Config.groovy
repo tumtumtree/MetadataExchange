@@ -9,5 +9,4 @@ import grails.util.Metadata
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.documentCache.maxsize = 1000
 
-// packages to include in Spring bean scanning
-grails.spring.bean.packages = []
+
