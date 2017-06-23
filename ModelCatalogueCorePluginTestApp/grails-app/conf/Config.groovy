@@ -10,9 +10,6 @@ oauth.providers = [:]
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.documentCache.maxsize = 1000
 
-// What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
-
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
 
