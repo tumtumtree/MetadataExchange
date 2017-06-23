@@ -250,3 +250,9 @@ beans:
         order: 70
     springOAuthAjaxFixInterceptor:
         order: 80
+---
+environments:
+    development:
+        grails:
+            mail:
+                disabled: true

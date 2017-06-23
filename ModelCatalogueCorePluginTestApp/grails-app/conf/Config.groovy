@@ -85,7 +85,6 @@ environments {
         }
 
         mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
-        grails.mail.disabled=true
     }
     test {
         oauth {
