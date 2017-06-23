@@ -35,10 +35,6 @@ grails {
 
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
-// whether to disable processing of multi part requests
-grails.web.disable.multipart = false
-
-// request parameters to mask when logging exceptions
 
 grails.views.gsp.encoding = "UTF-8"
 
