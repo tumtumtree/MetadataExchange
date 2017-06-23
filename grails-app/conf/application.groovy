@@ -215,3 +215,33 @@ environments {
         """
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+// OAUTH
+if (!mc.allow.signup) {
+    // for safety reasons, override the default class
+    grails.plugin.springsecurity.oauth.registration.roleNames = ['ROLE_REGISTERED']
+}
+environments {
+    development {
+        oauth {
+            providers {
+                google {
+                    callback = "${grails.serverURL}/oauth/google/callback"
+                }
+            }
+        }
+    }
+    test {
+        oauth {
+            providers {
+                google {
+                    callback = "${grails.serverURL}/oauth/google/callback"
+                }
+            }
+        }
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////

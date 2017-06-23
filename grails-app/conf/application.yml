@@ -133,6 +133,8 @@ environments:
 grails:
     plugin:
         springsecurity:
+            oauth:
+                domainClass: org.modelcatalogue.core.security.OAuthID # Added by the Spring Security OAuth plugin
             userLookup:
                 userDomainClassName: org.modelcatalogue.core.security.User
                 authorityJoinClassName: org.modelcatalogue.core.security.UserRole
@@ -256,3 +258,27 @@ environments:
         grails:
             mail:
                 disabled: true
+---
+environments:
+    development:
+        oauth:
+            providers:
+                google:
+                    # this key is limited to localhost only so no need to hide it
+                    api: org.modelcatalogue.repack.org.scribe.builder.api.GoogleApi20
+                    key: 225917730237-0hg6u55rgnld9cbtm949ab9h9fk5onr3.apps.googleusercontent.com
+                    secret: OG0JVVoy4bnGm48bneIS0haB
+                    successUri: /oauth/google/success
+                    failureUri: /oauth/google/error
+                    scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+    test:
+        oauth:
+            providers:
+                google:
+                    # this key is limited to localhost only so no need to hide it
+                    api: org.modelcatalogue.repack.org.scribe.builder.api.GoogleApi20
+                    key: 225917730237-0hg6u55rgnld9cbtm949ab9h9fk5onr3.apps.googleusercontent.com
+                    secret: OG0JVVoy4bnGm48bneIS0haB
+                    successUri: /oauth/google/success
+                    failureUri: /oauth/google/error
+                    scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'

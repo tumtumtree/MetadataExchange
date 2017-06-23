@@ -69,39 +69,9 @@ environments {
 //                key = System.getenv('METADATA_DISCOURSE_SSO_KEY') ?: "notasecret"
 //            }
 //        }
-        oauth {
-            providers {
-                google {
-                    // this key is limited to localhost only so no need to hide it
-                    api = org.modelcatalogue.repack.org.scribe.builder.api.GoogleApi20
-                    key = '225917730237-0hg6u55rgnld9cbtm949ab9h9fk5onr3.apps.googleusercontent.com'
-                    secret = 'OG0JVVoy4bnGm48bneIS0haB'
-                    successUri = '/oauth/google/success'
-                    failureUri = '/oauth/google/error'
-                    callback = "${grails.serverURL}/oauth/google/callback"
-                    scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
-                }
-            }
-        }
-
         mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
     }
     test {
-        oauth {
-            providers {
-                google {
-                    // this key is limited to localhost only so no need to hide it
-                    api = org.modelcatalogue.repack.org.scribe.builder.api.GoogleApi20
-                    key = '225917730237-0hg6u55rgnld9cbtm949ab9h9fk5onr3.apps.googleusercontent.com'
-                    secret = 'OG0JVVoy4bnGm48bneIS0haB'
-                    successUri = '/oauth/google/success'
-                    failureUri = '/oauth/google/error'
-                    callback = "${grails.serverURL}/oauth/google/callback"
-                    scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
-                }
-            }
-        }
-
         if (System.getenv('DOCKERIZED_TESTS') && System.properties["grails.test.phase"] == 'functional') {
             mc.search.elasticsearch.host="localhost"
             mc.search.elasticsearch.port=49300
@@ -129,14 +99,6 @@ grails.assets.babel.enabled = true
 grails.assets.less.compiler = 'less4j'
 
 
-
-// Added by the Spring Security OAuth plugin:
-grails.plugin.springsecurity.oauth.domainClass = 'org.modelcatalogue.core.security.OAuthID'
-
-if (!mc.allow.signup) {
-    // for safety reasons, override the default class
-    grails.plugin.springsecurity.oauth.registration.roleNames = ['ROLE_REGISTERED']
-}
 
 grails.plugin.springsecurity.ajaxCheckClosure = { request ->
     request.getHeader('accept')?.startsWith('application/json')
