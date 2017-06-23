@@ -4,8 +4,7 @@ import grails.util.Metadata
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
 
-// will be overriden by specific configuration but needs to exist at least as empty map
-oauth.providers = [:]
+
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.documentCache.maxsize = 1000
