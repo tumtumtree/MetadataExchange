@@ -171,6 +171,8 @@ dependencies {
     runtime "org.grails.plugins:grails-console:$grailsConsoleVersion"
 
     compile 'org.grails.plugins:grails-executor:0.4'
+
+    compile "net.errbuddy.plugins:babel-asset-pipeline:$babelAssetPipelineVersion"
 }
 
 sourceSets {

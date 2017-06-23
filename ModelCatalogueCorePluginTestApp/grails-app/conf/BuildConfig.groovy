@@ -49,8 +49,6 @@ grails.project.dependency.resolution = {
         test ':build-test-data:2.1.2'
         test ':fixtures:1.3'
 
-        compile "org.grails.plugins:babel-asset-pipeline:1.4.5"
-
         compile ":spring-websocket:1.3.1"
 
         // codenarc static analysis
