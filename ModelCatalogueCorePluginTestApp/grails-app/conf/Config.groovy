@@ -125,8 +125,6 @@ environments {
 
 grails.views.gsp.encoding = "UTF-8"
 
-grails.assets.plugin.famfamfam.excludes = ['**/*.*']
-
 grails.assets.babel.enabled = true
 grails.assets.less.compiler = 'less4j'
 
