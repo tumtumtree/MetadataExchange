@@ -560,3 +560,15 @@ private static String getDockerHost() {
     }
     return 'localhost'
 }
+
+bootRun {
+    systemProperties = System.properties
+}
+
+test {
+    systemProperties = System.properties
+}
+
+integrationTest {
+    systemProperties = System.properties
+}
