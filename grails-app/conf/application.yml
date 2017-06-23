@@ -81,6 +81,13 @@ grails:
             - MMddyyyy
             - yyyy-MM-dd HH:mm:ss.S
             - yyyy-MM-dd'T'hh:mm:sss'Z'
+    exceptionresolver:
+        params:
+            exclude:
+                - password
+                - password1
+                - password2
+                - client_secret
 
 ---
 hibernate:
