@@ -11,5 +11,3 @@ import grails.util.Metadata
 
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
-
-grails.assets.less.compiler = 'less4j'
