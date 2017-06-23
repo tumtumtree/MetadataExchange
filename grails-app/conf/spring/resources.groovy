@@ -48,7 +48,7 @@ import org.modelcatalogue.core.util.test.TestDataHelper
 import org.modelcatalogue.core.xml.render.RelationshipsXmlRenderer
 
 import java.util.concurrent.Executors
-import  grails.plugin.executor.PersistenceContextExecutorWrapper
+import  grails.plugins.executor.PersistenceContextExecutorWrapper
 
 // Place your Spring DSL code here
 beans = {

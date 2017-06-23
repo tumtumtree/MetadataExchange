@@ -170,7 +170,7 @@ dependencies {
     // Grails Console Plugin
     runtime "org.grails.plugins:grails-console:$grailsConsoleVersion"
 
-    compile 'org.grails.plugins:grails-executor:0.4'
+    compile "org.grails.plugins:grails-executor:$grailsExecutorVersion"
 
     compile "net.errbuddy.plugins:babel-asset-pipeline:$babelAssetPipelineVersion"
 }
