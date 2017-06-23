@@ -52,31 +52,7 @@ grails.exceptionresolver.params.exclude = ['password', 'password1', 'password2',
 // configure auto-caching of queries by default (if false you can documentCache individual queries with 'documentCache: true')
 grails.hibernate.cache.queries = false
 
-environments {
-    development {
-        mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
-    }
-    test {
-        if (System.getenv('DOCKERIZED_TESTS') && System.properties["grails.test.phase"] == 'functional') {
-            mc.search.elasticsearch.host="localhost"
-            mc.search.elasticsearch.port=49300
-            // this must be set to be able to send any mails
-            grails.mail.default.from = 'tester@metadata.org.uk'
-            grails.plugin.springsecurity.ui.register.emailFrom = 'tester@metadata.org.uk'
-            grails.plugin.springsecurity.ui.forgotPassword.emailFrom = 'tester@metadata.org.uk'
 
-            grails {
-                mail {
-                    host = 'localhost'
-                    port = 41025
-                }
-            }
-        } else {
-            mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${Metadata.getCurrent().getApplicationName()}/${Metadata.getCurrent().getApplicationVersion()}/es${System.currentTimeMillis()}"
-            grails.mail.disabled=true
-        }
-    }
-}
 
 grails.views.gsp.encoding = "UTF-8"
 

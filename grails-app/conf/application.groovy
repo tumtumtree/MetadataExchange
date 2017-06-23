@@ -249,3 +249,28 @@ environments {
 grails.plugin.springsecurity.ajaxCheckClosure = { request ->
     request.getHeader('accept')?.startsWith('application/json')
 }
+
+environments {
+    development {
+        mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/es${System.currentTimeMillis()}"
+    }
+    test {
+        if (System.getenv('DOCKERIZED_TESTS') ) { //  && System.properties["grails.test.phase"] == 'functional'
+            mc.search.elasticsearch.host="localhost"
+            mc.search.elasticsearch.port=49300
+            // this must be set to be able to send any mails
+            grails.mail.default.from = 'tester@metadata.org.uk'
+            grails.plugin.springsecurity.ui.register.emailFrom = 'tester@metadata.org.uk'
+            grails.plugin.springsecurity.ui.forgotPassword.emailFrom = 'tester@metadata.org.uk'
+            grails {
+                mail {
+                    host = 'localhost'
+                    port = 41025
+                }
+            }
+        } else {
+            mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/es${System.currentTimeMillis()}"
+            grails.mail.disabled=true
+        }
+    }
+}
