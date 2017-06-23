@@ -39,8 +39,6 @@ grails {
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
 
-// enabled native2ascii conversion of i18n properties files
-grails.enable.native2ascii = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
