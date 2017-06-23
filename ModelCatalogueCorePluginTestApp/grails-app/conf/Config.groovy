@@ -86,7 +86,3 @@ grails.assets.babel.enabled = true
 grails.assets.less.compiler = 'less4j'
 
 
-
-grails.plugin.springsecurity.ajaxCheckClosure = { request ->
-    request.getHeader('accept')?.startsWith('application/json')
-}
