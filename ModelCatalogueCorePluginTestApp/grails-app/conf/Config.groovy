@@ -46,12 +46,6 @@ grails.web.disable.multipart = false
 
 // request parameters to mask when logging exceptions
 
-
-// configure auto-caching of queries by default (if false you can documentCache individual queries with 'documentCache: true')
-grails.hibernate.cache.queries = false
-
-
-
 grails.views.gsp.encoding = "UTF-8"
 
 grails.assets.babel.enabled = true
