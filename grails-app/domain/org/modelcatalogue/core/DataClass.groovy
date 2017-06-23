@@ -7,8 +7,14 @@ import org.modelcatalogue.core.util.Legacy
 class DataClass extends CatalogueElement {
 
     static relationships = [
-            incoming: [hierarchy: 'childOf', ruleContext: 'contextFor'],
-            outgoing: [containment: 'contains', hierarchy: 'parentOf']
+            incoming: [
+                hierarchy: 'childOf',
+                ruleContext: 'contextFor'
+            ],
+            outgoing: [
+                containment: 'contains',
+                hierarchy: 'parentOf'
+            ]
     ]
 
     @Override

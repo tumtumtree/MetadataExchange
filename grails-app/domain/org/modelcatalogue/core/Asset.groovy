@@ -15,7 +15,9 @@ class Asset extends CatalogueElement {
     }
 
     static relationships = [
-            incoming: [attachment: 'isAttachedTo']
+            incoming: [
+                attachment: 'isAttachedTo'
+            ]
     ]
 
     @Override

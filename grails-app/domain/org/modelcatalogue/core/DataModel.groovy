@@ -24,11 +24,22 @@ class DataModel extends CatalogueElement {
     static transients = ['namespace', 'dataModelPolicies']
 
     static relationships = [
-        outgoing: [classificationFilter: 'usedAsFilterBy', 'import': 'imports'],
-        incoming: ['import': 'importedBy']
+        outgoing: [
+            classificationFilter: 'usedAsFilterBy',
+            'import': 'imports'
+        ],
+        incoming: [
+            'import': 'importedBy'
+        ]
     ]
 
-    static hasMany = [policies: DataModelPolicy, outgoingRelationships: Relationship, outgoingMappings: Mapping,  incomingMappings: Mapping, extensions: ExtensionValue]
+    static hasMany = [
+        policies: DataModelPolicy,
+        outgoingRelationships: Relationship,
+        outgoingMappings: Mapping,
+        incomingMappings: Mapping,
+        extensions: ExtensionValue
+    ]
 
     static mapping = {
         policies lazy: false

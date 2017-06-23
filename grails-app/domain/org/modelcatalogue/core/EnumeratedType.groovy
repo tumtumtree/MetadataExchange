@@ -22,7 +22,10 @@ class EnumeratedType extends DataType {
 
     String enumAsString = ""
 
-    static transients = ['enumerations', 'enumerationsObject']
+    static transients = [
+        'enumerations',
+        'enumerationsObject'
+    ]
 
     static constraints = {
         name unique: false

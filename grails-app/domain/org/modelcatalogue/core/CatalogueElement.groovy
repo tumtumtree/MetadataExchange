@@ -70,14 +70,48 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
     Set<Mapping> outgoingMappings = []
     Set<Mapping> incomingMappings = []
 
-    static transients = ['relations', 'info', 'archived', 'relations', 'incomingRelations', 'outgoingRelations', 'defaultModelCatalogueId', 'ext', 'combinedVersion', 'inheritedAssociationsNames', 'modelCatalogueResourceName', 'dataModelSemanticVersion', 'legacyModelCatalogueId', 'link']
+    static transients = [
+        'relations',
+        'info',
+        'archived',
+        'relations',
+        'incomingRelations',
+        'outgoingRelations',
+        'defaultModelCatalogueId',
+        'ext',
+        'combinedVersion',
+        'inheritedAssociationsNames',
+        'modelCatalogueResourceName',
+        'dataModelSemanticVersion',
+        'legacyModelCatalogueId',
+        'link'
+    ]
 
-    static hasMany = [incomingRelationships: Relationship, outgoingRelationships: Relationship, outgoingMappings: Mapping,  incomingMappings: Mapping, extensions: ExtensionValue]
+    static hasMany = [
+        incomingRelationships: Relationship,
+        outgoingRelationships: Relationship,
+        outgoingMappings: Mapping,
+        incomingMappings: Mapping,
+        extensions: ExtensionValue
+    ]
 
     static relationships = [
-            incoming: [base: 'isBaseFor', supersession: 'supersedes', favourite: 'isFavouriteOf', origin: 'isClonedFrom'],
-            outgoing: [base: 'isBasedOn', attachment: 'hasAttachmentOf', supersession: 'supersededBy', origin: 'isOriginFor'],
-            bidirectional: [relatedTo: 'relatedTo', synonym: 'isSynonymFor']
+            incoming: [
+                base: 'isBaseFor',
+                supersession: 'supersedes',
+                favourite: 'isFavouriteOf',
+                origin: 'isClonedFrom'
+            ],
+            outgoing: [
+                base: 'isBasedOn',
+                attachment: 'hasAttachmentOf',
+                supersession: 'supersededBy',
+                origin: 'isOriginFor'
+            ],
+            bidirectional: [
+                relatedTo: 'relatedTo',
+                synonym: 'isSynonymFor'
+            ]
     ]
 
     static constraints = {
@@ -103,7 +137,12 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
         dataModel lazy: false
     }
 
-    static mappedBy = [outgoingRelationships: 'source', incomingRelationships: 'destination', outgoingMappings: 'source', incomingMappings: 'destination']
+    static mappedBy = [
+        outgoingRelationships: 'source',
+        incomingRelationships: 'destination',
+        outgoingMappings: 'source',
+        incomingMappings: 'destination'
+    ]
 
     static fetchMode = [dataModel: 'eager']
 

@@ -24,8 +24,15 @@ class Action implements Extendible<ActionParameter> {
     Date dateCreated
     Date lastUpdated
 
-    static hasMany = [dependsOn: ActionDependency, dependencies: ActionDependency, extensions: ActionParameter]
-    static mappedBy = [dependsOn: 'dependant', dependencies: 'provider']
+    static hasMany = [
+        dependsOn: ActionDependency,
+        dependencies: ActionDependency,
+        extensions: ActionParameter
+    ]
+    static mappedBy = [
+        dependsOn: 'dependant',
+        dependencies: 'provider'
+    ]
     static belongsTo = [batch: Batch]
     static mapping = {
         // no need to optimistic locking, it usually just causes errors

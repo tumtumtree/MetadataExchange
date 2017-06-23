@@ -33,7 +33,10 @@ class DataType extends CatalogueElement implements Validating {
         tablePerHierarchy false
     }
 
-    static transients = ['relatedDataElements', 'regexDef']
+    static transients = [
+        'relatedDataElements',
+        'regexDef'
+    ]
 
     @Override
     Map<CatalogueElement, Object> manualDeleteRelationships(DataModel toBeDeleted) {
