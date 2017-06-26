@@ -38,6 +38,7 @@ apply plugin:"org.grails.plugins.views-json"
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'com.moowork.node'
 apply plugin: 'com.bmuschko.docker-remote-api'
+apply plugin: 'codenarc'
 
 repositories {
     jcenter()
@@ -53,6 +54,13 @@ ext {
     mySQLRootPassword = 'pa$$w0rd'
     webDriverVersion = System.getenv('WEB_DRIVER_VERSION') ?: '2.53.1'
     host = dockerHost
+}
+
+codenarc {
+    toolVersion = '0.27.0'
+    configFile = new File("${rootProject.projectDir}/conf/codenarc/rules.groovy")
+    reportFormat = 'html'
+    ignoreFailures = true
 }
 
 dependencies {
