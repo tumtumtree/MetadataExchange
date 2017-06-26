@@ -34,7 +34,7 @@ class MergePublishedElementsSpec extends Specification {
     def "uses default action natural name"() {
        expect:
         merge.naturalName == "Merge Published Elements"
-        merge.description == normalizeDescription(MergePublishedElements.description)
+        merge.description == MergePublishedElements.description
 
         when:
         merge.initWith(source: encodeEntity(one), destination: encodeEntity(two))
