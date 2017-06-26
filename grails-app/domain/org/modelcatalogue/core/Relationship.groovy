@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.util.DataModelAware
 import org.modelcatalogue.core.util.ExtensionsWrapper
 import org.modelcatalogue.core.util.FriendlyErrors
@@ -34,8 +35,8 @@ class Relationship implements Extendible<RelationshipMetadata>, org.modelcatalog
         ++nextIndex;
     }
 
-    def auditService
-    def relationshipService
+    AuditService auditService
+    RelationshipService relationshipService
 
     CatalogueElement source
     CatalogueElement destination
