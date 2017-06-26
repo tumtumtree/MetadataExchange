@@ -12,6 +12,7 @@ import org.codehaus.groovy.control.customizers.ImportCustomizer
 import org.codehaus.groovy.control.customizers.SecureASTCustomizer
 import org.codehaus.groovy.syntax.Types
 import org.grails.datastore.gorm.GormStaticApi
+import org.springframework.beans.factory.annotation.Autowired
 
 import javax.xml.bind.DatatypeConverter
 
@@ -56,6 +57,7 @@ class SecuredRuleExecutor<S extends Script> {
     private final Binding binding
     private final GroovyShell shell
     private final Class<S> baseScriptClass
+    List<String> additionalImportsWhiteList = [Autowired.name]
 
     SecuredRuleExecutor(Binding binding) {
         this.binding            = binding
@@ -80,10 +82,13 @@ class SecuredRuleExecutor<S extends Script> {
 
         ImportCustomizer importCustomizer = new ImportCustomizer().addStaticStars(Math.name)
 
+        List<String> importsWhiteList = withBaseScript()
+        importsWhiteList += additionalImportsWhiteList
+
         SecureASTCustomizer secureASTCustomizer = new SecureASTCustomizer()
         secureASTCustomizer.with {
             packageAllowed = false
-            importsWhitelist = withBaseScript()
+            importsWhitelist = importsWhiteList
             starImportsWhitelist = withBaseScript()
             staticImportsWhitelist = withBaseScript()
             staticStarImportsWhitelist = withBaseScript(Math, DatatypeConverter)

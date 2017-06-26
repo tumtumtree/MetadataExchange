@@ -4,6 +4,7 @@ import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.SecureASTCustomizer
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.builder.util.CatalogueBuilderScript
+import org.springframework.beans.factory.annotation.Autowired
 
 class ModelCatalogueLoader {
 
@@ -82,16 +83,21 @@ class ModelCatalogueLoader {
         new GroovyShell(classLoader, new Binding(builder: builder), configuration)
     }
 
+    private static List<String> additionalImportWhiteList() {
+        [Autowired.name]
+    }
+
     protected final static CompilerConfiguration getDefaultCompilerConfiguration(Iterable<Class> blackList) {
         CompilerConfiguration configuration = new CompilerConfiguration()
         configuration.scriptBaseClass = CatalogueBuilderScript.name
 
         SecureASTCustomizer secureASTCustomizer = new SecureASTCustomizer()
+        List<String> importWhiteList = [Object.name, CatalogueBuilder.name]
+        importWhiteList += additionalImportWhiteList()
         secureASTCustomizer.with {
             packageAllowed = false
             indirectImportCheckEnabled = true
-
-            importsWhitelist = [Object.name, CatalogueBuilder.name]
+            importsWhitelist = importWhiteList
             starImportsWhitelist = [Object.name, CatalogueBuilder.name]
             staticImportsWhitelist = [Object.name, CatalogueBuilder.name]
             staticStarImportsWhitelist = [Object.name, CatalogueBuilder.name]
