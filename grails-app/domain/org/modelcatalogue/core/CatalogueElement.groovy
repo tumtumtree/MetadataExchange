@@ -8,8 +8,14 @@ import org.hibernate.ObjectNotFoundException
 import org.hibernate.proxy.HibernateProxyHelper
 import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
 import org.modelcatalogue.core.api.ElementStatus
-import org.modelcatalogue.core.publishing.*
-import org.modelcatalogue.core.util.*
+import org.modelcatalogue.core.publishing.CloningContext
+import org.modelcatalogue.core.publishing.Published
+import org.modelcatalogue.core.publishing.Publisher
+import org.modelcatalogue.core.publishing.PublishingChain
+import org.modelcatalogue.core.publishing.PublishingContext
+import org.modelcatalogue.core.util.DataModelAware
+import org.modelcatalogue.core.util.ExtensionsWrapper
+import org.modelcatalogue.core.util.RelationshipDirection
 import rx.Observer
 
 import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
