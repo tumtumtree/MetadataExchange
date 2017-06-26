@@ -40,6 +40,18 @@ class Relationship implements Extendible<RelationshipMetadata>, org.modelcatalog
     CatalogueElement source
     CatalogueElement destination
 
+    void setDestination(org.modelcatalogue.core.api.CatalogueElement catalogueElement) {
+        if ( catalogueElement instanceof CatalogueElement) {
+            this.destination = catalogueElement
+        }
+    }
+
+    void setSource(org.modelcatalogue.core.api.CatalogueElement catalogueElement) {
+        if ( catalogueElement instanceof CatalogueElement) {
+            this.source = catalogueElement
+        }
+    }
+
     RelationshipType relationshipType
 
     DataModel dataModel
