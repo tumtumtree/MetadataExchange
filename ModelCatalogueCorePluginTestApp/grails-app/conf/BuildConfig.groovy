@@ -51,9 +51,6 @@ grails.project.dependency.resolution = {
 
         compile ":spring-websocket:1.3.1"
 
-        // codenarc static analysis
-        build ":codenarc:0.21"
-
         // test coverage
         test ":code-coverage:1.2.7"
 
