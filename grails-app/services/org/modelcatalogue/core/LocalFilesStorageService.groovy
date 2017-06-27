@@ -12,15 +12,13 @@ class LocalFilesStorageService implements StorageService, GrailsConfigurationAwa
 
     GrailsApplication grailsApplication
     private File fileStoreBase
-    private Long maxSize
 
     @Override
     void setConfiguration(Config co) {
         fileStoreBase   = new File(co.getProperty('mc.storage.directory') ?: 'storage')
-        maxSize         = (Long) co.getProperty('mc.storage.maxSize') ?: (20 * 1024 * 1024)
-
         // create all necessary directories
         fileStoreBase.mkdirs()
+        StorageService.super.setConfiguration(co)
     }
 
     /**
@@ -31,13 +29,6 @@ class LocalFilesStorageService implements StorageService, GrailsConfigurationAwa
      */
     String getServingUrl(String directory, String filename) { null }
 
-    /**
-     * Returns the maximal size of the file the storage can handle.
-     * @return the maximal size of the file the storage can handle
-     */
-    long getMaxFileSize() {
-        maxSize
-    }
 
     /**
      * Stores the file defined by given bytes and returns true if succeeded.

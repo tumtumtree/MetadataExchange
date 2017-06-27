@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.config.Config
+import grails.core.GrailsApplication
 import grails.core.support.GrailsConfigurationAware
 import grails.gorm.transactions.Transactional
 import com.bertramlabs.plugins.karman.CloudFile
@@ -15,11 +16,10 @@ class AmazonStorageService implements StorageService, GrailsConfigurationAware {
 
     private String bucket
     private StorageProvider provider
-    private Long maxSize
+    GrailsApplication grailsApplication
 
     @Override
     void setConfiguration(Config co) {
-        maxSize = (Long) co.getProperty('mc.storage.maxSize') ?: (20 * 1024 * 1024)
         if (co.getProperty('mc.storage.s3.bucket')) {
             provider = StorageProvider.create(
                 provider: 's3',
@@ -32,6 +32,7 @@ class AmazonStorageService implements StorageService, GrailsConfigurationAware {
             provider = new LocalStorageProvider(basePath: co.getProperty('mc.storage.directory') ?: 'storage')
             bucket = 'modelcatalogue'
         }
+        StorageService.super.setConfiguration(co)
     }
 
     /**
@@ -42,13 +43,6 @@ class AmazonStorageService implements StorageService, GrailsConfigurationAware {
      */
     String getServingUrl(String directory, String filename) { null }
 
-    /**
-     * Returns the maximal size of the file the storage can handle.
-     * @return the maximal size of the file the storage can handle
-     */
-    long getMaxFileSize() {
-        maxSize
-    }
 
     /**
      * Stores the file defined by given bytes and returns true if succeeded.

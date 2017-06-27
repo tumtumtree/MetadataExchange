@@ -1,24 +1,20 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import grails.gorm.transactions.Transactional
 import grails.core.GrailsApplication
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.runtime.IOGroovyMethods
 import org.hibernate.SessionFactory
 import org.modelcatalogue.core.util.FriendlyErrors
 
-import javax.annotation.PostConstruct
 
-@Transactional
+@Transactional @CompileStatic
 class ModelCatalogueStorageService implements StorageService {
 
     GrailsApplication grailsApplication
     SessionFactory sessionFactory
-    private Long maxSize
-
-    @PostConstruct
-    private void init() {
-        maxSize = grailsApplication.config.mc.storage.maxSize ?: (20 * 1024 * 1024)
-    }
 
     /**
      * Returns serving url if available or null if the content has to be served from current application.
@@ -28,13 +24,6 @@ class ModelCatalogueStorageService implements StorageService {
      */
     String getServingUrl(String directory, String filename) { null }
 
-    /**
-     * Returns the maximal size of the file the storage can handle.
-     * @return the maximal size of the file the storage can handle
-     */
-    long getMaxFileSize() {
-        maxSize
-    }
 
     /**
      * Stores the file defined by given bytes and returns true if succeeded.
