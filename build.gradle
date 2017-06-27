@@ -124,6 +124,7 @@ dependencies {
     // Security
     compile "org.grails.plugins:spring-security-core:$springSecurityCoreVersion"
     compile "org.grails.plugins:spring-security-ui:$springSecurityUiVersion"
+    //compile "org.hibernate:hibernate-ehcache:$grailsDatastoreGormHibernateCoreVersion"
 
     // Spring Messaging
     compile "org.springframework:spring-messaging:$springMessagingVersion"
