@@ -2,7 +2,11 @@ package org.modelcatalogue.core.audit
 
 import grails.util.Holders
 import org.apache.log4j.Logger
-import org.modelcatalogue.core.*
+import org.modelcatalogue.core.CatalogueElement
+import org.modelcatalogue.core.Mapping
+import org.modelcatalogue.core.MappingService
+import org.modelcatalogue.core.RelationshipType
+import org.modelcatalogue.core.Relationship
 import org.modelcatalogue.core.util.FriendlyErrors
 
 enum ChangeType {
