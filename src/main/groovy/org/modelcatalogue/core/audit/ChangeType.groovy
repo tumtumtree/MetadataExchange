@@ -1,6 +1,7 @@
 package org.modelcatalogue.core.audit
 
 import grails.util.Holders
+import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
@@ -150,6 +151,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             Map<String, Object> mapping = LoggingAuditor.readValue(change.newValue) as Map<String, Object>
@@ -167,6 +169,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             Map<String, Object> mapping = LoggingAuditor.readValue(change.newValue) as Map<String, Object>
@@ -184,6 +187,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             Map<String, Object> mapping = LoggingAuditor.readValue(change.oldValue) as Map<String, Object>
@@ -201,6 +205,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             def rel = LoggingAuditor.readValue(change.newValue)
@@ -228,6 +233,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             def rel = LoggingAuditor.readValue(change.oldValue)
@@ -247,6 +253,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             def ext = LoggingAuditor.readValue(change.newValue)
@@ -267,6 +274,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             def ext = LoggingAuditor.readValue(change.newValue)
@@ -287,6 +295,7 @@ enum ChangeType {
             true
         }
 
+        @CompileDynamic
         @Override
         boolean doUndo(Change change, CatalogueElement target) {
             def ext = LoggingAuditor.readValue(change.oldValue)
@@ -327,6 +336,7 @@ enum ChangeType {
         false
     }
 
+    @CompileDynamic
     protected static boolean undoChildChanges(Change change) {
         if (!change) {
             return false
