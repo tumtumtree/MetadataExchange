@@ -4,13 +4,11 @@ import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
 import grails.gorm.transactions.Transactional
 import com.bertramlabs.plugins.karman.CloudFile
-import com.bertramlabs.plugins.karman.CloudFileACL
 import com.bertramlabs.plugins.karman.StorageProvider
 import com.bertramlabs.plugins.karman.local.LocalStorageProvider
-import grails.core.GrailsApplication
+
 import groovy.transform.CompileStatic
 
-import javax.annotation.PostConstruct
 
 @Transactional @CompileStatic
 class AmazonStorageService implements StorageService, GrailsConfigurationAware {
