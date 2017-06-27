@@ -24,7 +24,7 @@ module.exports = function(config) {
         files: [
             // Required libraries
             'grails-app/assets/bower_components/core.js/client/core.js',
-            'web-app/js/libs/saxonce/Saxonce.nocache.js',
+            'src/main/webapp/js/libs/saxonce/Saxonce.nocache.js',
             'grails-app/assets/bower_components/rxjs/dist/rx.all.js',
             'grails-app/assets/bower_components/blob-polyfill/Blob.js',
             'grails-app/assets/bower_components/file-saver.js/FileSaver.js',
@@ -43,7 +43,7 @@ module.exports = function(config) {
             'grails-app/assets/bower_components/angular-file-saver/dist/angular-file-saver.js',
             'grails-app/assets/bower_components/sly-repeat/scalyr.js',
 
-            'web-app/js/libs/google-diff-match-patch/javascript/diff_match_patch.js',
+            'src/main/webapp/js/libs/google-diff-match-patch/javascript/diff_match_patch.js',
 
             // Tests Helpers
             'src/test/javascripts/*.fixture.js',
