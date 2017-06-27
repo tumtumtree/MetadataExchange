@@ -1,38 +1,39 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import grails.gorm.transactions.Transactional
 import com.bertramlabs.plugins.karman.CloudFile
 import com.bertramlabs.plugins.karman.CloudFileACL
 import com.bertramlabs.plugins.karman.StorageProvider
 import com.bertramlabs.plugins.karman.local.LocalStorageProvider
 import grails.core.GrailsApplication
+import groovy.transform.CompileStatic
 
 import javax.annotation.PostConstruct
 
-@Transactional
-class AmazonStorageService implements StorageService {
+@Transactional @CompileStatic
+class AmazonStorageService implements StorageService, GrailsConfigurationAware {
 
-    GrailsApplication grailsApplication
     private String bucket
     private StorageProvider provider
     private Long maxSize
 
-    @PostConstruct
-    private void init() {
-        maxSize = grailsApplication.config.mc.storage.maxSize ?: (20 * 1024 * 1024)
-        if (grailsApplication.config.mc.storage.s3.bucket) {
+    @Override
+    void setConfiguration(Config co) {
+        maxSize = (Long) co.getProperty('mc.storage.maxSize') ?: (20 * 1024 * 1024)
+        if (co.getProperty('mc.storage.s3.bucket')) {
             provider = StorageProvider.create(
                 provider: 's3',
-                accessKey: grailsApplication.config.mc.storage.s3.key,
-                secretKey: grailsApplication.config.mc.storage.s3.secret,
-                region: grailsApplication.config.mc.storage.s3.region ?: 'eu-west-1'
+                accessKey: co.getProperty('mc.storage.s3.key'),
+                secretKey: co.getProperty('mc.storage.s3.secret'),
+                region: co.getProperty('mc.storage.s3.region') ?: 'eu-west-1'
             )
-            bucket = grailsApplication.config.mc.storage.s3.bucket
+            bucket = co.getProperty('mc.storage.s3.bucket')
         } else {
-            provider = new LocalStorageProvider(basePath: grailsApplication.config.mc.storage.directory ?: 'storage')
+            provider = new LocalStorageProvider(basePath: co.getProperty('mc.storage.directory') ?: 'storage')
             bucket = 'modelcatalogue'
         }
-
     }
 
     /**
