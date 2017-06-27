@@ -1,6 +1,7 @@
 package org.modelcatalogue.core.audit
 
 import grails.util.Holders
+import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.Mapping
@@ -9,6 +10,7 @@ import org.modelcatalogue.core.RelationshipType
 import org.modelcatalogue.core.Relationship
 import org.modelcatalogue.core.util.FriendlyErrors
 
+@CompileStatic
 @Slf4j
 enum ChangeType {
 
