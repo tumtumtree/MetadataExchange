@@ -69,6 +69,7 @@ class TestDataHelper {
     }
 
     static boolean isH2(SessionFactory sessionFactory) {
-        sessionFactory.currentSession.connection().metaData.databaseProductName != 'H2'
+        String databaseProductName = sessionFactory?.currentSession?.connection()?.metaData?.databaseProductName
+        databaseProductName?.toUpperCase() == 'H2'
     }
 }
