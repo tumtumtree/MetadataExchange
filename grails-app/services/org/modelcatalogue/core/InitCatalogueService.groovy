@@ -1,5 +1,7 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import org.grails.datastore.gorm.GormStaticApi
 import org.grails.io.support.PathMatchingResourcePatternResolver
 import org.grails.io.support.Resource
@@ -14,7 +16,7 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.core.io.support.EncodedResource
 import org.springframework.jdbc.datasource.init.ScriptUtils
 
-class InitCatalogueService {
+class InitCatalogueService implements GrailsConfigurationAware {
 
     def grailsApplication
     def dataModelService
@@ -22,6 +24,14 @@ class InitCatalogueService {
     def sessionFactory
     def cacheService
     TestDataHelper testDataHelper
+    List<Map> defaultDataTypes
+    Boolean mcSyncRelationshipTypes
+
+    @Override
+    void setConfiguration(Config co) {
+        defaultDataTypes = co.getProperty('modelcatalogue.defaults.relationshiptypes', List)
+        mcSyncRelationshipTypes = co.getProperty('mc.sync.relationshipTypes', boolean, false)
+    }
 
     def initCatalogue(boolean test = false){
         Closure init = {
@@ -145,7 +155,7 @@ class InitCatalogueService {
 
     def initDefaultRelationshipTypes() {
         cacheService.clearCache()
-        def defaultDataTypes = grailsApplication.config.modelcatalogue.defaults.relationshiptypes
+
 
         for (Map definition in defaultDataTypes) {
             RelationshipType existing = RelationshipType.readByName(definition.name)
@@ -156,7 +166,7 @@ class InitCatalogueService {
                 if (type.hasErrors()) {
                     log.error(FriendlyErrors.printErrors("Cannot create relationship type $definition.name", type.errors))
                 }
-            } else if (grailsApplication.config.mc.sync.relationshipTypes) {
+            } else if (mcSyncRelationshipTypes) {
                 existing.properties = definition
                 existing.save(failOnError: true, flush: true, validate: true)
                 // The following didn't actually save properly:
