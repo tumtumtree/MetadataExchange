@@ -29,13 +29,17 @@ class TestDataHelper {
         initDb(sessionFactory, true, tempSqlFileName, initCode)
     }
 
+    String scriptFolder() {
+        "${System.getProperty('java.io.tmpdir')}${appName}/${appVersion}/"
+    }
+
     private void initDb(SessionFactory sessionFactory, boolean drop, String tempSqlFileName, Closure initCode) {
         if (isH2(sessionFactory)) {
             initCode()
             return
         }
 
-        String scriptLocation = "${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/${tempSqlFileName}"
+        String scriptLocation = "${scriptFolder()}${tempSqlFileName}"
 
         if (new File(scriptLocation).exists()) {
             long start = System.currentTimeMillis()
@@ -48,7 +52,7 @@ class TestDataHelper {
         long start = System.currentTimeMillis()
 
         if (drop) {
-            String clearScriptLocation = "${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}}/dropfiles/$tempSqlFileName"
+            String clearScriptLocation = "${scriptFolder()}dropfiles/$tempSqlFileName"
             new Sql(sessionFactory.currentSession.connection()).execute("SCRIPT NODATA DROP TO ${clearScriptLocation}")
             println "Clear script created in $clearScriptLocation"
             new Sql(sessionFactory.currentSession.connection()).execute("RUNSCRIPT FROM ${clearScriptLocation}")
