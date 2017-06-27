@@ -122,7 +122,15 @@ dependencies {
 
     // Security
     compile "org.grails.plugins:spring-security-core:$springSecurityCoreVersion"
+
+    // Spring Security UI
     compile "org.grails.plugins:spring-security-ui:$springSecurityUiVersion"
+    compile "org.grails:grails-datastore-core:$grailsDataStoreCoreVersion"
+    compile "org.grails:grails-datastore-gorm-support:$grailsDataStoreGormSupport"
+    compile "org.grails:grails-datastore-gorm:$grailsDataStoreGorm"
+    compile "org.grails:grails-datastore-simple:$grailsDatastoreSimpleVersion"
+    compile "org.grails:grails-datastore-gorm-hibernate5:$grailsDataStoreGormHibernate5Version"
+    compile "org.grails:grails-datastore-gorm-hibernate-core:$grailsDatastoreGormHibernateCoreVersion"
     //compile "org.hibernate:hibernate-ehcache:$grailsDatastoreGormHibernateCoreVersion"
 
     // Spring Messaging
