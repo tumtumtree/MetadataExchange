@@ -568,15 +568,15 @@ private static String getDockerHost() {
 }
 
 bootRun {
-    systemProperties = System.properties
+    systemProperties System.properties
 }
 
 test {
-    systemProperties = System.properties
+    systemProperties System.properties
 }
 
 integrationTest {
-    systemProperties = System.properties
+    systemProperties System.properties
 }
 
 dbmChangelogSync.group 'Database Migration Plugin'
