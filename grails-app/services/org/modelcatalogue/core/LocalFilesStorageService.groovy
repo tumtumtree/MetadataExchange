@@ -1,20 +1,23 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
 import grails.core.GrailsApplication
-import javax.annotation.PostConstruct
+import grails.core.support.GrailsConfigurationAware
+import groovy.transform.CompileStatic
+
 import grails.gorm.transactions.Transactional
 
-@Transactional
-class LocalFilesStorageService implements StorageService {
+@Transactional @CompileStatic
+class LocalFilesStorageService implements StorageService, GrailsConfigurationAware  {
 
     GrailsApplication grailsApplication
     private File fileStoreBase
     private Long maxSize
 
-    @PostConstruct
-    private void init() {
-        fileStoreBase   = new File(grailsApplication.config.mc.storage.directory ?: 'storage')
-        maxSize         = grailsApplication.config.mc.storage.maxSize ?: (20 * 1024 * 1024)
+    @Override
+    void setConfiguration(Config co) {
+        fileStoreBase   = new File(co.getProperty('mc.storage.directory') ?: 'storage')
+        maxSize         = (Long) co.getProperty('mc.storage.maxSize') ?: (20 * 1024 * 1024)
 
         // create all necessary directories
         fileStoreBase.mkdirs()
