@@ -9,7 +9,7 @@ import org.modelcatalogue.core.publishing.PublishingContext
 
 class User extends CatalogueElement {
 
-    ModelCatalogueSecurityService modelCatalogueSecurityService
+    def modelCatalogueSecurityService
 
     String username
     String password
