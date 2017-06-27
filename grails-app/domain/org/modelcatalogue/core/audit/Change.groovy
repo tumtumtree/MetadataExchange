@@ -52,6 +52,7 @@ class Change {
         newValue type: 'text'
         oldValue type: 'text'
         latestVersionId index: 'change_idx_4'
+        autowire true
     }
 
     @Override

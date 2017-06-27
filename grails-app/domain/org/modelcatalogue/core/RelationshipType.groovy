@@ -100,6 +100,7 @@ class RelationshipType implements org.modelcatalogue.core.api.RelationshipType {
         metadataHints type: 'text'
         rule type: 'text'
         searchable defaultValue: "false"
+        autowire true
     }
 
     void setRule(String rule) {

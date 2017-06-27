@@ -27,6 +27,10 @@ class DataModelPolicy {
         }
     }
 
+    static mapping = {
+        autowire true
+    }
+
     Policy getPolicy() {
         if (policy == null) {
             policy = PolicyBuilder.build(policyText)

@@ -69,6 +69,7 @@ class User extends CatalogueElement {
 
     static mapping = {
         password column: '`password`'
+        autowire true
     }
 
     static hasMany = [oAuthIDs: OAuthID]

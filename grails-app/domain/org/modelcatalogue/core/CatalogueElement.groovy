@@ -144,6 +144,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
         description type: "text"
         extensions lazy: false, sort: 'orderIndex', cascade: "all-delete-orphan"
         dataModel lazy: false
+        autowire true
     }
 
     static mappedBy = [
