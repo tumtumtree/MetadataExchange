@@ -4,10 +4,12 @@ import com.google.common.base.Function
 import com.google.common.collect.ImmutableSet
 import com.google.common.collect.Lists
 import grails.util.GrailsNameUtils
+import grails.web.mapping.LinkGenerator
 import org.hibernate.ObjectNotFoundException
 import org.hibernate.proxy.HibernateProxyHelper
 import org.modelcatalogue.core.api.CatalogueElement as ApiCatalogueElement
 import org.modelcatalogue.core.api.ElementStatus
+import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.publishing.CloningContext
 import org.modelcatalogue.core.publishing.Published
 import org.modelcatalogue.core.publishing.Publisher
@@ -31,11 +33,11 @@ import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 * */
 abstract class  CatalogueElement implements Extendible<ExtensionValue>, Published<CatalogueElement>, ApiCatalogueElement, DataModelAware {
 
-    def grailsLinkGenerator
-    def relationshipService
-    def auditService
-    def mappingService
-    def elementService
+    LinkGenerator grailsLinkGenerator
+    RelationshipService relationshipService
+    AuditService auditService
+    MappingService mappingService
+    ElementService elementService
 
     DataModel dataModel
 
@@ -93,7 +95,12 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
         'modelCatalogueResourceName',
         'dataModelSemanticVersion',
         'legacyModelCatalogueId',
-        'link'
+        'link',
+        'grailsLinkGenerator',
+        'relationshipService',
+        'auditService',
+        'mappingService',
+        'elementService',
     ]
 
     static hasMany = [

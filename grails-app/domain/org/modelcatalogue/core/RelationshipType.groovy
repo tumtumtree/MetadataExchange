@@ -15,8 +15,8 @@ import java.util.concurrent.Callable
 
 class RelationshipType implements org.modelcatalogue.core.api.RelationshipType {
 
-    def relationshipTypeService
-    def modelCatalogueSearchService
+    RelationshipTypeService relationshipTypeService
+    SearchCatalogue modelCatalogueSearchService
 
     //name of the relationship type i.e. parentChild  or synonym
     String name
@@ -89,8 +89,7 @@ class RelationshipType implements org.modelcatalogue.core.api.RelationshipType {
         destinationToSourceDescription nullable: true, maxSize: 2000
     }
 
-    static transients = ['ruleScript']
-
+    static transients = ['ruleScript', 'relationshipTypeService', 'modelCatalogueSearchService']
 
     static mapping = {
         cache 'nonstrict-read-write'

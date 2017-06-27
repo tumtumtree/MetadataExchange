@@ -4,11 +4,12 @@ import grails.util.Holders
 import grails.core.GrailsApplication
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataModel
+import org.modelcatalogue.core.ModelCatalogueSecurityService
 import org.modelcatalogue.core.publishing.PublishingContext
 
 class User extends CatalogueElement {
 
-    transient modelCatalogueSecurityService
+    ModelCatalogueSecurityService modelCatalogueSecurityService
 
     String username
     String password
@@ -19,6 +20,8 @@ class User extends CatalogueElement {
     boolean passwordExpired
 
     String apiKey
+
+    static transients = ['modelCatalogueSecurityService']
 
     static constraints = {
         username blank: false, unique: true, maxSize: 255

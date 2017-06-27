@@ -55,6 +55,8 @@ class Change {
         autowire true
     }
 
+    static transients = ['auditService']
+
     @Override
     String toString() {
         "Change[id: $id, changed element: $changedId ($latestVersionId), parent change: $parentId, author: $authorId, type: $type, property: $property, newValue: $newValue, oldValue: $oldValue, undone: $undone, otherSide: $otherSide]"

@@ -8,7 +8,7 @@ import org.modelcatalogue.core.util.SecuredRuleExecutor
 
 class DataModelPolicy {
 
-    def modelCatalogueSearchService
+    SearchCatalogue modelCatalogueSearchService
 
     // cached policy
     Policy policy
@@ -16,7 +16,7 @@ class DataModelPolicy {
     String name
     String policyText
 
-    static transients = ['policy']
+    static transients = ['policy', 'modelCatalogueSearchService']
 
     static constraints = {
         name size: 1..255, unique: true
