@@ -66,7 +66,7 @@ class Relationship implements Extendible<RelationshipMetadata>, org.modelcatalog
     }
 
     static hasMany = [extensions: RelationshipMetadata]
-    static transients = ['ext']
+    static transients = ['ext', 'auditService', 'relationshipService']
 
     Boolean archived = false
     Boolean inherited = false
