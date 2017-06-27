@@ -134,7 +134,7 @@ dependencies {
     //compile "org.hibernate:hibernate-ehcache:$grailsDatastoreGormHibernateCoreVersion"
 
     // Spring Messaging
-    compile "org.springframework:spring-messaging:$springMessagingVersion"
+    compile "org.grails.plugins:grails-spring-websocket:$grailsSpringWebsocketVersion"
 
     compile "commons-io:commons-io:2.5"
 
