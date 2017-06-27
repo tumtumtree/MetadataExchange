@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.audit
 
 import grails.util.Holders
-import org.apache.log4j.Logger
+import groovy.util.logging.Slf4j
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.Mapping
 import org.modelcatalogue.core.MappingService
@@ -9,6 +9,7 @@ import org.modelcatalogue.core.RelationshipType
 import org.modelcatalogue.core.Relationship
 import org.modelcatalogue.core.util.FriendlyErrors
 
+@Slf4j
 enum ChangeType {
 
     DATA_MODEL_CHANGED,
@@ -325,7 +326,6 @@ enum ChangeType {
     }
 
     protected static boolean undoChildChanges(Change change) {
-        Logger log = Logger.getLogger(ChangeType)
         if (!change) {
             return false
         }
