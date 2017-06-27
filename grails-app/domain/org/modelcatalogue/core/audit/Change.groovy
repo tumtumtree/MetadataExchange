@@ -5,7 +5,7 @@ import org.springframework.transaction.TransactionStatus
 
 class Change {
 
-    def auditService
+    AuditService auditService
 
     Long latestVersionId
     Long changedId
