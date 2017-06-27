@@ -1,10 +1,15 @@
 package org.modelcatalogue.core.elasticsearch
 
 import com.google.common.collect.ImmutableSet
+import grails.config.Config
 import grails.core.GrailsClass
+import grails.core.support.GrailsConfigurationAware
 import grails.util.GrailsNameUtils
 import groovy.json.JsonSlurper
 import grails.core.GrailsApplication
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder
 import org.elasticsearch.action.bulk.BulkItemResponse
 import org.elasticsearch.action.bulk.BulkRequestBuilder
@@ -38,14 +43,15 @@ import org.modelcatalogue.core.util.RelationshipDirection
 import org.modelcatalogue.core.util.lists.Lists
 import rx.Observable
 
-import javax.annotation.PostConstruct
 import javax.annotation.PreDestroy
 
 import static org.modelcatalogue.core.util.HibernateHelper.getEntityClass
 import static rx.Observable.from
 import static rx.Observable.just
 
-class ElasticSearchService implements SearchCatalogue {
+@CompileStatic
+@Slf4j
+class ElasticSearchService implements SearchCatalogue, GrailsConfigurationAware {
 
 
     private static final int ELEMENTS_PER_BATCH = readFromEnv('MC_ES_ELEMENTS_PER_BATCH', 10)
@@ -88,38 +94,46 @@ class ElasticSearchService implements SearchCatalogue {
     RxService rxService
     Node node
     Client client
+    String remoteHost
+    String localHost
+    String port
 
-    @PostConstruct
-    private void init() {
-        if (grailsApplication.config.mc.search.elasticsearch.host || System.getProperty('mc.search.elasticsearch.host')) {
+    @Override
+    void setConfiguration(Config co) {
+        String hostPropertyName = 'mc.search.elasticsearch.host'
+        String portPropertyName = 'mc.search.elasticsearch.port'
+        String localPropertyName = 'mc.search.elasticsearch.local'
+        remoteHost = co.getProperty(hostPropertyName) ?: System.getProperty(hostPropertyName)
+        localHost = co.getProperty(localPropertyName) || System.getProperty(localPropertyName)
+        port = co.getProperty(portPropertyName) ?: System.getProperty(portPropertyName) ?: "9300"
+
+        if (remoteHost) {
             initRemoteClient()
-        } else if (grailsApplication.config.mc.search.elasticsearch.local || System.getProperty('mc.search.elasticsearch.local')) {
+        }
+        else if (localHost) {
             initLocalClient()
         }
-
     }
 
     protected void initLocalClient() {
         Settings.Builder settingsBuilder = Settings.builder()
                                                    .put("${ThreadPool.THREADPOOL_GROUP}${ThreadPool.Names.BULK}.queue_size", 3000)
                                                    .put("${ThreadPool.THREADPOOL_GROUP}${ThreadPool.Names.BULK}.size", 25)
-                                                   .put("action.auto_create_index", false)
-                                                   .put("index.mapper.dynamic", false)
-                                                   .put('path.home', (grailsApplication.config.mc.search.elasticsearch.local ?: System.getProperty('mc.search.elasticsearch.local')).toString())
+                                                   .put('action.auto_create_index', false)
+                                                   .put('index.mapper.dynamic', false)
+                                                   .put('path.home', localHost.toString())
         node = NodeBuilder.nodeBuilder()
                           .settings(settingsBuilder)
                           .local(true).node()
 
         client = node.client()
-        log.info "Using local ElasticSearch instance in directory ${grailsApplication.config.mc.search.elasticsearch.local}"
+        log.info "Using local ElasticSearch instance in directory ${localHost}"
     }
-
+    @CompileDynamic // because of config
     protected void initRemoteClient() {
-        String host = grailsApplication.config.mc.search.elasticsearch.host ?: System.getProperty('mc.search.elasticsearch.host')
-        String port = grailsApplication.config.mc.search.elasticsearch.port ?: System.getProperty('mc.search.elasticsearch.port') ?: "9300"
 
         Settings.Builder settingsBuilder = Settings.builder()
-
+        // Not sure what type this thing is.
         if (grailsApplication.config.mc.search.elasticsearch.settings) {
             grailsApplication.config.mc.search.elasticsearch.settings(settingsBuilder)
         }
@@ -129,9 +143,9 @@ class ElasticSearchService implements SearchCatalogue {
             .builder()
             .settings(settingsBuilder)
             .build()
-            .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), Integer.parseInt(port, 10)))
+            .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(remoteHost), Integer.parseInt(port, 10)))
 
-        log.info "Using ElasticSearch instance at $host:$port"
+        log.info "Using ElasticSearch instance at $remoteHost:$port"
     }
 
     @PreDestroy
@@ -141,6 +155,7 @@ class ElasticSearchService implements SearchCatalogue {
     }
 
     @Override
+    @CompileDynamic // because of grailsApplication.getDomainClasses()
     ListWithTotalAndType<Relationship> search(CatalogueElement element, RelationshipType type, RelationshipDirection direction, Map params) {
         if (!type.searchable) {
             return Lists.emptyListWithTotalAndType(Relationship)
@@ -319,7 +334,8 @@ class ElasticSearchService implements SearchCatalogue {
 
         if (filter.includes) {
             // excludes are ignored if there are includes
-            return filter.includes.collect { types.collect { type -> ElasticSearchService.getDataModelIndex(it, getTypeName(type)) } }.flatten()
+            return (List<String>) filter.includes.collect {included -> types.collect
+                { type -> getDataModelIndex(included, getTypeName(type)) } }.flatten()
         }
 
         if (filter.excludes) {
@@ -397,6 +413,7 @@ class ElasticSearchService implements SearchCatalogue {
         return just(false)
     }
 
+    @CompileDynamic //getting id field from Object
     private Observable<Boolean> unindexInternal(IndexingSession session, Object element) {
         try {
             return from(getIndices(element)).flatMap { idx ->
@@ -429,9 +446,10 @@ class ElasticSearchService implements SearchCatalogue {
     }
 
     @Override
+    @CompileDynamic // because of where clauses and concatWith errors
     Observable<Boolean> reindex(boolean soft) {
         IndexingSession session = IndexingSession.create()
-
+        log.info("Elements should be Observable<Object>: ${elements}")
         Observable<Object> elements = rxService.from(DataModel.where{ status != ElementStatus.DEPRECATED }, sort: 'lastUpdated', order: 'desc', true, ELEMENTS_PER_BATCH, DELAY_AFTER_BATCH
         ) concatWith (
             // we still want to index deprecated data models in case of someone wants to search inside these data models
@@ -468,7 +486,7 @@ class ElasticSearchService implements SearchCatalogue {
             getMappingInternal(clazz, implementation, toplevel)
         }
     }
-
+    @CompileDynamic // because of strange Map stuff
     Map<String, Map> getMappingInternal(Class clazz, Class implementation, Boolean toplevel) {
         ElasticSearchService service = this
 
@@ -534,7 +552,7 @@ class ElasticSearchService implements SearchCatalogue {
 
     }
 
-
+    @CompileDynamic // because of where query
     private Observable<SimpleIndexRequest> toSimpleIndexRequests(IndexingSession session, Observable<Object> entities) {
         entities.groupBy {
             // XXX: shouldn't the change in data model trigger reindexing everything in the data model?
@@ -582,7 +600,7 @@ class ElasticSearchService implements SearchCatalogue {
             }
         }
     }
-
+    @CompileDynamic // because of where query
     private Observable<CatalogueElement> getDataModelWithDeclaredElements(DataModel element) {
         just(element as CatalogueElement).concatWith(rxService.from(CatalogueElement.where { dataModel == element }, true, ELEMENTS_PER_BATCH, DELAY_AFTER_BATCH))
     }
@@ -591,8 +609,10 @@ class ElasticSearchService implements SearchCatalogue {
         just(rel, rel.source, rel.destination)
     }
 
+    @CompileDynamic // because of it.items
     private Observable<BulkResponse> bulkIndex(List<SimpleIndexRequest> documents) {
         RxElastic.from { buildBulkIndexRequest(documents) }.flatMap {
+            log.info("Does ActionResponse ${it} have items: ${it.items}?")
             for (BulkItemResponse response in it.items) {
                 if (response.failed) {
                     if (response.failure.cause instanceof VersionConflictEngineException) {
@@ -741,7 +761,7 @@ class ElasticSearchService implements SearchCatalogue {
         }
         return current
     }
-
+    @CompileDynamic // because of params
     private DataModelFilter getOverridableDataModelFilter(Map params) {
         if (params.dataModel) {
             DataModel dataModel = DataModel.get(params.long('dataModel'))

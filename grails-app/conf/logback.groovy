@@ -45,7 +45,8 @@ logger('grails.app.services.org.modelcatalogue', INFO) // set log level to INFO 
 logger('grails.app.controllers.org.modelcatalogue', INFO)
 logger('grails.app.domain.org.modelcatalogue', INFO)
 logger('grails.app.services.org.grails.plugins.console', INFO)
-logger('grails.app.services.org.modelcatalogue.core.elasticsearch', INFO)
+//logger('grails.app.services.org.modelcatalogue.core.elasticsearch', INFO)
+logger('org.modelcatalogue.core.elasticsearch', INFO) // using Sl4fJ, logger is named without grails.app._
 logger('org.grails.plugins.console', INFO)
 logger('grails.app.services.org.modelcatalogue.core.ElementService', DEBUG)
 logger('grails.app.services.org.modelcatalogue.core.dataarchitect.OBOService', DEBUG)
