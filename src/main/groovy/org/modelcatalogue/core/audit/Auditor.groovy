@@ -1,6 +1,11 @@
 package org.modelcatalogue.core.audit
 
-import org.modelcatalogue.core.*
+import groovy.transform.CompileStatic
+import org.modelcatalogue.core.CatalogueElement
+import org.modelcatalogue.core.ExtensionValue
+import org.modelcatalogue.core.Mapping
+import org.modelcatalogue.core.Relationship
+import org.modelcatalogue.core.RelationshipMetadata
 import rx.Observable
 
 interface Auditor {
