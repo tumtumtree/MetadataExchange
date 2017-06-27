@@ -583,17 +583,17 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
 
     @Override
     List<org.modelcatalogue.core.api.Relationship> getIncomingRelationshipsByType(org.modelcatalogue.core.api.RelationshipType type) {
-        getIncomingRelationshipsByType(type as RelationshipType)
+        getIncomingRelationshipsByType(type as RelationshipType) as List<org.modelcatalogue.core.api.Relationship>
     }
 
     @Override
     List<org.modelcatalogue.core.api.Relationship> getOutgoingRelationshipsByType(org.modelcatalogue.core.api.RelationshipType type) {
-        getOutgoingRelationshipsByType(type as RelationshipType)
+        getOutgoingRelationshipsByType(type as RelationshipType) as List<org.modelcatalogue.core.api.Relationship>
     }
 
     @Override @Deprecated
     List<org.modelcatalogue.core.api.Relationship> getRelationshipsByType(org.modelcatalogue.core.api.RelationshipType type) {
-        getRelationshipsByType(type as RelationshipType)
+        getRelationshipsByType(type as RelationshipType) as List<org.modelcatalogue.core.api.Relationship>
     }
 
     @Override
@@ -613,22 +613,22 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
 
     @Override
     org.modelcatalogue.core.api.Relationship createLinkTo(Map<String, Object> parameters, org.modelcatalogue.core.api.CatalogueElement destination, org.modelcatalogue.core.api.RelationshipType type) {
-        createLinkTo(parameters, destination as CatalogueElement, type as RelationshipType)
+        createLinkTo(parameters, destination as CatalogueElement, type as RelationshipType) as org.modelcatalogue.core.api.Relationship
     }
 
     @Override
     org.modelcatalogue.core.api.Relationship createLinkFrom(Map<String, Object> parameters, org.modelcatalogue.core.api.CatalogueElement source, org.modelcatalogue.core.api.RelationshipType type) {
-        createLinkFrom(parameters, source as CatalogueElement, type as RelationshipType)
+        createLinkFrom(parameters, source as CatalogueElement, type as RelationshipType) as org.modelcatalogue.core.api.Relationship
     }
 
     @Override
     org.modelcatalogue.core.api.Relationship removeLinkTo(org.modelcatalogue.core.api.CatalogueElement destination, org.modelcatalogue.core.api.RelationshipType type) {
-        removeLinkTo(destination as CatalogueElement, type as RelationshipType)
+        removeLinkTo(destination as CatalogueElement, type as RelationshipType) as org.modelcatalogue.core.api.Relationship
     }
 
     @Override
     org.modelcatalogue.core.api.Relationship removeLinkFrom(org.modelcatalogue.core.api.CatalogueElement source, org.modelcatalogue.core.api.RelationshipType type) {
-        removeLinkFrom(source as CatalogueElement, type as RelationshipType)
+        removeLinkFrom(source as CatalogueElement, type as RelationshipType) as org.modelcatalogue.core.api.Relationship
     }
 
     String getCombinedVersion() {

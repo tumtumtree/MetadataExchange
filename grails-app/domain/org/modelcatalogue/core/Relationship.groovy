@@ -26,7 +26,7 @@ import org.modelcatalogue.core.util.OrderedMap
 *
 */
 
-class Relationship implements Extendible<RelationshipMetadata>, org.modelcatalogue.core.api.Relationship, DataModelAware {
+class Relationship implements Extendible<RelationshipMetadata>, DataModelAware {
 
     // when the relationship class is first loaded set the next index to current time in milliseconds
     static long nextIndex = System.currentTimeMillis()
@@ -40,18 +40,6 @@ class Relationship implements Extendible<RelationshipMetadata>, org.modelcatalog
 
     CatalogueElement source
     CatalogueElement destination
-
-    void setDestination(org.modelcatalogue.core.api.CatalogueElement catalogueElement) {
-        if ( catalogueElement instanceof CatalogueElement) {
-            this.destination = catalogueElement
-        }
-    }
-
-    void setSource(org.modelcatalogue.core.api.CatalogueElement catalogueElement) {
-        if ( catalogueElement instanceof CatalogueElement) {
-            this.source = catalogueElement
-        }
-    }
 
     RelationshipType relationshipType
 
