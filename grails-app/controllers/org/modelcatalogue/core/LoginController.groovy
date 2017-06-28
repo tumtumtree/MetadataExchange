@@ -3,6 +3,7 @@ package org.modelcatalogue.core
 import grails.converters.JSON
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 
+import org.springframework.context.MessageSource
 import javax.servlet.http.HttpServletResponse
 
 import grails.plugin.springsecurity.SpringSecurityUtils
@@ -16,6 +17,7 @@ import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 class LoginController {
+    MessageSource messageSource
 
     /**
      * Dependency injection for the authenticationTrustResolver.
@@ -98,17 +100,8 @@ class LoginController {
         String msg = ''
         def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
         if (exception) {
-            if (exception instanceof AccountExpiredException) {
-                msg = g.message(code: "springSecurity.errors.login.expired")
-            } else if (exception instanceof CredentialsExpiredException) {
-                msg = g.message(code: "springSecurity.errors.login.passwordExpired")
-            } else if (exception instanceof DisabledException) {
-                msg = g.message(code: "springSecurity.errors.login.disabled")
-            } else if (exception instanceof LockedException) {
-                msg = g.message(code: "springSecurity.errors.login.locked")
-            } else {
-                msg = g.message(code: "springSecurity.errors.login.fail")
-            }
+            String messageCode = AuthenticationUtils.i18nCodePerException(exception)
+            msg = messageSource.getMessage(messageCode, [] as Object[], 'Authentication failed', request.locale)
         }
 
         if (springSecurityService.isAjax(request)) {
