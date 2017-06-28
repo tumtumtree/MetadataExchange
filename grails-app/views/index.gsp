@@ -100,10 +100,10 @@
         demoConfig.config(['$logProvider', 'securityProvider', function ($logProvider, securityProvider) {
             $logProvider.debugEnabled(${Environment.current == Environment.DEVELOPMENT ? 'true' : 'false'});
             securityProvider.springSecurity({
-                contextPath:      '${grailsApplication.config.grails.app.context ?: request.contextPath ?: ''}',
-                allowRegistration: ${grailsApplication.config.mc.allow.signup.asBoolean()},
-                canResetPassword:  ${grailsApplication.config.grails.mail.host.asBoolean() || grailsApplication.config.grails.mc.can.reset.password.asBoolean()},
                 oauthProviders: ${metadata.oauthServices()},
+                contextPath:      '${metadata.contextPath(request: request)}',
+                allowRegistration: ${metadata.allowRegistration()},
+                canResetPassword:  ${metadata.canResetPassword()},
                 roles: {
                     VIEWER:     ['ROLE_USER', 'ROLE_METADATA_CURATOR', 'ROLE_ADMIN', 'ROLE_SUPERVISOR'],
                     CURATOR:    ['ROLE_METADATA_CURATOR', 'ROLE_ADMIN', 'ROLE_SUPERVISOR'],
