@@ -6,6 +6,8 @@ import grails.core.support.GrailsConfigurationAware
 import grails.gorm.DetachedCriteria
 import grails.util.Environment
 import grails.util.GrailsNameUtils
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
 import org.modelcatalogue.core.cache.CacheService
 import org.modelcatalogue.core.security.UserService
 import org.modelcatalogue.core.util.HibernateHelper
@@ -14,15 +16,19 @@ import org.modelcatalogue.core.util.builder.ProgressMonitor
 import org.modelcatalogue.core.util.lists.Lists
 import org.modelcatalogue.core.xml.CatalogueXmlPrinter
 import org.springframework.http.HttpStatus
+import sun.jvm.hotspot.opto.Compile
 
+import java.util.concurrent.ExecutorService
+
+@CompileStatic
 class CatalogueController implements GrailsConfigurationAware {
 
-    def dataModelService
-    def dataClassService
-    def elementService
-    def initCatalogueService
-    def modelCatalogueSecurityService
-    def executorService
+    DataModelService dataModelService
+    DataClassService dataClassService
+    ElementService elementService
+    InitCatalogueService initCatalogueService
+    SecurityService modelCatalogueSecurityService
+    ExecutorService executorService
 
     String serverUrl
     Object preloadedModel
@@ -32,7 +38,7 @@ class CatalogueController implements GrailsConfigurationAware {
         this.preloadedModel = co.getProperty('mc.preload', Object, [])
     }
 
-
+    @CompileDynamic // because of printer.bind to closure
     def xref() {
         CatalogueElement element = elementService.findByModelCatalogueId(CatalogueElement, request.forwardURI.replace('/export', ''))
 
@@ -59,7 +65,7 @@ class CatalogueController implements GrailsConfigurationAware {
 
         redirect controller: params.resource, action: 'show', id: element.id
     }
-
+    @CompileDynamic // criteria and delegate bound to closure
     def ext() {
         String key = params.key
         String value = params.value
@@ -105,7 +111,7 @@ class CatalogueController implements GrailsConfigurationAware {
     def feedback(String key) {
         render(BuildProgressMonitor.get(key) as JSON)
     }
-
+    @CompileDynamic // because of asMap() which is weird.
     def feedbacks() {
         if (params.max) {
             params.max = params.long('max')
@@ -127,7 +133,7 @@ class CatalogueController implements GrailsConfigurationAware {
 
         render(preloadedModel as JSON)
     }
-
+    @CompileDynamic // JSON.x
     def importFromUrl() {
         def urls = request.JSON.urls
 
