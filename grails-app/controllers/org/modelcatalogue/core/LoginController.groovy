@@ -34,7 +34,7 @@ class LoginController {
     /**
      * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
      */
-    def index = {
+    def index() {
         if (springSecurityService.isLoggedIn()) {
             redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
         } else {
@@ -45,7 +45,7 @@ class LoginController {
     /**
      * Show the login page.
      */
-    def auth = {
+    def auth() {
         // This solves the problem with infinite redirect loop when accessing main url witout trailing slash.
         // This is super dirty hack which actually redirects this request to trailing slash - ajax login.
         if (SpringSecurityUtils.getSavedRequest(session)?.redirectUrl
@@ -73,7 +73,7 @@ class LoginController {
     /**
      * The redirect action for Ajax requests.
      */
-    def authAjax = {
+    def authAjax() {
         response.setHeader 'Location', SpringSecurityUtils.securityConfig.auth.ajaxLoginFormUrl
         response.sendError HttpServletResponse.SC_UNAUTHORIZED
     }
@@ -81,14 +81,14 @@ class LoginController {
     /**
      * Show denied page.
      */
-    def denied = {
+    def denied() {
         response.sendError HttpServletResponse.SC_UNAUTHORIZED
     }
 
     /**
      * Login page for users with a remember-me cookie but accessing a IS_AUTHENTICATED_FULLY page.
      */
-    def full = {
+    def full() {
         def config = SpringSecurityUtils.securityConfig
         render view: 'auth', params: params,
                 model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
@@ -98,7 +98,7 @@ class LoginController {
     /**
      * Callback after a failed login. Redirects to the auth page with a warning message.
      */
-    def authfail = {
+    def authfail() {
         String msg = ''
         def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
         if (exception) {
@@ -121,7 +121,7 @@ class LoginController {
      *
      *
      */
-    def ajaxSuccess = {
+    def ajaxSuccess() {
         if (!springSecurityService.currentUser) {
             render([success: false] as JSON)
             return
@@ -138,7 +138,7 @@ class LoginController {
     /**
      * The Ajax denied redirect url.
      */
-    def ajaxDenied = {
+    def ajaxDenied() {
         response.sendError HttpServletResponse.SC_UNAUTHORIZED
         render([error: 'access denied'] as JSON)
     }
