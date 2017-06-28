@@ -3,6 +3,7 @@ package org.modelcatalogue.core
 import grails.core.GrailsApplication
 import grails.core.GrailsDomainClass
 import grails.gorm.DetachedCriteria
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.rest.render.RenderContext
 import grails.util.Environment
 import groovy.transform.CompileStatic
@@ -42,6 +43,7 @@ class BootStrap {
     GrailsApplication grailsApplication
     TestDataHelper testDataHelper
     RequestmapService requestmapService
+    SpringSecurityService springSecurityService
 
     def init = { servletContext ->
         ExtensionModulesLoader.addExtensionModules()
@@ -437,6 +439,8 @@ class BootStrap {
 //        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/dataType/**', 'ROLE_USER')
 //        requestmapService.requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/**', 'ROLE_METADATA_CURATOR')
 //        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/relationshipTypes/**', 'ROLE_ADMIN')
+
+        springSecurityService.clearCachedRequestmaps()
     }
 
     def initPoliciesAndTags() {
