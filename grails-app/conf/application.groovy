@@ -255,7 +255,7 @@ grails.plugin.springsecurity.ajaxCheckClosure = { request ->
 
 environments {
     development {
-        mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/es${System.currentTimeMillis()}"
+        //mc.search.elasticsearch.local="${System.getProperty('java.io.tmpdir')}/${appName}/${appVersion}/es${System.currentTimeMillis()}"
     }
     test {
         if (System.getenv('DOCKERIZED_TESTS') ) { //  && System.properties["grails.test.phase"] == 'functional'

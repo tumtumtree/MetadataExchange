@@ -2,8 +2,10 @@ package org.modelcatalogue.core
 
 import grails.core.GrailsApplication
 import grails.core.GrailsDomainClass
+import grails.gorm.DetachedCriteria
 import grails.rest.render.RenderContext
 import grails.util.Environment
+import groovy.transform.CompileStatic
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.actions.*
@@ -11,6 +13,7 @@ import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.dataarchitect.ColumnTransformationDefinition
 import org.modelcatalogue.core.dataarchitect.CsvTransformation
 import org.modelcatalogue.core.reports.ReportsRegistry
+import org.modelcatalogue.core.security.RequestmapService
 import org.modelcatalogue.core.security.Role
 import org.modelcatalogue.core.security.User
 import org.modelcatalogue.core.security.UserRole
@@ -24,6 +27,7 @@ import org.modelcatalogue.core.util.Metadata
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.test.TestDataHelper
 import org.springframework.http.HttpMethod
+import org.springframework.validation.ObjectError
 
 class BootStrap {
 
@@ -37,6 +41,7 @@ class BootStrap {
     def userService
     GrailsApplication grailsApplication
     TestDataHelper testDataHelper
+    RequestmapService requestmapService
 
     def init = { servletContext ->
         ExtensionModulesLoader.addExtensionModules()
@@ -334,7 +339,7 @@ class BootStrap {
         }
     }
 
-    private static void initSecurity(boolean production) {
+    private void initSecurity(boolean production) {
         def roleUser = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
         def roleAdmin = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
         def roleSupervisor = Role.findByAuthority('ROLE_SUPERVISOR') ?: new Role(authority: 'ROLE_SUPERVISOR').save(failOnError: true)
@@ -396,42 +401,42 @@ class BootStrap {
                 '/register/*', '/errors', '/errors/*',
                 '/index.gsp'
         ]) {
-            createRequestmapIfMissing(url, 'permitAll', null)
+            requestmapService.createRequestmapIfMissing(url, 'permitAll', null)
         }
 
-        createRequestmapIfMissing('/asset/download/*',                      'isAuthenticated()',   HttpMethod.GET)
-        createRequestmapIfMissing('/oauth/*/**',                            'IS_AUTHENTICATED_ANONYMOUSLY')
-        createRequestmapIfMissing('/user/current',                          'IS_AUTHENTICATED_ANONYMOUSLY',  HttpMethod.GET)
-        createRequestmapIfMissing('/catalogue/upload',                      'ROLE_METADATA_CURATOR',         HttpMethod.POST)
-        createRequestmapIfMissing('/catalogue/*/**',                        'isAuthenticated()',   HttpMethod.GET)
-        createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'isAuthenticated()',   HttpMethod.GET)
-        createRequestmapIfMissing('/api/modelCatalogue/core/*/*/comments',  'isAuthenticated()',   HttpMethod.POST) // post a comment
-        createRequestmapIfMissing('/api/modelCatalogue/core/user/*/favourite', 'isAuthenticated()',HttpMethod.POST) // favourite item
-        createRequestmapIfMissing('/api/modelCatalogue/core/user/apikey',    'isAuthenticated()',HttpMethod.POST) // get or create new api key
-        createRequestmapIfMissing('/api/modelCatalogue/core/user/*/favourite', 'isAuthenticated()',HttpMethod.DELETE) // unfavourite item
-        createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'ROLE_METADATA_CURATOR',         HttpMethod.POST)
-        createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'ROLE_METADATA_CURATOR',         HttpMethod.PUT)
-        createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'ROLE_METADATA_CURATOR',         HttpMethod.DELETE)
-        createRequestmapIfMissing('/api/modelCatalogue/core/asset/*/validateXML',  'isAuthenticated()',   HttpMethod.POST) // validate xml
+        requestmapService.createRequestmapIfMissing('/asset/download/*',                      'isAuthenticated()',   HttpMethod.GET)
+        requestmapService.createRequestmapIfMissing('/oauth/*/**',                            'IS_AUTHENTICATED_ANONYMOUSLY')
+        requestmapService.createRequestmapIfMissing('/user/current',                          'IS_AUTHENTICATED_ANONYMOUSLY',  HttpMethod.GET)
+        requestmapService.createRequestmapIfMissing('/catalogue/upload',                      'ROLE_METADATA_CURATOR',         HttpMethod.POST)
+        requestmapService.createRequestmapIfMissing('/catalogue/*/**',                        'isAuthenticated()',   HttpMethod.GET)
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'isAuthenticated()',   HttpMethod.GET)
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/*/comments',  'isAuthenticated()',   HttpMethod.POST) // post a comment
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/user/*/favourite', 'isAuthenticated()',HttpMethod.POST) // favourite item
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/user/apikey',    'isAuthenticated()',HttpMethod.POST) // get or create new api key
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/user/*/favourite', 'isAuthenticated()',HttpMethod.DELETE) // unfavourite item
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'ROLE_METADATA_CURATOR',         HttpMethod.POST)
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'ROLE_METADATA_CURATOR',         HttpMethod.PUT)
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/**',          'ROLE_METADATA_CURATOR',         HttpMethod.DELETE)
+        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/asset/*/validateXML',  'isAuthenticated()',   HttpMethod.POST) // validate xml
 
-        createRequestmapIfMissing('/sso/*/**',                              'isAuthenticated()',   HttpMethod.GET)
+        requestmapService.createRequestmapIfMissing('/sso/*/**',                              'isAuthenticated()',   HttpMethod.GET)
 
-        createRequestmapIfMissing('/role/**',                               'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/userAdmin/**',                          'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/requestMap/**',                         'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/registrationCode/**',                   'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/securityInfo/**',                       'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/console/**',                            'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/plugins/console*/**',                   'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/dbconsole/**',                          'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/monitoring/**',                         'ROLE_SUPERVISOR')
-        createRequestmapIfMissing('/plugins/console-1.5.0/**',              'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/role/**',                               'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/userAdmin/**',                          'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/requestMap/**',                         'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/registrationCode/**',                   'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/securityInfo/**',                       'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/console/**',                            'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/plugins/console*/**',                   'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/dbconsole/**',                          'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/monitoring/**',                         'ROLE_SUPERVISOR')
+        requestmapService.createRequestmapIfMissing('/plugins/console-1.5.0/**',              'ROLE_SUPERVISOR')
 
-//        createRequestmapIfMissing('/api/modelCatalogue/core/dataClass/**', 'IS_AUTHENTICATED_ANONYMOUSLY')
-//        createRequestmapIfMissing('/api/modelCatalogue/core/dataElement/**', 'ROLE_METADATA_CURATOR')
-//        createRequestmapIfMissing('/api/modelCatalogue/core/dataType/**', 'ROLE_USER')
-//        createRequestmapIfMissing('/api/modelCatalogue/core/*/**', 'ROLE_METADATA_CURATOR')
-//        createRequestmapIfMissing('/api/modelCatalogue/core/relationshipTypes/**', 'ROLE_ADMIN')
+//        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/dataClass/**', 'IS_AUTHENTICATED_ANONYMOUSLY')
+//        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/dataElement/**', 'ROLE_METADATA_CURATOR')
+//        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/dataType/**', 'ROLE_USER')
+//        requestmapService.requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/*/**', 'ROLE_METADATA_CURATOR')
+//        requestmapService.createRequestmapIfMissing('/api/modelCatalogue/core/relationshipTypes/**', 'ROLE_ADMIN')
     }
 
     def initPoliciesAndTags() {
@@ -588,16 +593,6 @@ class BootStrap {
     def destroy = {}
 
 
-    private static Requestmap createRequestmapIfMissing(String url, String configAttribute, HttpMethod method = null) {
-        List<Requestmap> maps = Requestmap.findAllByUrlAndHttpMethod(url, method)
-        for(Requestmap map in maps) {
-            if (map.configAttribute == configAttribute) {
-                return map
-            }
-            println "Requestmap method: $method, url: $url has different config attribute - expected: $configAttribute, actual: $map.configAttribute"
-        }
-        Requestmap.findOrSaveByUrlAndConfigAttributeAndHttpMethod(url, configAttribute, method, [failOnError: true])
-    }
 
     protected static mergeConfig(GrailsApplication application){
         application.config.merge(loadConfig(application))
