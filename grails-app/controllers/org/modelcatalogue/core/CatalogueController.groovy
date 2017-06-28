@@ -1,6 +1,8 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
 import grails.converters.JSON
+import grails.core.support.GrailsConfigurationAware
 import grails.gorm.DetachedCriteria
 import grails.util.Environment
 import grails.util.GrailsNameUtils
@@ -13,7 +15,7 @@ import org.modelcatalogue.core.util.lists.Lists
 import org.modelcatalogue.core.xml.CatalogueXmlPrinter
 import org.springframework.http.HttpStatus
 
-class CatalogueController {
+class CatalogueController implements GrailsConfigurationAware {
 
     def dataModelService
     def dataClassService
@@ -21,6 +23,15 @@ class CatalogueController {
     def initCatalogueService
     def modelCatalogueSecurityService
     def executorService
+
+    String serverUrl
+    Object preloadedModel
+    @Override
+    void setConfiguration(Config co) {
+        this.serverUrl = co.getProperty('grails.serverURL')
+        this.preloadedModel = co.getProperty('mc.preload', Object, [])
+    }
+
 
     def xref() {
         CatalogueElement element = elementService.findByModelCatalogueId(CatalogueElement, request.forwardURI.replace('/export', ''))
@@ -87,7 +98,7 @@ class CatalogueController {
             return
         }
 
-        redirect url: "${grailsApplication.config.grails.serverURL}/catalogue/${GrailsNameUtils.getPropertyName(HibernateHelper.getEntityClass(element))}/${element.id}"
+        redirect url: "${serverUrl}/catalogue/${GrailsNameUtils.getPropertyName(HibernateHelper.getEntityClass(element))}/${element.id}"
     }
 
 
@@ -114,7 +125,7 @@ class CatalogueController {
 
         }
 
-        render((grailsApplication.config.mc.preload ?: []) as JSON)
+        render(preloadedModel as JSON)
     }
 
     def importFromUrl() {
