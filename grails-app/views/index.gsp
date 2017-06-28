@@ -94,17 +94,16 @@
         <asset:javascript src="urijs/src/URI.js"/>
     </g:else>
     <g:set var="configurationProvider" bean="frontendConfigurationProviderRegistry"/>
-    <g:set var="oauthService" bean="oauthService"/>
     <script type="text/javascript">
         ${configurationProvider.frontendConfiguration}
         var demoConfig = angular.module('demo.config', ['mc.core.modelCatalogueApiRoot', 'mc.util.security']);
         demoConfig.config(['$logProvider', 'securityProvider', function ($logProvider, securityProvider) {
             $logProvider.debugEnabled(${Environment.current == Environment.DEVELOPMENT ? 'true' : 'false'});
             securityProvider.springSecurity({
-                oauthProviders: ${oauthService.services.keySet().collect{"'$it'"}},
                 contextPath:      '${grailsApplication.config.grails.app.context ?: request.contextPath ?: ''}',
                 allowRegistration: ${grailsApplication.config.mc.allow.signup.asBoolean()},
                 canResetPassword:  ${grailsApplication.config.grails.mail.host.asBoolean() || grailsApplication.config.grails.mc.can.reset.password.asBoolean()},
+                oauthProviders: ${metadata.oauthServices()},
                 roles: {
                     VIEWER:     ['ROLE_USER', 'ROLE_METADATA_CURATOR', 'ROLE_ADMIN', 'ROLE_SUPERVISOR'],
                     CURATOR:    ['ROLE_METADATA_CURATOR', 'ROLE_ADMIN', 'ROLE_SUPERVISOR'],

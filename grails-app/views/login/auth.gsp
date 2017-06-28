@@ -32,7 +32,6 @@
 </head>
 
 <body>
-<g:set var="oauth" bean="oauthService"/>
 <div id="metadataCurator" ng-app="metadataCurator">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -45,14 +44,14 @@
 
     <div class="container-fluid container-main">
         <div class="row">
-            <g:if test="${oauth.services}">
+            <g:if test="${oauthServices}">
                 <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Login with Service Provider</h3>
                         </div>
                         <div class="panel-body">
-                            <g:each in="${oauth.services}" var="entry">
+                            <g:each in="${oauthServices}" var="entry">
                                 <a class="btn btn-block btn-primary btn-lg" href="${createLink(controller: 'oauth', action: 'authenticate', params: [provider: entry.key])}"><span class="fa fa-fw fa-${entry.key}"></span> Login with ${entry.key.capitalize()} Account</a>
 
                             </g:each>
@@ -61,7 +60,7 @@
 
                 </div>
             </g:if>
-            <div class="${oauth.services ? '' : 'col-md-offset-3'} col-md-6">
+            <div class="${oauthServices ? '' : 'col-md-offset-3'} col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Login with Username or Email and Password</h3>

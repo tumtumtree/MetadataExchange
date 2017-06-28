@@ -32,7 +32,6 @@
 </head>
 
 <body>
-<g:set var="oauth" bean="oauthService"/>
 <g:set var="messageSource" bean="messageSource" />
 <div id="metadataCurator" ng-app="metadataCurator">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">

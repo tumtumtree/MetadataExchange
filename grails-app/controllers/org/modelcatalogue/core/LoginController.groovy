@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.converters.JSON
+import org.modelcatalogue.core.security.MetadataOauthService
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 
 import org.springframework.context.MessageSource
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class LoginController {
     MessageSource messageSource
 
+    MetadataOauthService metadataOauthService
     /**
      * Dependency injection for the authenticationTrustResolver.
      */
@@ -61,11 +63,11 @@ class LoginController {
             return
         }
 
-        String view = 'auth'
+        Map oauthServices = metadataOauthService.findAllOauthServices()
+
         String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
         response.setHeader('X-S2Auth-PostUrl', postUrl)
-        render view: view, model: [postUrl            : postUrl,
-                                   rememberMeParameter: config.rememberMe.parameter]
+        [postUrl: postUrl, rememberMeParameter: config.rememberMe.parameter, oauthServices: oauthServices]
     }
 
     /**
