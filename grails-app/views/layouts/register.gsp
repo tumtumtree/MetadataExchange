@@ -19,8 +19,6 @@
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 
-    <s2ui:resources module='register'/>
-
     <g:if test="${CDN.preferred}">
         <!-- CDNs -->
         <link rel="stylesheet" type="text/css"
@@ -42,7 +40,7 @@
 </head>
 
 <body>
-<s2ui:layoutResources module='register'/>
+
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
