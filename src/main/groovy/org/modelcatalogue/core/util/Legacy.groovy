@@ -15,7 +15,7 @@ class Legacy implements GrailsConfigurationAware {
 
     @Override
     void setConfiguration(Config co) {
-        this.serverUrl = co.getProperty('grails.serverUrl')
+        this.serverUrl = co.getProperty('grails.serverURL')
     }
 
 
