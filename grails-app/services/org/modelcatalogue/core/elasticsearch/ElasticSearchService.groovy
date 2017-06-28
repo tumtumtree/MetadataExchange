@@ -106,7 +106,6 @@ class ElasticSearchService implements SearchCatalogue, GrailsConfigurationAware 
         remoteHost = co.getProperty(hostPropertyName) ?: System.getProperty(hostPropertyName)
         localHost = co.getProperty(localPropertyName) || System.getProperty(localPropertyName)
         port = co.getProperty(portPropertyName) ?: System.getProperty(portPropertyName) ?: "9300"
-
         if (remoteHost) {
             initRemoteClient()
         }
@@ -133,9 +132,9 @@ class ElasticSearchService implements SearchCatalogue, GrailsConfigurationAware 
     protected void initRemoteClient() {
 
         Settings.Builder settingsBuilder = Settings.builder()
-        // Not sure what type this thing is.
+        // Not sure what type this thing is. Well it's meant to be a closure but a property string can't be cast to a closure anyways.
         if (grailsApplication.config.mc.search.elasticsearch.settings) {
-            grailsApplication.config.mc.search.elasticsearch.settings(settingsBuilder)
+            settingsBuilder.with grailsApplication.config.mc.search.elasticsearch.settings
         }
 
 
