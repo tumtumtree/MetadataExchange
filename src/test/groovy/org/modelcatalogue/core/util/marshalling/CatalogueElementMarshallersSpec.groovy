@@ -1,13 +1,16 @@
 package org.modelcatalogue.core.util.marshalling
 
-import grails.test.mixin.Mock
+import grails.testing.gorm.DataTest
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.RelationshipType
 import org.modelcatalogue.core.RelationshipTypeService
 import spock.lang.Specification
 
-@Mock(RelationshipType)
-class CatalogueElementMarshallersSpec extends Specification {
+class CatalogueElementMarshallersSpec extends Specification implements DataTest {
+
+    def setupSpec() {
+        mockDomain RelationshipType
+    }
 
     def "getting relationship configuration also from superclasses"() {
         CatalogueElementMarshaller marshallers = new CatalogueElementMarshaller(DataElement) {}

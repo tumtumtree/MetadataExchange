@@ -1,7 +1,7 @@
 package org.modelcatalogue.core.reports
 
 import grails.rest.render.RenderContext
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import grails.web.mapping.LinkGenerator
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass

@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.util
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Lists

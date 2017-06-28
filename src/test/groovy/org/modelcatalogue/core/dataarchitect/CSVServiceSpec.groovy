@@ -1,13 +1,9 @@
 package org.modelcatalogue.core.dataarchitect
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
-@TestFor(CSVService)
-class CSVServiceSpec extends Specification {
+class CSVServiceSpec extends Specification implements ServiceUnitTest<CSVService> {
 
     void "read csv headers"() {
         String inputFile = """

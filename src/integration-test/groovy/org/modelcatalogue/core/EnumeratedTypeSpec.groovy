@@ -1,7 +1,7 @@
 package org.modelcatalogue.core
 
 import spock.lang.Specification
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import spock.lang.Unroll
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions

@@ -1,6 +1,6 @@
 package org.modelcatalogue.gel
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import groovy.json.JsonOutput
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModelService

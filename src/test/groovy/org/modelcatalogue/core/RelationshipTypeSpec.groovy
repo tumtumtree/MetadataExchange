@@ -1,22 +1,17 @@
 package org.modelcatalogue.core
 
-import grails.test.mixin.Mock
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 import spock.lang.Unroll
 
-/**
- * Created by ladin on 10.02.14.
- */
-@Mock([RelationshipType])
-class RelationshipTypeSpec extends Specification {
+class RelationshipTypeSpec extends Specification implements DomainUnitTest<RelationshipType> {
 
     @Unroll
     def "'#name' is valid name == #valid"() {
         def type = new RelationshipType(name: name)
-        type.validate()
 
         expect:
-        type.errors.hasFieldErrors("name") == !valid
+        type.validate(['name']) == valid
 
         where:
         valid | name
@@ -27,8 +22,6 @@ class RelationshipTypeSpec extends Specification {
         true  | "Relationship"
         true  | "relationShip"
     }
-
-
 
     def "Validate rule"() {
         RelationshipType type = new RelationshipType(rule: rule)
@@ -45,7 +38,6 @@ class RelationshipTypeSpec extends Specification {
         true     | "ext.test as Boolean"
     }
 
-
     def "To camel case"() {
         expect:
         RelationshipType.toCamelCase(words) == result
@@ -54,5 +46,4 @@ class RelationshipTypeSpec extends Specification {
         words               | result
         'has attachments'   | 'hasAttachments'
     }
-
 }

@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import groovy.util.slurpersupport.GPathResult
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.DefaultResultRecorder

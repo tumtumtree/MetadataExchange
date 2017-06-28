@@ -1,10 +1,9 @@
 package org.modelcatalogue.core.dataarchitect
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-@TestFor(SchemaValidatorService)
-class SchemaValidatorServiceSpec extends Specification {
+class SchemaValidatorServiceSpec extends Specification implements ServiceUnitTest<SchemaValidatorService> {
 
     InputStream getSchemaStream() { new ByteArrayInputStream(EXAMPLE_XSD.bytes) }
 

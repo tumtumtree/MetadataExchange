@@ -1,12 +1,11 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
 import org.modelcatalogue.core.MeasurementUnit
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory
 import spock.lang.Specification
 
-@TestFor(MeasurementUnit)
-class AbstractActionRunnerSpec extends Specification {
+class AbstractActionRunnerSpec extends Specification implements DomainUnitTest<MeasurementUnit> {
 
     def "it normalizes to natural line breaks"() {
         expect:

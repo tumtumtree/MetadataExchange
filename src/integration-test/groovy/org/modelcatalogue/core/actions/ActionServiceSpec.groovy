@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import grails.util.Holders
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import spock.lang.Specification

@@ -1,6 +1,6 @@
 package org.modelcatalogue.gel.export
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import groovy.transform.TypeChecked
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModelService

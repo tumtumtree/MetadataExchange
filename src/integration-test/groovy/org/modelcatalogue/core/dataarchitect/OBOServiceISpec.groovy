@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.dataarchitect
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.modelcatalogue.core.DataClass
 import org.springframework.transaction.TransactionStatus
 import spock.lang.Ignore

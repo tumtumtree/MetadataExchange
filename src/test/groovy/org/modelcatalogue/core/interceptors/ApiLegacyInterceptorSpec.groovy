@@ -1,14 +1,10 @@
 package org.modelcatalogue.core.interceptors
 
-import grails.test.mixin.TestFor
+import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 import spock.lang.Unroll
 
-/**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
- */
-@TestFor(ApiLegacyInterceptor)
-class ApiLegacyInterceptorSpec extends Specification {
+class ApiLegacyInterceptorSpec extends Specification implements InterceptorUnitTest<ApiLegacyInterceptor> {
 
     @Unroll
     void "Test ArkivAll interceptor matching"() {

@@ -11,7 +11,7 @@ import org.modelcatalogue.core.util.test.TestData
 import org.modelcatalogue.core.util.test.TestDataHelper
 import org.springframework.web.context.support.WebApplicationContextUtils
 import spock.lang.Specification
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 
 @Integration
 abstract class AbstractIntegrationSpec extends Specification {

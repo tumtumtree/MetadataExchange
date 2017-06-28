@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.util
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import grails.util.Holders
 import spock.lang.Specification
 import spock.lang.Unroll

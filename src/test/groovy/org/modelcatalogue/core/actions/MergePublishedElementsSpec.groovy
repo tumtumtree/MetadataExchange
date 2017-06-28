@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.actions
 
-import grails.test.mixin.Mock
+import grails.testing.gorm.DataTest
 import org.modelcatalogue.core.ExtensionValue
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.ElementService
@@ -13,8 +13,12 @@ import spock.lang.Specification
 import static org.modelcatalogue.core.actions.AbstractActionRunner.encodeEntity
 import static org.modelcatalogue.core.actions.AbstractActionRunner.normalizeDescription
 
-@Mock([DataClass, ExtensionValue])
-class MergePublishedElementsSpec extends Specification {
+class MergePublishedElementsSpec extends Specification implements DataTest {
+
+    void setupSpec() {
+        mockDomain DataClass
+        mockDomain ExtensionValue
+    }
 
     MergePublishedElements merge = new MergePublishedElements()
 

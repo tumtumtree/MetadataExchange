@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.audit
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.publishing.DraftContext

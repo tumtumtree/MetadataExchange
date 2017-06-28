@@ -1,16 +1,19 @@
 package org.modelcatalogue.core
 
-import grails.test.mixin.Mock
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DataTest
+import grails.testing.services.ServiceUnitTest
 import org.modelcatalogue.core.audit.AuditService
 import org.modelcatalogue.core.cache.CacheService
 import rx.Observable
 import spock.lang.Specification
 import spock.util.concurrent.BlockingVariable
 
-@TestFor(CatalogueElementService)
-@Mock([DataClass, ReferenceType])
-class CatalogueElementServiceSpec extends Specification {
+class CatalogueElementServiceSpec extends Specification implements ServiceUnitTest<CatalogueElementService>, DataTest {
+
+    void setupSpec() {
+        mockDomain DataClass
+        mockDomain ReferenceType
+    }
 
     def "test if modelCatalogueSearchService unindex method is called when deleting CatalogueElement"() {
         setup:

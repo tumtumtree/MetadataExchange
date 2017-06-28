@@ -1,12 +1,17 @@
 package org.modelcatalogue.core
 
-import grails.test.mixin.Mock
+import grails.testing.gorm.DataTest
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@Mock([DataModel, DataElement, DataClass, CatalogueElement])
-class DataModelDomainSpec extends Specification {
+class DataModelDomainSpec extends Specification implements DataTest {
 
+    def setupSpec() {
+        mockDomain DataModel
+        mockDomain DataElement
+        mockDomain DataClass
+        mockDomain CatalogueElement
+    }
 
     @Unroll
     def "Data model creation for #args results in #validates"()

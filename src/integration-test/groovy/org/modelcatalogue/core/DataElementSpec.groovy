@@ -2,7 +2,7 @@ package org.modelcatalogue.core
 
 import spock.lang.Specification
 import spock.lang.Unroll
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 
 /**
  * Created by adammilward on 05/02/2014.

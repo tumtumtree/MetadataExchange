@@ -4,7 +4,7 @@ import geb.Browser
 import geb.navigator.Navigator
 import geb.spock.GebReportingSpec
 import geb.waiting.WaitTimeoutException
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.StaleElementReferenceException

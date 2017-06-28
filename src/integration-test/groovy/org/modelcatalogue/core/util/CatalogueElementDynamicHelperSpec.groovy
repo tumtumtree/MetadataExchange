@@ -1,6 +1,6 @@
 package org.modelcatalogue.core.util
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import spock.lang.Specification

@@ -1,15 +1,14 @@
 package org.modelcatalogue.core
 
-import grails.test.mixin.Mock
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DataTest
 import org.modelcatalogue.core.util.SecuredRuleExecutor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@Mock(Mapping)
-class MappingSpec extends Specification {
+class MappingSpec extends Specification implements DataTest {
+
+    def setupSpec() {
+        mockDomain Mapping
+    }
 
     void "map to function"() {
         def map = [1: "one", 2: "two", 3: "three"]
