@@ -1,35 +1,40 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
 import grails.converters.JSON
+import grails.core.support.GrailsConfigurationAware
+import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityUtils
 import org.modelcatalogue.core.security.MetadataOauthService
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
-
 import org.springframework.context.MessageSource
-import javax.servlet.http.HttpServletResponse
-
-import grails.plugin.springsecurity.SpringSecurityUtils
-
-import org.springframework.security.authentication.AccountExpiredException
-import org.springframework.security.authentication.CredentialsExpiredException
-import org.springframework.security.authentication.DisabledException
-import org.springframework.security.authentication.LockedException
+import org.springframework.security.authentication.AuthenticationTrustResolver
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 import org.springframework.security.web.WebAttributes
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import javax.servlet.http.HttpServletResponse
 
-class LoginController {
+class LoginController implements GrailsConfigurationAware {
+
+    String serverUrl
+
     MessageSource messageSource
 
     MetadataOauthService metadataOauthService
+
+    @Override
+    void setConfiguration(Config co) {
+        serverUrl = co.getProperty('grails.serverURL', String)
+    }
+
     /**
      * Dependency injection for the authenticationTrustResolver.
      */
-    def authenticationTrustResolver
+    AuthenticationTrustResolver authenticationTrustResolver
 
     /**
      * Dependency injection for the springSecurityService.
      */
-    def springSecurityService
+    SpringSecurityService springSecurityService
 
     /**
      * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
@@ -48,10 +53,8 @@ class LoginController {
     def auth() {
         // This solves the problem with infinite redirect loop when accessing main url witout trailing slash.
         // This is super dirty hack which actually redirects this request to trailing slash - ajax login.
-        if (SpringSecurityUtils.getSavedRequest(session)?.redirectUrl
-            && !grailsApplication.config.grails.serverURL?.endsWith('/')
-            && SpringSecurityUtils.getSavedRequest(session).redirectUrl == grailsApplication.config.grails.serverURL
-        ) {
+        String redirectUrl = SpringSecurityUtils.getSavedRequest(session)?.redirectUrl
+        if ( redirectUrl && !serverUrl?.endsWith('/') && redirectUrl == serverUrl ) {
             redirect uri: "${SpringSecurityUtils.getSavedRequest(session).redirectUrl}/"
             return
         }
