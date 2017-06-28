@@ -1,7 +1,15 @@
 package org.modelcatalogue.core
 
+import com.sun.org.apache.xml.internal.security.Init
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
 import org.apache.poi.poifs.filesystem.POIFSFileSystem
 import org.modelcatalogue.core.api.ElementStatus
+import org.modelcatalogue.core.audit.AuditService
+import org.modelcatalogue.core.dataarchitect.LoincImportService
+import org.modelcatalogue.core.dataarchitect.UmljService
 import org.modelcatalogue.core.security.User
 import org.modelcatalogue.core.util.builder.BuildProgressMonitor
 import org.modelcatalogue.integration.excel.ExcelLoader
@@ -12,41 +20,37 @@ import org.modelcatalogue.integration.xml.CatalogueXmlLoader
 import org.springframework.http.HttpStatus
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
-
+import java.util.concurrent.ExecutorService
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
-class DataImportController  {
+@CompileStatic
+class DataImportController implements GrailsConfigurationAware {
 
-    def initCatalogueService
-    def umljService
-    def loincImportService
-    def modelCatalogueSecurityService
-    def executorService
-    def elementService
-    def dataModelService
-    def assetService
-    def auditService
+    InitCatalogueService initCatalogueService
+    UmljService umljService
+    LoincImportService loincImportService
+    SecurityService modelCatalogueSecurityService // alias for SpringSecurity2SecurityService
+    ExecutorService executorService
+    ElementService elementService
+    DataModelService dataModelService
+    AssetService assetService
+    AuditService auditService
+
+    String serverUrl
+
+    @Override
+    void setConfiguration(Config co) {
+        this.serverUrl = co.getProperty('grails.serverURL')
+    }
 
 
-    private static final CONTENT_TYPES = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/octet-stream', 'application/xml', 'text/xml', 'application/zip']
+
+    private static final List<String> CONTENT_TYPES = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/octet-stream', 'application/xml', 'text/xml', 'application/zip']
     static responseFormats = ['json']
     static allowedMethods = [upload: "POST"]
 
-    protected static getErrors(Map params, MultipartFile file) {
-        def errors = []
-        if (file && !params.name) {
-            params.name = file.originalFilename
-        }
-        if (!params?.name) errors.add("no import name")
-        if (!file) {
-            errors.add("no file")
-        } else if (file.size <= 0) {
-            errors.add("file is empty")
-        }
-        return errors
-    }
-
+    @CompileDynamic // because of JSON.x
     def upload() {
         if (!modelCatalogueSecurityService.hasRole('CURATOR')) {
             render status: HttpStatus.UNAUTHORIZED
@@ -233,6 +237,20 @@ class DataImportController  {
         respond "errors": errors
     }
 
+    protected static getErrors(Map params, MultipartFile file) {
+        def errors = []
+        if (file && !params.name) {
+            params.name = file.originalFilename
+        }
+        if (!params?.name) errors.add("no import name")
+        if (!file) {
+            errors.add("no file")
+        } else if (file.size <= 0) {
+            errors.add("file is empty")
+        }
+        return errors
+    }
+
     protected static Asset finalizeAsset(Long id, DataModel dataModel, Long userId){
         BuildProgressMonitor.get(id)?.onCompleted()
 
@@ -254,7 +272,7 @@ class DataImportController  {
     }
     protected redirectToAsset(Long id){
         response.setHeader("X-Asset-ID",  id.toString())
-        redirect url: grailsApplication.config.grails.serverURL +  "/api/modelCatalogue/core/asset/" + id
+        redirect url: serverUrl +  "/api/modelCatalogue/core/asset/" + id
     }
 
     protected logError(Long id,Exception e){
