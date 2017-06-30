@@ -101,3 +101,8 @@ logger('org.modelcatalogue.core.xml', WARN)
 logger('org.modelcatalogue.core.publishing', DEBUG) // from MCConfig. Was INFO in Config
 
 root(ERROR, ['STDOUT'])
+
+// Debug Spring Security Core and Spring Security REST
+//logger("org.springframework.security", DEBUG, ['STDOUT'], false)
+//logger("grails.plugin.springsecurity", DEBUG, ['STDOUT'], false)
+//logger("org.pac4j", DEBUG, ['STDOUT'], false)
