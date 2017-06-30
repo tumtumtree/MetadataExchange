@@ -1,37 +1,28 @@
 package org.modelcatalogue.core
 
-import grails.config.Config
-import grails.core.support.GrailsConfigurationAware
+import org.modelcatalogue.core.security.ResetPasswordService
+import org.modelcatalogue.core.security.SignupService
 
-class ConfigurationTagLib implements GrailsConfigurationAware {
+class ConfigurationTagLib {
 
-    static namespace = "metadata"
-    
-    String contextPathConfiguration
-    
-    Boolean allowSignup
-    
-    Boolean mcCanResetPassword
-    
-    String mailHost
-    
-    @Override
-    void setConfiguration(Config co) {
-        contextPath = co.getProperty('server.contextPath', String)
-        allowSignup = co.getProperty('mc.allow.signup', Boolean)
-        mcCanResetPassword = co.getProperty('mc.can.reset.password', Boolean)
-        mailHost = co.getProperty('grails.mail.host', String)
+    static namespace = 'metadata'
+
+    ResetPasswordService resetPasswordService
+
+    SignupService signupService
+
+    DeploymentConfigurationService deploymentConfigurationService
+
+    def canResetPassword = { attrs ->
+        out << resetPasswordService.isItPossibleToResetPassword()
     }
 
-    def contextPath = { attrs, body ->
-        out << contextPathConfiguration ?: attrs?.request?.contextPath ?: ''
-    }
-    
-    def allowRegistration = { attrs , body ->
-        out << allowSignup
+    def contextPath = { attrs ->
+        out << deploymentConfigurationService.contextPath ?: attrs?.request?.contextPath ?: ''
     }
 
-    def canResetPassword = { attrs, body ->
-        out << (mcCanResetPassword || mailHost) as boolean
+    def allowRegistration = { attrs ->
+        boolean allowRegistration = signupService.isSignupAllowed()
+        out << allowRegistration
     }
 }
