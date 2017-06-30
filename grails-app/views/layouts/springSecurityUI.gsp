@@ -167,7 +167,7 @@ the explicit tags above and edit those, not the taglib code.
 				</sec:ifNotLoggedIn>
 
 				<sec:ifSwitched>
-				<a href='${request.contextPath}/j_spring_security_exit_user'>
+				<a href='${request.contextPath}/logout/impersonate'>
 					Resume as <sec:switchedUserOriginalUsername/>
 				</a>
 				</sec:ifSwitched>
