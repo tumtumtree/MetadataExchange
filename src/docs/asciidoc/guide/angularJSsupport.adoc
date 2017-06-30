@@ -208,9 +208,9 @@ in following way in your index page or main layout:
             loginUrl:      '/my/login'      // default is contextPath + '/j_spring_security_check'
             logoutUrl:     '/my/logout'     // default is contextPath + '/logout'
             userUrl:       '/my/user'       // default is contextPath + '/login/ajaxSuccess'
-            usernameParam: 'username'       // default is 'j_username'
             passwordParam: 'password'       // default is 'j_password'
             rememberParam: 'rememberMe'     // default is '_spring_security_remember_me'
+            usernameParam: 'username'       // default is 'username'
 
             // context path for prefixing the default login and logout url
             // if not defined, default login and logout url will lack the slash in the beginning

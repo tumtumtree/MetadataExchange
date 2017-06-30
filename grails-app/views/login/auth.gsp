@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <label for='username' class="control-label col-sm-3"><g:message code="springSecurity.login.username.label"/> or Email:</label>
                                 <div class="col-sm-9">
-                                    <input type='text' class='form-control' name='j_username' id='username'/>
+                                    <input type='text' class='form-control' name='username' id='username'/>
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
 <script type='text/javascript'>
     <!--
     (function() {
-        document.forms['loginForm'].elements['j_username'].focus();
+        document.forms['loginForm'].elements['username'].focus();
     })();
     // -->
 </script>

@@ -40,9 +40,9 @@ angular.module('mc.util.security', ['http-auth-interceptor', 'mc.util.messages',
       loginUrl      = 'j_spring_security_check'
       logoutUrl     = 'logout'
       userUrl       = 'user/current'
-      usernameParam = config.username ? 'j_username'
       passwordParam = config.password ? 'j_password'
       rememberParam = config.rememberMe ? '_spring_security_remember_me'
+      usernameParam = config.username ? 'username'
 
       config.contextPath = '' if config.contextPath == '/'
 

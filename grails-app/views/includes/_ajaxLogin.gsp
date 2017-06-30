@@ -10,7 +10,7 @@ input.login {
 	<g:form controller='j_spring_security_check' name="loginForm" autocomplete='off'>
 
 	<label for="username"><g:message code='spring.security.ui.login.username'/></label>
-	<input class='login' name="j_username" id="username" size="20" />
+	<input class='login' name="username" id="username" size="20" />
 
 	<label for="password"><g:message code='spring.security.ui.login.password'/></label>
 	<input class='login'type="password" name="j_password" id="password" size="20" />
