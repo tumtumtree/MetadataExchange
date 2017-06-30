@@ -197,6 +197,7 @@ sourceSets {
 }
 
 bootRun {
+    jvmArgs = ['-Xmx2048m']
     jvmArgs('-Dspring.output.ansi.enabled=always')
     addResources = true
 }
