@@ -37,7 +37,7 @@ angular.module('mc.util.security', ['http-auth-interceptor', 'mc.util.messages',
   securityProvider.springSecurity = (config = {}) ->
     securityFactory = ['$http', '$rootScope', '$q', '$state', '$httpParamSerializer',  ($http, $rootScope, $q, $state, $httpParamSerializer) ->
       httpMethod    = config.httpMethod ? 'POST'
-      loginUrl      = 'j_spring_security_check'
+      loginUrl      = 'login/authenticate'
       logoutUrl     = 'logout'
       userUrl       = 'user/current'
       passwordParam = config.password ? 'j_password'
