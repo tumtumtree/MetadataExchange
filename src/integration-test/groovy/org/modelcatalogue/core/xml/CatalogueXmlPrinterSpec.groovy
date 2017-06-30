@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.xml
 
+import grails.gorm.transactions.Rollback
 import groovy.xml.XmlUtil
 import org.custommonkey.xmlunit.DetailedDiff
 import org.custommonkey.xmlunit.Diff
@@ -9,6 +10,7 @@ import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import spock.lang.Ignore
 
+@Rollback
 class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
 
     CatalogueXmlPrinter printer

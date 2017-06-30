@@ -1,6 +1,7 @@
 package org.modelcatalogue.core.export.inventory
 
 import grails.core.GrailsApplication
+import grails.gorm.transactions.Rollback
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import org.modelcatalogue.builder.api.CatalogueBuilder
@@ -11,6 +12,7 @@ import org.modelcatalogue.spreadsheet.query.api.Predicate
 import org.modelcatalogue.spreadsheet.query.api.SpreadsheetCriteria
 import org.modelcatalogue.spreadsheet.query.poi.PoiSpreadsheetQuery
 
+@Rollback
 class DataModelToXlsxExporterSpec extends AbstractIntegrationSpec {
 
     ElementService elementService

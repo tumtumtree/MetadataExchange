@@ -1,9 +1,11 @@
 package org.modelcatalogue.core.rx
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataElement
 import rx.Observable
 
+@Rollback
 class ObservablesSpec extends AbstractIntegrationSpec {
 
     RxService rxService

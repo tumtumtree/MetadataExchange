@@ -1,4 +1,6 @@
 package org.modelcatalogue.core.elasticsearch
+
+import grails.gorm.transactions.Rollback
 import groovy.json.JsonOutput
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.*
@@ -12,6 +14,7 @@ import spock.util.concurrent.BlockingVariables
 
 import java.util.concurrent.TimeUnit
 
+@Rollback
 class ElasticSearchServiceSpec extends AbstractIntegrationSpec {
 
     ElasticSearchService elasticSearchService

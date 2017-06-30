@@ -1,11 +1,12 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.api.ElementStatus
 
 /**
  * Created by adammilward on 05/02/2014.
  */
-
+@Rollback
 class PublishedElementISpec extends AbstractIntegrationSpec{
 
     def setupSpec(){

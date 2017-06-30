@@ -1,12 +1,14 @@
 package org.modelcatalogue.core
 
 import grails.gorm.DetachedCriteria
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import org.modelcatalogue.core.util.lists.Lists
 
+@Rollback
 class DataModelServiceSpec extends AbstractIntegrationSpec {
 
     def dataModelService

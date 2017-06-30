@@ -1,13 +1,12 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.DataType
 import spock.lang.Unroll
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
+@Rollback
 @Unroll
 class InitXMLSchemaDataTypesSpec extends AbstractIntegrationSpec {
 

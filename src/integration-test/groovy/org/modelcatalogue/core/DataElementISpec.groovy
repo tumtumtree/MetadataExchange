@@ -1,6 +1,9 @@
 package org.modelcatalogue.core
 
-class DataElementISpec extends AbstractIntegrationSpec{
+import grails.gorm.transactions.Rollback
+
+@Rollback
+class DataElementISpec extends AbstractIntegrationSpec {
 
     def auth1, auth3, auth2
 

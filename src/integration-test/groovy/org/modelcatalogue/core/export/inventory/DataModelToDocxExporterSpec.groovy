@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.export.inventory
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 
 import static org.modelcatalogue.core.util.test.FileOpener.open
@@ -11,6 +12,7 @@ import org.junit.rules.TemporaryFolder
 import org.modelcatalogue.core.DataModelService
 import org.modelcatalogue.core.ElementService
 
+@Rollback
 class DataModelToDocxExporterSpec extends AbstractIntegrationSpec {
 
     ElementService elementService

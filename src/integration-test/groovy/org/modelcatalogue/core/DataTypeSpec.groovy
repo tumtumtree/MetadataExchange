@@ -1,11 +1,13 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import spock.lang.Specification
 import spock.lang.Unroll
 /**
  * Created by adammilward on 03/02/2014.
  */
+@Rollback
 @Integration
 class DataTypeSpec extends Specification {
 

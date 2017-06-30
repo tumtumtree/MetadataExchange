@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.specs
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.CatalogueElement
@@ -17,6 +18,7 @@ import org.modelcatalogue.core.util.Inheritance
 import org.modelcatalogue.core.util.test.TestDataHelper
 import spock.lang.Ignore
 
+@Rollback
 class InheritanceSpec extends AbstractIntegrationSpec  {
 
     public static final String DUMMY_DATA_CLASS_NAME = 'IS Dummy'

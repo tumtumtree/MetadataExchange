@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.forms
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.util.Metadata
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
@@ -18,6 +19,7 @@ import org.springframework.validation.Errors
 import spock.lang.Ignore
 import spock.lang.Requires
 
+@Rollback
 class ModelToFormExporterServiceSpec extends AbstractIntegrationSpec {
 
     public static final String TEST_FORM_REVISION_NOTES = "This is a test revision"

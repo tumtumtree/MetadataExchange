@@ -1,6 +1,7 @@
 package org.modelcatalogue.gel.export
 
 import grails.testing.mixin.integration.Integration
+import grails.gorm.transactions.Rollback
 import groovy.transform.TypeChecked
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModelService
@@ -9,6 +10,7 @@ import org.modelcatalogue.core.InitCatalogueService
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import spock.lang.Specification
 
+@Rollback
 @Integration
 class RareDiseaseDisorderListCsvExporterSpec extends Specification {
 

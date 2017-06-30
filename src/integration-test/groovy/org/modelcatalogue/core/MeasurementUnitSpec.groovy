@@ -1,12 +1,11 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import spock.lang.Specification
 import spock.lang.Unroll
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- * a measurement unit can be
- */
+
+@Rollback
 @Integration
 class MeasurementUnitSpec extends Specification {
 

@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.publishing.changelog
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.PerformanceUtilService
 import org.modelcatalogue.core.api.ElementStatus
 
@@ -18,6 +19,7 @@ import org.modelcatalogue.core.ddl.DataDefinitionLanguage
 import org.modelcatalogue.core.publishing.DraftContext
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 
+@Rollback
 class ChangeLogDocxGeneratorSpec extends AbstractIntegrationSpec {
 
     AuditService auditService

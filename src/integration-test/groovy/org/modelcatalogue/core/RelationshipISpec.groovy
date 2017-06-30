@@ -1,9 +1,11 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.util.RelationshipDirection
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 import spock.lang.Unroll
 
+@Rollback
 class RelationshipISpec extends AbstractIntegrationSpec{
 
     def relationshipService

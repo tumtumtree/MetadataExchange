@@ -1,11 +1,13 @@
 package org.modelcatalogue.core.util
 
+import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@Rollback
 @Integration
 class CatalogueElementDynamicHelperSpec extends Specification {
 

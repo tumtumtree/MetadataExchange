@@ -2,6 +2,7 @@ package org.modelcatalogue.core.diff
 
 import com.google.common.collect.Multimap
 import grails.core.GrailsApplication
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataClass
@@ -9,6 +10,7 @@ import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.EnumeratedType
 import org.modelcatalogue.integration.xml.CatalogueXmlLoader
 
+@Rollback
 class CatalogueElementDiffsIntegrationSpec extends AbstractIntegrationSpec {
 
     CatalogueBuilder catalogueBuilder

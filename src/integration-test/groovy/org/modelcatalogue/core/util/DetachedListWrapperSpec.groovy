@@ -1,12 +1,14 @@
 package org.modelcatalogue.core.util
 
 import grails.testing.mixin.integration.Integration
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Lists
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@Rollback
 @Integration
 class DetachedListWrapperSpec extends Specification {
 

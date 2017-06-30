@@ -1,11 +1,13 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.grails.plugins.testing.GrailsMockMultipartFile
 import org.grails.web.json.JSONElement
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
 import spock.lang.Unroll
 
+@Rollback
 class DataArchitectControllerIntegrationSpec extends AbstractIntegrationSpec {
 
     def relationshipService, de1, de2, de3, de4, de5, md, md2

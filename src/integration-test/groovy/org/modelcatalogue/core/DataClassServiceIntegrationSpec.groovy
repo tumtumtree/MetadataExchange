@@ -1,10 +1,12 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.lists.ListWithTotal
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 
+@Rollback
 class DataClassServiceIntegrationSpec extends AbstractIntegrationSpec {
 
     CatalogueBuilder catalogueBuilder

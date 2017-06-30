@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.actions
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.Relationship
@@ -10,7 +11,7 @@ import spock.lang.Shared
 import static org.modelcatalogue.core.actions.AbstractActionRunner.encodeEntity
 import static org.modelcatalogue.core.actions.AbstractActionRunner.normalizeDescription
 
-
+@Rollback
 class CreateRelationshipISpec extends AbstractIntegrationSpec {
 
     def relationshipService

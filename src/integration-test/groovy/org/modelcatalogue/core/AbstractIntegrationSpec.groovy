@@ -9,6 +9,7 @@ import org.modelcatalogue.core.util.Metadata
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import org.modelcatalogue.core.util.test.TestData
 import org.modelcatalogue.core.util.test.TestDataHelper
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.context.support.WebApplicationContextUtils
 import spock.lang.Specification
 import grails.testing.mixin.integration.Integration
@@ -19,11 +20,19 @@ abstract class AbstractIntegrationSpec extends Specification {
     protected static final String COMPLEX_MODEL_ROOT_DATA_CLASS_NAME = 'C4CTDE Root'
     protected static final String COMPLEX_MODEL_NAME = 'C4CTDE'
 
+    @Autowired
     def initCatalogueService
+
+    @Autowired
     def sessionFactory
+
+    @Autowired
     def cacheService
+
+    @Autowired
     def relationshipTypeService
 
+    @Autowired
     TestDataHelper testDataHelper
 
     void loadMarshallers() {

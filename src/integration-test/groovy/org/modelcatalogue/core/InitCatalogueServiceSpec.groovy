@@ -1,8 +1,8 @@
 package org.modelcatalogue.core
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
+import grails.gorm.transactions.Rollback
+
+@Rollback
 class InitCatalogueServiceSpec extends AbstractIntegrationSpec {
 
     def setup() {

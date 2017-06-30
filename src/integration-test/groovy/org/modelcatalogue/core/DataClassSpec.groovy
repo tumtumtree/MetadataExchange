@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.testing.mixin.integration.Integration
+import grails.gorm.transactions.Rollback
 import spock.lang.Specification
 import spock.lang.Unroll
 /**
@@ -10,6 +11,7 @@ import spock.lang.Unroll
  * They contains data elements
  */
 
+@Rollback
 @Integration
 class DataClassSpec extends Specification {
 

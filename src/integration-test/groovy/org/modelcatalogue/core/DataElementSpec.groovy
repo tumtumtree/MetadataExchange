@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import spock.lang.Specification
 import spock.lang.Unroll
 import grails.testing.mixin.integration.Integration
@@ -27,6 +28,7 @@ import grails.testing.mixin.integration.Integration
  *
  *
  */
+@Rollback
 @Integration
 class DataElementSpec extends Specification {
 

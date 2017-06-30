@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.xml
 
+import grails.gorm.transactions.Rollback
 import groovy.xml.XmlUtil
 import grails.core.GrailsApplication
 import org.custommonkey.xmlunit.DetailedDiff
@@ -12,6 +13,7 @@ import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import org.modelcatalogue.integration.xml.CatalogueXmlLoader
 import spock.lang.Shared
 
+@Rollback
 class CatalogueXmlImportSpec extends AbstractIntegrationSpec {
 
     @Shared

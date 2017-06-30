@@ -1,12 +1,14 @@
 package org.modelcatalogue.core.actions
 
 import grails.testing.mixin.integration.Integration
+import grails.gorm.transactions.Rollback
 import grails.util.Holders
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import spock.lang.Specification
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.FutureTask
 
+@Rollback
 @Integration
 class ActionServiceSpec extends Specification {
 

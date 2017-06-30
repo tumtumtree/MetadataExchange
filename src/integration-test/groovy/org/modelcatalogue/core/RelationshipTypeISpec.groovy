@@ -1,7 +1,11 @@
 package org.modelcatalogue.core
+
+import grails.gorm.transactions.Rollback
+
 /**
  * Created by ladin on 10.02.14.
  */
+@Rollback
 class RelationshipTypeISpec extends AbstractIntegrationSpec {
 
     def md1, de1, md2

@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.policy
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
@@ -8,6 +9,7 @@ import org.modelcatalogue.core.DataModelService
 import org.modelcatalogue.core.ElementService
 import org.modelcatalogue.core.util.Metadata
 
+@Rollback
 class ConventionCheckersSpec extends AbstractIntegrationSpec {
 
 

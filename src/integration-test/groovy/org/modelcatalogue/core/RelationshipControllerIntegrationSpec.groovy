@@ -1,5 +1,8 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
+
+@Rollback
 class RelationshipControllerIntegrationSpec extends AbstractIntegrationSpec {
 
     def setup() {

@@ -1,6 +1,7 @@
 package org.modelcatalogue.core.actions
 
 import grails.testing.mixin.integration.Integration
+import grails.gorm.transactions.Rollback
 import spock.lang.Specification
 
 @Integration
@@ -8,6 +9,7 @@ class ActionServiceISpec extends Specification {
 
     ActionService actionService
 
+    @Rollback
     def "runners are injected with dependencies"() {
         Action action = actionService.create(new Batch(name: "test batch").save(failOnError: true), IntegrationTestActionRunner)
 

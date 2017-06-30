@@ -1,10 +1,12 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.grails.web.json.JSONElement
 import org.modelcatalogue.integration.excel.HeadersMap
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
 
+@Rollback
 class DataImportControllerSpec extends AbstractIntegrationSpec implements ResultRecorder {
 
     def fileName, recorder, filenameXsd, filenameXsd2, fileNameStarUML

@@ -1,11 +1,13 @@
 package org.modelcatalogue.core.dataarchitect
 
 import au.com.bytecode.opencsv.CSVReader
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.util.lists.ListWithTotal
 
+@Rollback
 class DataArchitectServiceSpec extends AbstractIntegrationSpec {
 
     def dataArchitectService, relationshipService, de1, de2, de3, de4, de5, md

@@ -1,10 +1,12 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.integration.obo.OboLoader
 import spock.lang.Unroll
 
+@Rollback
 class HPOUpdatesSpec extends AbstractIntegrationSpec  {
 
     CatalogueBuilder catalogueBuilder

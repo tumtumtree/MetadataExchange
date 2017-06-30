@@ -1,7 +1,9 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import spock.lang.Unroll
 
+@Rollback
 class MappingISpec extends AbstractIntegrationSpec {
 
 

@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.publishing.CloningContext
@@ -9,6 +10,7 @@ import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import spock.lang.Issue
 import spock.lang.Unroll
 
+@Rollback
 class ElementServiceIntegrationSpec extends AbstractIntegrationSpec {
 
     def setup() {

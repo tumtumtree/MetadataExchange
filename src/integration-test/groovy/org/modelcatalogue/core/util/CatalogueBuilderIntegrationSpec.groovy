@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.util
 
+import grails.gorm.transactions.Rollback
 import grails.util.Holders
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.api.ElementStatus
@@ -12,6 +13,7 @@ import spock.lang.Issue
 
 import static org.modelcatalogue.core.util.HibernateHelper.*
 
+@Rollback
 class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
 
     public static final String DATA_MODEL_NO_HIERARCHY = "test no hierarchy"

@@ -1,10 +1,12 @@
 package org.modelcatalogue.core.actions
 
 import grails.testing.mixin.integration.Integration
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.RelationshipType
 import spock.lang.Specification
 
+@Rollback
 @Integration
 class UpdateCatalogueElementSpec extends Specification {
 

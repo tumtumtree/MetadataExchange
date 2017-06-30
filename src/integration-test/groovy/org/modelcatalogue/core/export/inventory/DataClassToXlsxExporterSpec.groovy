@@ -1,12 +1,14 @@
 package org.modelcatalogue.core.export.inventory
 
 import grails.core.GrailsApplication
+import grails.gorm.transactions.Rollback
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import org.modelcatalogue.core.*
 
 import static org.modelcatalogue.core.util.test.FileOpener.open
 
+@Rollback
 class DataClassToXlsxExporterSpec extends AbstractIntegrationSpec {
 
     ElementService elementService

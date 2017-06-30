@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.path
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataElement
@@ -8,6 +9,7 @@ import org.modelcatalogue.core.DataModelService
 import org.modelcatalogue.core.ElementService
 import spock.lang.Requires
 
+@Rollback
 class PathFinderSpec extends AbstractIntegrationSpec {
 
     DataModelService dataModelService
