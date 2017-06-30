@@ -109,7 +109,7 @@ if (isOpenId) {
 </g:if>
 
 <g:if test='${canRunAs}'>
-	<form name='runAsForm' action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
+	<form name='runAsForm' action='${request.contextPath}/login/impersonate' method='POST'>
 		<g:hiddenField name='username' value="${user.username}"/>
 		<input type='submit' class='s2ui_hidden_button' />
 	</form>
