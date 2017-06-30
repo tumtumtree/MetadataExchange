@@ -122,7 +122,7 @@
         }]);
 
         demoConfig.run(['$templateCache', function ($templateCache) {
-            $templateCache.put("/info/version.html", '${render(template:"/version")}')
+            $templateCache.put("/info/version.html", '${'Unknown Version'}')
 
         }]);
 
