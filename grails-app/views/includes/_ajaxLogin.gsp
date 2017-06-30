@@ -13,7 +13,7 @@ input.login {
 	<input class='login' name="username" id="username" size="20" />
 
 	<label for="password"><g:message code='spring.security.ui.login.password'/></label>
-	<input class='login'type="password" name="j_password" id="password" size="20" />
+	<input class='login'type="password" name="password" id="password" size="20" />
 
 	<input type="checkbox" class="checkbox" name="_spring_security_remember_me" id="remember_me" checked="checked" />
 	<label for='remember_me'><g:message code='spring.security.ui.login.rememberme'/></label> |
