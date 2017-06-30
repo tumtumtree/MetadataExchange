@@ -1,6 +1,7 @@
 package org.modelcatalogue.core.sanityTestSuite.CreateDataModels
 
 import org.modelcatalogue.core.geb.AbstractModelCatalogueGebSpec
+import spock.lang.IgnoreIf
 import spock.lang.Stepwise
 import org.modelcatalogue.core.geb.Common.*
 
@@ -8,6 +9,7 @@ import static org.modelcatalogue.core.geb.Common.getRightSideTitle
 import static org.modelcatalogue.core.geb.Common.modalHeader
 import static org.modelcatalogue.core.geb.Common.modalPrimaryButton
 
+@IgnoreIf({!System.getProperty('geb.env')})
 @Stepwise
 class NewVersionOfDataModelSpec extends AbstractModelCatalogueGebSpec{
 
