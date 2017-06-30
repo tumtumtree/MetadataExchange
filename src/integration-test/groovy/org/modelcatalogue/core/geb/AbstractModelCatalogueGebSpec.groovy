@@ -88,7 +88,7 @@ abstract class AbstractModelCatalogueGebSpec extends GebReportingSpec {
 
         $("#username").value(user)
         $("#password").value(pwd)
-        $("input[name=_spring_security_remember_me]").value(true)
+        $("input[name=remember-me]").value(true)
 
         $("#loginForm").find("button.btn-primary").first().click()
 
