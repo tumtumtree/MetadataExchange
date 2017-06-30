@@ -205,7 +205,7 @@ in following way in your index page or main layout:
     demoConfig.config(function (securityProvider) {
         securityProvider.springSecurity({
             httpMethod:    'PUT',           // default is 'POST'
-            loginUrl:      '/my/login'      // default is contextPath + '/j_spring_security_check'
+            loginUrl:      '/my/login'      // default is contextPath + '/login/authenticate'
             logoutUrl:     '/my/logout'     // default is contextPath + '/logout'
             userUrl:       '/my/user'       // default is contextPath + '/login/ajaxSuccess'
             rememberParam: 'rememberMe'     // default is '_spring_security_remember_me'
@@ -214,7 +214,7 @@ in following way in your index page or main layout:
 
             // context path for prefixing the default login and logout url
             // if not defined, default login and logout url will lack the slash in the beginning
-            // so loginUrl will be just 'j_spring_security_check'
+            // so loginUrl will be just 'login/authenticate'
             // and logoutUrl will be just 'logout'
             contextPath: '${request.contextPath ?: ''}',
 

@@ -7,7 +7,7 @@ input.login {
 <div class='s2ui_center'>
 
 <div id="loginFormContainer" style='display:none' title="${message(code:'spring.security.ui.login.signin')}">
-	<g:form controller='j_spring_security_check' name="loginForm" autocomplete='off'>
+	<g:form absolute='/login/authenticate' name="loginForm" autocomplete='off'>
 
 	<label for="username"><g:message code='spring.security.ui.login.username'/></label>
 	<input class='login' name="username" id="username" size="20" />
