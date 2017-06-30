@@ -1,20 +1,15 @@
 package org.modelcatalogue.core
 
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
-import grails.testing.mixin.integration.Integration
 import spock.lang.Unroll
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@Integration
-class EnumeratedTypeSpec extends Specification {
 
+class EnumeratedTypeSpec extends Specification implements DomainUnitTest<EnumeratedType> {
 
     @Unroll
-    def "validates to #validates for #args.name "() {
+    def "EnumeratedType #msg for #args "(boolean validates, Map args, String msg) {
         when:
         EnumeratedType etype = new EnumeratedType(args)
-
         etype.save()
 
         then:
@@ -30,5 +25,7 @@ class EnumeratedTypeSpec extends Specification {
         false     | [name: 'test3', enumAsString: ('m:s|' * 50000) + 's:m']
         true      | [name: 'test4', enumerations: ['m': 'male', 'f': 'female', 'u': 'unknown']]
         true      | [name: 'test5', enumerations: ['m': 'male', 'f': 'female', 'u': null]]
+
+        msg = validates ? 'validates' : 'does not validate'
     }
 }
