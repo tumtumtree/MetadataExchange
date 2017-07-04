@@ -1,6 +1,5 @@
-angular.module('mc.core.forms.actions', ['mc.util.ui.actions']).config(function (actionsProvider) {
+angular.module('mc.core.forms.actions', ['mc.util.ui.actions']).config(['actionsProvider', function (actionsProvider) {
   "ngInject"
-
   actionsProvider.registerChildActionInRoles('export', 'export-crf', [actionsProvider.ROLE_LIST_ACTION,
       actionsProvider.ROLE_ITEM_ACTION, actionsProvider.ROLE_NAVIGATION, actionsProvider.ROLE_LIST_HEADER_ACTION],
     function (security, $uibModal, $window, $scope, modelCatalogueApiRoot) {
@@ -39,4 +38,4 @@ angular.module('mc.core.forms.actions', ['mc.util.ui.actions']).config(function 
         }
       }
     });
-});
+}]);
