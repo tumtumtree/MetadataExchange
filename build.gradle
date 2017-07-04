@@ -25,6 +25,9 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.bertramlabs.asset-pipeline' version '2.5.0'
+}
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
