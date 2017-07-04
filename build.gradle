@@ -25,14 +25,13 @@ buildscript {
     }
 }
 
-
-apply plugin:"eclipse"
-apply plugin:"idea"
-apply plugin:"war"
-apply plugin:"org.grails.grails-web"
-apply plugin:"org.grails.grails-gsp"
-apply plugin:"asset-pipeline"
-apply plugin:"org.grails.plugins.views-json"
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'org.grails.grails-web'
+apply plugin: 'org.grails.grails-gsp'
+apply plugin: 'asset-pipeline'
+apply plugin: 'org.grails.plugins.views-json'
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'com.moowork.node'
 apply plugin: 'com.bmuschko.docker-remote-api'
