@@ -14,7 +14,7 @@ class SpringOAuthAjaxFixInterceptor {
     boolean before() {
         // we don't want any redirect back
         session.removeAttribute(SpringSecurityUtils.SAVED_REQUEST)
-        return true
+        true
     }
     boolean after() {true}
     void afterView() {}

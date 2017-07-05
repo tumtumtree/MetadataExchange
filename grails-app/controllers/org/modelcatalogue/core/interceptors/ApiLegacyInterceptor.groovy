@@ -17,7 +17,7 @@ class ApiLegacyInterceptor {
         if (Legacy.hasLegacyName(controllerName) && !request.forwardURI.contains(controllerName)) {
             redirect(url: Legacy.getRedirectUrl(controllerName, request), permanent: true)
         }
-        return true
+        true
     }
     boolean after() {true}
     void afterView() {}
