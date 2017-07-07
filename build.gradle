@@ -167,7 +167,7 @@ dependencies {
     compile "net.sf.opencsv:opencsv:$openCsvVersion"
 
     // Runtime
-    runtime "org.modelcatalogue:spring-security-ajax-aware:0.1.1"
+    runtime "org.modelcatalogue:spring-security-ajax-aware:$springSecurityAjaxAwareVersion"
     runtime 'mysql:mysql-connector-java:5.1.24'
 
     testCompile "org.modelcatalogue:mc-builder-xml:$mcToolkitVersion"

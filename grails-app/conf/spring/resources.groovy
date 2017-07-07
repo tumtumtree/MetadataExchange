@@ -52,11 +52,10 @@ import  grails.plugins.executor.PersistenceContextExecutorWrapper
 
 // Place your Spring DSL code here
 beans = {
-//    authenticationEntryPoint(AjaxAwareLoginUrlAuthenticationEntryPoint) {
-//        loginFormUrl = '/login/auth' // has to be specified even though it's ignored
-//        portMapper = ref('portMapper')
-//        portResolver = ref('portResolver')
-//    }
+    authenticationEntryPoint(AjaxAwareLoginUrlAuthenticationEntryPoint,  '/login/auth') {
+        portMapper = ref('portMapper')
+        portResolver = ref('portResolver')
+    }
 
     executorService(PersistenceContextExecutorWrapper ) { bean->
         bean.destroyMethod = 'destroy'
