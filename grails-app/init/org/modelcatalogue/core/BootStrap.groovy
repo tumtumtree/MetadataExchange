@@ -82,6 +82,10 @@ class BootStrap {
 
         ReportsRegistry reportsRegistry = grailsApplication.mainContext.getBean(ReportsRegistry)
 
+        registerReports(reportsRegistry)
+    }
+
+    private void registerReports(ReportsRegistry reportsRegistry) {
         reportsRegistry.register {
             creates asset
             title { "Export All Elements of ${it.name} to Excel XSLX" }
