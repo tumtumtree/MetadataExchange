@@ -5,11 +5,10 @@ class UrlMappings {
 	static mappings = {
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
-                controller(inList: ['login', 'logout', 'userAdmin', 'register','requestmap','role', 'console', 'dbconsole', 'home'])
+                controller(inList: ['login', 'logout', 'userAdmin', 'register','requestmap','role', 'console', 'dbconsole'])
             }
         }
-
-        '/'(redirect: '/home/index')
+        '/'(view: '/index')
         '500'(view: '/error')
 	}
 }
