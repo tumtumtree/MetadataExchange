@@ -385,7 +385,6 @@ class BootStrap {
 
         //permit all for assets and initial pages
         for (String url in [
-                '/home/index',
                 '/',
                 '/**/favicon.ico',
                 '/fonts/**',
