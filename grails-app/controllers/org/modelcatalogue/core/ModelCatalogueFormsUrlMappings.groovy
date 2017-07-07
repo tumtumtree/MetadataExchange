@@ -8,5 +8,4 @@ class ModelCatalogueFormsUrlMappings {
         "/api/modelCatalogue/core/forms/generate/$id" (controller: 'formGenerator', action: 'generateForm', method: HttpMethod.GET)
         "/api/modelCatalogue/core/forms/preview/$id" (controller: 'formGenerator', action: 'previewForm', method: HttpMethod.GET)
     }
-
 }
