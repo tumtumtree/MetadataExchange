@@ -1,9 +1,13 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
 import grails.converters.JSON
+import grails.core.support.GrailsConfigurationAware
 import grails.gorm.DetachedCriteria
 import grails.util.Environment
 import grails.util.GrailsNameUtils
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
 import org.modelcatalogue.core.cache.CacheService
 import org.modelcatalogue.core.security.UserService
 import org.modelcatalogue.core.util.HibernateHelper
@@ -12,16 +16,29 @@ import org.modelcatalogue.core.util.builder.ProgressMonitor
 import org.modelcatalogue.core.util.lists.Lists
 import org.modelcatalogue.core.xml.CatalogueXmlPrinter
 import org.springframework.http.HttpStatus
+import sun.jvm.hotspot.opto.Compile
 
-class CatalogueController {
+import java.util.concurrent.ExecutorService
 
-    def dataModelService
-    def dataClassService
-    def elementService
-    def initCatalogueService
-    def modelCatalogueSecurityService
-    def executorService
+@CompileStatic
+class CatalogueController implements GrailsConfigurationAware {
 
+    DataModelService dataModelService
+    DataClassService dataClassService
+    ElementService elementService
+    InitCatalogueService initCatalogueService
+    SecurityService modelCatalogueSecurityService
+    ExecutorService executorService
+
+    String serverUrl
+    Object preloadedModel
+    @Override
+    void setConfiguration(Config co) {
+        this.serverUrl = co.getProperty('grails.serverURL')
+        this.preloadedModel = co.getProperty('mc.preload', Object, [])
+    }
+
+    @CompileDynamic // because of printer.bind to closure
     def xref() {
         CatalogueElement element = elementService.findByModelCatalogueId(CatalogueElement, request.forwardURI.replace('/export', ''))
 
@@ -48,7 +65,7 @@ class CatalogueController {
 
         redirect controller: params.resource, action: 'show', id: element.id
     }
-
+    @CompileDynamic // criteria and delegate bound to closure
     def ext() {
         String key = params.key
         String value = params.value
@@ -87,14 +104,14 @@ class CatalogueController {
             return
         }
 
-        redirect url: "${grailsApplication.config.grails.serverURL}/catalogue/${GrailsNameUtils.getPropertyName(HibernateHelper.getEntityClass(element))}/${element.id}"
+        redirect url: "${serverUrl}/catalogue/${GrailsNameUtils.getPropertyName(HibernateHelper.getEntityClass(element))}/${element.id}"
     }
 
 
     def feedback(String key) {
         render(BuildProgressMonitor.get(key) as JSON)
     }
-
+    @CompileDynamic // because of asMap() which is weird.
     def feedbacks() {
         if (params.max) {
             params.max = params.long('max')
@@ -114,9 +131,9 @@ class CatalogueController {
 
         }
 
-        render((grailsApplication.config.mc.preload ?: []) as JSON)
+        render(preloadedModel as JSON)
     }
-
+    @CompileDynamic // JSON.x
     def importFromUrl() {
         def urls = request.JSON.urls
 

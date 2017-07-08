@@ -1,22 +1,33 @@
 package org.modelcatalogue.core.security
 
+
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.ui.RegisterCommand
 import grails.plugin.springsecurity.ui.RegistrationCode
-import org.modelcatalogue.core.util.FriendlyErrors
 import org.springframework.security.core.context.SecurityContextHolder
 
-class RegisterController extends grails.plugin.springsecurity.ui.RegisterController {
+class RegisterController extends grails.plugin.springsecurity.ui.RegisterController, GrailsConfigurationAware {
+
 
     UserService userService
+    String serverUrl
+    Boolean allowSignup
+
+    @Override
+    void setConfiguration(Config co) {
+        this.serverUrl = co.getProperty('grails.serverURL')
+        this.allowSignup = co.getProperty('mc.allow.signup')
+    }
 
     def register(RegisterCommand command) {
         def adminEmail = System.getenv(UserService.ENV_ADMIN_EMAIL)
         def supervisorEmail = System.getenv(UserService.ENV_SUPERVISOR_EMAIL)
         def conf = SpringSecurityUtils.securityConfig
 
-        if (!grailsApplication.config.mc.allow.signup) {
+        if (!allowSignup) {
             flash.error = "Registration is not enabled for this application"
             return
         }
@@ -173,7 +184,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
     }
 
     protected String generateLink(String action, linkParams) {
-        createLink(base: grailsApplication.config.grails.serverURL,
+        createLink(base: serverUrl,
             controller: 'register', action: action,
             params: linkParams)
     }

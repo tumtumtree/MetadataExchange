@@ -1,9 +1,17 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import grails.gorm.DetachedCriteria
 import grails.util.Holders
 import grails.core.GrailsApplication
 import grails.core.GrailsDomainClass
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
+import org.grails.datastore.mapping.model.MappingContext
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.hibernate.SessionFactory
 import org.modelcatalogue.core.actions.Batch
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.dataarchitect.CsvTransformation
@@ -14,21 +22,22 @@ import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import org.modelcatalogue.core.util.lists.ListWithTotalAndTypeWrapper
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Lists
+@CompileStatic
+@Slf4j
+class DataModelService implements GrailsConfigurationAware {
 
-import javax.annotation.PostConstruct
-
-class DataModelService {
-
-    def modelCatalogueSecurityService
-    def grailsApplication
-    def sessionFactory
+    ModelCatalogueSecurityService modelCatalogueSecurityService
+    GrailsApplication grailsApplication
+    SessionFactory sessionFactory
+    MappingContext mappingContext
 
     private boolean legacyDataModels
 
-    @PostConstruct
-    void init() {
-        this.legacyDataModels = grailsApplication.config.mc.legacy.dataModels
+    @Override
+    void setConfiguration(Config co) {
+        this.legacyDataModels = co.getProperty('mc.legacy.dataModels')
     }
+
 
     public Map<String, Integer> getStatistics(DataModelFilter filter) {
         def model = [:]
@@ -73,11 +82,12 @@ class DataModelService {
         model
     }
 
+    @CompileDynamic // because of list.list. What the hell is that.
     public <T> ListWrapper<T> classified(ListWrapper<T> list, DataModelFilter modelFilter = dataModelFilter) {
         if (!(list instanceof ListWithTotalAndTypeWrapper)) {
             throw new IllegalArgumentException("Cannot classify list $list. Only ListWithTotalAndTypeWrapper is currently supported")
         }
-
+        log.info("Apparently ListWrapper list can have property list.list: ${list.list}")
         if (list.list instanceof DetachedListWithTotalAndType) {
             classified(list.list as DetachedListWithTotalAndType<T>, modelFilter)
         } else {
@@ -87,11 +97,7 @@ class DataModelService {
         return list
     }
 
-    public <T> ListWithTotalAndType<T> classified(ListWithTotalAndType<T> list, DataModelFilter modelFilter = dataModelFilter) {
-        if (!(list instanceof DetachedListWithTotalAndType)) {
-            throw new IllegalArgumentException("Cannot classify list $list. Only DetachedListWithTotalAndType is currently supported")
-        }
-
+    public <T> ListWithTotalAndType<T> classified(DetachedListWithTotalAndType<T> list, DataModelFilter modelFilter = dataModelFilter) {
         classified(list.criteria, modelFilter)
 
         return list
@@ -166,7 +172,10 @@ class DataModelService {
 
         dataModel.declares.each {
             Class type = HibernateHelper.getEntityClass(it)
-            GrailsDomainClass domainClass = Holders.applicationContext.getBean(GrailsApplication).getDomainClass(type.name) as GrailsDomainClass
+            //PersistentEntity domainClass = mappingContext.getPersistentEntity(grailsApplication.getClassForName(type.name).name)
+            //log.info("Is the type returned by HibernateHelper ${type.name} different to that by grailsApplication ${domainClass.name}?")
+            // GrailsDomainClass is deprecated but the replacement, PersistentEntity, doesn't seem well documented yet.
+            GrailsDomainClass domainClass = Holders.applicationContext.getBean(GrailsApplication).getClassForName(type.name) as GrailsDomainClass
 
             for (prop in domainClass.persistentProperties) {
                 if (prop.association && (prop.manyToOne || prop.oneToOne) && prop.name != 'dataModel') {
@@ -180,7 +189,7 @@ class DataModelService {
 
         dependents
     }
-
+    @CompileDynamic // because of where query
     static List<Tag> allTags(DataModel dataModel) {
         Relationship.where { relationshipType == RelationshipType.tagType && destination.dataModel == dataModel }.distinct('source').list().sort { a, b -> a.name <=> b.name }
     }

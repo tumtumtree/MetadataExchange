@@ -779,6 +779,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
     }
 
     def "define id as closure"() {
+        // weird, why is this messing with the config serverURL?
         Object old = Holders.grailsApplication.config.grails.serverURL
         Holders.grailsApplication.config.grails.serverURL = "http://localhost:8080"
         build {
