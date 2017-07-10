@@ -32,7 +32,7 @@ import org.springframework.validation.ObjectError
 
 class BootStrap {
 
-    def initCatalogueService
+    InitCatalogueService initCatalogueService
     def elementService
     def actionService
     def mappingService

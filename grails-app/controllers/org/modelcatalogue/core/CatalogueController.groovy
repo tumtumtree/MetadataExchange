@@ -18,7 +18,7 @@ class CatalogueController {
     def dataModelService
     def dataClassService
     def elementService
-    def initCatalogueService
+    InitCatalogueService initCatalogueService
     def modelCatalogueSecurityService
     def executorService
 

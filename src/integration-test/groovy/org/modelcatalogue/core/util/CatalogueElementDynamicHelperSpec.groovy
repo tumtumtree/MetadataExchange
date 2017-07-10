@@ -4,6 +4,7 @@ import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
+import org.modelcatalogue.core.InitCatalogueService
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -11,7 +12,7 @@ import spock.lang.Unroll
 @Integration
 class CatalogueElementDynamicHelperSpec extends Specification {
 
-    def initCatalogueService
+    InitCatalogueService initCatalogueService
 
     def "Relationships are added to the transients"() {
         expect:

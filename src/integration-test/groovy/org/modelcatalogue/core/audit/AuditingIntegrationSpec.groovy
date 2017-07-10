@@ -14,7 +14,7 @@ import spock.lang.Specification
 class AuditingIntegrationSpec extends Specification {
 
     def elementService
-    def initCatalogueService
+    InitCatalogueService initCatalogueService
     def sessionFactory
     def mappingService
     def auditService

@@ -21,7 +21,7 @@ abstract class AbstractIntegrationSpec extends Specification {
     protected static final String COMPLEX_MODEL_NAME = 'C4CTDE'
 
     @Autowired
-    def initCatalogueService
+    InitCatalogueService initCatalogueService
 
     @Autowired
     def sessionFactory

@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream
 
 class DataImportController  {
 
-    def initCatalogueService
+    InitCatalogueService initCatalogueService
     def umljService
     def loincImportService
     def modelCatalogueSecurityService
