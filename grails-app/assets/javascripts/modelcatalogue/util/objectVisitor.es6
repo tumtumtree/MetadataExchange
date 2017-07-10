@@ -1,4 +1,4 @@
-angular.module('mc.util.objectVisitor', ['mc.util.objectVisitor']).factory('objectVisitor', function($q){
+angular.module('mc.util.objectVisitor', ['mc.util.objectVisitor']).factory('objectVisitor', ["$q", function($q){
 
     let symbols = {
       pendingPromises: Symbol('pendingPromise'),
@@ -41,4 +41,4 @@ angular.module('mc.util.objectVisitor', ['mc.util.objectVisitor']).factory('obje
     }
 
     return new ObjectVisitor();
-});
+}]);
