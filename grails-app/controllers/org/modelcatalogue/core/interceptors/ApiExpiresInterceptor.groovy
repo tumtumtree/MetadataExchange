@@ -31,6 +31,7 @@ class ApiExpiresInterceptor {
             response.setHeader('Expires', '-1')
             return true
         }
+        true
     }
     boolean after() {true}
     void afterView() {
