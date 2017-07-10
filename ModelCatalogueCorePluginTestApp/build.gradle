@@ -65,63 +65,6 @@ task runDev(type: Exec, dependsOn: bowerInstall) {
     mustRunAfter 'stop'
 }
 
-task ensureProductionConfig(type: Copy) {
-    description = "Ensures configuration for MX production environment exists"
-    onlyIf {
-        !new File(new File(System.getProperty('user.home'), '.grails'), 'mc-config.groovy').exists()
-    }
-    from('../conf/docker') {
-        include 'mc-config.groovy'
-    }
-    into "${System.getProperty('user.home')}/.grails"
-}
-
-task runProd(type: Exec, dependsOn: [bowerInstall, ensureProductionConfig, startContainers]) {
-    description = "Run MX in production environment"
-
-    assertJava8()
-    environment 'GRAILS_OPTS', "-Xmx2G -Xms1G -XX:MaxPermSize=1G -server"
-    environment 'METADATA_HOST', 'localhost:8080' // this is localhost if you're using docker machine or not
-    environment 'METADATA_USERNAME', "metadata"
-    environment 'METADATA_PASSWORD', "metadata"
-    environment 'METADATA_JDBC_URL', "jdbc:mysql://${host}:43306/metadata?autoReconnect=true&useUnicode=yes&characterEncoding=UTF-8"
-    environment 'MC_ES_HOST', host
-    environment 'MC_ES_PORT', "49300"
-    environment 'MC_MAIL_FROM', "tester@metadata.org.uk"
-    environment 'MC_MAIL_HOST', host
-    environment 'MC_MAIL_PORT', "41025"
-    environment 'MC_ALLOW_SIGNUP', "true"
-    environment 'MC_INDEX_PREFIX', "production"
-    environment 'MC_ADMIN_EMAIL', "admin@metadata.org.uk"
-    environment 'MC_SUPERVISOR_EMAIL', "supervisor@metadata.org.uk"
-
-    def cmds = [grailsw, 'prod']
-
-    if (project.hasProperty('mc.war')) {
-        cmds << 'run-war'
-    } else {
-        cmds << 'run-app'
-    }
-
-    if (project.hasProperty('mc.debug')) {
-        cmds << '--debug-fork'
-    }
-
-    cmds << '--non-interactive'
-    cmds << '--stacktrace'
-
-    if (project.hasProperty('mc.search.elasticsearch.host')) {
-        cmds << "-Dmc.search.elasticsearch.host=${project.getProperty('mc.search.elasticsearch.host')}"
-    }
-
-    if (project.hasProperty('mc.config.location')) {
-        cmds << "-Dmc.config.location=${project.getProperty('mc.config.location')}"
-    }
-
-    commandLine cmds
-    mustRunAfter 'stop'
-}
-
 task runGrailsTests(type: Exec, dependsOn: [bowerInstall, startContainers, initTestDatabaseInMySQLContainer]) {
     description = "Run all Grails MX tests. Can pass args to Grails test-app, e.g.: -PtestArgs='unit:spock PostController'"
 
@@ -163,10 +106,7 @@ task collectTestReports(type: Copy) {
     into "${System.getProperty('user.home')}/reports/"
 }
 
-task stop(type: Exec) {
-    description = "Stops running MX application"
-    commandLine grailsw, 'stop-app','--non-interactive', '--stacktrace'
-}
+
 
 stop.finalizedBy stopContainers
 
