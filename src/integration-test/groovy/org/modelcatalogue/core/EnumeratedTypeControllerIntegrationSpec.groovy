@@ -1,7 +1,9 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import grails.util.GrailsNameUtils
 
+@Rollback
 class EnumeratedTypeControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 
 

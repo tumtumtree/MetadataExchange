@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.converters.JSON
+import grails.gorm.transactions.Rollback
 import grails.util.GrailsNameUtils
 import org.grails.web.json.JSONElement
 import org.grails.web.json.JSONObject
@@ -14,6 +15,7 @@ import spock.lang.Unroll
 
 import javax.servlet.http.HttpServletResponse
 
+@Rollback
 abstract class AbstractCatalogueElementControllerIntegrationSpec<T> extends AbstractControllerIntegrationSpec implements ResultRecorder{
 
 

@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import grails.rest.RestfulController
 import grails.util.GrailsNameUtils
 import org.grails.web.json.JSONElement
@@ -13,6 +14,7 @@ import spock.lang.Unroll
 
 import javax.servlet.http.HttpServletResponse
 
+@Rollback
 abstract class AbstractControllerIntegrationSpec<T> extends AbstractIntegrationSpec implements ResultRecorder{
 
     @Shared

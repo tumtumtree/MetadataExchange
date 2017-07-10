@@ -1,5 +1,6 @@
 package org.modelcatalogue.gel.export
 
+import grails.gorm.transactions.Rollback
 import org.hibernate.SessionFactory
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder

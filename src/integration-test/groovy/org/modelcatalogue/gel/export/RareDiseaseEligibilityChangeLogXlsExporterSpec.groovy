@@ -1,5 +1,6 @@
 package org.modelcatalogue.gel.export
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.DataClass
 
 import static junit.framework.Assert.assertEquals
@@ -8,6 +9,7 @@ import static org.modelcatalogue.core.util.test.FileOpener.open
 /**
  * Test for RD eligibility criteria change log reports class using test model with similar format to expected data.
  */
+@Rollback
 class RareDiseaseEligibilityChangeLogXlsExporterSpec extends AbstractRareDiseasesExporterSpec {
 
 
