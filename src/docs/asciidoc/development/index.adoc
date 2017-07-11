@@ -20,6 +20,11 @@ include::bugs.adoc[leveloffset=+1]
 include::migration.adoc[leveloffset=+1]
 include::executor_service.adoc[leveloffset=+1]
 
+== Development Environment
+
+include::dockerMacOS.adoc[leveloffset=+1]
+include::runningAMySQLDump.adoc[leveloffset=+1]
+
 
 
 

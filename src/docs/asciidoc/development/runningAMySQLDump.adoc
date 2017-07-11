@@ -1,0 +1,11 @@
+= Running a MySQL Dump in development
+
+1. Install and configure Docker
+2. Start Containers `./gradlew startContainers`
+3. Import the MySQL dump in the container database.
+
+`docker exec -i mx-mysql mysql -umetadata -pmetadata metadata < gel_dump_09_05_2017_without_logs.sql`
+
+4. Start the app in production environment
+
+`./gradlew runProd`
