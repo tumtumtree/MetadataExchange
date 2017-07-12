@@ -1,9 +1,10 @@
 package org.modelcatalogue.core.actions
 
-import grails.testing.mixin.integration.Integration
 import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 import grails.util.Holders
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
+import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.FutureTask
@@ -12,15 +13,12 @@ import java.util.concurrent.FutureTask
 @Integration
 class ActionServiceSpec extends Specification {
 
+    @Autowired
     ActionService service
-    Batch batch
-
-    def setup() {
-        service = Holders.applicationContext.getBean(ActionService)
-        batch = new Batch(name: "Test Batch").save(failOnError: true)
-    }
 
     def "performing action does all necessary steps"() {
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
         def queue = []
         ExecutorService executorService = Mock(ExecutorService)
         executorService.submit(_ as Runnable) >> { Runnable task ->
@@ -32,7 +30,7 @@ class ActionServiceSpec extends Specification {
         service.executorService = executorService
 
 
-        Action action = createAction()
+        Action action = createAction(batch)
 
         expect:
         action.state == ActionState.PENDING
@@ -57,11 +55,14 @@ class ActionServiceSpec extends Specification {
     }
 
     def "failing provider action will fails the dependant"() {
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
         setupExecutorServiceForImmediateExecution()
 
-        Action ok = createAction()
-        Action fail = createAction(fail: 'true')
-        Action dependant = createAction(role: 'dependant')
+        Action ok = createAction(batch)
+        Action fail = createAction(batch, [fail: 'true'])
+        Action dependant = createAction(batch, [role: 'dependant'])
 
         dependant.addToDependsOn(provider: ok, dependant: dependant, role: 'test')
         dependant.addToDependsOn(provider: fail, dependant: dependant, role: 'blah')
@@ -74,11 +75,14 @@ class ActionServiceSpec extends Specification {
     }
 
     def "circular dependency fails the actions"() {
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
         setupExecutorServiceForImmediateExecution()
 
-        Action one = createAction()
-        Action two = createAction()
-        Action three = createAction()
+        Action one = createAction(batch)
+        Action two = createAction(batch)
+        Action three = createAction(batch)
 
         two.addToDependsOn(provider: one, dependant: two, role: 'two')
         three.addToDependsOn(provider: two, dependant: three, role: 'three')
@@ -103,11 +107,11 @@ class ActionServiceSpec extends Specification {
         service.executorService = executorService
     }
 
-    private Action createAction(Map<String, String> parameters = [test: 'ok']) {
-        createAction(parameters, ActionState.PENDING)
+    private Action createAction(Batch batch, Map<String, String> parameters = [test: 'ok']) {
+        createAction(batch, parameters, ActionState.PENDING)
     }
 
-    private Action createAction(Map<String, String> parameters = [test: 'ok'], ActionState state) {
+    private Action createAction(Batch batch, Map<String, String> parameters = [test: 'ok'], ActionState state) {
         Action action = new Action()
         action.state = state
         action.type = TestActionRunner
@@ -123,8 +127,11 @@ class ActionServiceSpec extends Specification {
 
 
     def "action is dismissed"() {
-        Action action = createAction(should: 'dismiss')
-        Action dependant = createAction(is: 'dependant')
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
+        Action action = createAction(batch, [should: 'dismiss'])
+        Action dependant = createAction(batch, [is: 'dependant'])
 
         action.addToDependencies(dependant: dependant, provider: action, role: 'test')
         dependant.addToDependsOn(dependant: dependant, provider: action, role: 'foo')
@@ -149,10 +156,13 @@ class ActionServiceSpec extends Specification {
     }
 
     def "create new action using service"() {
-        Action one = createAction(role: "one")
-        Action two = createAction(role: "two")
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
 
-        Action created = service.create(batch, TestActionRunner, one: one, two: two, role: 'created')
+        Action one = createAction(batch, [role: "one"])
+        Action two = createAction(batch, [role: "two"])
+
+        Action created = service.create([one: one, two: two, role: 'created'], batch, TestActionRunner)
 
         expect:
         created
@@ -167,6 +177,9 @@ class ActionServiceSpec extends Specification {
     }
 
     def "action parameters are validated before saving"() {
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
         Action failed = service.create(batch, TestActionRunner, fail: "it")
 
         expect:
@@ -178,9 +191,11 @@ class ActionServiceSpec extends Specification {
     }
 
     def "list actions"() {
-        createAction()
-        createAction(ActionState.DISMISSED)
-        createAction(ActionState.PERFORMED)
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+        createAction(batch)
+        createAction(batch, [:], ActionState.DISMISSED)
+        createAction(batch, [:], ActionState.PERFORMED)
 
         Batch other = new Batch(name: "Other batch").save(failOnError: true)
 
@@ -199,12 +214,15 @@ class ActionServiceSpec extends Specification {
     }
 
     def "find by type and params"() {
-        createAction(one: 'one', two: 'two')
-        createAction(one: 'one', two: 'two', ActionState.FAILED)
-        createAction(one: 'one')
-        createAction(two: 'two')
-        createAction(one: 'one', ActionState.DISMISSED)
-        createAction(two: 'two', ActionState.PERFORMED)
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
+        createAction(batch, [one: 'one', two: 'two'])
+        createAction(batch, [one: 'one', two: 'two'], ActionState.FAILED)
+        createAction(batch, [one: 'one'])
+        createAction(batch, [two: 'two'])
+        createAction(batch, [one: 'one'], ActionState.DISMISSED)
+        createAction(batch, [two: 'two'], ActionState.PERFORMED)
 
         Batch other = new Batch(name: "Other batch").save(failOnError: true)
 
@@ -235,6 +253,9 @@ class ActionServiceSpec extends Specification {
     }
 
     def "reuse existing action"() {
+        given:
+        Batch batch = new Batch(name: "Test Batch").save(failOnError: true)
+
         Action first = service.create batch, TestActionRunner, one: 12345
         Action second = service.create batch, TestActionRunner, one: 12345
 
