@@ -651,6 +651,7 @@ class ElementServiceIntegrationSpec extends AbstractIntegrationSpec {
         DataType clonedDataType = DataType.findByNameAndDataModel(originalDataTypeName, destination)
 
         then:
+        clonedDataType
         clonedDataType.instanceOf EnumeratedType
 
         verifyCloned source, destination, originalDataElement, clonedDataElement
@@ -731,6 +732,7 @@ class ElementServiceIntegrationSpec extends AbstractIntegrationSpec {
         DataType clonedDataType = DataType.findByNameAndDataModel(originalDataTypeName, destination)
 
         then:
+        clonedDataType
         clonedDataType instanceof EnumeratedType
 
         verifyCloned source, destination, originalDataClass, clonedDataClass
