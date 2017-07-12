@@ -4,6 +4,7 @@ import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.Relationship
+import org.modelcatalogue.core.RelationshipService
 import org.modelcatalogue.core.RelationshipType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory
@@ -14,32 +15,44 @@ import static org.modelcatalogue.core.actions.AbstractActionRunner.normalizeDesc
 @Rollback
 class CreateRelationshipISpec extends AbstractIntegrationSpec {
 
-    def relationshipService
+    @Autowired
+    RelationshipService relationshipService
 
-    @Autowired AutowireCapableBeanFactory autowireCapableBeanFactory
+    @Autowired
+    AutowireCapableBeanFactory autowireCapableBeanFactory
+
     @Shared
     DataClass one, two
+
     @Shared
     RelationshipType relation, contains
+
     @Shared
     CreateRelationship createAction
 
+    @Shared
+    Boolean fixturesLoaded = false
+
     def setup() {
-        loadFixtures()
-        createAction = new CreateRelationship()
-        createAction.relationshipService = relationshipService
-        createAction.autowireCapableBeanFactory = autowireCapableBeanFactory
-        one = DataClass.findByName("book")
-        two = DataClass.findByName("chapter1")
-        relation = RelationshipType.relatedToType
-        contains = RelationshipType.containmentType
+        if ( !fixturesLoaded ) {
+            fixturesLoaded = true
+
+            loadFixtures()
+            createAction = new CreateRelationship()
+            createAction.relationshipService = relationshipService
+            createAction.autowireCapableBeanFactory = autowireCapableBeanFactory
+            one = DataClass.findByName("book")
+            two = DataClass.findByName("chapter1")
+            relation = RelationshipType.relatedToType
+            contains = RelationshipType.containmentType
+        }
     }
 
     def "uses default action natural name"() {
 
         expect:
         createAction.naturalName == "Create Relationship"
-        createAction.description == normalizeDescription(CreateRelationship.description)
+        normalizeDescription(createAction.description) == normalizeDescription(CreateRelationship.description)
 
         when:
         createAction.initWith(source: encodeEntity(one), destination: encodeEntity(two), type: encodeEntity(relation))
@@ -84,6 +97,10 @@ class CreateRelationshipISpec extends AbstractIntegrationSpec {
     }
 
     def "the is action initialized with the parameters"() {
+        def createAction = new CreateRelationship()
+        createAction.relationshipService = relationshipService
+        createAction.autowireCapableBeanFactory = autowireCapableBeanFactory
+
         when:
         createAction.link()
 
@@ -99,32 +116,31 @@ class CreateRelationshipISpec extends AbstractIntegrationSpec {
     }
 
     def "new instance is created and saved to the database"() {
+        given:
+
         StringWriter sw = []
         PrintWriter pw = [sw]
-
         createAction.out = pw
 
-        expect:
-        Relationship.count() == 0
-
         when:
+        int initialCount = Relationship.count()
         createAction.initWith source: encodeEntity(one), destination: encodeEntity(two), type: encodeEntity(relation)
         createAction.run()
 
         then:
         !createAction.failed
         sw.toString() == "<a href='#/catalogue/dataClass/${one.id}'>Data Class 'book'</a> now <a href='#/catalogue/relationshipType/${relation.id}'>related to</a> <a href='#/catalogue/dataClass/${two.id}'>Data Class 'chapter1'</a>"
-        createAction.result == encodeEntity(Relationship.list(limit: 1)[0])
+        Relationship.count() > old(Relationship.count())
+        Relationship.where { id == createAction.result.replaceAll('gorm://org.modelcatalogue.core.Relationship:', '') as Long }.get()
+
     }
 
     def "error is reported to the output stream"() {
+        given:
         StringWriter sw = []
         PrintWriter pw = [sw]
 
         createAction.out = pw
-
-        expect:
-        Relationship.count() == 0
 
         when:
         createAction.initWith(source: encodeEntity(one), destination: encodeEntity(two), type: encodeEntity(contains))
@@ -132,7 +148,7 @@ class CreateRelationshipISpec extends AbstractIntegrationSpec {
 
         then:
         createAction.failed
-        Relationship.count() == 0
+        Relationship.count() == old(Relationship.count())
         sw.toString().startsWith('Unable to create new relationship')
     }
 
