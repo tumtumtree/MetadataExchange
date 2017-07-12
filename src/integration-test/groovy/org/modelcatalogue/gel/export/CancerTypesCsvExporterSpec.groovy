@@ -1,12 +1,10 @@
 package org.modelcatalogue.gel.export
 
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.DataClass
 
-/**
- * Created by rickrees on 07/04/2016.
- */
+@Rollback
 class CancerTypesCsvExporterSpec extends AbstractCancerTypesExporterSpec {
-
 
     def "export Cancer types to csv"() {
         OutputStream out = new ByteArrayOutputStream()
