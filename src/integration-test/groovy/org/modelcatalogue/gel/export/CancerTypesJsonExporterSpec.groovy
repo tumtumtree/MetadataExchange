@@ -1,11 +1,13 @@
 package org.modelcatalogue.gel.export
 
+import grails.gorm.transactions.Rollback
 import groovy.json.JsonOutput
 import org.modelcatalogue.core.DataClass
 
 /**
  * Created by rickrees on 31/03/2016.
  */
+@Rollback
 class CancerTypesJsonExporterSpec extends AbstractCancerTypesExporterSpec {
 
 

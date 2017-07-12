@@ -17,6 +17,7 @@ import org.modelcatalogue.gel.RareDiseaseCsvExporter
 /**
  * Created by rickrees on 10/03/2016.
  */
+@Rollback
 class AbstractRareDiseasesExporterSpec extends AbstractIntegrationSpec {
 
     public static final String RARE_DISEASE_DATA_MODEL_NAME = 'Rare Diseases Test Data Model'

@@ -1,5 +1,6 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import groovy.util.slurpersupport.GPathResult
 import org.modelcatalogue.core.api.ElementStatus
@@ -10,6 +11,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 import javax.servlet.http.HttpServletResponse
 
+@Rollback
 @Integration
 class DeleteThingsSpec extends Specification {
 

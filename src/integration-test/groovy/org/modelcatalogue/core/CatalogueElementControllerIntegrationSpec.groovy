@@ -1,8 +1,10 @@
 package org.modelcatalogue.core
 
+import grails.gorm.transactions.Rollback
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.api.ElementStatus
 
+@Rollback
 class CatalogueElementControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 
     def setupSpec(){

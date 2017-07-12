@@ -1,5 +1,6 @@
 package org.modelcatalogue.gel.export
 
+import grails.gorm.transactions.Rollback
 import org.hibernate.SessionFactory
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModel
@@ -11,6 +12,7 @@ import static org.modelcatalogue.core.util.test.FileOpener.open
 /**
  * Test for Data Spec change log reports class.
  */
+@Rollback
 class DataModelChangeLogXlsExporterSpec extends AbstractDataModelExporterSpec {
 
     def "Export data spec change logs to xls"() {
