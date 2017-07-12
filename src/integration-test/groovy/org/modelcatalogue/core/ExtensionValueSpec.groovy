@@ -2,6 +2,7 @@ package org.modelcatalogue.core
 
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
+import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -11,35 +12,30 @@ class ExtensionValueSpec extends Specification {
 
     @Unroll
     def "#r: create a new extension value from #args validates to #validates"() {
-        int initialSize = ExtensionValue.count()
-        when:
+        given:
+        def de = new DataElement(name: "element").save(failOnError: true)
 
+        when:
+        if ( hasElement ) {
+            args.element = de
+        }
         ExtensionValue type = new ExtensionValue(args)
         type.save()
 
-        println type.errors
-
         then:
-
         !type.hasErrors() == validates
-        ExtensionValue.count() == size + initialSize
+        ExtensionValue.count() == (validates ? 1 : 0) + old(ExtensionValue.count())
 
         where:
-        r | validates | size | args
-        1 | false     | 0    | [:]
-        2 | false     | 0    | [name: "x" * 256]
-        3 | false     | 0    | [name: "x" * 256, extensionValue: "x"]
-        4 | false     | 0    | [name: "x" * 256, extensionValue: "x" * 1001]
-        5 | false     | 0    | [name: "x" * 256, element: de]
-        6 | true      | 1    | [name: "xxx", element: de]
-        7 | false     | 0    | [name: "xxx" * 256, extensionValue: "x", element: de]
-        8 | false     | 0    | [name: "xxx" * 256, extensionValue: "x" * 1001, element: de]
-        9 | true      | 1    | [name: "xxx", extensionValue: "x", element: de]
+        r | validates | hasElement | args
+        1 | false     | false      | [:]
+        2 | false     | false      | [name: "x" * 256]
+        3 | false     | false      | [name: "x" * 256, extensionValue: "x"]
+        4 | false     | false      | [name: "x" * 256, extensionValue: "x" * 1001]
+        5 | false     | true       | [name: "x" * 256]
+        6 | true      | true       | [name: "xxx"]
+        7 | false     | true       | [name: "xxx" * 256, extensionValue: "x"]
+        8 | false     | true       | [name: "xxx" * 256, extensionValue: "x" * 1001]
+        9 | true      | true       | [name: "xxx", extensionValue: "x"]
     }
-
-    DataElement getDe() {
-        new DataElement(name: "element").save(failOnError: true)
-    }
-
-
 }
