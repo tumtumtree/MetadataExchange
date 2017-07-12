@@ -3,16 +3,13 @@ package org.modelcatalogue.core.elasticsearch
 import com.google.common.cache.Cache
 import com.google.common.cache.CacheBuilder
 import com.google.common.collect.ImmutableMap
-import org.elasticsearch.indices.IndexAlreadyExistsException
-import org.elasticsearch.transport.RemoteTransportException
-import org.hibernate.proxy.HibernateProxyHelper
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
+import org.grails.datastore.gorm.GormEntity
+import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.util.HibernateHelper
-import rx.Observable
 
-import javax.management.InstanceAlreadyExistsException
-
-import static rx.Observable.just
-
+@CompileStatic
 class IndexingSession {
 
     final Cache<String, Document> documentCache = CacheBuilder.newBuilder().build()
@@ -24,27 +21,30 @@ class IndexingSession {
 
     private IndexingSession() {}
 
+    @CompileDynamic
     Document getDocument(Object o) {
         if (!o) {
             return Document.EMPTY
         }
-
-        try {
-            return documentCache.get("${HibernateHelper.getEntityClass(o)}:${o.getId()}") {
-                createDocument(o)
+        CatalogueElement.withNewSession {
+            try {
+                return documentCache.get("${HibernateHelper.getEntityClass(o)}:${o.getId()}") {
+                    createDocument(o)
+                }
+            } catch (IllegalStateException | ConcurrentModificationException ignored) {
+                return createDocument(o)
             }
-        } catch (IllegalStateException | ConcurrentModificationException ignored) {
-            return createDocument(o)
         }
     }
 
+    @CompileDynamic
     private Document createDocument(Object object) {
         if (!object) {
             return Document.EMPTY
         }
 
         if (object instanceof Document) {
-            return object
+            return object as Document
         }
 
         ImmutableMap<String, Object> result = DocumentSerializer.Registry.get(object.class).buildDocument(this, object, ImmutableMap.builder()).build()
