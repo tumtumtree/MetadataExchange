@@ -5,13 +5,28 @@ import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass
+import org.modelcatalogue.core.RelationshipService
 import org.modelcatalogue.core.util.lists.ListWithTotal
 
 @Rollback
 class DataArchitectServiceSpec extends AbstractIntegrationSpec {
 
-    def dataArchitectService, relationshipService, de1, de2, de3, de4, de5, md
+    DataArchitectService dataArchitectService
+    RelationshipService relationshipService
 
+    def de1
+
+    def de2
+
+    def de3
+
+    def de4
+
+    def de5
+
+    def md
+
+    Boolean fixturesLoaded = false
 
     def setup() {
         loadFixtures()
