@@ -1,9 +1,12 @@
 package org.modelcatalogue.core.dataarchitect
+
+import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.DataClass
 import spock.lang.Requires
 
+@Rollback
 @Requires({ !System.getenv('TRAVIS') })
 class UmljServiceISpec extends AbstractIntegrationSpec {
 
@@ -11,12 +14,18 @@ class UmljServiceISpec extends AbstractIntegrationSpec {
     def catalogueBuilder
 
     def "test import"() {
+        given:
         initCatalogue()
-        def filenameXsd = "test/integration/resources/CLLDataModel0.1.umlj"
+        def filenameXsd = "src/integration-test/resources/CLLDataModel0.1.umlj"
         DataModel classification = new DataModel(name: "GeL Cancer Core ${System.currentTimeMillis()}").save(failOnError: true)
 
         when:
         InputStream inputStream = new FileInputStream(filenameXsd)
+
+        then:
+        inputStream
+
+        when:
         umljService.importUmlDiagram(catalogueBuilder, inputStream, "rare_diseases_combined", classification)
 
         def patient = DataClass.findByName("Patient")
