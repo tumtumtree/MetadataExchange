@@ -10,7 +10,21 @@ import spock.lang.Unroll
 @Rollback
 class DataArchitectControllerIntegrationSpec extends AbstractIntegrationSpec {
 
-    def relationshipService, de1, de2, de3, de4, de5, md, md2
+    RelationshipService relationshipService
+
+    DataElement de1
+
+    DataElement de2
+
+    DataElement de3
+
+    DataElement de4
+
+    DataElement de5
+
+    DataClass md
+
+    DataClass md2
 
 
     def setup() {

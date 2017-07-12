@@ -24,13 +24,13 @@ abstract class AbstractIntegrationSpec extends Specification {
     InitCatalogueService initCatalogueService
 
     @Autowired
-    def sessionFactory
+    SessionFactory sessionFactory
 
     @Autowired
-    def cacheService
+    CacheService cacheService
 
     @Autowired
-    def relationshipTypeService
+    RelationshipTypeService relationshipTypeService
 
     @Autowired
     TestDataHelper testDataHelper

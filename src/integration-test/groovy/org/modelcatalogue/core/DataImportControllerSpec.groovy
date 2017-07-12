@@ -9,13 +9,19 @@ import org.modelcatalogue.core.util.ResultRecorder
 @Rollback
 class DataImportControllerSpec extends AbstractIntegrationSpec implements ResultRecorder {
 
-    def fileName, recorder, filenameXsd, filenameXsd2, fileNameStarUML
+    String fileName = "src/integration-test/resources/example.xls"
+
+    ResultRecorder recorder
+
+    String filenameXsd = "src/test/resources/SACT/XMLDataTypes.xsd"//"test/unit/resources/SACT/XSD_Example.xsd"
+
+    String filenameXsd2 = "src/test/resources/SACT/Breast_XMLSchema.xsd"//"test/unit/resources/SACT/XSD_Example.xsd"
+
+    String fileNameStarUML = "src/test/resources/gel_cancer_combined2.umlj"
+
+    Boolean fixturesLoaded = false
 
     def setup() {
-        fileName = "test/integration/resources/example.xls"
-        filenameXsd = "test/unit/resources/SACT/XMLDataTypes.xsd"//"test/unit/resources/SACT/XSD_Example.xsd"
-        filenameXsd2 = "test/unit/resources/SACT/Breast_XMLSchema.xsd"//"test/unit/resources/SACT/XSD_Example.xsd"
-        fileNameStarUML = "test/integration/resources/gel_cancer_combined2.umlj"
         loadMarshallers()
         loadFixtures()
         recorder = DefaultResultRecorder.create(
