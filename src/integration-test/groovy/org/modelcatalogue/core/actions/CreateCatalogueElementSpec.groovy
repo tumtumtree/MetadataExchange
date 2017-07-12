@@ -16,7 +16,7 @@ class CreateCatalogueElementSpec extends Specification {
     def "uses default action natural name"() {
         expect:
         createAction.naturalName == "Create Catalogue Element"
-        createAction.description == AbstractActionRunner.normalizeDescription(CreateCatalogueElement.description)
+        AbstractActionRunner.normalizeDescription(createAction.description) == AbstractActionRunner.normalizeDescription(CreateCatalogueElement.description)
 
         when:
         createAction.initWith(name: 'The Model', type: DataClass.name)
