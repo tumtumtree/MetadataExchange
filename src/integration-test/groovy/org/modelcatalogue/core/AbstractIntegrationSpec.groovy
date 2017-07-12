@@ -2,6 +2,8 @@ package org.modelcatalogue.core
 
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.web.context.ServletContextHolder
+import org.hibernate.SessionFactory
+import org.modelcatalogue.core.cache.CacheService
 import org.modelcatalogue.core.security.Role
 import org.modelcatalogue.core.security.User
 import org.modelcatalogue.core.security.UserRole
