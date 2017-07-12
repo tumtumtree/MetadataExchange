@@ -11,17 +11,15 @@ import spock.lang.Specification
 class UpdateCatalogueElementSpec extends Specification {
 
     UpdateCatalogueElement updateAction = new UpdateCatalogueElement()
-    DataClass model
-
-    def setup() {
-        model = new DataClass(name: 'The Model UA').save(failOnError: true)
-        model.ext.bar = 'foo'
-    }
 
     def "uses default action natural name"() {
+        given:
+        DataClass model = new DataClass(name: 'The Model UA').save(failOnError: true)
+        model.ext.bar = 'foo'
+
         expect:
         updateAction.naturalName == "Update Catalogue Element"
-        updateAction.description == AbstractActionRunner.normalizeDescription(UpdateCatalogueElement.description)
+        AbstractActionRunner.normalizeDescription(updateAction.description) == AbstractActionRunner.normalizeDescription(UpdateCatalogueElement.description)
 
         when:
         updateAction.initWith(id: model.id.toString(), type: DataClass.name, name: 'The Updated Model')
@@ -35,6 +33,10 @@ class UpdateCatalogueElementSpec extends Specification {
     }
 
     def "the action validates the parameters"() {
+        given:
+        DataClass model = new DataClass(name: 'The Model UA').save(failOnError: true)
+        model.ext.bar = 'foo'
+
         Map<String, String> errorsForEmpty = updateAction.validate([:])
 
         expect:
@@ -80,6 +82,10 @@ class UpdateCatalogueElementSpec extends Specification {
     }
 
     def "the is action initialized with the parameters"() {
+        given:
+        DataClass model = new DataClass(name: 'The Model UA').save(failOnError: true)
+        model.ext.bar = 'foo'
+
         expect:
         updateAction.id   == null
         updateAction.type == null
@@ -100,6 +106,10 @@ class UpdateCatalogueElementSpec extends Specification {
     }
 
     def "new instance is updated and saved to the database"() {
+        given:
+        DataClass model = new DataClass(name: 'The Model UA').save(failOnError: true)
+        model.ext.bar = 'foo'
+
         StringWriter sw = []
         PrintWriter pw = [sw]
 
@@ -126,6 +136,10 @@ class UpdateCatalogueElementSpec extends Specification {
     }
 
     def "error is reported to the output stream"() {
+        given:
+        DataClass model = new DataClass(name: 'The Model UA').save(failOnError: true)
+        model.ext.bar = 'foo'
+
         StringWriter sw = []
         PrintWriter pw = [sw]
 
