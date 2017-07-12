@@ -237,7 +237,7 @@ abstract class  CatalogueElement implements Extendible<ExtensionValue>, Publishe
     }
 
     Relationship createLinkTo(CatalogueElement destination, RelationshipType type) {
-        createLinkTo([:], destination, type)
+        createLinkTo([:], destination, type) as Relationship
     }
 
     Relationship createLinkFrom(Map<String, Object> params, CatalogueElement source, RelationshipType type) {

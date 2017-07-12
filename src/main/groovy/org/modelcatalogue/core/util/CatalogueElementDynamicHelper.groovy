@@ -74,7 +74,7 @@ class CatalogueElementDynamicHelper {
                 type.metaClass[addMethodName] = { Map<String, Object> params = [:], CatalogueElement other ->
                     RelationshipType relType = RelationshipType.readByName(relName)
                     if (!relType) throw new IllegalArgumentException("Unknown relationship type $relName")
-                    Relationship rel = delegate."createLink${direction == 'incoming' ? 'From' : 'To'}"(params, other, relType)
+                    Relationship rel = delegate."createLink${direction == 'incoming' ? 'From' : 'To'}"(params, other, relType) as Relationship
                     if (rel.hasErrors()) {
                         throw new IllegalArgumentException(FriendlyErrors.printErrors("Cannot create relation '$delegate.name' ${direction == 'incoming' ? relType.destinationToSource : relType.sourceToDestination} '$other.name'", rel.errors))
                     }

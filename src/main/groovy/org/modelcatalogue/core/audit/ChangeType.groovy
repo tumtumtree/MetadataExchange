@@ -217,7 +217,7 @@ enum ChangeType {
                 return true
             }
 
-            Relationship old = source.removeLinkTo(destination, type)
+            Relationship old = source.removeLinkTo(destination, type) as Relationship
 
             if (!old) {
                 return true
