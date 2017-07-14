@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.gorm.transactions.Rollback
+import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 import spock.lang.Unroll
 import grails.testing.mixin.integration.Integration
@@ -9,7 +10,8 @@ import grails.testing.mixin.integration.Integration
 @Integration
 class ExtendibleElementExtensionsWrapperSpec extends Specification {
 
-    def relationshipService
+    @Autowired
+    RelationshipService relationshipService
 
     @Unroll
     def "Extendible elements have live map to extension values for #extensionClass"() {
@@ -17,8 +19,13 @@ class ExtendibleElementExtensionsWrapperSpec extends Specification {
         int initialSize = extensionClass.count()
 
         when:
-        def element = newElementFactory.call().save(flush: true)
+        def element
+        if ( newElementFactory == 'createData' ) {
+            element = createDataElement()
 
+        } else if ( newElementFactory == 'createRelationship' ) {
+            element = createRelationship()
+        }
 
         then:
         element
@@ -104,8 +111,8 @@ class ExtendibleElementExtensionsWrapperSpec extends Specification {
 
         where:
         extensionClass          | extensionProperty     | ownerProperty     | newElementFactory
-        ExtensionValue          | "extensions"          | 'element'         | this.&createDataElement
-        RelationshipMetadata    | "extensions"          | 'relationship'    | this.&createRelationship
+        ExtensionValue          | "extensions"          | 'element'         | 'createData'
+        RelationshipMetadata    | "extensions"          | 'relationship'    | 'createRelationship'
     }
 
     private DataElement createDataElement() {
