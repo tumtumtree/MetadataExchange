@@ -25,15 +25,12 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.bertramlabs.asset-pipeline' version '2.5.0'
-}
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'org.grails.grails-web'
 apply plugin: 'org.grails.grails-gsp'
-apply plugin: 'asset-pipeline'
+apply plugin: 'com.bertramlabs.asset-pipeline'
 apply plugin: 'org.grails.plugins.views-json'
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'com.moowork.node'
