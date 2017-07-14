@@ -1,7 +1,9 @@
 package org.modelcatalogue.core
 
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.util.MappingScript
 import org.modelcatalogue.core.util.SecuredRuleExecutor
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.validation.Errors
 
 class Mapping {
@@ -47,15 +49,33 @@ class Mapping {
     }
 
     static SecuredRuleExecutor.ValidationResult validateMapping(String mappingText) {
-        new SecuredRuleExecutor(MappingScript, x: 0).validate(mappingText)
+        new SecuredRuleExecutor.Builder()
+            .binding([x: 0])
+            .baseScriptClass(MappingScript)
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
+            .validate(mappingText)
     }
 
     static Object mapValue(String mapping, Object value) {
-        new SecuredRuleExecutor(MappingScript, x: value).execute(mapping)
+        new SecuredRuleExecutor.Builder()
+            .binding([x: value])
+            .baseScriptClass(MappingScript)
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
+            .execute(mapping)
     }
 
     static SecuredRuleExecutor.ReusableScript reusableMapping(String mappingText) {
-        new SecuredRuleExecutor(MappingScript, x: 0).reuse(mappingText)
+        new SecuredRuleExecutor.Builder()
+            .binding([x: 0])
+            .baseScriptClass(MappingScript)
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
+            .reuse(mappingText)
     }
 
     String toString() {

@@ -1,6 +1,8 @@
 package org.modelcatalogue.core.util
 
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.DataType
+import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 import spock.lang.Unroll
 import spock.util.mop.ConfineMetaClassChanges
@@ -21,7 +23,12 @@ class DataTypeRuleScriptSpec extends Specification {
         }
 
         def binding = new Binding(x: value, dataType: dataType)
-        def executor = new SecuredRuleExecutor<DataTypeRuleScript>(DataTypeRuleScript, binding)
+        def executor = new SecuredRuleExecutor<DataTypeRuleScript>.Builder()
+            .baseScriptClass(DataTypeRuleScript)
+            .binding(binding)
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
         executor.execute(expression)
         then:
         noExceptionThrown()

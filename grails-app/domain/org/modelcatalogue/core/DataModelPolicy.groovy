@@ -1,10 +1,13 @@
 package org.modelcatalogue.core
 
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.policy.Policy
 import org.modelcatalogue.core.policy.PolicyBuilder
 import org.modelcatalogue.core.policy.PolicyBuilderScript
 import org.modelcatalogue.core.rx.ErrorSubscriber
+import org.modelcatalogue.core.util.MappingScript
 import org.modelcatalogue.core.util.SecuredRuleExecutor
+import org.springframework.beans.factory.annotation.Autowired
 
 class DataModelPolicy {
 
@@ -22,7 +25,14 @@ class DataModelPolicy {
         name size: 1..255, unique: true
         policyText size: 1..10000, validator: { val,obj ->
             if(!val){return true}
-            SecuredRuleExecutor.ValidationResult result = new SecuredRuleExecutor(PolicyBuilderScript, new Binding()).validate(val)
+
+            SecuredRuleExecutor executor = new SecuredRuleExecutor.Builder()
+                .binding(new Binding())
+                .baseScriptClass(PolicyBuilderScript)
+                .additionalImportsWhiteList([Autowired])
+                .receiversClassesBlackList([System, GormStaticApi])
+                .build()
+            SecuredRuleExecutor.ValidationResult result = executor.validate(val)
             result ? true : ['wontCompile', result.compilationFailedMessage]
         }
     }

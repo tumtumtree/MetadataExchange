@@ -1,14 +1,14 @@
 package org.modelcatalogue.core.util
 
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.DataType
+import org.springframework.beans.factory.annotation.Autowired
+import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
 class SecuredRuleExecutorSpec extends Specification {
-
-    DataType x = new DataType()
-    SecuredRuleExecutor executor = [x: x]
 
     static List<String> VALID_EXPRESSIONS = [
         "x",
@@ -31,7 +31,12 @@ class SecuredRuleExecutorSpec extends Specification {
     ]
 
     def "Evaluation expression throws no error: #exp"() {
-
+        given:
+        new SecuredRuleExecutor.Builder()
+            .binding([x: new DataType()])
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
 
         when:
         executor.execute(exp)
@@ -44,7 +49,12 @@ class SecuredRuleExecutorSpec extends Specification {
     }
 
     def "Validates valid expression: #exp"() {
-        SecuredRuleExecutor executor = [x: new Object()]
+        given:
+        new SecuredRuleExecutor.Builder()
+            .binding([x: new Object()])
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
 
         expect:
         executor.validate(exp)
@@ -54,7 +64,12 @@ class SecuredRuleExecutorSpec extends Specification {
     }
 
     def "Validates invalid expression: #exp"() {
-        SecuredRuleExecutor executor = [x: new Object()]
+        given:
+        SecuredRuleExecutor executor = new SecuredRuleExecutor.Builder()
+            .binding([x: new Object()])
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
 
         expect:
         !executor.validate(exp)
@@ -74,9 +89,6 @@ java.lang.SecurityException: Expression [VariableExpression] is not allowed: y
 
         expect:
         brief == 'variable is not allowed: y'
-
-
-
     }
 
 

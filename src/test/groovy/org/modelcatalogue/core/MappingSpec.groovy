@@ -1,7 +1,9 @@
 package org.modelcatalogue.core
 
 import grails.testing.gorm.DataTest
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.util.SecuredRuleExecutor
+import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 
 class MappingSpec extends Specification implements DataTest {
@@ -18,7 +20,18 @@ class MappingSpec extends Specification implements DataTest {
 
         then:
         mapFunctionString == """[1:"one", 2:"two", 3:"three"][x]"""
-        new SecuredRuleExecutor(x: 2).execute(mapFunctionString) == "two"
+
+        when:
+        SecuredRuleExecutor executor = new SecuredRuleExecutor.Builder()
+            .binding([x: 2])
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .build()
+        def result = executor.execute(mapFunctionString)
+
+
+        then:
+        result == "two"
     }
 
 

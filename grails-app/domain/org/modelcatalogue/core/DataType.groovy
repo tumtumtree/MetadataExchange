@@ -1,13 +1,16 @@
 package org.modelcatalogue.core
 
 import grails.util.GrailsNameUtils
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.api.ElementStatus
+import org.modelcatalogue.core.policy.PolicyBuilderScript
 import org.modelcatalogue.core.publishing.PublishingContext
 import org.modelcatalogue.core.scripting.Validating
 import org.modelcatalogue.core.scripting.ValueValidator
 import org.modelcatalogue.core.util.DataTypeRuleScript
 import org.modelcatalogue.core.util.FriendlyErrors
 import org.modelcatalogue.core.util.SecuredRuleExecutor
+import org.springframework.beans.factory.annotation.Autowired
 
 /**
  * A Data Type is like a primitive type
@@ -24,7 +27,13 @@ class DataType extends CatalogueElement implements Validating {
             if (!val) {
                 return true
             }
-            SecuredRuleExecutor.ValidationResult result = new SecuredRuleExecutor(DataTypeRuleScript, new Binding(x: null)).validate(val)
+            SecuredRuleExecutor executor = new SecuredRuleExecutor.Builder()
+                .binding(new Binding(x: null))
+                .baseScriptClass(DataTypeRuleScript)
+                .additionalImportsWhiteList([Autowired])
+                .receiversClassesBlackList([System, GormStaticApi])
+                .build()
+            SecuredRuleExecutor.ValidationResult result = executor.validate(val)
             result ? true : ['wontCompile', result.compilationFailedMessage]
         }
     }

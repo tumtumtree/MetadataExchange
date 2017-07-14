@@ -1,5 +1,6 @@
 package org.modelcatalogue.core.util
 
+import groovy.transform.builder.Builder
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -11,12 +12,22 @@ import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 import org.codehaus.groovy.control.customizers.SecureASTCustomizer
 import org.codehaus.groovy.syntax.Types
-import org.grails.datastore.gorm.GormStaticApi
-import org.springframework.beans.factory.annotation.Autowired
-
 import javax.xml.bind.DatatypeConverter
 
 class SecuredRuleExecutor<S extends Script> {
+    GroovyShell shell
+    Binding binding
+    Class<S> baseScriptClass
+    List<Class> receiversClassesBlackList
+    List<Class> additionalImportsWhiteList
+
+    private SecuredRuleExecutor(Builder builder) {
+        this.binding = builder.binding
+        this.baseScriptClass = builder.baseScriptClass
+        this.receiversClassesBlackList = builder.receiversClassesBlackList ?: [System]
+        this.additionalImportsWhiteList = builder.additionalImportsWhiteList
+        this.shell = createShell(this.binding)
+    }
 
     static class ValidationResult {
 
@@ -54,36 +65,13 @@ class SecuredRuleExecutor<S extends Script> {
         }
     }
 
-    private final Binding binding
-    private final GroovyShell shell
-    private final Class<S> baseScriptClass
-    List<String> additionalImportsWhiteList = [Autowired.name]
-
-    SecuredRuleExecutor(Binding binding) {
-        this.binding            = binding
-        this.baseScriptClass    = Script.class
-        this.shell              = createShell(binding)
-    }
-
-    SecuredRuleExecutor(Map binding, Class<S> baseScriptClass) {
-        this.binding            = new Binding(binding)
-        this.baseScriptClass    = baseScriptClass
-        this.shell              = createShell(this.binding)
-    }
-
-    SecuredRuleExecutor(Class<S> baseScriptClass, Binding binding) {
-        this.binding            = binding
-        this.baseScriptClass    = baseScriptClass
-        this.shell              = createShell(binding)
-    }
-
     private createShell(Binding binding) {
         CompilerConfiguration configuration = new CompilerConfiguration()
 
         ImportCustomizer importCustomizer = new ImportCustomizer().addStaticStars(Math.name)
 
         List<String> importsWhiteList = withBaseScript()
-        importsWhiteList += additionalImportsWhiteList
+        importsWhiteList += additionalImportsWhiteList*.name
 
         SecureASTCustomizer secureASTCustomizer = new SecureASTCustomizer()
         secureASTCustomizer.with {
@@ -92,9 +80,8 @@ class SecuredRuleExecutor<S extends Script> {
             starImportsWhitelist = withBaseScript()
             staticImportsWhitelist = withBaseScript()
             staticStarImportsWhitelist = withBaseScript(Math, DatatypeConverter)
-
-            receiversClassesBlackList = [System, GormStaticApi]
         }
+        secureASTCustomizer.receiversClassesBlackList = this.receiversClassesBlackList
 
         secureASTCustomizer.addStatementCheckers(new SecureASTCustomizer.StatementChecker() {
             @Override
@@ -150,10 +137,6 @@ class SecuredRuleExecutor<S extends Script> {
         ret*.name
     }
 
-    SecuredRuleExecutor(Map binding) {
-        this(new Binding(binding))
-    }
-
     ValidationResult validate(String scriptText) {
         try {
             shell.parse(scriptText)
@@ -191,5 +174,44 @@ class SecuredRuleExecutor<S extends Script> {
             ret = ret.substring(0, indexOfSecurityException)
         }
         ret.trim()
+    }
+
+    public static class Builder {
+        Binding binding
+        Class baseScriptClass
+        List<Class> receiversClassesBlackList
+        List<Class> additionalImportsWhiteList
+
+        public Builder() { }
+
+        Builder binding(Binding binding) {
+            this.binding = binding
+            this
+        }
+
+        Builder binding(Map binding) {
+            this.binding = new Binding(binding)
+            this
+        }
+
+        Builder baseScriptClass(Class baseScriptClass) {
+            this.baseScriptClass = baseScriptClass
+            this
+        }
+
+        Builder receiversClassesBlackList(List<Class> receiversClassesBlackList) {
+            this.receiversClassesBlackList = receiversClassesBlackList
+            this
+        }
+
+        Builder additionalImportsWhiteList(List<Class> additionalImportsWhiteList) {
+            this.additionalImportsWhiteList = additionalImportsWhiteList
+            this
+        }
+
+
+        public SecuredRuleExecutor build() {
+            return new SecuredRuleExecutor(this)
+        }
     }
 }

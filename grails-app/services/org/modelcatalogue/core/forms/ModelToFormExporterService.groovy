@@ -3,6 +3,7 @@ package org.modelcatalogue.core.forms
 import groovy.xml.XmlUtil
 import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.mutable.MutableInt
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataElement
@@ -11,6 +12,7 @@ import org.modelcatalogue.core.ElementService
 import org.modelcatalogue.core.EnumeratedType
 import org.modelcatalogue.core.PrimitiveType
 import org.modelcatalogue.core.Relationship
+import org.modelcatalogue.core.util.DataTypeRuleScript
 import org.modelcatalogue.core.util.Metadata
 import org.modelcatalogue.core.util.SecuredRuleExecutor
 import org.modelcatalogue.crf.model.CaseReportForm
@@ -21,6 +23,7 @@ import org.modelcatalogue.crf.model.Item
 import org.modelcatalogue.crf.model.ItemContainer
 import org.modelcatalogue.crf.model.ResponseType
 import org.modelcatalogue.crf.model.Section
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.validation.DataBinder
 import org.springframework.validation.Errors
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter
@@ -128,7 +131,7 @@ class ModelToFormExporterService {
 
         if (customizer) {
             try {
-                new SecuredRuleExecutor(
+                Map binding =[
                     form: form,
                     include: { String mcid ->
                         CatalogueElement dataClass = elementService.findByModelCatalogueId(DataClass, mcid)
@@ -147,8 +150,13 @@ class ModelToFormExporterService {
                             throw new IllegalArgumentException("No data element found for id: $mcid!")
                         }
                         generateItems([new Relationship(destination: dataElement)], sectionName, sectionName, nameOverrides, section, itemNumber, null, null)
-                    }
-                ).execute(customizer)
+                    }]
+                new SecuredRuleExecutor.Builder()
+                    .binding(binding)
+                    .additionalImportsWhiteList([Autowired])
+                    .receiversClassesBlackList([System, GormStaticApi])
+                    .build()
+                    .execute(customizer)
             } catch (Exception e) {
                 throw new IllegalArgumentException("There were problems with the form customization script!", e)
             }

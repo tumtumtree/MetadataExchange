@@ -3,14 +3,18 @@ package org.modelcatalogue.core.policy
 import com.google.common.collect.ImmutableList
 import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
+import org.grails.datastore.gorm.GormStaticApi
 import org.modelcatalogue.core.CatalogueElement
 import org.modelcatalogue.core.util.SecuredRuleExecutor
+import org.springframework.beans.factory.annotation.Autowired
 
-@CompileStatic class PolicyBuilder implements DomainClassesShortcuts, KnownCheckersShortcuts {
+@CompileStatic
+class PolicyBuilder implements DomainClassesShortcuts, KnownCheckersShortcuts {
 
     private final List<ConventionBuilder> conventions = []
 
-    @PackageScope PolicyBuilder(){}
+    @PackageScope
+    PolicyBuilder() { }
 
     static PolicyBuilder create() {
         return new PolicyBuilder()
@@ -23,7 +27,12 @@ import org.modelcatalogue.core.util.SecuredRuleExecutor
     }
 
     static Policy build(String policyString) {
-        return new SecuredRuleExecutor<>([:], PolicyBuilderScript).execute(policyString) as Policy
+        new SecuredRuleExecutor<>.Builder()
+            .additionalImportsWhiteList([Autowired])
+            .receiversClassesBlackList([System, GormStaticApi])
+            .binding([:])
+            .baseScriptClass(PolicyBuilderScript)
+            .build().execute(policyString) as Policy
     }
 
     public <T extends CatalogueElement & GroovyObject> ConventionBuilder check(Class<T> target) {
