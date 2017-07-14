@@ -117,19 +117,6 @@ task war(type: Exec, dependsOn: bowerInstall) {
 }
 
 
-task copyWar(type: Copy) {
-    from 'target', {
-        include '*.war'
-        rename '.*\\.war', 'mc.war'
-    }
-    into '../build'
-}
-
 task restartDev(dependsOn: [stop, runDev]) {
 
 }
-
-war.finalizedBy copyWar
-
-
-

@@ -656,6 +656,12 @@ integrationTest {
     systemProperties System.properties
 }
 
+war.baseName 'mc'
+war.version ''
+tasks.withType(War) {
+    destinationDir = file("$rootDir/build")
+}
+
 dbmChangelogSync.group 'Database Migration Plugin'
 dbmChangelogSyncSql.group 'Database Migration Plugin'
 dbmClearChecksums.group 'Database Migration Plugin'
