@@ -2,6 +2,7 @@ package org.modelcatalogue.core
 
 import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.api.ElementStatus
+import spock.lang.Shared
 
 /**
  * Created by adammilward on 05/02/2014.
@@ -9,10 +10,15 @@ import org.modelcatalogue.core.api.ElementStatus
 @Rollback
 class PublishedElementISpec extends AbstractIntegrationSpec{
 
-    def setupSpec(){
-        loadFixtures()
-    }
+    @Shared
+    Boolean fixturesLoaded = false
 
+    def setup(){
+        if ( !fixturesLoaded ) {
+            fixturesLoaded = true
+            loadFixtures()
+        }
+    }
 
     def "finalize model with with finalized child models"(){
 
