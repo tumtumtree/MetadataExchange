@@ -3,7 +3,9 @@ package org.modelcatalogue.core
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.security.User
+import spock.lang.Ignore
 
+@Ignore
 class UserControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 
     @Override

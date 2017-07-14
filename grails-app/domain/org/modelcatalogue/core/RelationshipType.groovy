@@ -4,12 +4,14 @@ import com.google.common.collect.ImmutableMap
 import com.google.common.util.concurrent.UncheckedExecutionException
 import grails.util.GrailsNameUtils
 import org.apache.log4j.Logger
+import org.grails.datastore.gorm.GormStaticApi
 import org.grails.exceptions.reporting.DefaultStackTraceFilterer
 import org.grails.exceptions.reporting.StackTraceFilterer
 import org.modelcatalogue.core.cache.CacheService
 import org.modelcatalogue.core.rx.ErrorSubscriber
 import org.modelcatalogue.core.util.RelationshipTypeRuleScript
 import org.modelcatalogue.core.util.SecuredRuleExecutor
+import org.springframework.beans.factory.annotation.Autowired
 
 import java.util.concurrent.Callable
 
@@ -158,12 +160,16 @@ class RelationshipType implements org.modelcatalogue.core.api.RelationshipType {
         }
 
         if (!ruleScript) {
-            ruleScript = new SecuredRuleExecutor(RelationshipTypeRuleScript,
-                source: source,
-                destination: destination,
-                type: this,
-                ext: ext
-            ).reuse(rule)
+            ruleScript = new SecuredRuleExecutor.Builder()
+                .additionalImportsWhiteList([Autowired])
+                .receiversClassesBlackList([System, GormStaticApi])
+                .baseScriptClass(RelationshipTypeRuleScript)
+                .binding([source: source,
+                          destination: destination,
+                          type: this,
+                          ext: ext])
+                .build()
+                .reuse(rule)
         }
 
         ruleScript.execute(

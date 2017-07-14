@@ -12,9 +12,11 @@ import org.modelcatalogue.core.util.OrderedMap
 import org.modelcatalogue.core.util.ResultRecorder
 import org.modelcatalogue.core.util.marshalling.CatalogueElementMarshaller
 import spock.lang.Unroll
+import spock.lang.Ignore
 
 import javax.servlet.http.HttpServletResponse
 
+@Ignore
 @Rollback
 abstract class AbstractCatalogueElementControllerIntegrationSpec<T> extends AbstractControllerIntegrationSpec implements ResultRecorder{
 

@@ -32,7 +32,7 @@ class SecuredRuleExecutorSpec extends Specification {
 
     def "Evaluation expression throws no error: #exp"() {
         given:
-        new SecuredRuleExecutor.Builder()
+        SecuredRuleExecutor executor = new SecuredRuleExecutor.Builder()
             .binding([x: new DataType()])
             .additionalImportsWhiteList([Autowired])
             .receiversClassesBlackList([System, GormStaticApi])
@@ -50,7 +50,7 @@ class SecuredRuleExecutorSpec extends Specification {
 
     def "Validates valid expression: #exp"() {
         given:
-        new SecuredRuleExecutor.Builder()
+        SecuredRuleExecutor executor = new SecuredRuleExecutor.Builder()
             .binding([x: new Object()])
             .additionalImportsWhiteList([Autowired])
             .receiversClassesBlackList([System, GormStaticApi])

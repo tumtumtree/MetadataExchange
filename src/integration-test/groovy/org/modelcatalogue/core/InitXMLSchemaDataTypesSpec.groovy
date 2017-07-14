@@ -4,8 +4,10 @@ import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.DataType
+import spock.lang.Ignore
 import spock.lang.Unroll
 
+@Ignore
 @Rollback
 @Unroll
 class InitXMLSchemaDataTypesSpec extends AbstractIntegrationSpec {

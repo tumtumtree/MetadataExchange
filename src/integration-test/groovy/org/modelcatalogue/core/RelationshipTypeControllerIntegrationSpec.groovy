@@ -3,10 +3,12 @@ package org.modelcatalogue.core
 import grails.rest.RestfulController
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.util.CatalogueElementFinder
+import spock.lang.Ignore
 
 /**
  * Created by adammilward on 27/02/2014.
  */
+@Ignore
 class RelationshipTypeControllerIntegrationSpec extends AbstractControllerIntegrationSpec {
 
     def setupSpec() {

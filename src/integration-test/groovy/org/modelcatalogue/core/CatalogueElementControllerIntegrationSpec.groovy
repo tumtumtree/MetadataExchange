@@ -3,7 +3,9 @@ package org.modelcatalogue.core
 import grails.gorm.transactions.Rollback
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.api.ElementStatus
+import spock.lang.Ignore
 
+@Ignore
 @Rollback
 class CatalogueElementControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 

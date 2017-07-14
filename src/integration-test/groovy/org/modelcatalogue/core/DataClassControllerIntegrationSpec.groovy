@@ -1,7 +1,9 @@
 package org.modelcatalogue.core
 
 import grails.util.GrailsNameUtils
+import spock.lang.Ignore
 
+@Ignore
 class DataClassControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 
     protected boolean getRecord() {

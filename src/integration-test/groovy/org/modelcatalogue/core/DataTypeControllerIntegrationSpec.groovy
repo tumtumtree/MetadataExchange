@@ -2,8 +2,11 @@ package org.modelcatalogue.core
 
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.api.ElementStatus
+import org.springframework.beans.factory.annotation.Autowired
+import spock.lang.Ignore
 import spock.lang.Unroll
 
+@Ignore
 class DataTypeControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 
     protected boolean getRecord() {

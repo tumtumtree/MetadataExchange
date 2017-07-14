@@ -4,7 +4,9 @@ import grails.rest.RestfulController
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.policy.Policy
 import org.modelcatalogue.core.util.CatalogueElementFinder
+import spock.lang.Ignore
 
+@Ignore
 class DataModelPolicyControllerIntegrationSpec extends AbstractControllerIntegrationSpec {
 
     def setupSpec() {

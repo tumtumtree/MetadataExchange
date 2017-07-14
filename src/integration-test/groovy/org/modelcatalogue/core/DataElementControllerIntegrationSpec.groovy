@@ -2,7 +2,9 @@ package org.modelcatalogue.core
 
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.util.OrderedMap
+import spock.lang.Ignore
 
+@Ignore
 class DataElementControllerIntegrationSpec extends AbstractCatalogueElementControllerIntegrationSpec {
 
     @Override
