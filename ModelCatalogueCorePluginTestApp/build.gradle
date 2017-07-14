@@ -110,13 +110,6 @@ task collectTestReports(type: Copy) {
 
 stop.finalizedBy stopContainers
 
-
-task war(type: Exec, dependsOn: bowerInstall) {
-    description = "Build production war of MX application"
-    commandLine grailsw, 'war', '--non-interactive', '--stacktrace'
-}
-
-
 task restartDev(dependsOn: [stop, runDev]) {
 
 }

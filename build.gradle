@@ -528,7 +528,7 @@ task cleanUpBowerDependencies(type: Delete) {
     delete 'grails-app/assets/bower_components/sly-repeat/scripts'
     delete 'grails-app/assets/bower_components/sly-repeat/src'
 }
-//bowerInstall.finalizedBy cleanUpBowerDependencies
+bowerInstall.finalizedBy cleanUpBowerDependencies
 
 task cleanNodeModulesFolder(type: Delete) {
     group 'javascript'
