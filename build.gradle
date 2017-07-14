@@ -656,6 +656,9 @@ integrationTest {
     systemProperties System.properties
 }
 
+war.dependsOn bowerInstall
+assetCompile.mustRunAfter bowerInstall
+assetCompile.mustRunAfter cleanUpBowerDependencies
 war.baseName 'mc'
 war.version ''
 tasks.withType(War) {
