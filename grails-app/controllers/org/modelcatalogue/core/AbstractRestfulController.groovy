@@ -1,8 +1,8 @@
 package org.modelcatalogue.core
 
 import grails.converters.JSON
+import grails.gorm.transactions.Transactional
 import grails.rest.RestfulController
-import grails.transaction.Transactional
 import grails.core.GrailsDomainClass
 import org.hibernate.StaleStateException
 import org.modelcatalogue.core.api.ElementStatus

@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import org.modelcatalogue.core.util.CatalogueElementFinder
 import org.modelcatalogue.core.util.lists.Lists
 

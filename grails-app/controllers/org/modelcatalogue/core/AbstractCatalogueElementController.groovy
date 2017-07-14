@@ -1,6 +1,6 @@
 package org.modelcatalogue.core
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import org.modelcatalogue.builder.api.ModelCatalogueTypes
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.path.PathFinder

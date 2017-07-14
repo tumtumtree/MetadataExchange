@@ -1,6 +1,5 @@
 package org.modelcatalogue.core.util.builder
 
-import grails.transaction.Transactional
 import grails.util.GrailsNameUtils
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
