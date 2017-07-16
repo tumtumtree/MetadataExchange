@@ -3,10 +3,12 @@ package org.modelcatalogue.core
 import grails.rest.RestfulController
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.dataarchitect.CsvTransformation
+import spock.lang.Ignore
 
 /**
  * Created by adammilward on 27/02/2014.
  */
+@Ignore
 class CsvTransformationControllerIntegrationSpec extends AbstractControllerIntegrationSpec {
 
     def setupSpec() {

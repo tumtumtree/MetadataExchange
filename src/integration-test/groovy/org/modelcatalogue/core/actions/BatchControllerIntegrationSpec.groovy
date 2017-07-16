@@ -3,7 +3,9 @@ package org.modelcatalogue.core.actions
 import grails.rest.RestfulController
 import grails.util.GrailsNameUtils
 import org.modelcatalogue.core.AbstractControllerIntegrationSpec
+import spock.lang.Ignore
 
+@Ignore
 class BatchControllerIntegrationSpec extends AbstractControllerIntegrationSpec {
 
     def setupSpec() {
