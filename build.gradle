@@ -123,7 +123,9 @@ dependencies {
     compile "org.grails.plugins:spring-security-core:$springSecurityCoreVersion"
 
     // Spring Security UI
-    compile "org.grails.plugins:spring-security-ui:$springSecurityUiVersion"
+    compile ("org.grails.plugins:spring-security-ui:$springSecurityUiVersion") {
+        exclude group: 'com.bertramlabs.plugins', module:'asset-pipeline-grails'
+    }
     compile "org.grails:grails-datastore-core:$grailsDataStoreCoreVersion"
     compile "org.grails:grails-datastore-gorm-support:$grailsDataStoreGormSupport"
     compile "org.grails:grails-datastore-gorm:$grailsDataStoreGorm"
@@ -183,7 +185,9 @@ dependencies {
 
     compile "org.grails.plugins:grails-executor:$grailsExecutorVersion"
 
-    compile "net.errbuddy.plugins:babel-asset-pipeline:$babelAssetPipelineVersion"
+    compile ("net.errbuddy.plugins:babel-asset-pipeline:$babelAssetPipelineVersion") {
+        exclude group: 'org.grails.plugins', module: 'asset-pipeline'
+    }
 }
 
 sourceSets {
