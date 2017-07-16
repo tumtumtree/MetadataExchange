@@ -11,6 +11,7 @@ import org.modelcatalogue.integration.xml.CatalogueXmlLoader
 import org.modelcatalogue.spreadsheet.query.api.Predicate
 import org.modelcatalogue.spreadsheet.query.api.SpreadsheetCriteria
 import org.modelcatalogue.spreadsheet.query.poi.PoiSpreadsheetQuery
+import spock.lang.Shared
 
 @Rollback
 class DataModelToXlsxExporterSpec extends AbstractIntegrationSpec {
@@ -23,14 +24,21 @@ class DataModelToXlsxExporterSpec extends AbstractIntegrationSpec {
 
     DataModel dataModel
 
+    @Shared
+    Boolean loadFixtures = false
+
     @Rule TemporaryFolder temporaryFolder = new TemporaryFolder()
 
     def setup() {
-        initRelationshipTypes()
-        CatalogueXmlLoader loader = new CatalogueXmlLoader(catalogueBuilder)
-        loader.load(DataModelToXlsxExporterSpec.getResourceAsStream('TestDataModelV1.xml'))
-        loader.load(DataModelToXlsxExporterSpec.getResourceAsStream('TestDataModelV2.xml'))
-        dataModel = DataModel.findByNameAndSemanticVersion('TestDataModel', '2')
+        if ( !loadFixtures ) {
+            loadFixtures = true
+
+            initRelationshipTypes()
+            CatalogueXmlLoader loader = new CatalogueXmlLoader(catalogueBuilder)
+            loader.load(DataModelToXlsxExporterSpec.getResourceAsStream('TestDataModelV1.xml'))
+            loader.load(DataModelToXlsxExporterSpec.getResourceAsStream('TestDataModelV2.xml'))
+            dataModel = DataModel.findByNameAndSemanticVersion('TestDataModel', '2')
+        }
     }
 
     def "export model to excel"() {

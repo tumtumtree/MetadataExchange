@@ -8,13 +8,20 @@ import org.modelcatalogue.core.publishing.DraftContext
 import org.modelcatalogue.core.util.RelationshipDirection
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import spock.lang.Issue
+import spock.lang.Shared
 import spock.lang.Unroll
 
 @Rollback
 class ElementServiceIntegrationSpec extends AbstractIntegrationSpec {
 
+    @Shared
+    Boolean fixturesLoaded = false
+
     def setup() {
-        loadFixtures()
+        if ( !fixturesLoaded ) {
+            fixturesLoaded = true
+            loadFixtures()
+        }
     }
 
     def elementService

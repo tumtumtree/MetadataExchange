@@ -7,6 +7,7 @@ import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.RelationshipService
 import org.modelcatalogue.core.util.lists.ListWithTotal
+import spock.lang.Shared
 
 @Rollback
 class DataArchitectServiceSpec extends AbstractIntegrationSpec {
@@ -14,39 +15,49 @@ class DataArchitectServiceSpec extends AbstractIntegrationSpec {
     DataArchitectService dataArchitectService
     RelationshipService relationshipService
 
+    @Shared
     def de1
 
+    @Shared
     def de2
 
+    @Shared
     def de3
 
+    @Shared
     def de4
 
+    @Shared
     def de5
 
+    @Shared
     def md
 
+    @Shared
     Boolean fixturesLoaded = false
 
     def setup() {
-        loadFixtures()
-        de1 = DataElement.findByName("DE_author")
-        de2 = DataElement.findByName("auth")
-        de3 = DataElement.findByName("AUTHOR")
-        de4 = DataElement.findByName("auth4")
-        de5 = DataElement.findByName("auth5")
-        md = new DataClass(name: "tsdfafsd").save()
-        md.addToContains(de1)
-        de2.save()
-        de1.ext.put("localIdentifier", "test")
-        de4.ext.put("test2", "test2")
-        de4.ext.put("metadata", "test2")
-        de4.ext.put("test3", "test2")
-        de4.ext.put("test4", "test2")
-        de1.ext.put("Data item No.", "C1031")  // used in def "find relationships"
-        de2.ext.put("Optional_Local_Identifier", "C1031") // used in def "find relationships"
+        if ( !fixturesLoaded ) {
+            fixturesLoaded = true
+            loadFixtures()
+            de1 = DataElement.findByName("DE_author")
+            de2 = DataElement.findByName("auth")
+            de3 = DataElement.findByName("AUTHOR")
+            de4 = DataElement.findByName("auth4")
+            de5 = DataElement.findByName("auth5")
+            md = new DataClass(name: "tsdfafsd").save()
+            md.addToContains(de1)
+            de2.save()
+            de1.ext.put("localIdentifier", "test")
+            de4.ext.put("test2", "test2")
+            de4.ext.put("metadata", "test2")
+            de4.ext.put("test3", "test2")
+            de4.ext.put("test4", "test2")
+            de1.ext.put("Data item No.", "C1031")  // used in def "find relationships"
+            de2.ext.put("Optional_Local_Identifier", "C1031") // used in def "find relationships"
 
-        sessionFactory.currentSession.flush()
+            sessionFactory.currentSession.flush()
+        }
     }
 
     def "find relationships and action them"() {
@@ -66,7 +77,7 @@ class DataArchitectServiceSpec extends AbstractIntegrationSpec {
 
 
         then:
-        de1.relations.contains(de2)
+        de1.relations.find { it.id == de2.id }
 
     }
 

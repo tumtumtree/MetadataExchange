@@ -6,43 +6,57 @@ import org.grails.web.json.JSONElement
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
 import spock.lang.Unroll
+import spock.lang.Shared
 
 @Rollback
 class DataArchitectControllerIntegrationSpec extends AbstractIntegrationSpec {
 
     RelationshipService relationshipService
 
+    @Shared
     DataElement de1
 
+    @Shared
     DataElement de2
 
+    @Shared
     DataElement de3
 
+    @Shared
     DataElement de4
 
+    @Shared
     DataElement de5
 
+    @Shared
     DataClass md
 
+    @Shared
     DataClass md2
 
+    @Shared
+    Boolean fixturesLoaded
 
     def setup() {
         //domainModellerService.modelDomains()
-        loadFixtures()
-        de1 = DataElement.findByName("DE_author")
-        de2 = DataElement.findByName("auth")
-        de3 = DataElement.findByName("AUTHOR")
-        de4 = DataElement.findByName("auth4")
-        de5 = DataElement.findByName("auth5")
-        md = new DataClass(name: "testModel").save()
-        md2 = new DataClass(name: "testModel2").save()
-        md.addToContains(de1)
-        md2.addToContains(de3)
-        md.addToParentOf(md2)
+        if ( !fixturesLoaded  ) {
+            fixturesLoaded = true
 
-        de1.ext.put("Data item No.", "C10311")
-        de2.ext.put("Optional_Local_Identifier", "C10311")
+            loadFixtures()
+            de1 = DataElement.findByName("DE_author")
+            de2 = DataElement.findByName("auth")
+            de3 = DataElement.findByName("AUTHOR")
+            de4 = DataElement.findByName("auth4")
+            de5 = DataElement.findByName("auth5")
+            md = new DataClass(name: "testModel").save()
+            md2 = new DataClass(name: "testModel2").save()
+            md.addToContains(de1)
+            md2.addToContains(de3)
+            md.addToParentOf(md2)
+
+            de1.ext.put("Data item No.", "C10311")
+            de2.ext.put("Optional_Local_Identifier", "C10311")
+        }
     }
 
     def "json get sub model elements"() {

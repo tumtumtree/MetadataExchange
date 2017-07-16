@@ -5,29 +5,39 @@ import org.grails.web.json.JSONElement
 import org.modelcatalogue.integration.excel.HeadersMap
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
+import spock.lang.Shared
 
 @Rollback
 class DataImportControllerSpec extends AbstractIntegrationSpec implements ResultRecorder {
 
+    @Shared
     String fileName = "src/integration-test/resources/example.xls"
 
+    @Shared
     ResultRecorder recorder
 
+    @Shared
     String filenameXsd = "src/test/resources/SACT/XMLDataTypes.xsd"//"test/unit/resources/SACT/XSD_Example.xsd"
 
+    @Shared
     String filenameXsd2 = "src/test/resources/SACT/Breast_XMLSchema.xsd"//"test/unit/resources/SACT/XSD_Example.xsd"
 
+    @Shared
     String fileNameStarUML = "src/test/resources/gel_cancer_combined2.umlj"
 
+    @Shared
     Boolean fixturesLoaded = false
 
     def setup() {
-        loadMarshallers()
-        loadFixtures()
-        recorder = DefaultResultRecorder.create(
+        if ( !fixturesLoaded ) {
+            fixturesLoaded = true
+            loadMarshallers()
+            loadFixtures()
+            recorder = DefaultResultRecorder.create(
                 "../ModelCatalogueCorePluginTestApp/test/js/modelcatalogue/core",
                 "Importer"
-        )
+            )
+        }
     }
 
     def testHeaderSetup(){
@@ -47,7 +57,6 @@ class DataImportControllerSpec extends AbstractIntegrationSpec implements Result
         headersMap.measurementSymbol == "Measurement Unit Symbol"
         headersMap.classification == "Classification"
         headersMap.metadata == "Metadata"
-
     }
 
     def testCustomHeaderSetup(){

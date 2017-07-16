@@ -5,35 +5,60 @@ import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.lists.ListWithTotal
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
+import spock.lang.Shared
 
 @Rollback
 class DataClassServiceIntegrationSpec extends AbstractIntegrationSpec {
 
     CatalogueBuilder catalogueBuilder
 
-    DataClass parent1
-    DataClass parent2
-    DataClass child1
-    DataClass child2
-    DataClass grandChild
     DataClassService dataClassService
+
+    @Shared
+    DataClass parent1
+
+    @Shared
+    DataClass parent2
+
+    @Shared
+    DataClass child1
+
+    @Shared
+    DataClass child2
+
+    @Shared
+    DataClass grandChild
+
+    @Shared
     DataElement de1
+
+    @Shared
     DataElement de2
+
+    @Shared
     DataElement de3
 
+    @Shared
+    Boolean fixturesLoaded = false
+
     def setup(){
-        loadFixtures()
-        parent1 = new DataClass(name: 'book').save(failOnError: true)
-        parent2 = new DataClass(name: 'chapter1').save(failOnError: true)
-        child1 = new DataClass(name: 'chapter2').save(failOnError: true)
-        child2 = new DataClass(name: 'mTest1').save(failOnError: true)
-        grandChild = new DataClass(name: 'mTest2').save(failOnError: true)
-        parent1.addToParentOf child1
-        parent2.addToParentOf child2
-        child1.addToParentOf grandChild
-        de1 = DataElement.findByName("DE_author1")
-        de2 = DataElement.findByName("AUTHOR")
-        de3 = DataElement.findByName("auth")
+        if ( !fixturesLoaded ) {
+            loadFixtures()
+            fixturesLoaded = true
+
+            parent1 = new DataClass(name: 'book').save(failOnError: true)
+            parent2 = new DataClass(name: 'chapter1').save(failOnError: true)
+            child1 = new DataClass(name: 'chapter2').save(failOnError: true)
+            child2 = new DataClass(name: 'mTest1').save(failOnError: true)
+            grandChild = new DataClass(name: 'mTest2').save(failOnError: true)
+            parent1.addToParentOf child1
+            parent2.addToParentOf child2
+            child1.addToParentOf grandChild
+            de1 = DataElement.findByName("DE_author1")
+            de2 = DataElement.findByName("AUTHOR")
+            de3 = DataElement.findByName("auth")
+        }
+
     }
 
     def "get top level elements"() {
