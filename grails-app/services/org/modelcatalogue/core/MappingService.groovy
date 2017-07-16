@@ -59,7 +59,7 @@ class MappingService {
     }
 
 
-    private static String createMappingFunctionFromMap(Map map) {
+    static String createMappingFunctionFromMap(Map map) {
         "${map.collectEntries { key, value -> [key, "\"${value}\""] }.toMapString()}[x]"
     }
 
