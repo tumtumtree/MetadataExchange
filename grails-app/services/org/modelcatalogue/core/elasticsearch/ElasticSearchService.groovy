@@ -499,32 +499,35 @@ class ElasticSearchService implements SearchCatalogue {
             }
         }
 
-        if (clazz == DataElement) {
-            // data type is embedded into data element
-            mapping[typeName].properties.data_type = getMapping(DataType).data_type
-        } else if (clazz in [PrimitiveType, DataType]) {
-            // measurement unit is embedded in primitive type
-            mapping[typeName].properties.measurement_unit = getMapping(MeasurementUnit).measurement_unit
-        } else if (clazz  in [ReferenceType, DataType]) {
-            // data class is embedded in refrence type
-            mapping[typeName].properties.data_class = getMapping(DataClass).data_class
-        } else if (clazz == Relationship) {
-            // source and destination combines all available catalogue element mappings
-            // relationship copies relationship type mapping
-            mapping[typeName].properties.relationship_type = getMapping(RelationshipType).relationship_type
+        if ( mapping[typeName].properties ) {
+            if (clazz == DataElement) {
+                // data type is embedded into data element
+                mapping[typeName].properties.data_type = getMapping(DataType).data_type
+            } else if (clazz in [PrimitiveType, DataType]) {
+                // measurement unit is embedded in primitive type
+                mapping[typeName].properties.measurement_unit = getMapping(MeasurementUnit).measurement_unit
+            } else if (clazz  in [ReferenceType, DataType]) {
+                // data class is embedded in refrence type
+                mapping[typeName].properties.data_class = getMapping(DataClass).data_class
+            } else if (clazz == Relationship) {
+                // source and destination combines all available catalogue element mappings
+                // relationship copies relationship type mapping
+                mapping[typeName].properties.relationship_type = getMapping(RelationshipType).relationship_type
 
-            // the same applies for
-            mapping[typeName].properties.data_model = getMapping(DataModel).data_model
+                // the same applies for
+                mapping[typeName].properties.data_model = getMapping(DataModel).data_model
 
-            Map catalogueElementMappingCombined = combineMappingForAllCatalogueElements()
+                Map catalogueElementMappingCombined = combineMappingForAllCatalogueElements()
 
-            mapping[typeName].properties.source = catalogueElementMappingCombined.catalogue_element
-            mapping[typeName].properties.destination = catalogueElementMappingCombined.catalogue_element
-        } else if (clazz == CatalogueElement && implementation != DataModel) {
-            // source and destination combines all available catalogue element mappings
-            // relationship copies relationship type mapping
-            mapping[typeName].properties.data_model = getMapping(DataModel).data_model
+                mapping[typeName].properties.source = catalogueElementMappingCombined.catalogue_element
+                mapping[typeName].properties.destination = catalogueElementMappingCombined.catalogue_element
+            } else if (clazz == CatalogueElement && implementation != DataModel) {
+                // source and destination combines all available catalogue element mappings
+                // relationship copies relationship type mapping
+                mapping[typeName].properties.data_model = getMapping(DataModel).data_model
+            }
         }
+
         //Ignore date information NOT mapped as date
         if (toplevel) {
             mapping[typeName].date_detection = false
