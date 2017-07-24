@@ -5,6 +5,7 @@ import org.grails.web.json.JSONElement
 import org.modelcatalogue.integration.excel.HeadersMap
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
+import spock.lang.Ignore
 import spock.lang.Shared
 
 @Rollback
@@ -40,6 +41,7 @@ class DataImportControllerSpec extends AbstractIntegrationSpec implements Result
         }
     }
 
+    @Ignore
     def testHeaderSetup(){
         HeadersMap headersMap = HeadersMap.create()
         expect:
@@ -59,6 +61,7 @@ class DataImportControllerSpec extends AbstractIntegrationSpec implements Result
         headersMap.metadata == "Metadata"
     }
 
+    @Ignore
     def testCustomHeaderSetup(){
 
         Map<String,String> params = [:]

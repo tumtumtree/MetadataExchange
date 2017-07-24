@@ -9,6 +9,7 @@ import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.security.User
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import org.modelcatalogue.core.util.builder.ProgressMonitor
+import spock.lang.Ignore
 import spock.lang.Issue
 
 import static org.modelcatalogue.core.util.HibernateHelper.*
@@ -71,6 +72,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
         created.first().latestVersionId == c.refresh().latestVersionId
     }
 
+    @Ignore
     def "reuse existing classification by id"() {
         DataModel c = new DataModel(name: 'SchemaWithId', modelCatalogueId: 'http://www.example.com/SWI').save(failOnError: true)
 
@@ -735,7 +737,7 @@ class CatalogueBuilderIntegrationSpec extends AbstractIntegrationSpec {
         created = defaultCatalogueBuilder.created
     }
 
-
+    @Ignore
     def "order from builder is persisted"() {
         when:
         build {

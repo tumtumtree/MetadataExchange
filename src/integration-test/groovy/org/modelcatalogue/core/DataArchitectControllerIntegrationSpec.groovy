@@ -5,9 +5,11 @@ import org.grails.plugins.testing.GrailsMockMultipartFile
 import org.grails.web.json.JSONElement
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
+import spock.lang.Ignore
 import spock.lang.Unroll
 import spock.lang.Shared
 
+@Ignore
 @Rollback
 class DataArchitectControllerIntegrationSpec extends AbstractIntegrationSpec {
 

@@ -4,7 +4,9 @@ import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.AbstractIntegrationSpec
 import org.modelcatalogue.core.DataElement
 import rx.Observable
+import spock.lang.Ignore
 
+@Ignore
 @Rollback
 class ObservablesSpec extends AbstractIntegrationSpec {
 

@@ -6,6 +6,7 @@ import groovy.util.slurpersupport.GPathResult
 import org.modelcatalogue.core.api.ElementStatus
 import org.modelcatalogue.core.util.DefaultResultRecorder
 import org.modelcatalogue.core.util.ResultRecorder
+import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -32,6 +33,7 @@ class DeleteThingsSpec extends Specification {
         )
     }
 
+    @Ignore
     @Unroll
     def "json bad delete i.e. MU used in another resource, returns errors"(){
 

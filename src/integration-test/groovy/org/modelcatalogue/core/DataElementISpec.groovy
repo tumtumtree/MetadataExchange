@@ -1,6 +1,7 @@
 package org.modelcatalogue.core
 
 import grails.gorm.transactions.Rollback
+import spock.lang.Ignore
 
 @Rollback
 class DataElementISpec extends AbstractIntegrationSpec {
@@ -11,6 +12,7 @@ class DataElementISpec extends AbstractIntegrationSpec {
         loadFixtures()
     }
 
+    @Ignore
     def "get all relations"() {
 
         initCatalogueService.initDefaultRelationshipTypes()

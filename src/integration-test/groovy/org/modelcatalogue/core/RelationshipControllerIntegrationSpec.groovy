@@ -1,7 +1,9 @@
 package org.modelcatalogue.core
 
 import grails.gorm.transactions.Rollback
+import spock.lang.Ignore
 
+@Ignore
 @Rollback
 class RelationshipControllerIntegrationSpec extends AbstractIntegrationSpec {
 

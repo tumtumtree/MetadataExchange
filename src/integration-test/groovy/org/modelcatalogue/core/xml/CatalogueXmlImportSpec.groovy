@@ -11,6 +11,7 @@ import org.modelcatalogue.builder.xml.XmlCatalogueBuilder
 import org.modelcatalogue.core.*
 import org.modelcatalogue.core.util.builder.DefaultCatalogueBuilder
 import org.modelcatalogue.integration.xml.CatalogueXmlLoader
+import spock.lang.Ignore
 import spock.lang.Shared
 
 @Rollback
@@ -30,6 +31,7 @@ class CatalogueXmlImportSpec extends AbstractIntegrationSpec {
 
     }
 
+    @Ignore
     def "load bases"(){
         final String DATA_MODEL_NAME = "based on test"
         final String GRAND_PARENT_NAME = "grand parent"

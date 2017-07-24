@@ -7,8 +7,10 @@ import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.RelationshipService
 import org.modelcatalogue.core.util.lists.ListWithTotal
+import spock.lang.Ignore
 import spock.lang.Shared
 
+@Ignore
 @Rollback
 class DataArchitectServiceSpec extends AbstractIntegrationSpec {
 

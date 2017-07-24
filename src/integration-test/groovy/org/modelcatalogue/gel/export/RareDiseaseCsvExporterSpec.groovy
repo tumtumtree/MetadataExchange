@@ -2,10 +2,12 @@ package org.modelcatalogue.gel.export
 
 import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.gel.RareDiseaseCsvExporter
+import spock.lang.Ignore
 
 /**
  * Test for RD reports class using test model with similar format to expected data.
  */
+@Ignore
 class RareDiseaseCsvExporterSpec extends AbstractRareDiseasesExporterSpec {
 
     static def hpoAndClinicalTestsCSV

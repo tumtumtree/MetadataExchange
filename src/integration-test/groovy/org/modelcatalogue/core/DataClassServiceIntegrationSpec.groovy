@@ -5,8 +5,10 @@ import org.modelcatalogue.builder.api.CatalogueBuilder
 import org.modelcatalogue.core.util.DataModelFilter
 import org.modelcatalogue.core.util.lists.ListWithTotal
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
+import spock.lang.Ignore
 import spock.lang.Shared
 
+@Ignore
 @Rollback
 class DataClassServiceIntegrationSpec extends AbstractIntegrationSpec {
 

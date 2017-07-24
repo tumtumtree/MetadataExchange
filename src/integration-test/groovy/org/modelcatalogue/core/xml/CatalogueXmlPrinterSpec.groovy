@@ -43,18 +43,19 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
 </catalogue>'''
     }
 
-
+    @Ignore
     def "write simple measurement unit"() {
         expect:
         similar newton, 'newton.catalogue.xml'
-
     }
 
+    @Ignore
     def "write simple data type"() {
         expect:
         similar integer, 'integer.catalogue.xml'
     }
 
+    @Ignore
     def "write enumerated type"() {
         def type = gender
         expect:
@@ -62,6 +63,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
         similar type, 'gender.catalogue.xml'
     }
 
+    @Ignore
     def "write reference type"() {
         def type = user
         expect:
@@ -69,6 +71,7 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
         similar type, 'user.catalogue.xml'
     }
 
+    @Ignore
     def "write simple value domain"() {
         expect:
         similar force, 'force.catalogue.xml'
@@ -76,21 +79,23 @@ class CatalogueXmlPrinterSpec extends AbstractIntegrationSpec {
 
     // TODO: sometimes is needed to print the type as well if not obvious
 
+    @Ignore
     def "write simple data element"() {
         expect:
         similar adhesion, 'adhesion.catalogue.xml'
     }
 
+    @Ignore
     def "write simple model with validation"() {
         expect:
         similar locomotive, 'locomotive.catalogue.xml'
     }
 
+    @Ignore
     def "write simple classification"() {
         expect:
         similar transportation, 'transportation.catalogue.xml'
     }
-
 
     boolean similar(CatalogueElement input, String sampleFile) {
         String xml = XmlUtil.serialize(printer.bind(input){

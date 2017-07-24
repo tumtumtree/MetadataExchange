@@ -10,9 +10,11 @@ import org.modelcatalogue.core.util.lists.Elements
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Relationships
 import org.modelcatalogue.core.util.lists.SimpleListWrapper
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Stepwise
 
+@Ignore
 @Integration
 @Stepwise
 class ReportsRegistryIntegrationSpec extends Specification {

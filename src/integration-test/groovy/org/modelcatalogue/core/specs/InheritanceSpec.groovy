@@ -18,6 +18,7 @@ import org.modelcatalogue.core.util.Inheritance
 import org.modelcatalogue.core.util.test.TestDataHelper
 import spock.lang.Ignore
 
+@Ignore
 @Rollback
 class InheritanceSpec extends AbstractIntegrationSpec  {
 

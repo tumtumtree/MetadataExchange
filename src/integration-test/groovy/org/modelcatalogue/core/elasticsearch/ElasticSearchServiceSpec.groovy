@@ -9,11 +9,13 @@ import org.modelcatalogue.core.util.HibernateHelper
 import org.modelcatalogue.core.util.RelationshipDirection
 import org.modelcatalogue.core.util.lists.ListWithTotalAndType
 import org.modelcatalogue.core.util.lists.Lists
+import spock.lang.Ignore
 import spock.util.concurrent.BlockingVariable
 import spock.util.concurrent.BlockingVariables
 
 import java.util.concurrent.TimeUnit
 
+@Ignore
 @Rollback
 class ElasticSearchServiceSpec extends AbstractIntegrationSpec {
 

@@ -9,6 +9,7 @@ import org.modelcatalogue.core.DataClass
 import org.modelcatalogue.core.DataModel
 import org.modelcatalogue.core.EnumeratedType
 import org.modelcatalogue.integration.xml.CatalogueXmlLoader
+import spock.lang.Ignore
 
 @Rollback
 class CatalogueElementDiffsIntegrationSpec extends AbstractIntegrationSpec {
@@ -25,6 +26,7 @@ class CatalogueElementDiffsIntegrationSpec extends AbstractIntegrationSpec {
         catalogueElementDiffs = new CatalogueElementDiffs(grailsApplication)
     }
 
+    @Ignore
     def "some diff" () {
         when:
             loader.load(CatalogueElementDiffsIntegrationSpec.getResourceAsStream('TestDataModelV1.xml'))

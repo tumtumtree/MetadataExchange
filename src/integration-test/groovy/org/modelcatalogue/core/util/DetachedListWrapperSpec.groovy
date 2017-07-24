@@ -5,9 +5,11 @@ import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.DataElement
 import org.modelcatalogue.core.util.lists.ListWrapper
 import org.modelcatalogue.core.util.lists.Lists
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@Ignore
 @Rollback
 @Integration
 class DetachedListWrapperSpec extends Specification {

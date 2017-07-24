@@ -2,6 +2,7 @@ package org.modelcatalogue.core
 
 import grails.gorm.transactions.Rollback
 import org.modelcatalogue.core.api.ElementStatus
+import spock.lang.Ignore
 import spock.lang.Shared
 
 /**
@@ -20,6 +21,7 @@ class PublishedElementISpec extends AbstractIntegrationSpec{
         }
     }
 
+    @Ignore
     def "finalize model with with finalized child models"(){
 
         setup:
@@ -42,6 +44,7 @@ class PublishedElementISpec extends AbstractIntegrationSpec{
 
     }
 
+    @Ignore
     def "finalize model with with finalized data elements"(){
 
         setup:
