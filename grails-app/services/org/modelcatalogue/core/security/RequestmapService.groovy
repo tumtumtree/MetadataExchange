@@ -35,7 +35,54 @@ class RequestmapService {
 
     @CompileStatic
     protected DetachedCriteria<Requestmap> requestmapQueryByUrlAndConfigAttributeAndHttpMethod(String requestMapUrl, String requestMapConfigAttribute, HttpMethod requestMapMethod = null) {
-        Requestmap.where { url == requestMapUrl &&  configAttribute == requestMapConfigAttribute && httpMethod == requestMapMethod }
+        DetachedCriteria<Requestmap> q = Requestmap.where { }
+        if ( !requestMapUrl ) {
+            q = q.where {
+                isNull('url')
+            }
+        } else {
+            q = q.where {
+                url == requestMapUrl
+            }
+        }
+
+        if ( !requestMapConfigAttribute ) {
+            q = q.where {
+                isNull('configAttribute')
+            }
+        } else {
+
+            if ( ['isRememberMe()', 'IS_AUTHENTICATED_REMEMBERED', 'isAuthenticated()'].contains(requestMapConfigAttribute) ) {
+                q = q.where {
+                    configAttribute in ['isRememberMe()', 'IS_AUTHENTICATED_REMEMBERED', 'isAuthenticated()']
+                }
+            } else if ( ['permitAll', 'IS_AUTHENTICATED_ANONYMOUSLY'].contains(requestMapConfigAttribute) ) {
+                q = q.where {
+                    configAttribute in ['permitAll', 'IS_AUTHENTICATED_ANONYMOUSLY']
+                }
+            } else if ( ['isFullyAuthenticated()', 'IS_AUTHENTICATED_FULLY'].contains(requestMapConfigAttribute) ) {
+                q = q.where {
+                    configAttribute in ['isFullyAuthenticated()', 'IS_AUTHENTICATED_FULLY']
+                }
+            } else {
+                q = q.where {
+                    configAttribute == requestMapConfigAttribute
+                }
+            }
+        }
+
+        if ( !requestMapMethod ) {
+            q = q.where {
+                isNull('httpMethod')
+            }
+        } else {
+
+            String str = requestMapMethod.toString()
+            q = q.where {
+                httpMethod == str
+            }
+        }
+        q
     }
 
     @CompileStatic
