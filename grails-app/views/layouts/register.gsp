@@ -1,4 +1,4 @@
-<%@ page import="org.modelcatalogue.core.util.CDN; grails.util.BuildScope; org.modelcatalogue.core.util.FriendlyErrors; org.modelcatalogue.core.util.DataModelFilter; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
+<%@ page import="grails.util.BuildScope; org.modelcatalogue.core.util.FriendlyErrors; org.modelcatalogue.core.util.DataModelFilter; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +19,7 @@
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 
-    <g:if test="${CDN.preferred}">
+    <g:if test="${metadata.isCDNPreferred()}">
         <!-- CDNs -->
         <link rel="stylesheet" type="text/css"
               href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap${minSuffix}.css">

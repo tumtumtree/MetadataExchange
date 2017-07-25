@@ -42,4 +42,12 @@ class ConfigurationTagLibSpec extends Specification implements TagLibUnitTest<Co
         and: 'tagLib tag can be invoked with the metadata namespace'
         applyTemplate('<metadata:canResetPassword />') == 'true'
     }
+
+    def 'tag isCDNPreferred exists'() {
+        expect:
+        tagLib.isCDNPreferred()
+
+        and: 'tagLib tag can be invoked with the metadata namespace'
+        applyTemplate('<metadata:isCDNPreferred />') == true as String
+    }
 }

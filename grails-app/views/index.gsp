@@ -1,4 +1,4 @@
-<%@ page import="org.modelcatalogue.core.util.DataModelFilter; org.modelcatalogue.core.util.CDN; grails.plugin.springsecurity.SpringSecurityUtils; org.modelcatalogue.core.security.User; grails.util.BuildScope; org.modelcatalogue.core.util.DataModelFilter; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
+<%@ page import="org.modelcatalogue.core.util.DataModelFilter; grails.plugin.springsecurity.SpringSecurityUtils; org.modelcatalogue.core.security.User; grails.util.BuildScope; org.modelcatalogue.core.util.DataModelFilter; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +43,7 @@
     </g:if>
     <g:javascript src="libs/saxonce/Saxonce.nocache.js"/>
     <g:javascript src="libs/google-diff-match-patch/javascript/diff_match_patch.js"/>
-    <g:if test="${CDN.preferred}">
+    <g:if test="${metadata.isCDNPreferred()}">
         <g:set var="minSuffix" value="${Environment.current == Environment.TEST ? '' : '.min'}"/>
         <!-- CDNs -->
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap${minSuffix}.css">
