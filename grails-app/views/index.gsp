@@ -102,8 +102,8 @@
             securityProvider.springSecurity({
                 oauthProviders: ${metadata.oauthServices()},
                 contextPath:      '${metadata.contextPath(request: request)}',
-                allowRegistration: ${metadata.allowRegistration() as boolean},
-                canResetPassword:  ${metadata.canResetPassword() as boolean},
+                allowRegistration: ${metadata.allowRegistration()},
+                canResetPassword:  ${metadata.canResetPassword()},
                 roles: {
                     VIEWER:     ['ROLE_USER', 'ROLE_METADATA_CURATOR', 'ROLE_ADMIN', 'ROLE_SUPERVISOR'],
                     CURATOR:    ['ROLE_METADATA_CURATOR', 'ROLE_ADMIN', 'ROLE_SUPERVISOR'],

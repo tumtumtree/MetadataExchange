@@ -24,10 +24,10 @@ class ConfigurationTagLibSpec extends Specification implements TagLibUnitTest<Co
         tagLib.signupService.isSignupAllowed() >> true
 
         expect:
-        tagLib.allowRegistration() == 'true'
+        tagLib.allowRegistration()
 
         and: 'tagLib tag can be invoked with the metadata namespace'
-        applyTemplate('<metadata:allowRegistration />') == 'true'
+        applyTemplate('<metadata:allowRegistration />') == true as String
     }
 
     def 'tag canResetPassword exists'() {
@@ -37,10 +37,10 @@ class ConfigurationTagLibSpec extends Specification implements TagLibUnitTest<Co
         }
 
         expect:
-        tagLib.canResetPassword() == 'true'
+        tagLib.canResetPassword()
 
         and: 'tagLib tag can be invoked with the metadata namespace'
-        applyTemplate('<metadata:canResetPassword />') == 'true'
+        applyTemplate('<metadata:canResetPassword />') == true as String
     }
 
     def 'tag isCDNPreferred exists'() {
