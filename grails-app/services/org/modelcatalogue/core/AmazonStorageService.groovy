@@ -1,5 +1,7 @@
 package org.modelcatalogue.core
 
+import grails.config.Config
+import grails.core.support.GrailsConfigurationAware
 import grails.gorm.transactions.Transactional
 import com.bertramlabs.plugins.karman.CloudFile
 import com.bertramlabs.plugins.karman.CloudFileACL
@@ -10,29 +12,37 @@ import grails.core.GrailsApplication
 import javax.annotation.PostConstruct
 
 @Transactional
-class AmazonStorageService implements StorageService {
+class AmazonStorageService implements StorageService, GrailsConfigurationAware {
 
     GrailsApplication grailsApplication
-    private String bucket
     private StorageProvider provider
-    private Long maxSize
 
-    @PostConstruct
-    private void init() {
-        maxSize = grailsApplication.config.mc.storage.maxSize ?: (20 * 1024 * 1024)
-        if (grailsApplication.config.mc.storage.s3.bucket) {
+    String bucket
+    String s3Region
+    String s3Secret
+    String s3Key
+    String storageDirectory
+    Long maxSize
+
+    @Override
+    void setConfiguration(Config co) {
+        this.bucket = co.getProperty('mc.storage.s3.bucket', String, 'modelcatalogue')
+        this.s3Region = co.getProperty('mc.storage.s3.region', String, 'eu-west-1')
+        this.s3Secret = co.getProperty('mc.storage.s3.secret', String)
+        this.s3Key = co.getProperty('mc.storage.s3.key', String)
+        this.storageDirectory = co.getProperty('mc.storage.directory', String, 'storage')
+        this.maxSize = co.getProperty('mc.storage.maxSize', Long, (20 * 1024 * 1024))
+
+        if ( s3Secret && s3Key) {
             provider = StorageProvider.create(
                 provider: 's3',
-                accessKey: grailsApplication.config.mc.storage.s3.key,
-                secretKey: grailsApplication.config.mc.storage.s3.secret,
-                region: grailsApplication.config.mc.storage.s3.region ?: 'eu-west-1'
+                accessKey: s3Key,
+                secretKey: s3Secret,
+                region: s3Region
             )
-            bucket = grailsApplication.config.mc.storage.s3.bucket
         } else {
-            provider = new LocalStorageProvider(basePath: grailsApplication.config.mc.storage.directory ?: 'storage')
-            bucket = 'modelcatalogue'
+            provider = new LocalStorageProvider(basePath: storageDirectory)
         }
-
     }
 
     /**
