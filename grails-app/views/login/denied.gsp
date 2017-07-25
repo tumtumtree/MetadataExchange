@@ -1,4 +1,4 @@
-<%@ page import="grails.util.BuildScope; org.modelcatalogue.core.util.DataModelFilter; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
+<%@ page import="grails.util.BuildScope; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
