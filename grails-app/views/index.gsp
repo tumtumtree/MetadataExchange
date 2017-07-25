@@ -1,4 +1,4 @@
-<%@ page import="org.modelcatalogue.core.util.DataModelFilter; grails.plugin.springsecurity.SpringSecurityUtils; org.modelcatalogue.core.security.User; grails.util.BuildScope; org.modelcatalogue.core.util.DataModelFilter; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
+<%@ page import="grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,10 +112,10 @@
                 },
                 <sec:ifLoggedIn>
                 currentUser: {
-                    roles: ${SpringSecurityUtils.getPrincipalAuthorities()*.authority.encodeAsJSON()},
+                    roles: ${metadata.rolesAsJson()},
                     username: '${sec.username()}',
                     id: ${sec.loggedInUserInfo(field:"id")},
-                    dataModels: ${(DataModelFilter.from(User.get(sec.loggedInUserInfo(field:"id"))).toMap()).encodeAsJSON() }
+                    dataModels: ${metadata.currentUserDataModels()}
                 }
                 </sec:ifLoggedIn>
             })
