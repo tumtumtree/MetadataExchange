@@ -1,7 +1,9 @@
 package org.modelcatalogue.core.security
 
 import com.google.common.io.BaseEncoding
+import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
+import groovy.transform.CompileStatic
 import org.modelcatalogue.core.util.FriendlyErrors
 
 @Transactional
@@ -90,5 +92,17 @@ class UserService {
 
     private static String generateApiKey() {
         BaseEncoding.base64().encode(UUID.randomUUID().toString().bytes)
+    }
+
+    @CompileStatic
+    @ReadOnly
+    User readById(Serializable id) {
+        User.read(id)
+    }
+
+    @CompileStatic
+    @ReadOnly
+    User findByUsername(String name) {
+        User.where { username == name }.get()
     }
 }

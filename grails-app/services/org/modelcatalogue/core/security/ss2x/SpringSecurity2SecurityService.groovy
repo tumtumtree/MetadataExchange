@@ -8,6 +8,7 @@ import grails.util.Holders
 import org.modelcatalogue.core.LogoutListeners
 import org.modelcatalogue.core.SecurityService
 import org.modelcatalogue.core.security.User
+import org.modelcatalogue.core.security.UserService
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.logout.LogoutHandler
 
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class SpringSecurity2SecurityService implements SecurityService, LogoutListeners, LogoutHandler {
 
+    UserService userService
 
     SpringSecurityService springSecurityService
 
@@ -60,7 +62,7 @@ class SpringSecurity2SecurityService implements SecurityService, LogoutListeners
     void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) {
         def id = authentication?.principal?.id
         if (id) {
-            userLoggedOut(User.get(id as Long))
+            userLoggedOut(userService.readById(id as Long))
         }
     }
 
