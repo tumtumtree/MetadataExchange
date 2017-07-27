@@ -102,20 +102,142 @@ hibernate:
         use_second_level_cache: false
         use_query_cache: false
 #        region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-
 dataSource:
     jmxExport: true
-
+    pooled: true
 environments:
     development:
         dataSource:
-            pooled: true
             dbCreate: create-drop
             driverClassName: org.h2.Driver
             username: sa
             password: ''
             url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-
+        grails:
+            serverURL: http://localhost:8080
+            plugin:
+                springsecurity:
+                    auth:
+                        loginFormUrl: http://localhost:8080/login/auth
+                        successHandler:
+                            ajaxSuccessUrl: http://localhost:8080/login/ajaxSuccess
+                            defaultTargetUrl: http://localhost:8080
+                        failureHandler:
+                            ajaxAuthFailUrl: http://localhost:8080/login/authfail
+                    logout:
+                        afterLogoutUrl: http://localhost:8080
+            logging:
+                jul:
+                    usebridge: true # Spring Security Core - Debug Filter
+            mail:
+                disabled: true
+        mc:
+            # green for dev mode to show it's safe to do any changes
+            css:
+                custom: '.navbar-default { background-color: #c8e1c0; border-color: #bee2b2;}'
+            allow:
+                signup: true
+            storage: # configure the default storage
+                directory: /tmp/mc/storage
+            search:
+                elasticsearch:
+                    host: localhost
+                    port: 49300
+#            search:
+#                elasticsearch:
+#                    local: /tmp/mc/elasticsearch
+            preload:
+                -
+                    name: 'Java Basic Types'
+                    url: https://s3-eu-west-1.amazonaws.com/datamodels.metadata.org.uk/Java.mc.xml
+    test:
+        dataSource:
+            pooled: true
+            driverClassName: org.h2.Driver
+            username: sa
+            password: ''
+            dbCreate: create-drop # one of 'create', 'create-drop', 'update', 'validate', ''
+            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
+        grails:
+            serverURL: http://localhost:8080
+            logging:
+                jul:
+                    usebridge: true # Spring Security Core - Debug Filter
+            mail:
+                disabled: true
+        mc:
+            allow:
+                signup: true
+            search:
+                elasticsearch:
+                    local: /tmp/mc/elasticsearch
+    production:
+        dataSource:
+            driverClassName: com.mysql.jdbc.Driver
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            dbCreate: update
+            url: '${JDBC_CONNECTION_STRING}'
+            username: '${RDS_USERNAME}'
+            password: '${RDS_PASSWORD}'
+            properties:
+                jmxEnabled: true
+                initialSize: 5
+                maxActive: 50
+                minIdle: 5
+                maxIdle: 25
+                maxWait: 10000
+                maxAge: 600000
+                timeBetweenEvictionRunsMillis: 5000
+                minEvictableIdleTimeMillis: 60000
+                validationQuery: SELECT 1
+                validationQueryTimeout: 3
+                validationInterval: 15000
+                testOnBorrow: true
+                testWhileIdle: true
+                testOnReturn: false
+                jdbcInterceptors: ConnectionState
+                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+        mc:
+            allow:
+                signup: true
+            search:
+                elasticsearch:
+                    host: '${ELASTIC_SEARCH_HOST}'
+                    port: '${ELASTIC_SEARCH_PORT}'
+            storage:
+                type: '${STORAGE_TYPE}' # s3 or local
+                directory: '${STORAGE_FOLDER}'
+                s3:
+                    key: '${AWS_ACCESS_KEY_ID}'
+                    secret: '${AWS_SECRET_KEY}'
+                    region: '${AWS_S3_REGION}'
+                    bucket: '${AWS_S3_BUCKET}'
+        grails:
+            serverURL: '${SERVER_URL}'
+            plugin:
+                springsecurity:
+                    ui:
+                        register:
+                            emailFrom: tester@metadata.org.uk
+                        forgotPassword:
+                            emailFrom: tester@metadata.org.uk
+                    auth:
+                        loginFormUrl: '${SERVER_URL}/login/auth'
+                        successHandler:
+                            ajaxSuccessUrl: '${SERVER_URL}/login/ajaxSuccess'
+                            defaultTargetUrl: '${SERVER_URL}'
+                        failureHandler:
+                            ajaxAuthFailUrl: '${SERVER_URL}/login/authfail'
+                    logout:
+                        afterLogoutUrl: '${SERVER_URL}'
+            mail:
+                username: '${MAIL_USERNAME}'
+                password: '${MAIL_PASSWORD}'
+                host: smtp.gmail.com
+                port: 465
+            logging:
+                jul:
+                    usebridge: false # Spring Security Core - Debug Filter
 ---
 grails:
     plugin:
@@ -167,51 +289,12 @@ environments:
         javamelody:
             disabled: false
 ---
-environments:
-    development:
-        mc:
-            allow:
-                signup: true
-            preload:
-                -
-                    name: 'Java Basic Types'
-                    url: https://s3-eu-west-1.amazonaws.com/datamodels.metadata.org.uk/Java.mc.xml
-    test:
-        mc:
-            allow:
-                signup: true
-    production:
-        # you can overrides in your mc-config.groovy
-        mc:
-            sync:
-                relationshipTypes: true
-            storage: # configure the default storage
-               directory: /tmp/mc/storage
-               maxSize: 52428800 # 50 * 1024 * 1024
----
 grails:
     plugin:
         springsecurity:
             ui:
                 register:
                    defaultRoleNames: [] # no roles
---- # Spring Security Core - Debug Filter
-environments:
-    development:
-        grails:
-            logging:
-                jul:
-                    usebridge: true
-    test:
-        grails:
-            logging:
-                jul:
-                    usebridge: true
-    production:
-        grails:
-            logging:
-                jul:
-                    usebridge: false
 --- # Grails Console
 environments:
     development:
@@ -242,12 +325,6 @@ beans:
 ---
 environments:
     development:
-        grails:
-            mail:
-                disabled: true
----
-environments:
-    development:
         oauth:
             providers:
                 google:
@@ -258,6 +335,7 @@ environments:
                     successUri: /oauth/google/success
                     failureUri: /oauth/google/error
                     scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+                    callback: '${SERVER_URL}/oauth/google/callback'
     test:
         oauth:
             providers:
@@ -269,11 +347,23 @@ environments:
                     successUri: /oauth/google/success
                     failureUri: /oauth/google/error
                     scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+                    callback: '${SERVER_URL}/oauth/google/callback'
 ---
 grails:
+    plugin:
+        console:
+            enabled: true
     assets:
         babel:
             enabled: true
+mc:
+    storage:
+        maxSize: 52428800 # 50 * 1024 * 1024
+    legacy:
+        dataModels: true
+    welcome:
+        jumbo: '<h1>Model Catalogue</h1><p class="lead"><b><em>Model</em></b> existing business processes and context. <b><em>Design</em></b> and version new datasets <b><em>Generate</em></b> better software components</p>'
+        info: '<div class="col-sm-4"><h2>Data Quality</h2><p>Build up datasets using existing data elements from existing datasets and add them to new data elements to compose new data models.</p><p></p></div><div class="col-sm-4"><h2>Dataset Curation</h2><p>Link and compose data-sets to create uniquely identified and versioned "metadata-sets", thus ensuring preservation of data semantics between applications</p><p></p></div><div class="col-sm-4"><h2>Dataset Comparison</h2><p>Discover synonyms, hyponyms and duplicate data elements within datasets, and compare data elements from differing datasets.</p><p></p></div>'
 #---
 #environments:
 #    development:
@@ -286,11 +376,24 @@ grails:
 #                fallbackEmail: vladimir.orany+:username@gmail.com
 #            sso:
 #                key: System.getenv('METADATA_DISCOURSE_SSO_KEY') ?: "notasecret"
----
-environments:
-    development:
-        grails:
-            serverURL: http://localhost:8080
-    test:
-        grails:
-            serverURL: http://localhost:8080
+#---
+# Uncomment if MC_SECURED_REVERSE_PROXY = true
+# Setting of https behind load balancer (or proxy server) needs to set http header 'X-Forwarded-Proto' in order
+# to decide if http or https should be used. Environment without load balancer is not affected.
+#grails:
+#    plugin:
+#        springsecurity:
+#            secureChannel:
+#                useHeaderCheckChannelSecurity: true
+#                secureHeaderName: X-Forwarded-Proto
+#                secureHeaderValue: http
+#                insecureHeaderName: X-Forwarded-Proto
+#                insecureHeaderValue: https
+#                definition:
+#                    -
+#                        pattern: /**
+#                        access: REQUIRES_SECURE_CHANNEL
+#            portMapper:
+#                httpPort: 80
+#                httpsPort: 443
+

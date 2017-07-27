@@ -17,6 +17,7 @@ class AmazonStorageService implements StorageService, GrailsConfigurationAware {
     GrailsApplication grailsApplication
     private StorageProvider provider
 
+    String storageType
     String bucket
     String s3Region
     String s3Secret
@@ -26,6 +27,7 @@ class AmazonStorageService implements StorageService, GrailsConfigurationAware {
 
     @Override
     void setConfiguration(Config co) {
+        this.storageType = co.getProperty('mc.storage.type', String, 'local')
         this.bucket = co.getProperty('mc.storage.s3.bucket', String, 'modelcatalogue')
         this.s3Region = co.getProperty('mc.storage.s3.region', String, 'eu-west-1')
         this.s3Secret = co.getProperty('mc.storage.s3.secret', String)
@@ -33,7 +35,7 @@ class AmazonStorageService implements StorageService, GrailsConfigurationAware {
         this.storageDirectory = co.getProperty('mc.storage.directory', String, 'storage')
         this.maxSize = co.getProperty('mc.storage.maxSize', Long, (20 * 1024 * 1024))
 
-        if ( s3Secret && s3Key) {
+        if ( storageType == 's3') {
             provider = StorageProvider.create(
                 provider: 's3',
                 accessKey: s3Key,
