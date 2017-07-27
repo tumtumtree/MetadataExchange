@@ -1,4 +1,3 @@
-<%@ page import="grails.util.BuildScope; grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
 <!DOCTYPE html>
 <html lang="en">
 
