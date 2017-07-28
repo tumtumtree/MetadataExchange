@@ -25,7 +25,6 @@ buildscript {
     }
 }
 
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'org.grails.grails-web'
@@ -694,19 +693,9 @@ dbmUpdateCountSql.group 'Database Migration Plugin'
 dbmUpdateSql.group 'Database Migration Plugin'
 dbmValidate.group 'Database Migration Plugin'
 
-cleanEclipseClasspath.group 'IDE tasks'
-cleanEclipseJdt.group 'IDE tasks'
-cleanEclipseProject.group 'IDE tasks'
-cleanEclipseWtpComponent.group 'IDE tasks'
-cleanEclipseWtpFacet.group 'IDE tasks'
 cleanIdeaModule.group 'IDE tasks'
 cleanIdeaProject.group 'IDE tasks'
 cleanIdeaWorkspace.group 'IDE tasks'
-eclipseClasspath.group 'IDE tasks'
-eclipseJdt.group 'IDE tasks'
-eclipseProject.group 'IDE tasks'
-eclipseWtpComponent.group 'IDE tasks'
-eclipseWtpFacet.group 'IDE tasks'
 ideaModule.group 'IDE tasks'
 ideaProject.group 'IDE tasks'
 ideaWorkspace.group 'IDE tasks'
