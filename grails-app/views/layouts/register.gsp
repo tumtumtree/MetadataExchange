@@ -1,3 +1,4 @@
+<%@ page import="grails.util.Environment" contentType="text/html;charset=UTF-8" defaultCodec="none" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,7 @@
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 
     <g:if test="${metadata.isCDNPreferred()}">
+       <g:set var="minSuffix" value="${Environment.current == Environment.TEST ? '' : '.min'}"/>
         <!-- CDNs -->
         <link rel="stylesheet" type="text/css"
               href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap${minSuffix}.css">
