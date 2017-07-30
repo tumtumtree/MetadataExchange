@@ -57,11 +57,11 @@ ext {
 
 dependencies {
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:$assetPipelineVersion"
-    assets "com.bertramlabs.plugins:less-asset-pipeline:$assetPipelineVersion"
-    assets "com.bertramlabs.plugins:coffee-asset-pipeline:$assetPipelineVersion"
-    assets "com.craigburke.angular:angular-template-asset-pipeline:$angularTemplateAssetPipeline"
-    assets "com.craigburke.angular:angular-annotate-asset-pipeline:$angularAnnotateAssetPipeline"
-    assets "com.craigburke:js-closure-wrap-asset-pipeline:$jsClosureWrapAssetPipelineVersion"
+    compile "com.bertramlabs.plugins:less-asset-pipeline:$assetPipelineVersion"
+    compile "com.bertramlabs.plugins:coffee-asset-pipeline:$assetPipelineVersion"
+    compile "com.craigburke.angular:angular-template-asset-pipeline:$angularTemplateAssetPipeline"
+    compile "com.craigburke.angular:angular-annotate-asset-pipeline:$angularAnnotateAssetPipeline"
+    compile "com.craigburke:js-closure-wrap-asset-pipeline:$jsClosureWrapAssetPipelineVersion"
 
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
