@@ -203,6 +203,7 @@ bootRun {
 }
 
 assets {
+    minifyCss = true
     minifyJs = true
     minifyOptions = [
         strictSemicolons: false,
@@ -253,8 +254,6 @@ assets {
         '**/python2/*.*',
         '**/python3/*.*',
     ]
-    // unspecified in Grails 2
-    minifyCss = true
 }
 
 task docs {
