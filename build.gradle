@@ -203,11 +203,6 @@ bootRun {
 }
 
 assets {
-    // development & test
-    // minifyJs = false
-    //bundle = false // individually require files in development
-
-    // production
     minifyJs = true
     minifyOptions = [
         strictSemicolons: false,
